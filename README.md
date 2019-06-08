@@ -5,7 +5,7 @@ This UI Kit allows you to build Bootstrap 4 webapp with some extra UI features.
 It's easy to extend and easy to convert HTML templates to CMS templates.
 
 # Demo
-https://rawcdn.githack.com/a2nt/cropper-image-mask/master/dist/index.html
+https://rawcdn.githack.com/a2nt/webpack-bootstrap-ui-kit/master/dist/index.html
 
 ## Usage
 Install required modules using:
