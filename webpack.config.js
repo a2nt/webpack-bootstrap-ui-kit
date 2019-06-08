@@ -10,7 +10,7 @@ module.exports = {
   entry: './src/js/app.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'app.js'
+    filename: 'js/app.js'
   },
   devtool: 'source-map',
   externals: {

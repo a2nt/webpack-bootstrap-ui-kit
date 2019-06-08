@@ -110,7 +110,8 @@
       "block-no-empty": null,
       "color-no-invalid-hex": true,
       "comment-empty-line-before": [
-        "always", {
+        "always",
+        {
           "ignore": [
             "stylelint-commands",
             "after-comment"
@@ -119,7 +120,8 @@
       ],
       "declaration-colon-space-after": "always",
       "indentation": [
-        4, {
+        4,
+        {
           "except": [
             "value"
           ]
@@ -127,7 +129,8 @@
       ],
       "max-empty-lines": 2,
       "rule-empty-line-before": [
-        "always", {
+        "always",
+        {
           "except": [
             "first-nested"
           ],
