@@ -1,0 +1,139 @@
+/*
+ * some basic styles
+ */
+
+// don't let images be wider than the parent layer
+iframe,
+img {
+    max-width: 100%;
+}
+
+.a {
+    cursor: pointer;
+}
+
+.a:hover,
+.a:focus,
+a:hover,
+a:focus,
+[data-toggle]:hover,
+[data-toggle]:focus {
+    opacity: .8;
+
+    .fas,
+    .fab,
+    &.fas,
+    &.fab {
+        transform: rotate(-180deg);
+    }
+}
+
+[data-toggle="collapse"] {
+    &[aria-expanded="true"] {
+        .accordion-icon {
+            &:before {
+                content: "\f068";
+            }
+        }
+    }
+}
+
+// transactions
+.transition,
+a, a *,
+.a, .a *,
+button, input, optgroup, select, textarea,
+.btn,
+.alert,
+.dropdown,
+[data-toggle], [data-toggle] *,
+.container,
+.container-fluid,
+.row,
+[class="col-*"] {
+    transition: all 0.4s ease;
+}
+
+.btn-toolbar {
+    margin-top: $grid-gutter-height / 2;
+}
+
+.field {
+    margin: ($grid-gutter-height / 4) 0;
+
+    &.composite {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    &.required {
+        &:after {
+            display: block;
+            position: absolute;
+            top: 2rem;
+            right: .5rem;
+            content: "*";
+            color: $red;
+            z-index: 2;
+        }
+    }
+
+    &.holder-error,
+    &.error {
+        input, select, textarea {
+            border-color: $red;
+        }
+
+        label {
+            color: $red;
+        }
+    }
+
+    .bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
+        width: 100%;
+    }
+}
+
+.message {
+    @extend .alert;
+
+    @extend .alert-info;
+
+    display: block;
+    margin: .5rem 0;
+}
+
+.message.validation,
+.message.required,
+.message.error {
+    @extend .alert;
+
+    @extend .alert-danger;
+}
+
+// element col paddings
+.col-block {
+    padding: $grid-gutter-height / 4;
+}
+
+// rewrite btn opacity on hover
+.btn {
+    &:hover,
+    &:focus {
+        opacity: 1;
+    }
+}
+
+// SS-messages
+.message {
+    @extend .alert;
+
+    @extend .alert-info;
+}
+
+.message.required,
+.message.error {
+    @extend .alert;
+
+    @extend .alert-danger;
+}

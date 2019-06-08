@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Webpack Bootstrap 4 UI Demo</title>
+		<%= require('html-loader!./html/Head.html') %>
+	</head>
+	<body>
+		<%= require('html-loader!./html/First.html') %>
+		<div class="wrapper">
+			<header id="Header" class="bg-dark">
+				<div class="container-fluid">
+					<%= require('html-loader!./html/Navigation.html') %>
+				</div>
+			</header>
+			<main id="MainContent" class="page-content">
+				<!-- Slider -->
+				<section id="Slider" class="element site__elements__sliderelement">
+					<div class="element-container container-fluid">
+						<%= require('html-loader!./html/Slider.html') %>
+					</div>
+				</section>
+				<!-- /Slider -->
+				<!-- Content -->
+				<section id="Content" class="element dnadesign__elemental__models__elementcontent">
+					<div class="element-container container">
+						<%= require('html-loader!./html/Elements/Content.html') %>
+					</div>
+				</section>
+				<!-- /Content -->
+				<!-- List -->
+				<section id="List" class="element dnadesign__elementallist__model__elementlist bg-dark">
+					<div class="element-container container">
+						<%= require('html-loader!./html/Elements/ElementsList.html') %>
+					</div>
+				</section>
+				<!-- /List -->
+				<!-- Accordion List -->
+				<section id="AccordionList" class="element site__elements__accordion">
+					<div class="element-container container">
+						<%= require('html-loader!./html/Elements/Accordion.html') %>
+					</div>
+				</section>
+				<!-- /Accordion List -->
+			</main>
+		</div>
+		<footer id="Footer" class="footer site-footer">
+			<%= require('html-loader!./html/Footer.html') %>
+		</footer>
+		<%= require('html-loader!./html/Last.html') %>
+	</body>
+</html>
