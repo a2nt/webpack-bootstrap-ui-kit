@@ -13,7 +13,7 @@ const FormFieldUI = (($) => {
       const ui = this;
 
       ui.$el = $(el);
-      ui.$el.data(DATA_KEY, this);
+      ui.$el.data(DATA_KEY, ui);
       ui.shown = true;
       //ui.$actions = ui.$el.parents('form').children('.btn-toolbar,.form-actions');
 
@@ -22,7 +22,24 @@ const FormFieldUI = (($) => {
         'checked': ui.$el.is(':checked'),
       };
 
+      // bootstrap collapse integration
+      ui.$el.parents('.optionset').not('.field').removeClass('collapse');
+      ui.$collapse = ui.$el.parents('.field.collapse').not('.composite').first();
+      if (ui.$collapse.length) {
+        ui.$el.removeClass('collapse');
+
+        ui.$collapse.on('show.bs.collapse', (e) => {
+          ui.show();
+        });
+
+        ui.$collapse.on('hidden.bs.collapse', (e) => {
+          ui.hide();
+        });
+      }
+
       ui.$el.addClass(`${NAME}-active`);
+
+      return ui;
     }
 
     // Public methods
@@ -32,7 +49,6 @@ const FormFieldUI = (($) => {
 
       $el.removeClass(`${NAME}-active`);
       $.removeData(this._el, DATA_KEY);
-      this._el = null;
     }
 
     show() {
@@ -42,11 +58,15 @@ const FormFieldUI = (($) => {
       ui.restore();
       ui.shown = true;
 
-      if ($el.hasClass('collapse')) {
-        $el.collapse('show');
+      /*if (ui.$collapse.length) {
+        ui.$collapse.collapse('show');
       }
 
-      $el.trigger('change');
+      if ($el.hasClass('collapse')) {
+        $el.collapse('show');
+      }*/
+
+      $el.trigger('shown.' + NAME);
     }
 
     hide() {
@@ -56,20 +76,21 @@ const FormFieldUI = (($) => {
       ui.wipe();
       ui.shown = false;
 
+      /*if (ui.$collapse.length) {
+        ui.$collapse.collapse('hide');
+      }
+
       if ($el.hasClass('collapse')) {
         $el.collapse('hide');
       }
 
-      $el.trigger('change');
+      $el.trigger('change');*/
+      $el.trigger('hidden.' + NAME);
     }
 
     wipe() {
       const ui = this;
       const $el = ui.$el;
-
-      if (!ui.shown) {
-        return;
-      }
 
       ui.vals = {
         'name': $el.attr('name'),
@@ -84,9 +105,10 @@ const FormFieldUI = (($) => {
     restore() {
       const ui = this;
       const $el = ui.$el;
+      const checked = ui.vals['checked'];
 
       $el.val(ui.vals['val']);
-      $el.prop('checked', ui.vals['checked']);
+      $el.prop('checked', checked);
     }
 
     static _jQueryInterface() {
