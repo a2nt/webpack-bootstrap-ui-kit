@@ -349,6 +349,12 @@ const MainUI = (($) => {
     MainUI.init();
   });
 
+  $(W).on('beforeunload', () => {
+    Spinner.show(() => {
+      $Body.removeClass('loaded');
+    });
+  });
+
   W.MainUI = MainUI;
 
   return MainUI;
