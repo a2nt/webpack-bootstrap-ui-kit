@@ -66,7 +66,7 @@ const FormFieldUI = (($) => {
         $el.collapse('show');
       }*/
 
-      $el.trigger('shown.' + NAME);
+      $el.trigger(`shown.${  NAME}`);
     }
 
     hide() {
@@ -85,7 +85,7 @@ const FormFieldUI = (($) => {
       }
 
       $el.trigger('change');*/
-      $el.trigger('hidden.' + NAME);
+      $el.trigger(`hidden.${  NAME}`);
     }
 
     wipe() {

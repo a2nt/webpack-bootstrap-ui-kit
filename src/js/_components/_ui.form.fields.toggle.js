@@ -19,7 +19,7 @@ const FormToggleUI = (($) => {
 
       ui.toggle();
 
-      ui.$el.on('change shown.' + FieldUI + ' hidden.' + FieldUI, (e) => {
+      ui.$el.on(`change shown.${  FieldUI  } hidden.${  FieldUI}`, (e) => {
         ui.toggle();
       });
 
@@ -34,7 +34,7 @@ const FormToggleUI = (($) => {
 
       const val = ($el.attr('type') === 'checkbox') ?
         ($el.is(':checked') ? true : false) :
-        ($el.attr('type') === 'radio' ? $Html.find('[name="' + $el.attr('name') + '"]:checked').val() : $el.val());
+        ($el.attr('type') === 'radio' ? $Html.find(`[name="${  $el.attr('name')  }"]:checked`).val() : $el.val());
 
       const $dataEl = ($el.is('[type="radio"]') && $el.parents('.optionset').length) ?
         $el.parents('.optionset') : $el;
@@ -81,7 +81,7 @@ const FormToggleUI = (($) => {
         $el.collapse(action);
       });
 
-      $el.trigger(action + '.' + NAME);
+      $el.trigger(`${action  }.${  NAME}`);
     }
 
     dispose() {
@@ -111,8 +111,8 @@ const FormToggleUI = (($) => {
         const $el = $(el);
         const name = $el.attr('name');
 
-        if ($('[name="' + name + '"]').length > 1) {
-          console.log(NAME + ': Module malfunction duplicate "' + name + '" elements found');
+        if ($(`[name="${  name  }"]`).length > 1) {
+          console.log(`${NAME  }: Module malfunction duplicate "${  name  }" elements found`);
         }
       });
     }
