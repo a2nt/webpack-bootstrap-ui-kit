@@ -64,8 +64,8 @@ const CarouselUI = (($) => {
                   events: {
                     'onReady': () => {
                       $e.data('player').pauseVideo();
-                    }
-                  }
+                    },
+                  },
                 }));
 
                 $e.data('player').pauseVideo();
@@ -85,25 +85,17 @@ const CarouselUI = (($) => {
         });
 
         // init touch swipes
-        $e.hammer().bind('swipeleft', (event) => {
+        $e.hammer().bind('swipeleft panleft', (e) => {
           $(event.target).carousel('next');
         });
 
-        $e.hammer().bind('swiperight', (event) => {
+        $e.hammer().bind('swiperight panright', (e) => {
           $(event.target).carousel('prev');
         });
 
-        $e.hammer().bind('panleft', (event) => {
+        /*$e.find('.carousel-item').hammer().bind('tap', (event) => {
           $(event.target).carousel('next');
-        });
-
-        $e.hammer().bind('panright', (event) => {
-          $(event.target).carousel('prev');
-        });
-
-        $e.find('.carousel-item').hammer().bind('tap', (event) => {
-          $(event.target).carousel('next');
-        });
+        });*/
       });
     }
 

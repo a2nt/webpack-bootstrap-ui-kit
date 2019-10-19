@@ -2,22 +2,46 @@
 
 @import "~bootstrap/scss/tables";
 
-.image {
+img,
+.captionImage,
+.image,
+.ss-htmleditorfield-file {
+    display: block;
+    margin: 1rem;
+    max-width: 100%;
+
+    &.center {
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    }
+
     &.left {
         float: left;
         clear: left;
         margin: 0 1rem 1rem 0;
     }
 
-    &.center {
-        display: block;
-        margin: 1rem auto;
-    }
-
     &.right {
         float: right;
         clear: right;
         margin: 1rem 0 0 1rem;
+    }
+
+    &.leftAlone {
+        float: left;
+        clear: left;
+        margin: 0 1rem 1rem 0;
+    }
+
+    &.rightAlone {
+        float: right;
+        clear: right;
+        margin: 1rem 0 0 1rem;
+    }
+
+    iframe {
+        width: 100% !important;
     }
 }
 
@@ -56,4 +80,22 @@ table {
             background: none !important;
         }
     }
+}
+
+ul {
+    list-style: none;
+
+    li {
+        list-style: none;
+
+        &:before {
+            content: "\2022";
+            display: inline-block;
+            margin-right: .5em;
+        }
+    }
+}
+
+iframe {
+    max-width: 100%;
 }

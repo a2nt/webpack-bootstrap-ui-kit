@@ -33,9 +33,8 @@ const NoCaptcha = (($) => {
       const $_noCaptchaFields = $('.g-recaptcha');
 
       const submitListener = (e) => {
-        e.preventDefault();
-
-        grecaptcha.execute();
+        const $field = $(e.currentTarget).find('.g-recaptcha');
+        grecaptcha.execute($field.data('widgetid'));
       };
 
       $_noCaptchaFields.each((i, field) => {
@@ -47,15 +46,15 @@ const NoCaptcha = (($) => {
 
         const $form = $field.data('form') ? $(`#${  $field.data('form')}`) : $field.parents('form');
 
-        //For the invisible captcha we need to setup some callback listeners
-        if ($field.data('size') === 'invisible' && !$field.data('callback')) {
-          $form.on('submit', submitListener);
-        }
-
         const widget_id = grecaptcha.render(field, $field.data());
         $field.data('widgetid', widget_id);
-      });
 
+        // For the invisible captcha we need to setup some callback listeners
+        if ($field.data('size') === 'invisible' && !$field.data('callback')) {
+          grecaptcha.execute(widget_id);
+          $form.on('submit', submitListener);
+        }
+      });
     }
   }
 

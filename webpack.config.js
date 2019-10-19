@@ -71,8 +71,7 @@ module.exports = {
         use: [{
           loader: 'css-loader',
           options: {
-            sourceMap: false,
-            minimize: true
+            sourceMap: false
           }
         }, {
           loader: 'postcss-loader',

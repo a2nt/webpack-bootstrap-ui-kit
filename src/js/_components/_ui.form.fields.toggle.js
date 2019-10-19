@@ -13,6 +13,10 @@ const FormToggleUI = (($) => {
 
     constructor($el) {
       const ui = this;
+      const condition = $el.data('value-toggle');
+      if (!condition) {
+        return;
+      }
 
       ui.$el = $el;
       ui.$el.data(DATA_KEY, ui);
@@ -39,39 +43,43 @@ const FormToggleUI = (($) => {
       const $dataEl = ($el.is('[type="radio"]') && $el.parents('.optionset').length) ?
         $el.parents('.optionset') : $el;
 
-      const yesNoVal = val && val !== '' && val !== '0' ? true : false;
+      // coditional toggler
+      const target = $el.data('target');
+      const condition = $el.data('value-toggle');
+      if (!condition) {
+        return;
+      }
+
+      // yes/no toggler
+      const yesNoVal = (
+        (condition === true && val && val !== '' && val !== '0') ||
+        condition === val
+      ) ? true : false;
+
       const $yesTarget = $($dataEl.data('value-toggle-yes'));
       const $noTarget = $($dataEl.data('value-toggle-no'));
 
       if (!$el.data(FieldUI).shown || typeof val === 'undefined') {
-        if ($yesTarget.length) {
-          ui.toggleElement($yesTarget, false);
-        }
-        if ($noTarget.length) {
-          ui.toggleElement($noTarget, false);
-        }
+        ui.toggleElement($yesTarget, false);
+        ui.toggleElement($noTarget, false);
 
         return;
       }
 
       if (yesNoVal) {
-        if ($yesTarget.length) {
-          ui.toggleElement($yesTarget, true);
-        }
-        if ($noTarget.length) {
-          ui.toggleElement($noTarget, false);
-        }
+        ui.toggleElement($yesTarget, true);
+        ui.toggleElement($noTarget, false);
       } else {
-        if ($yesTarget.length) {
-          ui.toggleElement($yesTarget, false);
-        }
-        if ($noTarget.length) {
-          ui.toggleElement($noTarget, true);
-        }
+        ui.toggleElement($yesTarget, false);
+        ui.toggleElement($noTarget, true);
       }
     }
 
     toggleElement($el, show) {
+      if (!$el.length) {
+        return;
+      }
+
       const ui = this;
       const action = show ? 'show' : 'hide';
 
@@ -130,7 +138,10 @@ const FormToggleUI = (($) => {
   $(W).on(`${Events.AJAX} ${Events.LOADED}`, () => {
     //FormToggleUI.validate();
     $(Events.FORM_FIELDS).filter('[data-value-toggle]').jsFormToggleUI();
-    $('[data-value-toggle]').not(Events.FORM_FIELDS).find(Events.FORM_FIELDS).jsFormToggleUI();
+    $('[data-value-toggle]')
+      .not(Events.FORM_FIELDS)
+      .find(Events.FORM_FIELDS)
+      .jsFormToggleUI();
   });
 
   return FormToggleUI;

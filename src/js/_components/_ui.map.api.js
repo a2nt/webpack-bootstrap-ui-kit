@@ -39,18 +39,18 @@ const MapAPI = (($) => {
       currentStyle = this.getStyle();
       mapBoxGL.accessToken = $el.data('key');
       Map = new mapBoxGL.Map({
-          'container': $el.find('.mapAPI-map')[0],
-          'center': center,
-          //hash: true,
-          'style': currentStyle,
-          'localIdeographFontFamily': $BODY.css('font-family'),
-          'zoom': (config['mapZoom'] ? config['mapZoom'] : 10),
-          'attributionControl': false,
-          'antialias': true,
-          /*'pitch': 45,
+        'container': $el.find('.mapAPI-map')[0],
+        center,
+        //hash: true,
+        'style': currentStyle,
+        'localIdeographFontFamily': $BODY.css('font-family'),
+        'zoom': (config['mapZoom'] ? config['mapZoom'] : 10),
+        'attributionControl': false,
+        'antialias': true,
+        /*'pitch': 45,
           'bearing': -17.6*/
 
-          /*transformRequest: (url, resourceType)=> {
+        /*transformRequest: (url, resourceType)=> {
                               if(resourceType === 'Source' && url.startsWith('http://myHost')) {
                                 return {
                                   url: url.replace('http', 'https'),
@@ -59,7 +59,7 @@ const MapAPI = (($) => {
                                 }
                               }
                             }*/
-        })
+      })
         .addControl(new mapBoxGL.AttributionControl({
           compact: true,
         }))
@@ -108,16 +108,16 @@ const MapAPI = (($) => {
                 "interpolate", ["linear"],
                 ["zoom"],
                 15, 0,
-                15.05, ["get", "height"]
+                15.05, ["get", "height"],
               ],
               'fill-extrusion-base': [
                 "interpolate", ["linear"],
                 ["zoom"],
                 15, 0,
-                15.05, ["get", "min_height"]
+                15.05, ["get", "min_height"],
               ],
-              'fill-extrusion-opacity': .6
-            }
+              'fill-extrusion-opacity': .6,
+            },
           }, labelLayerId);
         }
 

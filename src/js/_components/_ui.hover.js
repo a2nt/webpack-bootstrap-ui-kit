@@ -1,3 +1,6 @@
+/*
+ * Conflicts with 'bootstrap/js/dist/dropdown'
+ */
 "use strict";
 
 import $ from 'jquery';
@@ -62,7 +65,10 @@ const HoverUI = (($) => {
       }
 
       $el.on('click touch', (e) => {
-        e.preventDefault();
+        if (!$el.data('allow-click')) {
+          console.log('aaaa');
+          e.preventDefault();
+        }
 
         if (ui.isShown()) {
           ui.hide();
@@ -80,9 +86,9 @@ const HoverUI = (($) => {
 
     show() {
       const ui = this;
-      ui.$el.parents('.dropdown, .dropdown-menu').each((i, el) => {
+      ui.$el.parents('.dropdown').not('.active').each((i, el) => {
         const $el = $(el);
-        $el.siblings('.dropdown, .dropdown-menu').removeClass('show');
+        $el.find('.dropdown').removeClass('show');
         $el.addClass('show');
       });
 
@@ -91,8 +97,10 @@ const HoverUI = (($) => {
 
     hide() {
       const ui = this;
-      ui.$target.removeClass('show');
-      ui.$target.parent('.dropdown').removeClass('show');
+      const $el = ui.$target;
+      $el.removeClass('show');
+      $el.find('.dropdown-menu').removeClass('show');
+      $el.parent('.dropdown').removeClass('show');
     }
 
     dispose() {
@@ -133,6 +141,23 @@ const HoverUI = (($) => {
   // auto-apply
   $('[data-toggle="hover"]').ready(() => {
     $('[data-toggle="hover"]').jsHoverUI();
+  });
+
+  // rewrite 'bootstrap/js/dist/dropdown'
+  $('[data-toggle="dropdown"]').on('click touch', (e) => {
+    e.preventDefault();
+
+    const $el = $(e.currentTarget);
+    const $parent = $el.parent('.dropdown');
+
+    if ($parent.hasClass('show')) {
+      $parent.removeClass('show');
+      $parent.find('.dropdown-menu').removeClass('show');
+    } else {
+      $parent.addClass('show');
+      $parent.find('.dropdown-menu').addClass('show');
+    }
+
   });
 
   return HoverUI;

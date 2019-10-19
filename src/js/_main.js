@@ -2,53 +2,19 @@
 
 import $ from 'jquery';
 
-import 'hammerjs/hammer';
-import 'jquery-hammerjs/jquery.hammer';
-
-//import Confirmation from 'bootstrap-confirmation2/dist/bootstrap-confirmation';
-//import Table from 'bootstrap-table/dist/bootstrap-table';
-
-// Routie
-import 'pouchdb/dist/pouchdb';
-import './_components/routes/index';
-
 import Events from './_events';
+import Consts from './_consts';
+
 import Spinner from './_components/_ui.spinner';
 
 // AJAX functionality
 import AjaxUI from './_components/_ui.ajax';
-import './_components/_ui.carousel';
-import './_components/_ui.menu';
-
-// Bootstrap hover menu
-import './_components/_ui.hover';
-
 
 import FormBasics from './_components/_ui.form.basics';
 
-// Toggle bootstrap form fields
-//import FormToggleUI from './_components/_ui.form.fields.toggle';
-
-// Bootstrap Date & Time fields
-//import FormDatetime from './_components/_ui.form.datetime';
-
-// Stepped forms functionality
-//import FormStepped from './_components/_ui.form.stepped';
-
-// Forms validation functionality
-//import FormValidate from './_components/_ui.form.validate';
-
-// Store forms data into localStorage
-//import FormStorage from './_components/_ui.form.storage';
-
-// client-side images cropping
-//import FormCroppie from './_components/_ui.form.croppie';
-
-// Google NoCaptcha fields
-//import NoCaptcha from './_components/_ui.nocaptcha';
-
 import SmoothScroll from 'smooth-scroll';
 const smoothScroll = SmoothScroll();
+
 
 const MainUI = (($) => {
   // Constants
@@ -84,7 +50,7 @@ const MainUI = (($) => {
 
 
   // update online/offline state
-  const updateOnlineStatus = function() {
+  const updateOnlineStatus = () => {
     if (!navigator.onLine) {
       console.log('Tab: offline');
       $Body.addClass('is-offline');
@@ -111,7 +77,7 @@ const MainUI = (($) => {
   }
 
   // scrollTo
-  const ScrollTo = function(trigger, selector) {
+  const ScrollTo = (trigger, selector) => {
     smoothScroll.animateScroll(
       D.querySelector(selector),
       trigger, {
@@ -119,8 +85,8 @@ const MainUI = (($) => {
         offset: -20,
         //easing: 'easeInOutCubic',
         // Callback API
-        //before: function (anchor, toggle) {}, // Callback to run before scroll
-        //`after: function (anchor, toggle) {} // Callback to run after scroll
+        //before: (anchor, toggle) => {}, // Callback to run before scroll
+        //`after: (anchor, toggle) => {} // Callback to run after scroll
       }
     );
   };
@@ -168,48 +134,44 @@ const MainUI = (($) => {
         $('a.offline').addClass('offline-available');
       }
 
-      if (typeof AjaxUI !== 'undefined') {
-        this.loadImages();
-      }
+      this.loadImages();
+
+      // detect bootstrap screen size
+      this.detectBootstrapScreenSize();
 
       // mark external links
       $('a.external,a[rel="external"]').attr('target', '_blank');
 
       // show encoded emails
-      /*$(D).find('.obm').each(function () {
-        if ($(this).attr('data-val') !== undefined) {
-          const email = $(this).attr('data-val').split('')
-            .reverse()
-            .join('')
-            .slice(0, -8)
-            .replace(/[a-zA-Z]/g, (c) => String.fromCharCode((c <= 'Z' ? 90 : 122) >= (c = c.charCodeAt(0) + 13) ? c : c - 26))
-            .replace('#AT#', '@');
-          const attr = $(this).attr('data-val-append');
-          if (attr !== undefined && attr !== false) {
-            $(this).append(email);
-          }
-          if ($(this).find('.sr-only').length > 0) {
-            $(this).find('.sr-only').append(email);
-          }
-          if ($(this).attr('href') !== undefined) {
-            $(this).attr('href', `mailto:${email}`);
-          }
-        }
-      });*/
+      /*$(D).find('.obm').each(() => {
+              if ($(this).attr('data-val') !== undefined) {
+                const email = $(this).attr('data-val').split('')
+                  .reverse()
+                  .join('')
+                  .slice(0, -8)
+                  .replace(/[a-zA-Z]/g, (c) => String.fromCharCode((c <= 'Z' ? 90 : 122) >= (c = c.charCodeAt(0) + 13) ? c : c - 26))
+                  .replace('#AT#', '@');
+                const attr = $(this).attr('data-val-append');
+                if (attr !== undefined && attr !== false) {
+                  $(this).append(email);
+                }
+                if ($(this).find('.sr-only').length > 0) {
+                  $(this).find('.sr-only').append(email);
+                }
+                if ($(this).attr('href') !== undefined) {
+                  $(this).attr('href', `mailto:${email}`);
+                }
+              }
+            });*/
       //
 
       // scroll links
-      $(D).on('click', '.js-scrollTo', (e) => {
+      $('.js-scrollTo').on('click', (e) => {
         e.preventDefault();
         const el = e.currentTarget;
         const $el = $(e.currentTarget);
-        const target = $el.data('target') || $el.attr('href');
 
-        if ($(target).length) {
-          ScrollTo(el, target);
-        } else {
-          console.log(`[ScrollTo] Undefined target: ${  target}`);
-        }
+        ScrollTo(el, $el.attr('data-target'));
       });
 
       // load external fonts
@@ -263,10 +225,29 @@ const MainUI = (($) => {
         W.print();
       }
 
-      // load youtube API
-      if ($('iframe[src^="https://www.youtube.com/embed/"]').length) {
-        $Body.append('<script src="https://www.youtube.com/iframe_api"></script>');
+      $Body.data(NAME, this);
+    }
+
+    static detectBootstrapScreenSize() {
+      const $el = $('<div class="env-test"></div>');
+      const envs = [...Consts.ENVS];
+
+      $Body.append($el);
+      let curEnv = envs.shift();
+
+      for (let env of envs.reverse()) {
+        $el.addClass(`d-${env}-none`);
+        if ($el.is(':hidden')) {
+          curEnv = env;
+          break;
+        }
       }
+
+      $el.remove();
+      $Body.removeClass(envs);
+      $Body.addClass(curEnv);
+
+      return curEnv;
     }
 
     static updateLocation(url) {
@@ -370,7 +351,11 @@ const MainUI = (($) => {
     MainUI.init();
   });
 
-  $(W).on('beforeunload', () => {
+  $(W).on('resize', () => {
+    MainUI.detectBootstrapScreenSize();
+  });
+
+  $(W).on('beforeunload unload', () => {
     Spinner.show(() => {
       $Body.removeClass('loaded');
     });
