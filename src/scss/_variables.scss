@@ -1,38 +1,17 @@
-/*
- * Your custom variables
- */
+@import "_colors";
 
-$grid-breakpoints: (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px, xxl: 1390px, xxxl: 1590px);
-$container-max-widths: (sm: 540px, md: 720px, lg: 960px, xl: 1140px, xxl: 1330px, xxxl: 1560px);
+$grid-breakpoints: (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px, xxl: 1390px, xxxl: 1590px) !default;
+$container-max-widths: (sm: 540px, md: 720px, lg: 960px, xl: 1140px, xxl: 1330px, xxxl: 1560px) !default;
 
-$font-family-base: "Lato", sans-serif;
+$font-family-base: "Lato", sans-serif !default;
 
-$grid-gutter-width: 30px;
-$grid-gutter-xs-width: $grid-gutter-width / 2;
-$grid-gutter-height: 8rem;
+$grid-gutter-width: 2rem !default;
+$grid-gutter-height: 2rem !default;
+$grid-gutter-xs-width: $grid-gutter-width / 2 !default;
+$grid-gutter-element-height: $grid-gutter-height * 2 !default;
 
-$gray-900: #212529;
-$white: #fff;
-$blue: #016cb1;
-$yellow: #ecac02;
-
-$dark: #000;
-
-//$primary: $dark;
-$bg-alt: $yellow;
-
-$body-color: $gray-900;
-$navbar-light-active-color: $blue;
-
-$navbar-dark-hover-background: $dark;
-$navbar-dark-active-background: $dark;
-$navbar-dark-show-color: $blue;
-$navbar-dark-show-background: $dark;
-
-$dropdown-border-color: $white;
-
-$footer-size: 18.5rem;
-$footer-bar-size: 2.5rem;
+$footer-size: 18.5rem !default;
+$footer-bar-size: 2.5rem !default;
 
 /*
  * bootstrap includes
@@ -40,13 +19,12 @@ $footer-bar-size: 2.5rem;
  */
 
 // bootstrap minify bugfix:
-$navbar-dark-toggler-icon-bg: none;
-$navbar-light-toggler-icon-bg: none;
+$navbar-dark-toggler-icon-bg: none !default;
+$navbar-light-toggler-icon-bg: none !default;
 
 // IE > 9
-$enable-flex: true;
+$enable-flex: true !default;
 
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";
 @import "~bootstrap/scss/mixins";
-@import "_components/_variables";

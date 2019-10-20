@@ -84,6 +84,7 @@
     "file-loader": "^1.1.5",
     "html-webpack-plugin": "^4.0.0-beta.8",
     "lost": "^8.3.1",
+    "material-design-color": "^2.3.2",
     "node-sass": "^4.12.0",
     "object-assign": "^4.1.1",
     "optimize-css-assets-webpack-plugin": "^5.0.3",

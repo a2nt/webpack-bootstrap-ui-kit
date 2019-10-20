@@ -1,3 +1,5 @@
+const COMPRESS = false;
+
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 const path = require('path');
@@ -8,13 +10,48 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
+const plugins = [
+  new webpack.DefinePlugin({
+    'process.env': {
+      'NODE_ENV': JSON.stringify('production')
+    }
+  }),
+  new webpack.LoaderOptionsPlugin({
+    minimize: COMPRESS,
+    debug: false
+  }),
+  new ExtractTextPlugin({
+    filename: 'css/[name].css',
+    allChunks: true
+  }),
+  /**/
+  new HtmlWebpackPlugin({
+    template: './src/index.html'
+  }),
+];
+
+if (COMPRESS) {
+  plugins.push(new OptimizeCssAssetsPlugin({
+    //assetNameRegExp: /\.optimize\.css$/g,
+    cssProcessor: require('cssnano'),
+    cssProcessorPluginOptions: {
+      preset: ['default', {
+        discardComments: {
+          removeAll: true
+        }
+      }],
+    },
+    canPrint: true
+  }));
+}
+
 module.exports = {
   entry: './src/js/app.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'js/app.js'
   },
-  devtool: 'source-map',
+  devtool: (COMPRESS ? '' : 'source-map'),
   externals: {
     'jquery': 'jQuery',
   },
@@ -29,7 +66,7 @@ module.exports = {
     minimizer: [
       new TerserPlugin({
         parallel: true,
-        sourceMap: false,
+        sourceMap: !COMPRESS,
         terserOptions: {
           parse: {
             ecma: 8,
@@ -79,12 +116,12 @@ module.exports = {
         use: [{
           loader: 'css-loader',
           options: {
-            sourceMap: false
+            sourceMap: !COMPRESS
           }
         }, {
           loader: 'postcss-loader',
           options: {
-            sourceMap: false,
+            sourceMap: !COMPRESS,
             plugins: [
               autoprefixer({
                 // If we want to use the same browser list for more tools
@@ -106,7 +143,7 @@ module.exports = {
         }, {
           loader: 'sass-loader',
           options: {
-            sourceMap: false
+            sourceMap: !COMPRESS
           }
         }, ]
       })
@@ -150,36 +187,7 @@ module.exports = {
       'jQuery': require.resolve('jquery'),
     },
   },
-  plugins: [
-    new webpack.DefinePlugin({
-      'process.env': {
-        'NODE_ENV': JSON.stringify('production')
-      }
-    }),
-    new webpack.LoaderOptionsPlugin({
-      minimize: true,
-      debug: false
-    }),
-    new ExtractTextPlugin({
-      filename: 'css/[name].css',
-      allChunks: true
-    }),
-    new OptimizeCssAssetsPlugin({
-      //assetNameRegExp: /\.optimize\.css$/g,
-      cssProcessor: require('cssnano'),
-      cssProcessorPluginOptions: {
-        preset: ['default', {
-          discardComments: {
-            removeAll: true
-          }
-        }],
-      },
-      canPrint: true
-    }),
-    new HtmlWebpackPlugin({
-      template: './src/index.html'
-    }),
-  ],
+  plugins: plugins,
 
   devServer: {
     host: '127.0.0.1',
