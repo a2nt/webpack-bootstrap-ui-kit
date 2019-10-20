@@ -4,7 +4,9 @@ const path = require('path');
 
 const autoprefixer = require('autoprefixer');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+
+const TerserPlugin = require('terser-webpack-plugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = {
   entry: './src/js/app.js',
@@ -25,12 +27,18 @@ module.exports = {
     noEmitOnErrors: true, // NoEmitOnErrorsPlugin
     concatenateModules: true, //ModuleConcatenationPlugin
     minimizer: [
-      new UglifyJSPlugin({
-        uglifyOptions: {
-          sourceMap: false,
-          comments: false
-        }
-      })
+      new TerserPlugin({
+        parallel: true,
+        sourceMap: false,
+        terserOptions: {
+          parse: {
+            ecma: 8,
+          },
+          output: {
+            ecma: 5,
+          },
+        },
+      }),
     ]
   },
   module: {
@@ -155,6 +163,18 @@ module.exports = {
     new ExtractTextPlugin({
       filename: 'css/[name].css',
       allChunks: true
+    }),
+    new OptimizeCssAssetsPlugin({
+      //assetNameRegExp: /\.optimize\.css$/g,
+      cssProcessor: require('cssnano'),
+      cssProcessorPluginOptions: {
+        preset: ['default', {
+          discardComments: {
+            removeAll: true
+          }
+        }],
+      },
+      canPrint: true
     }),
     new HtmlWebpackPlugin({
       template: './src/index.html'
