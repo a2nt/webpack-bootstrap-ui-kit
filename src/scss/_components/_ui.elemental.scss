@@ -12,7 +12,7 @@ h1.page-header {
 }
 
 // add top/bottom paddings for basic elements
-.page-content > .element {
+.element {
     position: relative;
     padding: $grid-gutter-element-height 0;
 
