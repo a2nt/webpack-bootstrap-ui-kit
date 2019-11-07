@@ -3,6 +3,11 @@
  */
 
 // don't let images be wider than the parent layer
+div, a, span, button, i {
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
 iframe,
 img {
     max-width: 100%;
