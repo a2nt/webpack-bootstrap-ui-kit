@@ -13,12 +13,12 @@ const FormToggleUI = (($) => {
 
     constructor($el) {
       const ui = this;
-      const condition = $el.data('value-toggle');
-      if (!condition) {
+      ui.$el = $el;
+
+      if (!ui.getCondition()) {
         return;
       }
 
-      ui.$el = $el;
       ui.$el.data(DATA_KEY, ui);
 
       ui.toggle();
@@ -32,20 +32,62 @@ const FormToggleUI = (($) => {
       return ui;
     }
 
+    getDataEl() {
+      const ui = this;
+      const $el = ui.$el;
+
+      return ($el.is('[type="radio"]') && $el.parents('.optionset').length) ?
+        $el.parents('.optionset') : $el;
+    }
+
+    getCondition() {
+      const ui = this;
+
+      return ui.getDataEl().data('value-toggle');
+    }
+
+    getCurrentVal() {
+      const ui = this;
+      const $el = ui.$el;
+
+      return ($el.attr('type') === 'checkbox') ?
+        ($el.is(':checked') ? true : false) :
+        ($el.attr('type') === 'radio' ? $Html.find(`[name="${  $el.attr('name')  }"]:checked`).val() : $el.val());
+    }
+
+    getTrueTarget() {
+      const ui = this;
+      const $dataEl = ui.getDataEl();
+
+      let target = $dataEl.data('value-toggle-yes');
+      if (!target || !target.length) {
+        let target = $dataEl.data('target');
+      }
+
+      return ui.getElement(target);
+    }
+
+    getFalseTarget() {
+      const ui = this;
+      const target = ui.getDataEl().data('value-toggle-no');
+
+      return ui.getElement(target);
+    }
+
+    getElement(target) {
+      return target && target.length && $(target).length ?
+        $(target) : false;
+    }
+
     toggle() {
       const ui = this;
       const $el = ui.$el;
 
-      const val = ($el.attr('type') === 'checkbox') ?
-        ($el.is(':checked') ? true : false) :
-        ($el.attr('type') === 'radio' ? $Html.find(`[name="${  $el.attr('name')  }"]:checked`).val() : $el.val());
-
-      const $dataEl = ($el.is('[type="radio"]') && $el.parents('.optionset').length) ?
-        $el.parents('.optionset') : $el;
+      const val = ui.getCurrentVal();
+      const $dataEl = ui.getDataEl();
 
       // coditional toggler
-      const target = $el.data('target');
-      const condition = $el.data('value-toggle');
+      const condition = ui.getCondition();
       if (!condition) {
         return;
       }
@@ -56,8 +98,8 @@ const FormToggleUI = (($) => {
         condition === val
       ) ? true : false;
 
-      const $yesTarget = $($dataEl.data('value-toggle-yes'));
-      const $noTarget = $($dataEl.data('value-toggle-no'));
+      const $yesTarget = ui.getTrueTarget();
+      const $noTarget = ui.getFalseTarget();
 
       if (!$el.data(FieldUI).shown || typeof val === 'undefined') {
         ui.toggleElement($yesTarget, false);

@@ -37,3 +37,19 @@ input.time {
         border: 1px solid #ced4da;
     }
 }
+
+.form-inline {
+    margin-top: -1rem;
+
+    fieldset {
+        margin-top: 1rem;
+    }
+
+    .field {
+        display: flex;
+    }
+
+    .form-control {
+        width: 100%;
+    }
+}
