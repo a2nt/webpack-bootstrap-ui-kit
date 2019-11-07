@@ -21,6 +21,18 @@ h1.page-header {
     &.site__elements__sliderelement {
         padding: 0;
     }
+
+    // remove paddings for elemental list cuz inner elements will have paddings
+    &.dnadesign__elementallist__model__elementlist {
+        padding-top: 0;
+        padding-bottom: 0;
+
+        .dynamic__elements__image__elements__elementimage,
+        .site__elements__sliderelement {
+            padding-top: $grid-gutter-element-height;
+            padding-bottom: $grid-gutter-element-height;
+        }
+    }
 }
 
 // remove container paddings for the slideshow
