@@ -145,6 +145,14 @@ button, input, optgroup, select, textarea,
 }
 
 // dropdown icon
+.navbar-toggler {
+    transform: rotate(90deg);
+
+    &.collapsed {
+        transform: rotate(0);
+    }
+}
+
 .dropdown.show .dropdown-toggle::after,
 .dropdown-toggle.active-dropdown::after,
 .dropdown-toggle.active::after {
