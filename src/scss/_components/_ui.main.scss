@@ -146,10 +146,8 @@ button, input, optgroup, select, textarea,
 
 // dropdown icon
 .navbar-toggler {
-    transform: rotate(90deg);
-
-    &.collapsed {
-        transform: rotate(0);
+    &[aria-expanded="true"] {
+        transform: rotate(90deg);
     }
 }
 
