@@ -53,3 +53,77 @@ input.time {
         width: 100%;
     }
 }
+
+// select2 dropdowns bootstrap4 styling
+.select2-container {
+    display: block;
+    width: 100% !important;
+}
+
+.select2-container--default {
+    &.select2-container--focus {
+        .select2-selection {
+            color: $input-focus-color;
+            background-color: $input-focus-bg;
+            border-color: $input-focus-border-color;
+            outline: 0;
+
+            // Avoid using mixin so we can pass custom focus shadow properly
+            @if $enable-shadows {
+                box-shadow: $input-box-shadow, $input-focus-box-shadow;
+            }
+            @else {
+                box-shadow: $input-focus-box-shadow;
+            }
+
+            &.select2-selection--single {}
+
+            &.select2-selection--multiple {}
+        }
+    }
+
+    .select2-selection {
+        @extend .form-control;
+
+        .select2-selection__rendered {
+            line-height: inherit;
+        }
+
+        &.select2-selection--single {}
+
+        &.select2-selection--multiple {
+            padding-top: 0;
+            padding-bottom: 0;
+
+            .select2-selection__choice {
+                @extend .badge;
+
+                @extend .badge-primary;
+
+                padding: $input-padding-y $input-padding-x;
+                border: 0;
+            }
+
+            .select2-selection__choice__remove {
+                color: color-yiq($primary);
+            }
+        }
+    }
+
+    .select2-results__option--highlighted[aria-selected] {
+        background: $primary;
+        color: color-yiq($primary);
+    }
+}
+
+.select2-dropdown {
+    border: $input-border-width solid $input-border-color;
+
+    .select2-search--dropdown {
+        padding: $input-padding-y $input-padding-x;
+    }
+
+    .select2-search__field {
+        @extend .form-control;
+    }
+}
