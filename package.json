@@ -25,7 +25,7 @@
     "prepare": "yarn lint:fix && yarn build"
   },
   "dependencies": {
-    "@a2nt/meta-lightbox": "git+https://github.com/a2nt/meta-lightbox.git",
+    "@a2nt/meta-lightbox": "*",
     "@google/markerclusterer": "^1.0.3",
     "animate.css": "^3.7.0",
     "bootbox": "^4.4.0",
