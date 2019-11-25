@@ -1,5 +1,5 @@
 {
-  "name": "ss-bootstrap-ui-webpack-boilerplate",
+  "name": "@a2nt/ss-bootstrap-ui-webpack-boilerplate",
   "version": "1.0.1",
   "author": "Tony Air <tony@twma.pro>",
   "license": "MIT",
@@ -112,13 +112,18 @@
     "webpack-manifest-plugin": "^1.3.2",
     "webpack-merge": "^4.1.1"
   },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "browserslist": [
+    "defaults"
+  ],
   "stylelint": {
     "rules": {
       "block-no-empty": null,
       "color-no-invalid-hex": true,
       "comment-empty-line-before": [
-        "always",
-        {
+        "always", {
           "ignore": [
             "stylelint-commands",
             "after-comment"
@@ -127,8 +132,7 @@
       ],
       "declaration-colon-space-after": "always",
       "indentation": [
-        4,
-        {
+        4, {
           "except": [
             "value"
           ]
@@ -136,8 +140,7 @@
       ],
       "max-empty-lines": 2,
       "rule-empty-line-before": [
-        "always",
-        {
+        "always", {
           "except": [
             "first-nested"
           ],
