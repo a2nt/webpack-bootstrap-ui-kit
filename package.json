@@ -1,6 +1,6 @@
 {
   "name": "@a2nt/ss-bootstrap-ui-webpack-boilerplate",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "Tony Air <tony@twma.pro>",
   "license": "MIT",
   "description": "This UI Kit allows you to build Bootstrap 4 webapp with some extra UI features. It's easy to extend and easy to convert HTML templates to CMS templates.",
@@ -123,7 +123,8 @@
       "block-no-empty": null,
       "color-no-invalid-hex": true,
       "comment-empty-line-before": [
-        "always", {
+        "always",
+        {
           "ignore": [
             "stylelint-commands",
             "after-comment"
@@ -132,7 +133,8 @@
       ],
       "declaration-colon-space-after": "always",
       "indentation": [
-        4, {
+        4,
+        {
           "except": [
             "value"
           ]
@@ -140,7 +142,8 @@
       ],
       "max-empty-lines": 2,
       "rule-empty-line-before": [
-        "always", {
+        "always",
+        {
           "except": [
             "first-nested"
           ],
