@@ -82,6 +82,7 @@
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "favicons-webpack-plugin": "^1.0.2",
     "file-loader": "^1.1.5",
+    "html-loader": "^0.5.5",
     "html-webpack-plugin": "^4.0.0-beta.11",
     "lost": "^8.3.1",
     "material-design-color": "^2.3.2",
