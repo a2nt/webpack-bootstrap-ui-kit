@@ -1,3 +1,5 @@
+/*@cc_on!@*/
+
 /*!
  * Datepicker for Bootstrap v1.9.0 (https://github.com/uxsolutions/bootstrap-datepicker)
  *
@@ -97,8 +99,6 @@
 * Licensed under the MIT license (http://www.opensource.org/licenses/mit-license.php)
 * Version: 3.3.4
 */
-
-/*@cc_on!@*/
 
 /**!
  * @fileOverview Kickass library to create and place poppers near their reference elements.

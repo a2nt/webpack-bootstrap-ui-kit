@@ -62,7 +62,7 @@ import 'bootstrap/js/dist/tab';
 import './_components/_ui.video.preview';
 
 // Meta Lightbox
-import 'meta-lightbox/meta-lightbox';
+import '@a2nt/meta-lightbox/src/js/index';
 
 //import Confirmation from 'bootstrap-confirmation2/dist/bootstrap-confirmation';
 //import Table from 'bootstrap-table/dist/bootstrap-table';

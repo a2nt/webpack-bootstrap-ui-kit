@@ -48,7 +48,7 @@
     "jquery.inputmask": "^3.3.4",
     "laravel-mix": "^4.1.2",
     "mapbox-gl": "^1.2.1",
-    "meta-lightbox": "^1.0.0",
+    "@a2nt/meta-lightbox": "git+https://github.com/a2nt/meta-lightbox.git",
     "offcanvas-bootstrap": "^2.5.2",
     "popper.js": "^1.15.0",
     "pouchdb": "^6.4.3",
