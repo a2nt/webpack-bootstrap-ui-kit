@@ -1,11 +1,8 @@
+"use strict";
+
 import $ from 'jquery';
 
 import Events from './_events';
-import Spinner from './_components/_ui.spinner';
-import FormDatetime from './_components/_ui.form.datetime';
-import FormStepped from './_components/_ui.form.stepped';
-
-//import Multislider from './_components/_ui.multislider';
 
 const LayoutUI = (($) => {
   // Constants

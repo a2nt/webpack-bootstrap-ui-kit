@@ -1,3 +1,5 @@
+"use strict";
+
 import '../scss/app.scss';
 
 // import Bootstrap

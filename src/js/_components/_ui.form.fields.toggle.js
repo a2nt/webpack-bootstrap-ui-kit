@@ -1,6 +1,8 @@
 import $ from 'jquery';
 import Events from '../_events';
 
+import FormBasics from './_ui.form.basics';
+
 const FormToggleUI = (($) => {
   // Constants
   const NAME = 'jsFormToggleUI';
@@ -16,10 +18,9 @@ const FormToggleUI = (($) => {
       ui.$el = $el;
 
       if (!ui.getCondition()) {
+        console.warn(`${NAME}: no condition found`);
         return;
       }
-
-      ui.$el.data(DATA_KEY, ui);
 
       ui.toggle();
 
@@ -28,6 +29,7 @@ const FormToggleUI = (($) => {
       });
 
       ui.$el.addClass(`${NAME}-active`);
+      ui.$el.data(DATA_KEY, ui);
 
       return ui;
     }
@@ -36,8 +38,8 @@ const FormToggleUI = (($) => {
       const ui = this;
       const $el = ui.$el;
 
-      return ($el.is('[type="radio"]') && $el.parents('.optionset').length) ?
-        $el.parents('.optionset') : $el;
+      return ($el.is('[type="radio"],[type="checkbox"]') && $el.parents('.optionset,.checkboxset').length) ?
+        $el.parents('.optionset,.checkboxset') : $el;
     }
 
     getCondition() {
@@ -50,18 +52,29 @@ const FormToggleUI = (($) => {
       const ui = this;
       const $el = ui.$el;
 
-      return ($el.attr('type') === 'checkbox') ?
-        ($el.is(':checked') ? true : false) :
-        ($el.attr('type') === 'radio' ? $Html.find(`[name="${  $el.attr('name')  }"]:checked`).val() : $el.val());
+      if ($el.attr('type') === 'checkbox') {
+        if ($el.parents('.checkboxset').length && $el.is(':checked')) {
+          return $el.val();
+        }
+
+        return $el.is(':checked') ? true : false;
+      }
+
+      if ($el.attr('type') === 'radio') {
+        return $Html.find(`[name="${  $el.attr('name')  }"]:checked`).val();
+      }
+
+      return $el.val();
     }
 
     getTrueTarget() {
       const ui = this;
       const $dataEl = ui.getDataEl();
 
-      let target = $dataEl.data('value-toggle-yes');
+      // compatibility params
+      const target = $dataEl.data('value-toggle-yes');
       if (!target || !target.length) {
-        let target = $dataEl.data('target');
+        return ui.getElement($dataEl.data('target'));
       }
 
       return ui.getElement(target);
@@ -69,7 +82,13 @@ const FormToggleUI = (($) => {
 
     getFalseTarget() {
       const ui = this;
-      const target = ui.getDataEl().data('value-toggle-no');
+      const $dataEl = ui.getDataEl();
+
+      // compatibility params
+      const target = $dataEl.data('value-toggle-no');
+      if (!target || !target.length) {
+        return ui.getElement($dataEl.data('value-toggle-false'));
+      }
 
       return ui.getElement(target);
     }
@@ -86,7 +105,7 @@ const FormToggleUI = (($) => {
       const val = ui.getCurrentVal();
       const $dataEl = ui.getDataEl();
 
-      // coditional toggler
+      // conditional toggler
       const condition = ui.getCondition();
       if (!condition) {
         return;
@@ -162,7 +181,7 @@ const FormToggleUI = (($) => {
         const name = $el.attr('name');
 
         if ($(`[name="${  name  }"]`).length > 1) {
-          console.log(`${NAME  }: Module malfunction duplicate "${  name  }" elements found`);
+          console.warn(`${NAME  }: Module malfunction duplicate "${  name  }" elements found`);
         }
       });
     }
@@ -180,6 +199,7 @@ const FormToggleUI = (($) => {
   $(W).on(`${Events.AJAX} ${Events.LOADED}`, () => {
     //FormToggleUI.validate();
     $(Events.FORM_FIELDS).filter('[data-value-toggle]').jsFormToggleUI();
+
     $('[data-value-toggle]')
       .not(Events.FORM_FIELDS)
       .find(Events.FORM_FIELDS)

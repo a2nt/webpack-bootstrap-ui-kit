@@ -13,8 +13,9 @@ const FormFieldUI = (($) => {
       const ui = this;
 
       ui.$el = $(el);
-      ui.$el.data(DATA_KEY, ui);
       ui.shown = true;
+
+      ui.$el.data(DATA_KEY, ui);
       //ui.$actions = ui.$el.parents('form').children('.btn-toolbar,.form-actions');
 
       ui.vals = {
