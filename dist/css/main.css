@@ -14628,6 +14628,35 @@ a.text-dark:focus {
   }
 }
 
+.flyout-FlyoutUI {
+  position: absolute;
+  z-index: 99;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  -webkit-transition: right 2s;
+  transition: right 2s;
+  right: -100%;
+  top: 50%;
+  background: #000;
+  color: #fff;
+  padding: 1rem 2rem;
+}
+
+.flyout-FlyoutUI__active {
+  display: block;
+  right: 0;
+}
+
+.flyout-FlyoutUI__title {
+  color: #fff;
+}
+
+.flyout-FlyoutUI__close {
+  position: absolute;
+  top: 1rem;
+  right: 2rem;
+}
+
 /*
  * some basic styles
  */
@@ -15758,6 +15787,11 @@ h6,
   padding: .2rem .5rem;
   margin: .2rem;
   color: #212529;
+}
+
+html,
+body {
+  overflow-x: hidden;
 }
 
 @media (min-width: 576px) {

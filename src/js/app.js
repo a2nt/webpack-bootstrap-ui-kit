@@ -19,6 +19,7 @@ import 'jquery-hammerjs/jquery.hammer';
 
 // conflicts with _components/_ui.hover.js (shows dropdown on hover)
 //import 'bootstrap/js/dist/dropdown';
+import './_components/_ui.flyout';
 import './_components/_ui.hover';
 
 import './_components/_ui.carousel';
@@ -38,6 +39,8 @@ import 'bootstrap/js/dist/tab';
 // Uncomment it to enable meta-lightbox zooming on hover
 //import 'jquery-zoom/jquery.zoom';
 
+// FlyoutUI
+//import FlyoutUI from './_components/_ui.flyout';
 
 // Toggle bootstrap form fields
 //import FormToggleUI from './_components/_ui.form.fields.toggle';
