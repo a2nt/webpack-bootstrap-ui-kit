@@ -49,7 +49,7 @@ const FormFieldUI = (($) => {
       const $el = ui.$el;
 
       $el.removeClass(`${NAME}-active`);
-      $.removeData(this._el, DATA_KEY);
+      $.removeData($el[0], DATA_KEY);
     }
 
     show() {
@@ -110,6 +110,31 @@ const FormFieldUI = (($) => {
 
       $el.val(ui.vals['val']);
       $el.prop('checked', checked);
+    }
+
+    addMessage(msg, type = null, scrollTo = true) {
+      const ui = this;
+      const $field = ui.$el.closest('.field');
+
+
+      $field.addClass('has-message');
+      if (msg) {
+        $field.append(`<div class="message alert ${  type  }">${  msg  }</div>`);
+      }
+
+      if (scrollTo) {
+        const pos = $field.offset().top;
+        $field.focus();
+        $Html.scrollTop(pos - 100);
+      }
+    }
+
+    removeMessages() {
+      const ui = this;
+      const $field = ui.$el.closest('.field');
+
+      $field.removeClass('has-message');
+      $field.find('.message').remove();
     }
 
     static _jQueryInterface() {

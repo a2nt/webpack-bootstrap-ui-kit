@@ -7,39 +7,43 @@ const FormValidateField = (($) => {
   const DATA_KEY = NAME;
   const $Html = $('html, body');
 
+  const FieldUI = 'jsFormFieldUI';
+
   class FormValidateField {
 
-    constructor(element) {
+    constructor(el) {
       const ui = this;
-      const $element = $(element);
+      const $el = $(el);
 
-      ui._element = element;
-      ui._actions = $element.parents('form').children('.btn-toolbar,.form-actions');
-      $element.data(DATA_KEY, this);
+      ui.$el = $el;
+
+      ui._actions = $el.parents('form').children('.btn-toolbar,.form-actions');
+      $el.data(DATA_KEY, this);
 
       // prevent browsers checks (will do it using JS)
-      $element.attr('novalidate', 'novalidate');
+      $el.attr('novalidate', 'novalidate');
 
-      $element.on('change focusout', (e) => {
+      $el.on('change focusout', (e) => {
         ui.validate(false);
       });
 
-      $element.addClass(`${NAME}-active`);
-      $element.trigger(Events.FORM_INIT_VALIDATE_FIELD);
+      $el.addClass(`${NAME}-active`);
+      $el.trigger(Events.FORM_INIT_VALIDATE_FIELD);
     }
 
     // Public methods
     dispose() {
-      const $element = $(this._element);
+      const $el = ui.$el;
 
-      $element.removeClass(`${NAME}-active`);
-      $.removeData(this._element, DATA_KEY);
-      this._element = null;
+      $el.removeClass(`${NAME}-active`);
+      $.removeData(ui.$el[0], DATA_KEY);
+      ui.$el = null;
     }
 
     validate(scrollTo = true) {
       const ui = this;
-      const $el = $(ui._element);
+      const $el = ui.$el;
+
       const $field = $el.closest('.field');
       const extraChecks = $el.data(`${NAME}-extra`);
       let valid = true;
@@ -48,7 +52,7 @@ const FormValidateField = (($) => {
       const val = $el.val();
 
       // browser checks + required
-      if (!ui._element.checkValidity() ||
+      if (!ui.$el[0].checkValidity() ||
         ($el.hasClass('required') && (!val.length || !val.trim().length ||
           ui.isHtml(val) && !$(val).text().length
         ))
@@ -97,15 +101,17 @@ const FormValidateField = (($) => {
 
     setError(scrollTo = true, msg = null) {
       const ui = this;
-      const $field = $(ui._element).closest('.field');
+      const fieldUI = ui.$el.data(FieldUI);
+
+      const $field = ui.$el.closest('.field');
       const pos = $field.offset().top;
+
+      ui.removeError();
 
       $field.addClass('error');
       if (msg) {
-        $field.append(`<div class="message alert alert-error alert-danger">${  msg  }</div>`);
-      }
-
-      if (scrollTo) {
+        fieldUI.addMessage(msg, 'alert-error alert-danger', scrollTo);
+      } else if (scrollTo) {
         $field.focus();
         $Html.scrollTop(pos - 100);
       }
@@ -113,24 +119,26 @@ const FormValidateField = (($) => {
 
     removeError() {
       const ui = this;
-      const $field = $(ui._element).closest('.field');
+      const fieldUI = ui.$el.data(FieldUI);
+
+      const $field = ui.$el.closest('.field');
 
       $field.removeClass('error');
 
       $field.removeClass('holder-error');
       $field.removeClass('holder-validation');
-      $field.find('.message').remove();
+      $field.find('.alert-error').remove();
     }
 
     static _jQueryInterface() {
       return this.each(function() {
-        // attach functionality to element
-        const $element = $(this);
-        let data = $element.data(DATA_KEY);
+        // attach functionality to el
+        const $el = $(this);
+        let data = $el.data(DATA_KEY);
 
         if (!data) {
           data = new FormValidateField(this);
-          $element.data(DATA_KEY, data);
+          $el.data(DATA_KEY, data);
         }
       });
     }
