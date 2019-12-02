@@ -33,6 +33,14 @@ a:focus,
     }
 }
 
+// exclude bootstrap-table
+[data-toggle="table"] {
+    &:hover,
+    &:focus {
+        opacity: 1;
+    }
+}
+
 [data-toggle="collapse"] {
     &[aria-expanded="true"] {
         .accordion-icon {
