@@ -6,7 +6,10 @@ import Events from '../_events';
 import Spinner from '../_components/_ui.spinner';
 import FormValidateField from "./_ui.form.validate.field";
 
-import '../../thirdparty/jquery-te/jquery-te.js';
+
+import '../../thirdparty/jQuery-TE_v.1.4.0/jquery-te-1.4.0.css';
+import '../../thirdparty/jQuery-TE_v.1.4.0/uncompressed/jquery-te-1.4.0.js';
+
 
 const JqteUI = (($) => {
 
