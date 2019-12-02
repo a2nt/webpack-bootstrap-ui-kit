@@ -25,8 +25,8 @@ a:focus,
 [data-toggle]:focus {
     opacity: .8;
 
-    .fas,
-    .fab,
+    > .fas,
+    > .fab,
     &.fas,
     &.fab {
         transform: rotate(-180deg);
