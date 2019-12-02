@@ -14716,6 +14716,11 @@ a:focus.fab,
           transform: rotate(-180deg);
 }
 
+[data-toggle="table"]:hover,
+[data-toggle="table"]:focus {
+  opacity: 1;
+}
+
 [data-toggle="collapse"][aria-expanded="true"] .accordion-icon:before {
   content: "\f068";
 }
