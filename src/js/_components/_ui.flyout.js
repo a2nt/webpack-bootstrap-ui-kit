@@ -17,14 +17,12 @@ const FlyoutUI = (($) => {
   class FlyoutUI {
     static init() {
       const ui = this;
+      const $close = ui.$modal.find(`.flyout-${NAME}__close`);
 
       ui.$modal = $(`.flyout-${NAME}`);
-      const hide = CookieUI.get(COOKIE);
 
-      if (ui.$modal.length && (!hide || hide !== 'true')) {
+      if (ui.$modal.length) {
         ui.$modal.data(NAME, ui);
-
-        const $close = ui.$modal.find(`.flyout-${NAME}__close`);
 
         if ($close.length) {
           $close.on('click', () => {
@@ -32,9 +30,13 @@ const FlyoutUI = (($) => {
           });
         }
 
-        setTimeout(() => {
-          ui.show();
-        }, TIMEOUT);
+        const hide = CookieUI.get(COOKIE);
+
+        if (!$close.length || !hide || hide !== 'true') {
+          setTimeout(() => {
+            ui.show();
+          }, TIMEOUT);
+        }
       }
     }
 
