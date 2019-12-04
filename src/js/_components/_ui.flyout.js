@@ -17,27 +17,30 @@ const FlyoutUI = (($) => {
   class FlyoutUI {
     static init() {
       const ui = this;
-      const $close = ui.$modal.find(`.flyout-${NAME}__close`);
 
       ui.$modal = $(`.flyout-${NAME}`);
 
-      if (ui.$modal.length) {
-        ui.$modal.data(NAME, ui);
-
-        if ($close.length) {
-          $close.on('click', () => {
-            ui.hide();
-          });
-        }
-
-        const hide = CookieUI.get(COOKIE);
-
-        if (!$close.length || !hide || hide !== 'true') {
-          setTimeout(() => {
-            ui.show();
-          }, TIMEOUT);
-        }
+      if (!ui.$modal.length) {
+        return false;
       }
+
+      const $close = ui.$modal.find(`.flyout-${NAME}__close`);
+      ui.$modal.data(NAME, ui);
+
+      if ($close.length) {
+        $close.on('click', () => {
+          ui.hide();
+        });
+      }
+
+      const hide = CookieUI.get(COOKIE);
+
+      if (!$close.length || !hide || hide !== 'true') {
+        setTimeout(() => {
+          ui.show();
+        }, TIMEOUT);
+      }
+
     }
 
     static show(callback) {
