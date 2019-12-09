@@ -78,8 +78,8 @@ const MultiSlider = (($) => {
       // actions
       ui.$elContainer.append(
         '<div class="slider-actions">' +
-        '<a href="#" class="slider-prev"><i class="fas fa-chevron-left"></i></a>' +
-        '<a href="#" class="slider-next"><i class="fas fa-chevron-right"></i></a>' +
+        '<a href="#" class="slider-prev"><i class="fas fa-chevron-left"></i><b class="sr-only">Prev</b></a>' +
+        '<a href="#" class="slider-next"><i class="fas fa-chevron-right"></i><b class="sr-only">Next</b></a>' +
         '</div>'
       );
 
