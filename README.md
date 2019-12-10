@@ -17,7 +17,7 @@ cd ./webpack-bootstrap-ui-kit-quick-start
 npm install
 
 
-+ Edit files at ./src
+## Edit files at ./src
 
 ## Start development server at https://127.0.0.1:8001:
 
