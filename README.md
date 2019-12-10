@@ -8,18 +8,23 @@ It's easy to extend and easy to convert HTML templates to CMS templates.
 https://rawcdn.githack.com/a2nt/webpack-bootstrap-ui-kit/master/dist/index.html
 
 # Quick Start
-Clone and setup quick start repository:
+## Clone and setup quick start repository:
 
 git clone https://github.com/a2nt/webpack-bootstrap-ui-kit-quick-start.git
+
 cd ./webpack-bootstrap-ui-kit-quick-start
+
 npm install
 
-Edit files at ./src
 
-Start development server at https://127.0.0.1:8001:
++ Edit files at ./src
+
+## Start development server at https://127.0.0.1:8001:
+
 yarn start
 
-Build your files to ./dist:
+## Build your files to ./dist:
+
 yarn build
 
 ## Directory structure
