@@ -327,6 +327,12 @@ button, input, optgroup, select, textarea,
     }
 }
 
+.row, .row-xs {
+    > [class^="col-"] > .card {
+        height: 100%;
+    }
+}
+
 .row-xs {
     margin-right: -($grid-gutter-xs-width / 2);
     margin-left: -($grid-gutter-xs-width / 2);

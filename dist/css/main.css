@@ -15029,6 +15029,11 @@ textarea,
   }
 }
 
+.row > [class^="col-"] > .card,
+.row-xs > [class^="col-"] > .card {
+  height: 100%;
+}
+
 .row-xs {
   margin-right: -0.5rem;
   margin-left: -0.5rem;
