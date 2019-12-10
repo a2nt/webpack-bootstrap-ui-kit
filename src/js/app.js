@@ -72,7 +72,7 @@ import '@a2nt/meta-lightbox/src/js/index';
 //import Table from 'bootstrap-table/dist/bootstrap-table';
 
 // Map UI
-import MapApi from './_components/_ui.map.api';
+//import MapApi from './_components/_ui.map.api';
 
 import './_main';
 import './_layout';

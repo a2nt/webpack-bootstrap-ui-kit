@@ -1,8 +1,11 @@
+const SOURCEDIR = './src';
 const COMPRESS = false;
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 const path = require('path');
+const filesystem = require('fs');
+
 
 const autoprefixer = require('autoprefixer');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -45,11 +48,73 @@ if (COMPRESS) {
   }));
 }
 
+const includes = {};
+
+const _addAppFiles = (theme) => {
+
+  const dirPath = path.resolve(__dirname, theme);
+  const themeName = path.basename(theme);
+
+  if (filesystem.existsSync(path.join(dirPath, 'js', 'app.js'))) {
+    includes['app'] = path.join(dirPath, 'js', 'app.js');
+  } else if (filesystem.existsSync(path.join(dirPath, 'scss', 'app.scss'))) {
+    includes['app'] = path.join(dirPath, 'scss', 'app.scss');
+  }
+
+  const _getAllFilesFromFolder = function(dir, includeSubFolders = true) {
+    const dirPath = path.resolve(__dirname, dir);
+    let results = [];
+
+    filesystem.readdirSync(dirPath).forEach((file) => {
+      if (file.charAt(0) === '_') {
+        return;
+      }
+
+      const filePath = path.join(dirPath, file);
+      const stat = filesystem.statSync(filePath);
+
+      if (stat && stat.isDirectory() && includeSubFolders) {
+        results = results.concat(_getAllFilesFromFolder(filePath, includeSubFolders));
+      } else {
+        results.push(filePath);
+      }
+    });
+
+    return results;
+  };
+
+  // add page specific scripts
+  const typesJSPath = path.join(theme, 'js/types');
+  if (filesystem.existsSync(typesJSPath)) {
+    const pageScripts = _getAllFilesFromFolder(typesJSPath, true);
+    pageScripts.forEach((file) => {
+      includes[`app_${path.basename(file, '.js')}`] = file;
+    });
+  }
+
+  // add page specific scss
+  const typesSCSSPath = path.join(theme, 'scss/types');
+  if (filesystem.existsSync(typesSCSSPath)) {
+    const scssIncludes = _getAllFilesFromFolder(typesSCSSPath, true);
+    scssIncludes.forEach((file) => {
+      includes[`app_${path.basename(file, '.scss')}`] = file;
+    });
+  }
+};
+
+_addAppFiles(SOURCEDIR);
+
+// remove unnecessary elements for the demo
+delete includes['app_cms'];
+delete includes['app_editor'];
+delete includes['app_order'];
+
 module.exports = {
-  entry: './src/js/app.js',
+  entry: includes,
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'js/app.js'
+    filename: path.join('js', '[name].js'),
+    publicPath: path.resolve(__dirname, 'dist'),
   },
   devtool: (COMPRESS ? '' : 'source-map'),
   externals: {
