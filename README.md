@@ -7,17 +7,19 @@ It's easy to extend and easy to convert HTML templates to CMS templates.
 # Demo
 https://rawcdn.githack.com/a2nt/webpack-bootstrap-ui-kit/master/dist/index.html
 
-## Usage
-Install required modules using:
+# Quick Start
+Clone and setup quick start repository:
+
+git clone https://github.com/a2nt/webpack-bootstrap-ui-kit-quick-start.git
+cd ./webpack-bootstrap-ui-kit-quick-start
 npm install
 
-Start development server:
+Edit files at ./src
+
+Start development server at https://127.0.0.1:8001:
 yarn start
 
-Access development server at:
-http://127.0.0.1:8001
-
-Build your cropper script:
+Build your files to ./dist:
 yarn build
 
 ## Directory structure
