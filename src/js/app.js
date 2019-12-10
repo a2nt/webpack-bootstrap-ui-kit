@@ -19,7 +19,6 @@ import 'jquery-hammerjs/jquery.hammer';
 
 // conflicts with _components/_ui.hover.js (shows dropdown on hover)
 //import 'bootstrap/js/dist/dropdown';
-import './_components/_ui.flyout';
 import './_components/_ui.hover';
 
 import './_components/_ui.carousel';
@@ -40,7 +39,7 @@ import 'bootstrap/js/dist/tab';
 //import 'jquery-zoom/jquery.zoom';
 
 // FlyoutUI
-//import FlyoutUI from './_components/_ui.flyout';
+import FlyoutUI from './_components/_ui.flyout';
 
 // Toggle bootstrap form fields
 //import FormToggleUI from './_components/_ui.form.fields.toggle';
@@ -71,6 +70,11 @@ import '@a2nt/meta-lightbox/src/js/index';
 
 //import Confirmation from 'bootstrap-confirmation2/dist/bootstrap-confirmation';
 //import Table from 'bootstrap-table/dist/bootstrap-table';
+
+// Map UI
+import MapApi from './_components/_ui.map.api';
+// Google Maps
+//import MapApi from './_components/_ui.map.api.google';
 
 import './_main';
 import './_layout';

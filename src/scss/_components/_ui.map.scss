@@ -6,7 +6,15 @@
     margin-bottom: 1rem;
 }
 
+.mapboxgl-popup {
+    font-size: .8rem;
+    z-index: 4;
+    line-height: 20px;
+}
+
 .mapboxgl-popup-content {
+    min-width: 240px;
+    min-height: 5rem;
     box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.4);
 
     .mapboxgl-popup-close-button {
@@ -29,7 +37,10 @@
     text-align: center;
     color: $primary;
 
-    .fas {
+    .marker-icon,
+    .fas,
+    .fab,
+    .far {
         animation: pulse 0.8s linear infinite;
     }
 }

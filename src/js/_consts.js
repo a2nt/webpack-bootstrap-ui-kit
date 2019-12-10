@@ -2,7 +2,10 @@
  * Add your global events here
  */
 
-module.exports = {
+import MAP_DRIVER from './_components/drivers/_map.google';
+//import MAP_DRIVER from './_components/drivers/_map.mapbox';
+
+const CONSTS = {
   ENVS: [
     'xs',
     'sm',
@@ -12,4 +15,7 @@ module.exports = {
     'xxl',
     'xxxl',
   ],
+  MAP_DRIVER: MAP_DRIVER
 };
+
+export default CONSTS;
