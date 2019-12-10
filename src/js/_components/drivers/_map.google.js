@@ -31,23 +31,29 @@ const GoogleMapsDriver = (($) => {
       const config = ui.config;
       const $mapDiv = $el.find('.mapAPI-map');
 
-      console.log(`${ui.getName()}: API is loaded`);
+      const zoom = (config['mapZoom'] ? config['mapZoom'] : 10);
+      const center = (config['center'] ? {
+        lat: config['center'][1],
+        lng: config['center'][0],
+      } : {
+        lat: 0,
+        lng: 0,
+      });
+      const style = (config['style'] ? config['style'] : null);
 
+      console.log(`${ui.getName()}: API is loaded`);
       // init fontawesome icons
       ui.MarkerUI = MarkerUI.init($);
 
       ui.map = new google.maps.Map($mapDiv[0], {
-        'zoom': (config['mapZoom'] ? config['mapZoom'] : 10),
-        'center': (config['center'] ? {
-          lat: config['center'][1],
-          lng: config['center'][0],
-        } : {
-          lat: 0,
-          lng: 0,
-        }),
+        zoom,
+        center,
         'fullscreenControl': true,
-        'styles': (config['style'] ? config['style'] : null),
+        'styles': style,
       });
+
+      ui.default_zoom = zoom;
+
       $mapDiv.addClass('mapboxgl-map');
 
 
@@ -78,30 +84,54 @@ const GoogleMapsDriver = (($) => {
         'position': pos,
         'map': ui.map,
         'html': `<div class="mapboxgl-marker"><div id="Marker${ config['id'] }" data-id="${ config['id'] }" class="marker">${ config['icon'] }</div></div>`,
-        'onClick': (e) => {
-          const $popup = $(ui.popup.getDiv());
-          $popup.css({
-            'opacity': '0',
-          });
-          $popup.removeClass('d-none');
+        'onClick': () => {
+          const $el = $(`#Marker${ config['id'] }`);
+          ui.showPopup(pos, config['content']);
 
-          ui.popup.setPosition(pos, ['center', 'top']);
-          $popup.find('.mapboxgl-popup-content .html').html(config['content']);
-
-          $popup.find('.mapboxgl-popup-close-button').on('click', (e) => {
-            e.preventDefault();
-            $popup.addClass('d-none');
-          });
-
-          $popup.css({
-            'margin-left': '1rem',
-            'opacity': '1',
-          });
+          $el.trigger(Events.MAPMARKERCLICK);
         },
       });
 
 
       return marker;
+    }
+
+    showPopup(pos, content) {
+      const ui = this;
+      const $popup = $(ui.popup.getDiv());
+
+      if (ui.config['flyToMarker']) {
+        ui.map.setCenter(pos); // panTo
+        ui.map.setZoom(18);
+      }
+
+      $popup.css({
+        'opacity': '0',
+      });
+      $popup.removeClass('d-none');
+
+      ui.popup.setPosition(pos, ['center', 'top']);
+      $popup.find('.mapboxgl-popup-content .html').html(content);
+
+      $popup.find('.mapboxgl-popup-close-button').on('click', (e) => {
+        e.preventDefault();
+        ui.hidePopup();
+      });
+
+      $popup.css({
+        'margin-left': '1rem',
+        'opacity': '1',
+      });
+    }
+
+    hidePopup() {
+      const ui = this;
+      const $popup = $(ui.popup.getDiv());
+
+      $popup.addClass('d-none');
+      ui.restoreBounds();
+
+      ui.$el.trigger(Events.MAPPOPUPCLOSE);
     }
 
     addGeoJson(config) {
@@ -132,8 +162,10 @@ const GoogleMapsDriver = (($) => {
 
       ui.map.fitBounds(bounds, {
         padding: 30,
-      });
+      }); //panToBounds
 
+      ui.default_bounds = bounds;
+      ui.default_zoom = ui.map.getZoom();
     }
 
     getMap() {
@@ -144,6 +176,20 @@ const GoogleMapsDriver = (($) => {
     getPopup() {
       const ui = this;
       return ui.popup;
+    }
+
+    restoreBounds() {
+      const ui = this;
+
+      ui.map.fitBounds(ui.default_bounds, {
+        padding: 30,
+      }); //panToBounds
+    }
+
+    restoreZoom() {
+      const ui = this;
+
+      ui.map.setZoom(ui.default_zoom);
     }
   }
 
