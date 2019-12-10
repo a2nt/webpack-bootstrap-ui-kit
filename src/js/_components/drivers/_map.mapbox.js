@@ -18,16 +18,16 @@ const MapBoxDriver = (($) => {
       mapBoxGL.accessToken = config['key'];
 
       ui.map = new mapBoxGL.Map({
-          'container': $el.find('.mapAPI-map')[0],
-          'center': (config['center'] ? config['center'] : [0, 0]),
-          //hash: true,
-          'style': (config['style'] ? config['style'] : 'mapbox://styles/mapbox/streets-v9'),
-          'localIdeographFontFamily': config['font-family'],
-          'zoom': (config['mapZoom'] ? config['mapZoom'] : 10),
-          'attributionControl': false,
-          'antialias': true,
-          'accessToken': config['key']
-        })
+        'container': $el.find('.mapAPI-map')[0],
+        'center': (config['center'] ? config['center'] : [0, 0]),
+        //hash: true,
+        'style': (config['style'] ? config['style'] : 'mapbox://styles/mapbox/streets-v9'),
+        'localIdeographFontFamily': config['font-family'],
+        'zoom': (config['mapZoom'] ? config['mapZoom'] : 10),
+        'attributionControl': false,
+        'antialias': true,
+        'accessToken': config['key'],
+      })
         .addControl(new mapBoxGL.AttributionControl({
           compact: true,
         }))
@@ -136,10 +136,10 @@ const MapBoxDriver = (($) => {
         const content = marker.properties.content;
 
         ui.addMarker(crds, {
-          'id': id,
-          'content': content,
+          id,
+          content,
           'icon': marker.icon,
-          'flyToMarker': config['flyToMarker']
+          'flyToMarker': config['flyToMarker'],
         });
 
         bounds.extend(crds);

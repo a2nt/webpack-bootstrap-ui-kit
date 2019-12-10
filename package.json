@@ -1,6 +1,6 @@
 {
   "name": "@a2nt/ss-bootstrap-ui-webpack-boilerplate",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "author": "Tony Air <tony@twma.pro>",
   "license": "MIT",
   "description": "This UI Kit allows you to build Bootstrap 4 webapp with some extra UI features. It's easy to extend and easy to convert HTML templates to CMS templates.",
@@ -17,10 +17,10 @@
     "start": "cross-env NODE_ENV=development webpack-dev-server --https -d --config webpack.config.js",
     "dash": "cross-env NODE_ENV=development webpack-dashboard -- webpack-dev-server --config webpack.config.js",
     "build": "cross-env NODE_ENV=production webpack -p --config webpack.config.js --progress",
-    "lint:check": "eslint ./app/client/src --config .eslintrc && sass-lint ./app/client/src --config .sasslintrc -v -q",
-    "lint:fix": "eslint ./app/client/src --config .eslintrc --fix && sass-lint ./app/client/src --config .sasslintrc -v -q --fix",
-    "lint:js": "eslint ./app/client/src --config .eslintrc",
-    "lint:sass": "sass-lint ./app/client/src --config .sasslintrc -v -q",
+    "lint:check": "eslint ./src --config .eslintrc && sass-lint ./src --config .sasslintrc -v -q",
+    "lint:fix": "eslint ./src --config .eslintrc --fix && sass-lint ./src --config .sasslintrc -v -q --fix",
+    "lint:js": "eslint ./src --config .eslintrc",
+    "lint:sass": "sass-lint ./src --config .sasslintrc -v -q",
     "prebuild": "yarn lint:fix && rimraf dist",
     "prepare": "yarn lint:fix && yarn build"
   },
@@ -124,8 +124,7 @@
       "block-no-empty": null,
       "color-no-invalid-hex": true,
       "comment-empty-line-before": [
-        "always",
-        {
+        "always", {
           "ignore": [
             "stylelint-commands",
             "after-comment"
@@ -134,8 +133,7 @@
       ],
       "declaration-colon-space-after": "always",
       "indentation": [
-        4,
-        {
+        4, {
           "except": [
             "value"
           ]
@@ -143,8 +141,7 @@
       ],
       "max-empty-lines": 2,
       "rule-empty-line-before": [
-        "always",
-        {
+        "always", {
           "except": [
             "first-nested"
           ],

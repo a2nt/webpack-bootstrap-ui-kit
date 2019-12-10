@@ -235,7 +235,7 @@ const MainUI = (($) => {
       $Body.append($el);
       let curEnv = envs.shift();
 
-      for (let env of envs.reverse()) {
+      for (const env of envs.reverse()) {
         $el.addClass(`d-${env}-none`);
         if ($el.is(':hidden')) {
           curEnv = env;

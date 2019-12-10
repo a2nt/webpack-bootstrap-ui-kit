@@ -73,8 +73,6 @@ import '@a2nt/meta-lightbox/src/js/index';
 
 // Map UI
 import MapApi from './_components/_ui.map.api';
-// Google Maps
-//import MapApi from './_components/_ui.map.api.google';
 
 import './_main';
 import './_layout';

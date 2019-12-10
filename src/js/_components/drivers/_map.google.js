@@ -40,10 +40,10 @@ const GoogleMapsDriver = (($) => {
         'zoom': (config['mapZoom'] ? config['mapZoom'] : 10),
         'center': (config['center'] ? {
           lat: config['center'][1],
-          lng: config['center'][0]
+          lng: config['center'][0],
         } : {
           lat: 0,
-          lng: 0
+          lng: 0,
         }),
         'fullscreenControl': true,
         'styles': (config['style'] ? config['style'] : null),
@@ -70,7 +70,7 @@ const GoogleMapsDriver = (($) => {
       const ui = this;
       const pos = {
         lat: crds[1],
-        lng: crds[0]
+        lng: crds[0],
       };
 
 
@@ -81,7 +81,7 @@ const GoogleMapsDriver = (($) => {
         'onClick': (e) => {
           const $popup = $(ui.popup.getDiv());
           $popup.css({
-            'opacity': '0'
+            'opacity': '0',
           });
           $popup.removeClass('d-none');
 
@@ -95,9 +95,9 @@ const GoogleMapsDriver = (($) => {
 
           $popup.css({
             'margin-left': '1rem',
-            'opacity': '1'
+            'opacity': '1',
           });
-        }
+        },
       });
 
 
@@ -118,15 +118,15 @@ const GoogleMapsDriver = (($) => {
         const content = marker.properties.content;
 
         ui.addMarker(crds, {
-          'id': id,
-          'content': content,
+          id,
+          content,
           'icon': marker.icon,
-          'flyToMarker': config['flyToMarker']
+          'flyToMarker': config['flyToMarker'],
         });
 
         bounds.extend({
           lat: crds[1],
-          lng: crds[0]
+          lng: crds[0],
         });
       });
 
