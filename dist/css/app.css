@@ -15153,6 +15153,7 @@ input.time[readonly] {
 
 h1.page-header {
   display: none;
+  margin-bottom: 0;
 }
 
 h1.page-header.no-elements {
@@ -15178,6 +15179,14 @@ h1.page-header.no-elements {
 .element.dnadesign__elementallist__model__elementlist .site__elements__sliderelement {
   padding-top: 4rem;
   padding-bottom: 4rem;
+}
+
+.element.secodary {
+  padding: 2rem 0;
+}
+
+.sidebar {
+  padding: 2rem 0;
 }
 
 .dynamic__elements__image__elements__elementimage .container-fluid,
