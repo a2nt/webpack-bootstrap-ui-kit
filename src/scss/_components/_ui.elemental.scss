@@ -5,6 +5,7 @@
 // hide default page title cuz elemental object will be used to display titles
 h1.page-header {
     display: none;
+    margin-bottom: 0;
 
     &.no-elements {
         display: block;
@@ -33,6 +34,15 @@ h1.page-header {
             padding-bottom: $grid-gutter-element-height;
         }
     }
+
+    // Sidebar elements
+    &.secodary {
+        padding: ($grid-gutter-element-height / 2) 0;
+    }
+}
+
+.sidebar {
+    padding: ($grid-gutter-element-height / 2) 0;
 }
 
 // remove container paddings for the slideshow
