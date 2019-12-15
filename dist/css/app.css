@@ -14684,7 +14684,9 @@ img {
 a:hover,
 a:focus,
 [data-toggle]:hover,
-[data-toggle]:focus {
+[data-toggle]:focus,
+button:hover,
+button:focus {
   opacity: .8;
 }
 
@@ -14711,7 +14713,15 @@ a:focus.fab,
 [data-toggle]:focus > .fas,
 [data-toggle]:focus > .fab,
 [data-toggle]:focus.fas,
-[data-toggle]:focus.fab {
+[data-toggle]:focus.fab,
+button:hover > .fas,
+button:hover > .fab,
+button:hover.fas,
+button:hover.fab,
+button:focus > .fas,
+button:focus > .fab,
+button:focus.fas,
+button:focus.fab {
   -webkit-transform: rotate(-180deg);
           transform: rotate(-180deg);
 }

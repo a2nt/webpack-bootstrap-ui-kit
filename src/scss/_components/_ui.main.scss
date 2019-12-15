@@ -17,19 +17,20 @@ img {
     cursor: pointer;
 }
 
-.a:hover,
-.a:focus,
-a:hover,
-a:focus,
-[data-toggle]:hover,
-[data-toggle]:focus {
-    opacity: .8;
+.a,
+a,
+[data-toggle],
+button {
+    &:hover,
+    &:focus {
+        opacity: .8;
 
-    > .fas,
-    > .fab,
-    &.fas,
-    &.fab {
-        transform: rotate(-180deg);
+        > .fas,
+        > .fab,
+        &.fas,
+        &.fab {
+            transform: rotate(-180deg);
+        }
     }
 }
 
