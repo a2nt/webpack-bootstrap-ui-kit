@@ -20,13 +20,16 @@ img {
 .a,
 a,
 [data-toggle],
-button {
+button,
+.btn {
     &:hover,
     &:focus {
         opacity: .8;
 
+        > .far,
         > .fas,
         > .fab,
+        &.far,
         &.fas,
         &.fab {
             transform: rotate(-180deg);
