@@ -3,6 +3,9 @@ import Events from '../_events';
 import LANG from '../lang/_en';
 import FormValidateField from "./_ui.form.validate.field";
 
+import '../../scss/_components/_ui.form.stepped.scss';
+
+
 const SteppedForm = (($) => {
   // Constants
   const NAME = 'jsSteppedForm';
