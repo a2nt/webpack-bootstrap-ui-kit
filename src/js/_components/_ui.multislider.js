@@ -7,8 +7,11 @@ import Events from '../_events';
 import 'hammerjs/hammer';
 import 'jquery-hammerjs/jquery.hammer';
 
-import MainUI from '../_main';
 
+import '../../scss/_components/_ui.multislider.scss';
+
+
+import MainUI from '../_main';
 const W = window;
 
 const MultiSlider = (($) => {
