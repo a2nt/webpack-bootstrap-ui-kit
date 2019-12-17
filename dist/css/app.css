@@ -14732,11 +14732,6 @@ a.text-dark:focus {
  * some basic styles
  */
 
-.pulse {
-  -webkit-animation: pulse 0.8s linear infinite;
-          animation: pulse 0.8s linear infinite;
-}
-
 @-webkit-keyframes pulse {
   0% {
     -webkit-transform: scale(1);
@@ -14769,6 +14764,11 @@ a.text-dark:focus {
     -webkit-transform: scale(1);
             transform: scale(1);
   }
+}
+
+.pulse {
+  -webkit-animation: pulse 0.8s linear infinite;
+          animation: pulse 0.8s linear infinite;
 }
 
 div,

@@ -3,11 +3,6 @@
  * keep it at the end
  */
 
-.pulse {
-  -webkit-animation: pulse 0.8s linear infinite;
-          animation: pulse 0.8s linear infinite;
-}
-
 @-webkit-keyframes pulse {
   0% {
     -webkit-transform: scale(1);
