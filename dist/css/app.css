@@ -3462,7 +3462,8 @@ textarea.form-control,
   margin-left: -1.25rem;
 }
 
-.form-check-input[disabled] ~ .form-check-label {
+.form-check-input[disabled] ~ .form-check-label,
+.form-check-input:disabled ~ .form-check-label {
   color: #757575;
 }
 
@@ -5358,11 +5359,13 @@ input[type="button"].btn-block {
   border-color: #cae6fc;
 }
 
-.custom-control-input[disabled] ~ .custom-control-label {
+.custom-control-input[disabled] ~ .custom-control-label,
+.custom-control-input:disabled ~ .custom-control-label {
   color: #757575;
 }
 
-.custom-control-input[disabled] ~ .custom-control-label::before {
+.custom-control-input[disabled] ~ .custom-control-label::before,
+.custom-control-input:disabled ~ .custom-control-label::before {
   background-color: #eeeeee;
 }
 
@@ -5564,7 +5567,8 @@ input[type="button"].btn-block {
           box-shadow: 0 0 0 0.2rem rgba(33, 150, 243, 0.25);
 }
 
-.custom-file-input[disabled] ~ .custom-file-label {
+.custom-file-input[disabled] ~ .custom-file-label,
+.custom-file-input:disabled ~ .custom-file-label {
   background-color: #eeeeee;
 }
 
