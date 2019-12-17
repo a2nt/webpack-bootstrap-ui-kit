@@ -92,7 +92,7 @@ const MainUI = (($) => {
   };
 
   // session ping
-  setInterval(() => {
+  const pingInterval = setInterval(() => {
     if ($Body.hasClass('is-offline')) {
       return;
     }
@@ -106,7 +106,8 @@ const MainUI = (($) => {
       type: 'POST',
       complete(data, datastatus) {
         if (datastatus !== 'success') {
-          W.location.reload(false);
+          clearInterval(pingInterval);
+          //W.location.reload(false);
         }
       },
     });
