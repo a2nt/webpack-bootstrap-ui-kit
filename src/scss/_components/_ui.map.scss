@@ -7,20 +7,42 @@
     margin-bottom: 1rem;
 }
 
-.mapboxgl-popup {
-    font-size: .8rem;
-    z-index: 4;
-    line-height: 20px;
-}
+.mapboxgl {
+    &-popup {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: flex;
+        pointer-events: none;
+        font-size: .8rem;
+        z-index: 4;
+        line-height: 20px;
+    }
 
-.mapboxgl-popup-content {
-    min-width: 240px;
-    min-height: 5rem;
-    box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.4);
+    &-popup-anchor-bottom,
+    &-popup-anchor-bottom-left,
+    &-popup-anchor-bottom-right {
+        flex-direction: column-reverse;
+    }
 
-    .mapboxgl-popup-close-button {
+    &-popup-content {
+        position: relative;
+        pointer-events: auto;
+        padding: 10px 10px 15px;
+        border-radius: 3px;
+        background: $white;
+        min-width: 240px;
+        min-height: 5rem;
+        box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.4);
+    }
+
+    &-popup-close-button {
+        position: absolute;
+        right: 0;
+        top: 0;
         font-size: 2rem;
         padding: .5rem;
+        border-top-right-radius: 3px;
 
         &:hover,
         &:focus {
@@ -28,20 +50,33 @@
             color: $white;
         }
     }
-}
 
-.mapboxgl-marker {
-    width: 30px;
-    height: 30px;
-    font-size: 30px;
-    cursor: pointer;
-    text-align: center;
-    color: $primary;
+    &-popup-tip {
+        width: 0;
+        height: 0;
+        border: 10px solid transparent;
+        z-index: 1;
+    }
 
-    .marker-icon,
-    .fas,
-    .fab,
-    .far {
-        animation: pulse 0.8s linear infinite;
+    &-popup-anchor-bottom &-popup-tip {
+        align-self: center;
+        border-bottom: none;
+        border-top-color: #fff;
+    }
+
+    &-marker {
+        width: 30px;
+        height: 30px;
+        font-size: 30px;
+        cursor: pointer;
+        text-align: center;
+        color: $primary;
+
+        .marker-icon,
+        .fas,
+        .fab,
+        .far {
+            animation: pulse 0.8s linear infinite;
+        }
     }
 }

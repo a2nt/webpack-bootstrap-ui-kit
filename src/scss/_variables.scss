@@ -35,6 +35,8 @@ $navbar-light-toggler-icon-bg: none !default;
 // IE > 9
 $enable-flex: true !default;
 
+$enable-responsive-font-sizes: true !default;
+
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";
 @import "~bootstrap/scss/mixins";

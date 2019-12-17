@@ -39,7 +39,25 @@ const MapAPI = (($) => {
       ui.map = Drv.init($el, config);
 
       $el.on(Events.MAPLOADED, (e) => {
-        Drv.addGeoJson(config);
+        if (config['geojson']) {
+          console.log(`${NAME}: setting up geocode data`);
+          Drv.addGeoJson(config);
+        } else if (config['address']) {
+          console.log(config['address']);
+          console.log(`${NAME}: setting up address marker`);
+          Drv.geocode(config['address'], (result) => {
+            console.log(result);
+          });
+        } else if (config['lat'] && config['lng']) {
+          console.log(`${NAME}: setting up single lat/lng marker`);
+
+          if (!config['icon']) {
+            config['icon'] = '<i class="fas fa-map-marker-alt"></i>';
+          }
+
+          Drv.addMarker([config['lng'], config['lat']], config);
+        }
+
         console.log(`${NAME}: Map is loaded`);
       });
 

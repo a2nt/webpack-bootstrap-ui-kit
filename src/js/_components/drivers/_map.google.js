@@ -17,6 +17,7 @@ const GoogleMapsDriver = (($) => {
 
       ui.$el = $el;
       ui.config = config;
+      ui.markers = [];
 
       W[`init${ui.getName()}`] = () => {
         ui.googleApiLoaded();
@@ -27,6 +28,7 @@ const GoogleMapsDriver = (($) => {
 
     googleApiLoaded() {
       const ui = this;
+
       const $el = ui.$el;
       const config = ui.config;
       const $mapDiv = $el.find('.mapAPI-map');
@@ -67,6 +69,7 @@ const GoogleMapsDriver = (($) => {
           '</div>',
       });
 
+      ui.geocoder = new google.maps.Geocoder();
 
 
       $el.trigger(Events.MAPLOADED);
@@ -74,6 +77,7 @@ const GoogleMapsDriver = (($) => {
 
     addMarker(crds, config) {
       const ui = this;
+
       const pos = {
         lat: crds[1],
         lng: crds[0],
@@ -91,6 +95,8 @@ const GoogleMapsDriver = (($) => {
           $el.trigger(Events.MAPMARKERCLICK);
         },
       });
+
+      ui.markers.push(marker);
 
 
       return marker;
@@ -132,6 +138,46 @@ const GoogleMapsDriver = (($) => {
       ui.restoreBounds();
 
       ui.$el.trigger(Events.MAPPOPUPCLOSE);
+    }
+
+    geocode(addr, callback) {
+      const ui = this;
+
+      ui.geocoder.geocode({
+        'address': addr
+      }, (results, status) => {
+        if (status === 'OK') {
+          //results[0].geometry.location;
+
+          if (typeof callback === 'function') {
+            callback(results);
+          }
+
+          return results;
+        } else {
+          console.error(`${ui.getName()}: Geocode was not successful for the following reason: ${status}`);
+        }
+      });
+    }
+
+    reverseGeocode(latLng, callback) {
+      const ui = this;
+
+      ui.geocoder.geocode({
+        'location': latlng
+      }, (results, status) => {
+        if (status === 'OK') {
+          //results[0].formatted_address;
+
+          if (typeof callback === 'function') {
+            callback(results);
+          }
+
+          return results;
+        } else {
+          console.error(`${ui.getName()}: Reverse Geocoding was not successful for the following reason: ${status}`);
+        }
+      });
     }
 
     addGeoJson(config) {
@@ -181,9 +227,17 @@ const GoogleMapsDriver = (($) => {
     restoreBounds() {
       const ui = this;
 
-      ui.map.fitBounds(ui.default_bounds, {
-        padding: 30,
-      }); //panToBounds
+      if (ui.default_bounds) {
+        ui.map.fitBounds(ui.default_bounds, {
+          padding: 30,
+        }); //panToBounds
+      } else {
+        if (ui.markers[0]) {
+          ui.map.setCenter(ui.markers[0].getPosition());
+        }
+
+        ui.restoreZoom();
+      }
     }
 
     restoreZoom() {

@@ -35,7 +35,7 @@ h1.page-header {
         }
     }
 
-    // Sidebar elements
+    // Sidebar-like elements
     &.secondary {
         padding: ($grid-gutter-element-height / 2) 0;
     }
@@ -43,6 +43,11 @@ h1.page-header {
 
 .sidebar {
     padding: ($grid-gutter-element-height / 2) 0;
+
+    // Sidebar elements
+    .element {
+        padding: ($grid-gutter-element-height / 2) 0;
+    }
 }
 
 // remove container paddings for the slideshow
