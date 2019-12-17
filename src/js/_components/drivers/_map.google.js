@@ -144,7 +144,7 @@ const GoogleMapsDriver = (($) => {
       const ui = this;
 
       ui.geocoder.geocode({
-        'address': addr
+        'address': addr,
       }, (results, status) => {
         if (status === 'OK') {
           //results[0].geometry.location;
@@ -164,7 +164,7 @@ const GoogleMapsDriver = (($) => {
       const ui = this;
 
       ui.geocoder.geocode({
-        'location': latlng
+        'location': latlng,
       }, (results, status) => {
         if (status === 'OK') {
           //results[0].formatted_address;
