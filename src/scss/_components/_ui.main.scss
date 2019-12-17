@@ -3,6 +3,10 @@
  */
 @import "../_animations";
 
+.pulse {
+    animation: pulse 0.8s linear infinite;
+}
+
 // don't let images be wider than the parent layer
 div, a, span, button, i {
     background-repeat: no-repeat;
