@@ -31,6 +31,15 @@ const SteppedForm = (($) => {
       ui._totalStepsCounter = $element.find('.steps-counter .total-steps');
 
       ui._steps = $element.find('.step');
+      ui._steps.each((i, el) => {
+        const $el = $(el);
+
+        if (!$el.data('step')) {
+          $el.data('step', i + 1);
+          $el.attr('data-step', i + 1);
+        }
+      });
+
       ui._stepNext = $element.find('.step-next');
 
       ui._stepPrev = $element.find('.step-prev');

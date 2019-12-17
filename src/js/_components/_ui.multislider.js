@@ -162,6 +162,15 @@ const MultiSlider = (($) => {
 
     dispose() {
       const ui = this;
+
+      if (ui.$elContainer) {
+        ui.$el.parent().find('.slider-actions').remove();
+      }
+
+      if (ui.$el) {
+        ui.$el.hammer().unbind('swipeleft panleft swiperight panright');
+      }
+
       console.log(`Disposing: ${NAME}`);
 
       ui.$el = null;

@@ -88,6 +88,11 @@ const FormBasics = (($) => {
     dispose() {
       const $el = $(this._el);
 
+      const $selectFields = $el.find('select:not([readonly])');
+      $selectFields.each((i, el) => {
+        $(el).select2('destroy');
+      });
+
       $el.removeClass(`${NAME}-active`);
       $.removeData(this._el, DATA_KEY);
       this._el = null;
