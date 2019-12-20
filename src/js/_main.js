@@ -107,7 +107,11 @@ const MainUI = (($) => {
       complete(data, datastatus) {
         if (datastatus !== 'success') {
           clearInterval(pingInterval);
+
+          $Body.addClass('is-offline');
           //W.location.reload(false);
+        } else {
+          $Body.removeClass('is-offline');
         }
       },
     });

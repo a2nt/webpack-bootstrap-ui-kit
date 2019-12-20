@@ -1,7 +1,42 @@
-.jsMultiSlider-slides-container {
-    overflow: hidden;
+@import '../_variables';
+$grid-gutter-element-height: 2rem !default;
 
-    > .slider-nav {
-        position: relative;
-    }
+.jsMultiSlider {
+	margin-bottom: $grid-gutter-element-height/2;
+
+	&-active {
+		margin-bottom: 0;
+	}
+
+	&-container {
+		position: relative;
+		margin-bottom: $grid-gutter-element-height/2;
+
+		.slider-actions {
+			.act {
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				left: 0;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				text-decoration: none;
+				&-slider-prev {
+				}
+				&-slider-next {
+					left: auto;
+					right: 0;
+				}
+			}
+		}
+	}
+
+	&-slides-container {
+		overflow: hidden;
+
+		> .slider-nav {
+			position: relative;
+		}
+	}
 }

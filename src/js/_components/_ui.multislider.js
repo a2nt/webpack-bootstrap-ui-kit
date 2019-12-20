@@ -3,13 +3,10 @@
 import $ from 'jquery';
 import Events from '../_events';
 
-
 import 'hammerjs/hammer';
 import 'jquery-hammerjs/jquery.hammer';
 
-
 import '../../scss/_components/_ui.multislider.scss';
-
 
 import MainUI from '../_main';
 const W = window;
@@ -43,6 +40,7 @@ const MultiSlider = (($) => {
         ui.calculate();
       });
 
+      ui.$elContainer.addClass(`${NAME}-active`);
       $el.addClass(`${NAME}-active`);
     }
 
@@ -56,7 +54,7 @@ const MultiSlider = (($) => {
       ui.maxPos = ui.numberOfSlides - ui.numToDisplay();
       ui.slideWidth = ui.containerWidth / ui.numToDisplay();
 
-      ui.$slides.css('width', `${ui.slideWidth  }px`);
+      ui.$slides.css('width', `${ui.slideWidth}px`);
       ui.$el.css('width', ui.slideWidth * ui.numberOfSlides);
 
       ui.currPos = 0;
@@ -81,22 +79,30 @@ const MultiSlider = (($) => {
       // actions
       ui.$elContainer.append(
         '<div class="slider-actions">' +
-        '<a href="#" class="slider-prev"><i class="fas fa-chevron-left"></i><b class="sr-only">Prev</b></a>' +
-        '<a href="#" class="slider-next"><i class="fas fa-chevron-right"></i><b class="sr-only">Next</b></a>' +
-        '</div>'
+          '<a href="#" class="act act-slider-prev"><i class="fas fa-chevron-left"></i><b class="sr-only">Prev</b></a>' +
+          '<a href="#" class="act act-slider-next"><i class="fas fa-chevron-right"></i><b class="sr-only">Next</b></a>' +
+          '</div>',
       );
 
-      ui.$prevBtn = ui.$elContainer.find('.slider-prev');
-      ui.$nextBtn = ui.$elContainer.find('.slider-next');
+      ui.$prevBtn = ui.$elContainer.find('.act-slider-prev');
+      ui.$nextBtn = ui.$elContainer.find('.act-slider-next');
 
       ui.$prevBtn.on('click', (e) => {
         e.preventDefault();
+
+        if ($(e.currentTarget).hasClass('disabled')) {
+          return false;
+        }
 
         ui.prev();
       });
 
       ui.$nextBtn.on('click', (e) => {
         e.preventDefault();
+
+        if ($(e.currentTarget).hasClass('disabled')) {
+          return false;
+        }
 
         ui.next();
       });
@@ -153,18 +159,26 @@ const MultiSlider = (($) => {
         }
       }
 
-      ui.$el.animate({
-        'left': `${-(pos * ui.slideWidth)  }px`,
-      }, 'slow', 'swing', () => {
-        ui.sliding = false;
-      });
+      ui.$el.animate(
+        {
+          left: `${-(pos * ui.slideWidth)}px`,
+        },
+        'slow',
+        'swing',
+        () => {
+          ui.sliding = false;
+        },
+      );
     }
 
     dispose() {
       const ui = this;
 
       if (ui.$elContainer) {
-        ui.$el.parent().find('.slider-actions').remove();
+        ui.$el
+          .parent()
+          .find('.slider-actions')
+          .remove();
       }
 
       if (ui.$el) {
