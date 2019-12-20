@@ -14793,178 +14793,151 @@ img {
   cursor: pointer;
 }
 
-.a:hover,
-.a.hover,
-.a:focus,
-a:hover,
-a.hover,
-a:focus,
-[data-toggle]:hover,
-[data-toggle].hover,
-[data-toggle]:focus,
-button:hover,
-button.hover,
-button:focus,
-.btn:hover,
-.btn.hover,
-.btn:focus {
+.a :not(.disabled).hover,
+.a :not(.disabled):hover,
+.a :not(.disabled):focus,
+a :not(.disabled).hover,
+a :not(.disabled):hover,
+a :not(.disabled):focus,
+[data-toggle] :not(.disabled).hover,
+[data-toggle] :not(.disabled):hover,
+[data-toggle] :not(.disabled):focus,
+button :not(.disabled).hover,
+button :not(.disabled):hover,
+button :not(.disabled):focus,
+.btn :not(.disabled).hover,
+.btn :not(.disabled):hover,
+.btn :not(.disabled):focus {
   opacity: 0.8;
 }
 
-.a:hover > .fa,
-.a:hover > .far,
-.a:hover > .fas,
-.a:hover > .fab,
-.a:hover.fa,
-.a:hover.far,
-.a:hover.fas,
-.a:hover.fab,
-.a.hover > .fa,
-.a.hover > .far,
-.a.hover > .fas,
-.a.hover > .fab,
-.a.hover.fa,
-.a.hover.far,
-.a.hover.fas,
-.a.hover.fab,
-.a:focus > .fa,
-.a:focus > .far,
-.a:focus > .fas,
-.a:focus > .fab,
-.a:focus.fa,
-.a:focus.far,
-.a:focus.fas,
-.a:focus.fab,
-a:hover > .fa,
-a:hover > .far,
-a:hover > .fas,
-a:hover > .fab,
-a:hover.fa,
-a:hover.far,
-a:hover.fas,
-a:hover.fab,
-a.hover > .fa,
-a.hover > .far,
-a.hover > .fas,
-a.hover > .fab,
-a.hover.fa,
-a.hover.far,
-a.hover.fas,
-a.hover.fab,
-a:focus > .fa,
-a:focus > .far,
-a:focus > .fas,
-a:focus > .fab,
-a:focus.fa,
-a:focus.far,
-a:focus.fas,
-a:focus.fab,
-[data-toggle]:hover > .fa,
-[data-toggle]:hover > .far,
-[data-toggle]:hover > .fas,
-[data-toggle]:hover > .fab,
-[data-toggle]:hover.fa,
-[data-toggle]:hover.far,
-[data-toggle]:hover.fas,
-[data-toggle]:hover.fab,
-[data-toggle].hover > .fa,
-[data-toggle].hover > .far,
-[data-toggle].hover > .fas,
-[data-toggle].hover > .fab,
-[data-toggle].hover.fa,
-[data-toggle].hover.far,
-[data-toggle].hover.fas,
-[data-toggle].hover.fab,
-[data-toggle]:focus > .fa,
-[data-toggle]:focus > .far,
-[data-toggle]:focus > .fas,
-[data-toggle]:focus > .fab,
-[data-toggle]:focus.fa,
-[data-toggle]:focus.far,
-[data-toggle]:focus.fas,
-[data-toggle]:focus.fab,
-button:hover > .fa,
-button:hover > .far,
-button:hover > .fas,
-button:hover > .fab,
-button:hover.fa,
-button:hover.far,
-button:hover.fas,
-button:hover.fab,
-button.hover > .fa,
-button.hover > .far,
-button.hover > .fas,
-button.hover > .fab,
-button.hover.fa,
-button.hover.far,
-button.hover.fas,
-button.hover.fab,
-button:focus > .fa,
-button:focus > .far,
-button:focus > .fas,
-button:focus > .fab,
-button:focus.fa,
-button:focus.far,
-button:focus.fas,
-button:focus.fab,
-.btn:hover > .fa,
-.btn:hover > .far,
-.btn:hover > .fas,
-.btn:hover > .fab,
-.btn:hover.fa,
-.btn:hover.far,
-.btn:hover.fas,
-.btn:hover.fab,
-.btn.hover > .fa,
-.btn.hover > .far,
-.btn.hover > .fas,
-.btn.hover > .fab,
-.btn.hover.fa,
-.btn.hover.far,
-.btn.hover.fas,
-.btn.hover.fab,
-.btn:focus > .fa,
-.btn:focus > .far,
-.btn:focus > .fas,
-.btn:focus > .fab,
-.btn:focus.fa,
-.btn:focus.far,
-.btn:focus.fas,
-.btn:focus.fab {
+.a :not(.disabled).hover > .fa,
+.a :not(.disabled).hover > .far,
+.a :not(.disabled).hover > .fas,
+.a :not(.disabled).hover > .fab,
+.a :not(.disabled).hover.fa,
+.a :not(.disabled).hover.far,
+.a :not(.disabled).hover.fas,
+.a :not(.disabled).hover.fab,
+.a :not(.disabled):hover > .fa,
+.a :not(.disabled):hover > .far,
+.a :not(.disabled):hover > .fas,
+.a :not(.disabled):hover > .fab,
+.a :not(.disabled):hover.fa,
+.a :not(.disabled):hover.far,
+.a :not(.disabled):hover.fas,
+.a :not(.disabled):hover.fab,
+.a :not(.disabled):focus > .fa,
+.a :not(.disabled):focus > .far,
+.a :not(.disabled):focus > .fas,
+.a :not(.disabled):focus > .fab,
+.a :not(.disabled):focus.fa,
+.a :not(.disabled):focus.far,
+.a :not(.disabled):focus.fas,
+.a :not(.disabled):focus.fab,
+a :not(.disabled).hover > .fa,
+a :not(.disabled).hover > .far,
+a :not(.disabled).hover > .fas,
+a :not(.disabled).hover > .fab,
+a :not(.disabled).hover.fa,
+a :not(.disabled).hover.far,
+a :not(.disabled).hover.fas,
+a :not(.disabled).hover.fab,
+a :not(.disabled):hover > .fa,
+a :not(.disabled):hover > .far,
+a :not(.disabled):hover > .fas,
+a :not(.disabled):hover > .fab,
+a :not(.disabled):hover.fa,
+a :not(.disabled):hover.far,
+a :not(.disabled):hover.fas,
+a :not(.disabled):hover.fab,
+a :not(.disabled):focus > .fa,
+a :not(.disabled):focus > .far,
+a :not(.disabled):focus > .fas,
+a :not(.disabled):focus > .fab,
+a :not(.disabled):focus.fa,
+a :not(.disabled):focus.far,
+a :not(.disabled):focus.fas,
+a :not(.disabled):focus.fab,
+[data-toggle] :not(.disabled).hover > .fa,
+[data-toggle] :not(.disabled).hover > .far,
+[data-toggle] :not(.disabled).hover > .fas,
+[data-toggle] :not(.disabled).hover > .fab,
+[data-toggle] :not(.disabled).hover.fa,
+[data-toggle] :not(.disabled).hover.far,
+[data-toggle] :not(.disabled).hover.fas,
+[data-toggle] :not(.disabled).hover.fab,
+[data-toggle] :not(.disabled):hover > .fa,
+[data-toggle] :not(.disabled):hover > .far,
+[data-toggle] :not(.disabled):hover > .fas,
+[data-toggle] :not(.disabled):hover > .fab,
+[data-toggle] :not(.disabled):hover.fa,
+[data-toggle] :not(.disabled):hover.far,
+[data-toggle] :not(.disabled):hover.fas,
+[data-toggle] :not(.disabled):hover.fab,
+[data-toggle] :not(.disabled):focus > .fa,
+[data-toggle] :not(.disabled):focus > .far,
+[data-toggle] :not(.disabled):focus > .fas,
+[data-toggle] :not(.disabled):focus > .fab,
+[data-toggle] :not(.disabled):focus.fa,
+[data-toggle] :not(.disabled):focus.far,
+[data-toggle] :not(.disabled):focus.fas,
+[data-toggle] :not(.disabled):focus.fab,
+button :not(.disabled).hover > .fa,
+button :not(.disabled).hover > .far,
+button :not(.disabled).hover > .fas,
+button :not(.disabled).hover > .fab,
+button :not(.disabled).hover.fa,
+button :not(.disabled).hover.far,
+button :not(.disabled).hover.fas,
+button :not(.disabled).hover.fab,
+button :not(.disabled):hover > .fa,
+button :not(.disabled):hover > .far,
+button :not(.disabled):hover > .fas,
+button :not(.disabled):hover > .fab,
+button :not(.disabled):hover.fa,
+button :not(.disabled):hover.far,
+button :not(.disabled):hover.fas,
+button :not(.disabled):hover.fab,
+button :not(.disabled):focus > .fa,
+button :not(.disabled):focus > .far,
+button :not(.disabled):focus > .fas,
+button :not(.disabled):focus > .fab,
+button :not(.disabled):focus.fa,
+button :not(.disabled):focus.far,
+button :not(.disabled):focus.fas,
+button :not(.disabled):focus.fab,
+.btn :not(.disabled).hover > .fa,
+.btn :not(.disabled).hover > .far,
+.btn :not(.disabled).hover > .fas,
+.btn :not(.disabled).hover > .fab,
+.btn :not(.disabled).hover.fa,
+.btn :not(.disabled).hover.far,
+.btn :not(.disabled).hover.fas,
+.btn :not(.disabled).hover.fab,
+.btn :not(.disabled):hover > .fa,
+.btn :not(.disabled):hover > .far,
+.btn :not(.disabled):hover > .fas,
+.btn :not(.disabled):hover > .fab,
+.btn :not(.disabled):hover.fa,
+.btn :not(.disabled):hover.far,
+.btn :not(.disabled):hover.fas,
+.btn :not(.disabled):hover.fab,
+.btn :not(.disabled):focus > .fa,
+.btn :not(.disabled):focus > .far,
+.btn :not(.disabled):focus > .fas,
+.btn :not(.disabled):focus > .fab,
+.btn :not(.disabled):focus.fa,
+.btn :not(.disabled):focus.far,
+.btn :not(.disabled):focus.fas,
+.btn :not(.disabled):focus.fab {
   -webkit-transform: rotate(-180deg);
           transform: rotate(-180deg);
 }
 
-.a.disabled,
-a.disabled,
-[data-toggle].disabled,
-button.disabled,
-.btn.disabled {
-  opacity: 0.5;
-}
-
-.a.disabled:hover,
-.a.disabled.hover,
-.a.disabled:focus,
-a.disabled:hover,
-a.disabled.hover,
-a.disabled:focus,
-[data-toggle].disabled:hover,
-[data-toggle].disabled.hover,
-[data-toggle].disabled:focus,
-button.disabled:hover,
-button.disabled.hover,
-button.disabled:focus,
-.btn.disabled:hover,
-.btn.disabled.hover,
-.btn.disabled:focus {
-  -webkit-transform: rotate(0deg);
-          transform: rotate(0deg);
-}
-
-[data-toggle='table']:hover,
-[data-toggle='table'].hover,
-[data-toggle='table']:focus {
+[data-toggle='table'] :not(.disabled).hover,
+[data-toggle='table'] :not(.disabled):hover,
+[data-toggle='table'] :not(.disabled):focus {
   opacity: 1;
 }
 
@@ -15056,9 +15029,9 @@ textarea,
   padding: 0.5rem;
 }
 
-.btn:hover,
-.btn.hover,
-.btn:focus {
+.btn :not(.disabled).hover,
+.btn :not(.disabled):hover,
+.btn :not(.disabled):focus {
   opacity: 1;
 }
 
@@ -15077,8 +15050,7 @@ textarea,
 /*
 .dropdown.show {
     .dropdown {
-        &:hover,&.hover,
-        &:focus {
+        @include ss_hover {
             .dropdown-menu {
                 display: block;
             }
@@ -15091,8 +15063,7 @@ textarea,
     }
 
     .dropdown-hover ul li {
-        &:hover,&.hover,
-        &:focus {
+       @include ss_hover {
             > .dropdown-toggle::after {
                 transform: rotate(-90deg);
             }
@@ -15116,8 +15087,7 @@ textarea,
     }
 
     .dropdown-hover ul ul li {
-        &:hover,&.hover,
-        &:focus {
+       @include ss_hover {
             > ul {
                 display: block;
             }
@@ -15137,8 +15107,7 @@ textarea,
     }
 
     .dropdown-hover ul ul ul li {
-        &:hover,&.hover,
-        &:focus {
+        @include ss_hover {
             ul {
                 display: block;
             }
@@ -15155,8 +15124,9 @@ textarea,
     }
 }*/
 
-.navbar-dark .nav-link:hover,
-.navbar-dark .nav-link:focus {
+.navbar-dark .nav-link :not(.disabled).hover,
+.navbar-dark .nav-link :not(.disabled):hover,
+.navbar-dark .nav-link :not(.disabled):focus {
   background: #212121;
 }
 
@@ -15183,12 +15153,15 @@ textarea,
   color: rgba(255, 255, 255, 0.5);
 }
 
-.dropdown-menu.bg-dark .nav-link:hover,
-.dropdown-menu.bg-alt .nav-link:hover,
-.element.site__elements__accordion .card .dropdown-menu.card-header .nav-link:hover,
-.dropdown-menu.bg-dark .nav-link:focus,
-.dropdown-menu.bg-alt .nav-link:focus,
-.element.site__elements__accordion .card .dropdown-menu.card-header .nav-link:focus {
+.dropdown-menu.bg-dark .nav-link :not(.disabled).hover,
+.dropdown-menu.bg-alt .nav-link :not(.disabled).hover,
+.element.site__elements__accordion .card .dropdown-menu.card-header .nav-link :not(.disabled).hover,
+.dropdown-menu.bg-dark .nav-link :not(.disabled):hover,
+.dropdown-menu.bg-alt .nav-link :not(.disabled):hover,
+.element.site__elements__accordion .card .dropdown-menu.card-header .nav-link :not(.disabled):hover,
+.dropdown-menu.bg-dark .nav-link :not(.disabled):focus,
+.dropdown-menu.bg-alt .nav-link :not(.disabled):focus,
+.element.site__elements__accordion .card .dropdown-menu.card-header .nav-link :not(.disabled):focus {
   color: rgba(255, 255, 255, 0.75);
 }
 
@@ -15213,12 +15186,15 @@ textarea,
   color: #fff;
 }
 
-.dropdown-menu.bg-dark .dropdown-item:hover,
-.dropdown-menu.bg-alt .dropdown-item:hover,
-.element.site__elements__accordion .card .dropdown-menu.card-header .dropdown-item:hover,
-.dropdown-menu.bg-dark .dropdown-item:focus,
-.dropdown-menu.bg-alt .dropdown-item:focus,
-.element.site__elements__accordion .card .dropdown-menu.card-header .dropdown-item:focus {
+.dropdown-menu.bg-dark .dropdown-item :not(.disabled).hover,
+.dropdown-menu.bg-alt .dropdown-item :not(.disabled).hover,
+.element.site__elements__accordion .card .dropdown-menu.card-header .dropdown-item :not(.disabled).hover,
+.dropdown-menu.bg-dark .dropdown-item :not(.disabled):hover,
+.dropdown-menu.bg-alt .dropdown-item :not(.disabled):hover,
+.element.site__elements__accordion .card .dropdown-menu.card-header .dropdown-item :not(.disabled):hover,
+.dropdown-menu.bg-dark .dropdown-item :not(.disabled):focus,
+.dropdown-menu.bg-alt .dropdown-item :not(.disabled):focus,
+.element.site__elements__accordion .card .dropdown-menu.card-header .dropdown-item :not(.disabled):focus {
   color: rgba(255, 255, 255, 0.75);
   background: #212121;
 }

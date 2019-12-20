@@ -1,0 +1,9 @@
+@mixin ss_hover() {
+	:not(.disabled) {
+		&.hover,
+		&:hover,
+		&:focus {
+			@content;
+		}
+	}
+}

@@ -1,9 +1,25 @@
-@import "_colors";
+@import '_mixings';
+@import '_colors';
 
-$grid-breakpoints: (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px, xxl: 1390px, xxxl: 1590px) !default;
-$container-max-widths: (sm: 540px, md: 720px, lg: 960px, xl: 1140px, xxl: 1330px, xxxl: 1560px) !default;
+$grid-breakpoints: (
+	xs: 0,
+	sm: 576px,
+	md: 768px,
+	lg: 992px,
+	xl: 1200px,
+	xxl: 1390px,
+	xxxl: 1590px
+) !default;
+$container-max-widths: (
+	sm: 540px,
+	md: 720px,
+	lg: 960px,
+	xl: 1140px,
+	xxl: 1330px,
+	xxxl: 1560px
+) !default;
 
-$font-family-base: "Lato", sans-serif !default;
+$font-family-base: 'Lato', sans-serif !default;
 
 $font-size-base: 1rem !default;
 
@@ -37,6 +53,6 @@ $enable-flex: true !default;
 
 $enable-responsive-font-sizes: true !default;
 
-@import "~bootstrap/scss/functions";
-@import "~bootstrap/scss/variables";
-@import "~bootstrap/scss/mixins";
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
