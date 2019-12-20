@@ -14794,75 +14794,140 @@ img {
 }
 
 .a:hover,
+.a.hover,
 .a:focus,
 a:hover,
+a.hover,
 a:focus,
 [data-toggle]:hover,
+[data-toggle].hover,
 [data-toggle]:focus,
 button:hover,
+button.hover,
 button:focus,
 .btn:hover,
+.btn.hover,
 .btn:focus {
-  opacity: .8;
+  opacity: 0.8;
 }
 
+.a:hover > .fa,
 .a:hover > .far,
 .a:hover > .fas,
 .a:hover > .fab,
+.a:hover.fa,
 .a:hover.far,
 .a:hover.fas,
 .a:hover.fab,
+.a.hover > .fa,
+.a.hover > .far,
+.a.hover > .fas,
+.a.hover > .fab,
+.a.hover.fa,
+.a.hover.far,
+.a.hover.fas,
+.a.hover.fab,
+.a:focus > .fa,
 .a:focus > .far,
 .a:focus > .fas,
 .a:focus > .fab,
+.a:focus.fa,
 .a:focus.far,
 .a:focus.fas,
 .a:focus.fab,
+a:hover > .fa,
 a:hover > .far,
 a:hover > .fas,
 a:hover > .fab,
+a:hover.fa,
 a:hover.far,
 a:hover.fas,
 a:hover.fab,
+a.hover > .fa,
+a.hover > .far,
+a.hover > .fas,
+a.hover > .fab,
+a.hover.fa,
+a.hover.far,
+a.hover.fas,
+a.hover.fab,
+a:focus > .fa,
 a:focus > .far,
 a:focus > .fas,
 a:focus > .fab,
+a:focus.fa,
 a:focus.far,
 a:focus.fas,
 a:focus.fab,
+[data-toggle]:hover > .fa,
 [data-toggle]:hover > .far,
 [data-toggle]:hover > .fas,
 [data-toggle]:hover > .fab,
+[data-toggle]:hover.fa,
 [data-toggle]:hover.far,
 [data-toggle]:hover.fas,
 [data-toggle]:hover.fab,
+[data-toggle].hover > .fa,
+[data-toggle].hover > .far,
+[data-toggle].hover > .fas,
+[data-toggle].hover > .fab,
+[data-toggle].hover.fa,
+[data-toggle].hover.far,
+[data-toggle].hover.fas,
+[data-toggle].hover.fab,
+[data-toggle]:focus > .fa,
 [data-toggle]:focus > .far,
 [data-toggle]:focus > .fas,
 [data-toggle]:focus > .fab,
+[data-toggle]:focus.fa,
 [data-toggle]:focus.far,
 [data-toggle]:focus.fas,
 [data-toggle]:focus.fab,
+button:hover > .fa,
 button:hover > .far,
 button:hover > .fas,
 button:hover > .fab,
+button:hover.fa,
 button:hover.far,
 button:hover.fas,
 button:hover.fab,
+button.hover > .fa,
+button.hover > .far,
+button.hover > .fas,
+button.hover > .fab,
+button.hover.fa,
+button.hover.far,
+button.hover.fas,
+button.hover.fab,
+button:focus > .fa,
 button:focus > .far,
 button:focus > .fas,
 button:focus > .fab,
+button:focus.fa,
 button:focus.far,
 button:focus.fas,
 button:focus.fab,
+.btn:hover > .fa,
 .btn:hover > .far,
 .btn:hover > .fas,
 .btn:hover > .fab,
+.btn:hover.fa,
 .btn:hover.far,
 .btn:hover.fas,
 .btn:hover.fab,
+.btn.hover > .fa,
+.btn.hover > .far,
+.btn.hover > .fas,
+.btn.hover > .fab,
+.btn.hover.fa,
+.btn.hover.far,
+.btn.hover.fas,
+.btn.hover.fab,
+.btn:focus > .fa,
 .btn:focus > .far,
 .btn:focus > .fas,
 .btn:focus > .fab,
+.btn:focus.fa,
 .btn:focus.far,
 .btn:focus.fas,
 .btn:focus.fab {
@@ -14870,13 +14935,41 @@ button:focus.fab,
           transform: rotate(-180deg);
 }
 
-[data-toggle="table"]:hover,
-[data-toggle="table"]:focus {
+.a.disabled,
+a.disabled,
+[data-toggle].disabled,
+button.disabled,
+.btn.disabled {
+  opacity: 0.5;
+}
+
+.a.disabled:hover,
+.a.disabled.hover,
+.a.disabled:focus,
+a.disabled:hover,
+a.disabled.hover,
+a.disabled:focus,
+[data-toggle].disabled:hover,
+[data-toggle].disabled.hover,
+[data-toggle].disabled:focus,
+button.disabled:hover,
+button.disabled.hover,
+button.disabled:focus,
+.btn.disabled:hover,
+.btn.disabled.hover,
+.btn.disabled:focus {
+  -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+}
+
+[data-toggle='table']:hover,
+[data-toggle='table'].hover,
+[data-toggle='table']:focus {
   opacity: 1;
 }
 
-[data-toggle="collapse"][aria-expanded="true"] .accordion-icon:before {
-  content: "\f068";
+[data-toggle='collapse'][aria-expanded='true'] .accordion-icon:before {
+  content: '\f068';
 }
 
 .transition,
@@ -14907,7 +15000,7 @@ textarea,
 .container-xxl,
 .container-xxxl,
 .row,
-[class="col-*"] {
+[class='col-*'] {
   -webkit-transition: all 0.4s ease;
   transition: all 0.4s ease;
 }
@@ -14930,8 +15023,8 @@ textarea,
   display: block;
   position: absolute;
   top: 2rem;
-  right: .5rem;
-  content: "*";
+  right: 0.5rem;
+  content: '*';
   color: #f44336;
   z-index: 2;
 }
@@ -14950,13 +15043,13 @@ textarea,
   color: #f44336;
 }
 
-.field .bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
+.field .bootstrap-select:not([class*='col-']):not([class*='form-control']):not(.input-group-btn) {
   width: 100%;
 }
 
 .message {
   display: block;
-  margin: .5rem 0;
+  margin: 0.5rem 0;
 }
 
 .col-block {
@@ -14964,11 +15057,12 @@ textarea,
 }
 
 .btn:hover,
+.btn.hover,
 .btn:focus {
   opacity: 1;
 }
 
-.navbar-toggler[aria-expanded="true"] {
+.navbar-toggler[aria-expanded='true'] {
   -webkit-transform: rotate(90deg);
           transform: rotate(90deg);
 }
@@ -14983,7 +15077,7 @@ textarea,
 /*
 .dropdown.show {
     .dropdown {
-        &:hover,
+        &:hover,&.hover,
         &:focus {
             .dropdown-menu {
                 display: block;
@@ -14997,7 +15091,7 @@ textarea,
     }
 
     .dropdown-hover ul li {
-        &:hover,
+        &:hover,&.hover,
         &:focus {
             > .dropdown-toggle::after {
                 transform: rotate(-90deg);
@@ -15022,7 +15116,7 @@ textarea,
     }
 
     .dropdown-hover ul ul li {
-        &:hover,
+        &:hover,&.hover,
         &:focus {
             > ul {
                 display: block;
@@ -15043,7 +15137,7 @@ textarea,
     }
 
     .dropdown-hover ul ul ul li {
-        &:hover,
+        &:hover,&.hover,
         &:focus {
             ul {
                 display: block;
@@ -15144,8 +15238,8 @@ textarea,
   background: none;
 }
 
-.row > [class^="col-"] > .card,
-.row-xs > [class^="col-"] > .card {
+.row > [class^='col-'] > .card,
+.row-xs > [class^='col-'] > .card {
   height: 100%;
 }
 
@@ -15154,7 +15248,7 @@ textarea,
   margin-left: -0.5rem;
 }
 
-.row-xs [class^="col-"] {
+.row-xs [class^='col-'] {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
 }

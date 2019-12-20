@@ -1,14 +1,18 @@
 /*
  * some basic styles
  */
-@import "../_animations";
+@import '../_animations';
 
 .pulse {
     animation: pulse 0.8s linear infinite;
 }
 
 // don't let images be wider than the parent layer
-div, a, span, button, i {
+div,
+a,
+span,
+button,
+i {
     background-repeat: no-repeat;
     background-size: contain;
 }
@@ -28,33 +32,47 @@ a,
 button,
 .btn {
     &:hover,
+    &.hover,
     &:focus {
-        opacity: .8;
+        opacity: 0.8;
 
+        > .fa,
         > .far,
         > .fas,
         > .fab,
+        &.fa,
         &.far,
         &.fas,
         &.fab {
             transform: rotate(-180deg);
         }
     }
+
+    &.disabled {
+        opacity: 0.5;
+
+        &:hover,
+        &.hover,
+        &:focus {
+            transform: rotate(0deg);
+        }
+    }
 }
 
 // exclude bootstrap-table
-[data-toggle="table"] {
+[data-toggle='table'] {
     &:hover,
+    &.hover,
     &:focus {
         opacity: 1;
     }
 }
 
-[data-toggle="collapse"] {
-    &[aria-expanded="true"] {
+[data-toggle='collapse'] {
+    &[aria-expanded='true'] {
         .accordion-icon {
             &:before {
-                content: "\f068";
+                content: '\f068';
             }
         }
     }
@@ -62,17 +80,24 @@ button,
 
 // transactions
 .transition,
-a, a *,
-.a, .a *,
-button, input, optgroup, select, textarea,
+a,
+a *,
+.a,
+.a *,
+button,
+input,
+optgroup,
+select,
+textarea,
 .btn,
 .alert,
 .dropdown,
-[data-toggle], [data-toggle] *,
+[data-toggle],
+[data-toggle] *,
 .container,
 .container-fluid,
 .row,
-[class="col-*"] {
+[class='col-*'] {
     transition: all 0.4s ease;
 }
 
@@ -94,8 +119,8 @@ button, input, optgroup, select, textarea,
             display: block;
             position: absolute;
             top: 2rem;
-            right: .5rem;
-            content: "*";
+            right: 0.5rem;
+            content: '*';
             color: $red;
             z-index: 2;
         }
@@ -103,7 +128,9 @@ button, input, optgroup, select, textarea,
 
     &.holder-error,
     &.error {
-        input, select, textarea {
+        input,
+        select,
+        textarea {
             border-color: $red;
         }
 
@@ -112,7 +139,7 @@ button, input, optgroup, select, textarea,
         }
     }
 
-    .bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
+    .bootstrap-select:not([class*='col-']):not([class*='form-control']):not(.input-group-btn) {
         width: 100%;
     }
 }
@@ -123,7 +150,7 @@ button, input, optgroup, select, textarea,
     @extend .alert-info;
 
     display: block;
-    margin: .5rem 0;
+    margin: 0.5rem 0;
 }
 
 .message.validation,
@@ -142,6 +169,7 @@ button, input, optgroup, select, textarea,
 // rewrite btn opacity on hover
 .btn {
     &:hover,
+    &.hover,
     &:focus {
         opacity: 1;
     }
@@ -163,7 +191,7 @@ button, input, optgroup, select, textarea,
 
 // dropdown icon
 .navbar-toggler {
-    &[aria-expanded="true"] {
+    &[aria-expanded='true'] {
         transform: rotate(90deg);
     }
 }
@@ -178,7 +206,7 @@ button, input, optgroup, select, textarea,
 /*
 .dropdown.show {
     .dropdown {
-        &:hover,
+        &:hover,&.hover,
         &:focus {
             .dropdown-menu {
                 display: block;
@@ -192,7 +220,7 @@ button, input, optgroup, select, textarea,
     }
 
     .dropdown-hover ul li {
-        &:hover,
+        &:hover,&.hover,
         &:focus {
             > .dropdown-toggle::after {
                 transform: rotate(-90deg);
@@ -217,7 +245,7 @@ button, input, optgroup, select, textarea,
     }
 
     .dropdown-hover ul ul li {
-        &:hover,
+        &:hover,&.hover,
         &:focus {
             > ul {
                 display: block;
@@ -238,7 +266,7 @@ button, input, optgroup, select, textarea,
     }
 
     .dropdown-hover ul ul ul li {
-        &:hover,
+        &:hover,&.hover,
         &:focus {
             ul {
                 display: block;
@@ -286,7 +314,6 @@ button, input, optgroup, select, textarea,
             color: $navbar-dark-hover-color;
         }
 
-
         &.disabled {
             color: $navbar-dark-disabled-color;
         }
@@ -305,7 +332,6 @@ button, input, optgroup, select, textarea,
             background: $navbar-dark-hover-background;
         }
 
-
         &.active,
         &:active {
             background: $navbar-dark-active-background;
@@ -317,8 +343,9 @@ button, input, optgroup, select, textarea,
     }
 }
 
-.row, .row-xs {
-    > [class^="col-"] > .card {
+.row,
+.row-xs {
+    > [class^='col-'] > .card {
         height: 100%;
     }
 }
@@ -327,7 +354,7 @@ button, input, optgroup, select, textarea,
     margin-right: -($grid-gutter-xs-width / 2);
     margin-left: -($grid-gutter-xs-width / 2);
 
-    [class^="col-"] {
+    [class^='col-'] {
         padding-left: $grid-gutter-xs-width / 2;
         padding-right: $grid-gutter-xs-width / 2;
     }
