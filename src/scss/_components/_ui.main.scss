@@ -31,7 +31,9 @@ a,
 [data-toggle],
 button,
 .btn {
-    @include ss_hover {
+    &:hover,
+    &.hover,
+    &:focus {
         opacity: 0.8;
 
         > .fa,
@@ -45,11 +47,32 @@ button,
             transform: rotate(-180deg);
         }
     }
+
+    &.disabled {
+        opacity: 0.5;
+
+        &:hover,
+        &.hover,
+        &:focus {
+            > .fa,
+            > .far,
+            > .fas,
+            > .fab,
+            &.fa,
+            &.far,
+            &.fas,
+            &.fab {
+                transform: rotate(0deg);
+            }
+        }
+    }
 }
 
 // exclude bootstrap-table
 [data-toggle='table'] {
-    @include ss_hover {
+    &:hover,
+    &.hover,
+    &:focus {
         opacity: 1;
     }
 }
@@ -154,7 +177,9 @@ textarea,
 
 // rewrite btn opacity on hover
 .btn {
-    @include ss_hover {
+    &:hover,
+    &.hover,
+    &:focus {
         opacity: 1;
     }
 }
@@ -190,7 +215,8 @@ textarea,
 /*
 .dropdown.show {
     .dropdown {
-        @include ss_hover {
+        &:hover,&.hover,
+        &:focus {
             .dropdown-menu {
                 display: block;
             }
@@ -203,7 +229,8 @@ textarea,
     }
 
     .dropdown-hover ul li {
-       @include ss_hover {
+        &:hover,&.hover,
+        &:focus {
             > .dropdown-toggle::after {
                 transform: rotate(-90deg);
             }
@@ -227,7 +254,8 @@ textarea,
     }
 
     .dropdown-hover ul ul li {
-       @include ss_hover {
+        &:hover,&.hover,
+        &:focus {
             > ul {
                 display: block;
             }
@@ -247,7 +275,8 @@ textarea,
     }
 
     .dropdown-hover ul ul ul li {
-        @include ss_hover {
+        &:hover,&.hover,
+        &:focus {
             ul {
                 display: block;
             }
@@ -267,7 +296,7 @@ textarea,
 // dark dropdowns
 .navbar-dark {
     .nav-link {
-        @include ss_hover {
+        @include hover-focus {
             background: $navbar-dark-hover-background;
         }
     }
@@ -290,7 +319,7 @@ textarea,
     .nav-link {
         color: $navbar-dark-color;
 
-        @include ss_hover {
+        @include hover-focus {
             color: $navbar-dark-hover-color;
         }
 
@@ -307,7 +336,7 @@ textarea,
     }
 
     .dropdown-item {
-        @include ss_hover {
+        @include hover-focus {
             color: $navbar-dark-hover-color;
             background: $navbar-dark-hover-background;
         }

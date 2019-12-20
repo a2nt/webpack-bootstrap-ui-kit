@@ -1,5 +1,5 @@
 @mixin ss_hover() {
-	:not(.disabled) {
+	&:not(.disabled) {
 		&.hover,
 		&:hover,
 		&:focus {
