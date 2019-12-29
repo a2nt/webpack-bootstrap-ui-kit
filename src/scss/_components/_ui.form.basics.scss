@@ -21,16 +21,16 @@ input.time {
         font-variant: normal;
         text-rendering: auto;
         line-height: 1;
-        font-family: Font Awesome\ 5 Free;
+        font-family: Font Awesome\5 Free;
         font-weight: 900;
     }
 
     .glyphicon-chevron-up:before {
-        content: "\f077";
+        content: '\f077';
     }
 
     .glyphicon-chevron-down:before {
-        content: "\f078";
+        content: '\f078';
     }
 
     input {
@@ -71,14 +71,15 @@ input.time {
             // Avoid using mixin so we can pass custom focus shadow properly
             @if $enable-shadows {
                 box-shadow: $input-box-shadow, $input-focus-box-shadow;
-            }
-            @else {
+            } @else {
                 box-shadow: $input-focus-box-shadow;
             }
 
-            &.select2-selection--single {}
+            &.select2-selection--single {
+            }
 
-            &.select2-selection--multiple {}
+            &.select2-selection--multiple {
+            }
         }
     }
 
@@ -89,7 +90,8 @@ input.time {
             line-height: inherit;
         }
 
-        &.select2-selection--single {}
+        &.select2-selection--single {
+        }
 
         &.select2-selection--multiple {
             padding-top: 0;

@@ -1,6 +1,7 @@
-@mixin ss_hover() {
+@mixin hover-disabled() {
 	&:not(.disabled) {
-		&.hover,
+		&.active,
+		&:active,
 		&:hover,
 		&:focus {
 			@content;

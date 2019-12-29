@@ -32,7 +32,7 @@ a,
 button,
 .btn {
     &:hover,
-    &.hover,
+    &.active,
     &:focus {
         opacity: 0.8;
 
@@ -50,9 +50,10 @@ button,
 
     &.disabled {
         opacity: 0.5;
+        cursor: default;
 
         &:hover,
-        &.hover,
+        &.active,
         &:focus {
             > .fa,
             > .far,
@@ -71,7 +72,7 @@ button,
 // exclude bootstrap-table
 [data-toggle='table'] {
     &:hover,
-    &.hover,
+    &.active,
     &:focus {
         opacity: 1;
     }
@@ -178,7 +179,7 @@ textarea,
 // rewrite btn opacity on hover
 .btn {
     &:hover,
-    &.hover,
+    &.active,
     &:focus {
         opacity: 1;
     }
@@ -215,7 +216,7 @@ textarea,
 /*
 .dropdown.show {
     .dropdown {
-        &:hover,&.hover,
+        &:hover,&.active,
         &:focus {
             .dropdown-menu {
                 display: block;
@@ -229,7 +230,7 @@ textarea,
     }
 
     .dropdown-hover ul li {
-        &:hover,&.hover,
+        &:hover,&.active,
         &:focus {
             > .dropdown-toggle::after {
                 transform: rotate(-90deg);
@@ -254,7 +255,7 @@ textarea,
     }
 
     .dropdown-hover ul ul li {
-        &:hover,&.hover,
+        &:hover,&.active,
         &:focus {
             > ul {
                 display: block;
@@ -275,7 +276,7 @@ textarea,
     }
 
     .dropdown-hover ul ul ul li {
-        &:hover,&.hover,
+        &:hover,&.active,
         &:focus {
             ul {
                 display: block;
@@ -324,6 +325,7 @@ textarea,
         }
 
         &.disabled {
+            cursor: default;
             color: $navbar-dark-disabled-color;
         }
     }

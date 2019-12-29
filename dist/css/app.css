@@ -14794,19 +14794,19 @@ img {
 }
 
 .a:hover,
-.a.hover,
+.a.active,
 .a:focus,
 a:hover,
-a.hover,
+a.active,
 a:focus,
 [data-toggle]:hover,
-[data-toggle].hover,
+[data-toggle].active,
 [data-toggle]:focus,
 button:hover,
-button.hover,
+button.active,
 button:focus,
 .btn:hover,
-.btn.hover,
+.btn.active,
 .btn:focus {
   opacity: 0.8;
 }
@@ -14819,14 +14819,14 @@ button:focus,
 .a:hover.far,
 .a:hover.fas,
 .a:hover.fab,
-.a.hover > .fa,
-.a.hover > .far,
-.a.hover > .fas,
-.a.hover > .fab,
-.a.hover.fa,
-.a.hover.far,
-.a.hover.fas,
-.a.hover.fab,
+.a.active > .fa,
+.a.active > .far,
+.a.active > .fas,
+.a.active > .fab,
+.a.active.fa,
+.a.active.far,
+.a.active.fas,
+.a.active.fab,
 .a:focus > .fa,
 .a:focus > .far,
 .a:focus > .fas,
@@ -14843,14 +14843,14 @@ a:hover.fa,
 a:hover.far,
 a:hover.fas,
 a:hover.fab,
-a.hover > .fa,
-a.hover > .far,
-a.hover > .fas,
-a.hover > .fab,
-a.hover.fa,
-a.hover.far,
-a.hover.fas,
-a.hover.fab,
+a.active > .fa,
+a.active > .far,
+a.active > .fas,
+a.active > .fab,
+a.active.fa,
+a.active.far,
+a.active.fas,
+a.active.fab,
 a:focus > .fa,
 a:focus > .far,
 a:focus > .fas,
@@ -14867,14 +14867,14 @@ a:focus.fab,
 [data-toggle]:hover.far,
 [data-toggle]:hover.fas,
 [data-toggle]:hover.fab,
-[data-toggle].hover > .fa,
-[data-toggle].hover > .far,
-[data-toggle].hover > .fas,
-[data-toggle].hover > .fab,
-[data-toggle].hover.fa,
-[data-toggle].hover.far,
-[data-toggle].hover.fas,
-[data-toggle].hover.fab,
+[data-toggle].active > .fa,
+[data-toggle].active > .far,
+[data-toggle].active > .fas,
+[data-toggle].active > .fab,
+[data-toggle].active.fa,
+[data-toggle].active.far,
+[data-toggle].active.fas,
+[data-toggle].active.fab,
 [data-toggle]:focus > .fa,
 [data-toggle]:focus > .far,
 [data-toggle]:focus > .fas,
@@ -14891,14 +14891,14 @@ button:hover.fa,
 button:hover.far,
 button:hover.fas,
 button:hover.fab,
-button.hover > .fa,
-button.hover > .far,
-button.hover > .fas,
-button.hover > .fab,
-button.hover.fa,
-button.hover.far,
-button.hover.fas,
-button.hover.fab,
+button.active > .fa,
+button.active > .far,
+button.active > .fas,
+button.active > .fab,
+button.active.fa,
+button.active.far,
+button.active.fas,
+button.active.fab,
 button:focus > .fa,
 button:focus > .far,
 button:focus > .fas,
@@ -14915,14 +14915,14 @@ button:focus.fab,
 .btn:hover.far,
 .btn:hover.fas,
 .btn:hover.fab,
-.btn.hover > .fa,
-.btn.hover > .far,
-.btn.hover > .fas,
-.btn.hover > .fab,
-.btn.hover.fa,
-.btn.hover.far,
-.btn.hover.fas,
-.btn.hover.fab,
+.btn.active > .fa,
+.btn.active > .far,
+.btn.active > .fas,
+.btn.active > .fab,
+.btn.active.fa,
+.btn.active.far,
+.btn.active.fas,
+.btn.active.fab,
 .btn:focus > .fa,
 .btn:focus > .far,
 .btn:focus > .fas,
@@ -14941,6 +14941,7 @@ a.disabled,
 button.disabled,
 .btn.disabled {
   opacity: 0.5;
+  cursor: default;
 }
 
 .a.disabled:hover > .fa,
@@ -14951,14 +14952,14 @@ button.disabled,
 .a.disabled:hover.far,
 .a.disabled:hover.fas,
 .a.disabled:hover.fab,
-.a.disabled.hover > .fa,
-.a.disabled.hover > .far,
-.a.disabled.hover > .fas,
-.a.disabled.hover > .fab,
-.a.disabled.hover.fa,
-.a.disabled.hover.far,
-.a.disabled.hover.fas,
-.a.disabled.hover.fab,
+.a.disabled.active > .fa,
+.a.disabled.active > .far,
+.a.disabled.active > .fas,
+.a.disabled.active > .fab,
+.a.disabled.active.fa,
+.a.disabled.active.far,
+.a.disabled.active.fas,
+.a.disabled.active.fab,
 .a.disabled:focus > .fa,
 .a.disabled:focus > .far,
 .a.disabled:focus > .fas,
@@ -14975,14 +14976,14 @@ a.disabled:hover.fa,
 a.disabled:hover.far,
 a.disabled:hover.fas,
 a.disabled:hover.fab,
-a.disabled.hover > .fa,
-a.disabled.hover > .far,
-a.disabled.hover > .fas,
-a.disabled.hover > .fab,
-a.disabled.hover.fa,
-a.disabled.hover.far,
-a.disabled.hover.fas,
-a.disabled.hover.fab,
+a.disabled.active > .fa,
+a.disabled.active > .far,
+a.disabled.active > .fas,
+a.disabled.active > .fab,
+a.disabled.active.fa,
+a.disabled.active.far,
+a.disabled.active.fas,
+a.disabled.active.fab,
 a.disabled:focus > .fa,
 a.disabled:focus > .far,
 a.disabled:focus > .fas,
@@ -14999,14 +15000,14 @@ a.disabled:focus.fab,
 [data-toggle].disabled:hover.far,
 [data-toggle].disabled:hover.fas,
 [data-toggle].disabled:hover.fab,
-[data-toggle].disabled.hover > .fa,
-[data-toggle].disabled.hover > .far,
-[data-toggle].disabled.hover > .fas,
-[data-toggle].disabled.hover > .fab,
-[data-toggle].disabled.hover.fa,
-[data-toggle].disabled.hover.far,
-[data-toggle].disabled.hover.fas,
-[data-toggle].disabled.hover.fab,
+[data-toggle].disabled.active > .fa,
+[data-toggle].disabled.active > .far,
+[data-toggle].disabled.active > .fas,
+[data-toggle].disabled.active > .fab,
+[data-toggle].disabled.active.fa,
+[data-toggle].disabled.active.far,
+[data-toggle].disabled.active.fas,
+[data-toggle].disabled.active.fab,
 [data-toggle].disabled:focus > .fa,
 [data-toggle].disabled:focus > .far,
 [data-toggle].disabled:focus > .fas,
@@ -15023,14 +15024,14 @@ button.disabled:hover.fa,
 button.disabled:hover.far,
 button.disabled:hover.fas,
 button.disabled:hover.fab,
-button.disabled.hover > .fa,
-button.disabled.hover > .far,
-button.disabled.hover > .fas,
-button.disabled.hover > .fab,
-button.disabled.hover.fa,
-button.disabled.hover.far,
-button.disabled.hover.fas,
-button.disabled.hover.fab,
+button.disabled.active > .fa,
+button.disabled.active > .far,
+button.disabled.active > .fas,
+button.disabled.active > .fab,
+button.disabled.active.fa,
+button.disabled.active.far,
+button.disabled.active.fas,
+button.disabled.active.fab,
 button.disabled:focus > .fa,
 button.disabled:focus > .far,
 button.disabled:focus > .fas,
@@ -15047,14 +15048,14 @@ button.disabled:focus.fab,
 .btn.disabled:hover.far,
 .btn.disabled:hover.fas,
 .btn.disabled:hover.fab,
-.btn.disabled.hover > .fa,
-.btn.disabled.hover > .far,
-.btn.disabled.hover > .fas,
-.btn.disabled.hover > .fab,
-.btn.disabled.hover.fa,
-.btn.disabled.hover.far,
-.btn.disabled.hover.fas,
-.btn.disabled.hover.fab,
+.btn.disabled.active > .fa,
+.btn.disabled.active > .far,
+.btn.disabled.active > .fas,
+.btn.disabled.active > .fab,
+.btn.disabled.active.fa,
+.btn.disabled.active.far,
+.btn.disabled.active.fas,
+.btn.disabled.active.fab,
 .btn.disabled:focus > .fa,
 .btn.disabled:focus > .far,
 .btn.disabled:focus > .fas,
@@ -15068,7 +15069,7 @@ button.disabled:focus.fab,
 }
 
 [data-toggle='table']:hover,
-[data-toggle='table'].hover,
+[data-toggle='table'].active,
 [data-toggle='table']:focus {
   opacity: 1;
 }
@@ -15162,7 +15163,7 @@ textarea,
 }
 
 .btn:hover,
-.btn.hover,
+.btn.active,
 .btn:focus {
   opacity: 1;
 }
@@ -15182,7 +15183,7 @@ textarea,
 /*
 .dropdown.show {
     .dropdown {
-        &:hover,&.hover,
+        &:hover,&.active,
         &:focus {
             .dropdown-menu {
                 display: block;
@@ -15196,7 +15197,7 @@ textarea,
     }
 
     .dropdown-hover ul li {
-        &:hover,&.hover,
+        &:hover,&.active,
         &:focus {
             > .dropdown-toggle::after {
                 transform: rotate(-90deg);
@@ -15221,7 +15222,7 @@ textarea,
     }
 
     .dropdown-hover ul ul li {
-        &:hover,&.hover,
+        &:hover,&.active,
         &:focus {
             > ul {
                 display: block;
@@ -15242,7 +15243,7 @@ textarea,
     }
 
     .dropdown-hover ul ul ul li {
-        &:hover,&.hover,
+        &:hover,&.active,
         &:focus {
             ul {
                 display: block;
@@ -15300,6 +15301,7 @@ textarea,
 .dropdown-menu.bg-dark .nav-link.disabled,
 .dropdown-menu.bg-alt .nav-link.disabled,
 .element.site__elements__accordion .card .dropdown-menu.card-header .nav-link.disabled {
+  cursor: default;
   color: rgba(255, 255, 255, 0.25);
 }
 
@@ -15378,16 +15380,16 @@ input.time[readonly] {
   font-variant: normal;
   text-rendering: auto;
   line-height: 1;
-  font-family: Font Awesome\ 5 Free;
+  font-family: Font Awesome\5 Free;
   font-weight: 900;
 }
 
 .bootstrap-timepicker-widget .glyphicon-chevron-up:before {
-  content: "\f077";
+  content: '\f077';
 }
 
 .bootstrap-timepicker-widget .glyphicon-chevron-down:before {
-  content: "\f078";
+  content: '\f078';
 }
 
 .bootstrap-timepicker-widget input {
