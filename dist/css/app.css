@@ -15501,10 +15501,12 @@ h1.page-header.no-elements {
   padding: 2rem 0;
 }
 
+.elements-sm,
 .sidebar {
   padding: 2rem 0;
 }
 
+.elements-sm .element,
 .sidebar .element {
   padding: 2rem 0;
 }
