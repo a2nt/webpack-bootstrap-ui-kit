@@ -1,6 +1,6 @@
-@import "../_variables";
+@import '../_variables';
 
-@import "~bootstrap/scss/tables";
+@import '~bootstrap/scss/tables';
 
 img,
 .captionImage,
@@ -42,6 +42,7 @@ img,
 
     iframe {
         width: 100% !important;
+        height: 100% !important;
     }
 }
 
@@ -75,7 +76,9 @@ table {
     &.table-none {
         border: 0;
 
-        tr, td, th {
+        tr,
+        td,
+        th {
             border: 0;
             background: none !important;
         }
@@ -89,9 +92,9 @@ ul {
         list-style: none;
 
         &:before {
-            content: "\2022";
+            content: '\2022';
             display: inline-block;
-            margin-right: .5em;
+            margin-right: 0.5em;
         }
     }
 }
