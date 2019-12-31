@@ -7,7 +7,7 @@ import $ from 'jquery';
 import Events from '../_events';
 import 'jquery-hoverintent/jquery.hoverIntent.js';
 
-const HoverUI = ($ => {
+const HoverUI = (($) => {
   // Constants
   const W = window;
   const D = document;
@@ -36,8 +36,8 @@ const HoverUI = ($ => {
       $target = $target
         ? $target
         : $parent
-        ? $parent.find('.dropdown-menu')
-        : null;
+          ? $parent.find('.dropdown-menu')
+          : null;
 
       if (!$target || !$target.length) {
         console.warn(`${NAME}: Missing target for:`);
@@ -51,7 +51,7 @@ const HoverUI = ($ => {
       ui.$triger = $triger;
 
       // integrate with dropdown-toggle
-      $('[data-toggle="dropdown"]').on('click touch', e => {
+      $('[data-toggle="dropdown"]').on('click touch', (e) => {
         ui.hide();
       });
 
@@ -68,7 +68,7 @@ const HoverUI = ($ => {
         });
       }
 
-      $el.on('click touch', e => {
+      $el.on('click touch', (e) => {
         if (!$el.data('allow-click')) {
           e.preventDefault();
         }
@@ -150,7 +150,7 @@ const HoverUI = ($ => {
   });
 
   // rewrite 'bootstrap/js/dist/dropdown'
-  $('[data-toggle="dropdown"]').on('click touch', e => {
+  $('[data-toggle="dropdown"]').on('click touch', (e) => {
     e.preventDefault();
 
     const $el = $(e.currentTarget);

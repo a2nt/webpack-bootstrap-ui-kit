@@ -16058,6 +16058,7 @@ h6,
 .typography .image iframe,
 .typography .ss-htmleditorfield-file iframe {
   width: 100% !important;
+  height: 100% !important;
 }
 
 .typography .text-left {
@@ -16102,9 +16103,9 @@ h6,
 }
 
 .typography ul li:before {
-  content: "\2022";
+  content: '\2022';
   display: inline-block;
-  margin-right: .5em;
+  margin-right: 0.5em;
 }
 
 .typography iframe {
