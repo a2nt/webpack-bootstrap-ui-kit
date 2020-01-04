@@ -5,10 +5,8 @@
 // hide default page title cuz elemental object will be used to display titles
 .page-header-element {
     display: none;
-
-    h1 {
-        margin-bottom: 0;
-    }
+    padding-bottom: 0;
+    margin-bottom: -$grid-gutter-element-height;
 }
 
 // add top/bottom paddings for basic elements

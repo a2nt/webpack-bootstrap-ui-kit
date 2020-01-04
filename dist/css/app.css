@@ -15469,10 +15469,8 @@ input.time[readonly] {
 
 .page-header-element {
   display: none;
-}
-
-.page-header-element h1 {
-  margin-bottom: 0;
+  padding-bottom: 0;
+  margin-bottom: -4rem;
 }
 
 .element {
