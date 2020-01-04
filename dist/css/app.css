@@ -15467,13 +15467,12 @@ input.time[readonly] {
  * Basic styles for silverstripe-elemental
  */
 
-h1.page-header {
+.page-header-element {
   display: none;
-  margin-bottom: 0;
 }
 
-h1.page-header.no-elements {
-  display: block;
+.page-header-element h1 {
+  margin-bottom: 0;
 }
 
 .element {
