@@ -3,12 +3,11 @@
  */
 
 // hide default page title cuz elemental object will be used to display titles
-h1.page-header {
+.page-header-element {
     display: none;
-    margin-bottom: 0;
 
-    &.no-elements {
-        display: block;
+    h1 {
+        margin-bottom: 0;
     }
 }
 
