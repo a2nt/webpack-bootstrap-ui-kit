@@ -2,13 +2,6 @@
  * Basic styles for silverstripe-elemental
  */
 
-// hide default page title cuz elemental object will be used to display titles
-.page-header-element {
-    display: none;
-    padding-bottom: 0;
-    margin-bottom: -$grid-gutter-element-height;
-}
-
 // add top/bottom paddings for basic elements
 .element {
     position: relative;
@@ -35,6 +28,13 @@
     // Sidebar-like elements
     &.secondary {
         padding: ($grid-gutter-element-height / 2) 0;
+    }
+
+    // hide default page title cuz elemental object will be used to display titles
+    &.page-header-element {
+        display: none;
+        padding-bottom: 0;
+        margin-bottom: -$grid-gutter-element-height;
     }
 }
 

@@ -15467,12 +15467,6 @@ input.time[readonly] {
  * Basic styles for silverstripe-elemental
  */
 
-.page-header-element {
-  display: none;
-  padding-bottom: 0;
-  margin-bottom: -4rem;
-}
-
 .element {
   position: relative;
   padding: 4rem 0;
@@ -15496,6 +15490,12 @@ input.time[readonly] {
 
 .element.secondary {
   padding: 2rem 0;
+}
+
+.element.page-header-element {
+  display: none;
+  padding-bottom: 0;
+  margin-bottom: -4rem;
 }
 
 .elements-sm,
