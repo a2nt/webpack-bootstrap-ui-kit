@@ -173,7 +173,8 @@ textarea,
 
 // element col paddings
 .col-block {
-    padding: $grid-gutter-height / 4;
+    padding-top: $grid-gutter-height / 4;
+    padding-bottom: $grid-gutter-height / 4;
 }
 
 // rewrite btn opacity on hover
