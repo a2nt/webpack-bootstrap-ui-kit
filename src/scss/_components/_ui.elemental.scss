@@ -13,6 +13,7 @@
     &.site__elements__sliderelement {
         padding-top: 0;
         padding-bottom: 0;
+        margin-bottom: $grid-gutter-element-height;
     }
 
     // remove paddings for elemental list cuz inner elements will have paddings
