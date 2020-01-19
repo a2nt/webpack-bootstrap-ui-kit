@@ -15478,6 +15478,7 @@ input.time[readonly] {
 .element.site__elements__sliderelement {
   padding-top: 0;
   padding-bottom: 0;
+  margin-bottom: 4rem;
 }
 
 .element.dnadesign__elementallist__model__elementlist {
