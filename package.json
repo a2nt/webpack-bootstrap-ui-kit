@@ -62,6 +62,7 @@
     "yarn": "^1.21.1"
   },
   "devDependencies": {
+    "@a2nt/image-sprite-webpack-plugin": "^0.2.5",
     "autoprefixer": "^7.2.5",
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.6",

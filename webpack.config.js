@@ -12,6 +12,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const ImageminPlugin = require('imagemin-webpack');
+const ImageSpritePlugin = require('@a2nt/image-sprite-webpack-plugin');
 
 const plugins = [
   new webpack.DefinePlugin({
@@ -87,6 +88,20 @@ if (COMPRESS) {
           ],
         ],
       },
+    }),
+  );
+
+  plugins.push(
+    new ImageSpritePlugin({
+      exclude: /exclude|original|default-|icons|sprite/,
+      commentOrigin: false,
+      compress: true,
+      extensions: ['png'],
+      indent: '',
+      log: true,
+      //outputPath: path.join(__dirname, conf.APPDIR, conf.DIST),
+      outputFilename: 'img/sprite-[hash].png',
+      padding: 0,
     }),
   );
 }
