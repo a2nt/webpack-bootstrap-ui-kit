@@ -15,6 +15,10 @@ const SidebarUI = (($) => {
       const ui = this;
       ui.dispose();
 
+      if (!$(`.${CLASSNAME}`).length) {
+        return;
+      }
+
       console.log(`Initializing: ${NAME}`);
 
       const sticky = new StickySidebar(`.${CLASSNAME}`, {
