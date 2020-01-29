@@ -1,6 +1,6 @@
 {
   "name": "@a2nt/ss-bootstrap-ui-webpack-boilerplate",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "author": "Tony Air <tony@twma.pro>",
   "license": "MIT",
   "description": "This UI Kit allows you to build Bootstrap 4 webapp with some extra UI features. It's easy to extend and easy to convert HTML templates to CMS templates.",
@@ -59,6 +59,7 @@
     "routie": "0.0.1",
     "select2": "^4.0.12",
     "smooth-scroll": "^14.2.1",
+    "sticky-sidebar": "^3.3.1",
     "yarn": "^1.21.1"
   },
   "devDependencies": {

@@ -8,6 +8,8 @@ module.exports = {
   MAPLOADED: 'map-loaded',
   MAPMARKERCLICK: 'map-marker-click',
   MAPPOPUPCLOSE: 'map-popup-close',
+  SCROLL: 'scroll',
+  RESIZE: 'resize',
   SET_TARGET_UPDATE: 'set-target-update',
   RESTORE_FIELD: 'restore-field',
   FORM_INIT_BASICS: 'form-basics',

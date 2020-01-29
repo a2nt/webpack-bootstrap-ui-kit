@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 import '../scss/app.scss';
 
@@ -31,7 +31,6 @@ import 'bootstrap/js/dist/scrollspy';
 import 'bootstrap/js/dist/tab';
 //
 
-
 // Offcanvas menu
 //import 'offcanvas-bootstrap/dist/js/bootstrap.offcanvas';
 
@@ -40,6 +39,9 @@ import 'bootstrap/js/dist/tab';
 
 // FlyoutUI
 import FlyoutUI from './_components/_ui.flyout';
+
+// Sticky sidebar
+import SidebarUI from './_components/_ui.sidebar';
 
 // Toggle bootstrap form fields
 //import FormToggleUI from './_components/_ui.form.fields.toggle';
@@ -81,5 +83,9 @@ function importAll(r) {
   return r.keys().map(r);
 }
 
-const images = importAll(require.context('../img/', false, /\.(png|jpe?g|svg)$/));
-const fontAwesome = importAll(require.context('font-awesome', false, /\.(otf|eot|svg|ttf|woff|woff2)$/));
+const images = importAll(
+  require.context('../img/', false, /\.(png|jpe?g|svg)$/),
+);
+const fontAwesome = importAll(
+  require.context('font-awesome', false, /\.(otf|eot|svg|ttf|woff|woff2)$/),
+);
