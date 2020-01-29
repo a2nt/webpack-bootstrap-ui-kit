@@ -7,7 +7,6 @@ import Events from '../../_events';
 
 const MapBoxDriver = (($) => {
   class MapBoxDriver {
-
     getName() {
       return 'MapBoxDriver';
     }
@@ -18,34 +17,44 @@ const MapBoxDriver = (($) => {
       mapBoxGL.accessToken = config['key'];
 
       ui.map = new mapBoxGL.Map({
-        'container': $el.find('.mapAPI-map')[0],
-        'center': (config['center'] ? config['center'] : [0, 0]),
+        container: $el.find('.mapAPI-map')[0],
+        center: config['center'] ? config['center'] : [0, 0],
         //hash: true,
-        'style': (config['style'] ? config['style'] : 'mapbox://styles/mapbox/streets-v9'),
-        'localIdeographFontFamily': config['font-family'],
-        'zoom': (config['mapZoom'] ? config['mapZoom'] : 10),
-        'attributionControl': false,
-        'antialias': true,
-        'accessToken': config['key'],
+        style: config['style']
+          ? config['style']
+          : 'mapbox://styles/mapbox/streets-v9',
+        localIdeographFontFamily: config['font-family'],
+        zoom: config['mapZoom'] ? config['mapZoom'] : 10,
+        attributionControl: false,
+        antialias: true,
+        accessToken: config['key'],
       })
-        .addControl(new mapBoxGL.AttributionControl({
-          compact: true,
-        }))
+        .addControl(
+          new mapBoxGL.AttributionControl({
+            compact: true,
+          }),
+        )
         .addControl(new mapBoxGL.NavigationControl(), 'top-right')
-        .addControl(new mapBoxGL.GeolocateControl({
-          positionOptions: {
-            enableHighAccuracy: true,
-          },
-          trackUserLocation: true,
-        }), 'bottom-right')
-        .addControl(new mapBoxGL.ScaleControl({
-          maxWidth: 80,
-          unit: 'metric',
-        }), 'top-left')
+        .addControl(
+          new mapBoxGL.GeolocateControl({
+            positionOptions: {
+              enableHighAccuracy: true,
+            },
+            trackUserLocation: true,
+          }),
+          'bottom-right',
+        )
+        .addControl(
+          new mapBoxGL.ScaleControl({
+            maxWidth: 80,
+            unit: 'metric',
+          }),
+          'top-left',
+        )
         .addControl(new mapBoxGL.FullscreenControl());
 
       ui.map.on('load', (e) => {
-        $el.trigger(Events.MAPLOADED);
+        $el.trigger(Events.MAPAPILOADED);
       });
 
       ui.popup = new mapBoxGL.Popup({
@@ -58,10 +67,13 @@ const MapBoxDriver = (($) => {
       const ui = this;
 
       // create a DOM el for the marker
-      const $el = $(`<div id="Marker${ config['id'] }" data-id="${ config['id'] }" class="marker">${ config['icon'] }</div>`);
+      const $el = $(
+        `<div id="Marker${config['id']}" data-id="${config['id']}" class="marker">${config['icon']}</div>`,
+      );
 
       $el.on('click', (e) => {
-        ui.popup.setLngLat(crds)
+        ui.popup
+          .setLngLat(crds)
           .setHTML(config['content'])
           .addTo(ui.map);
 
@@ -76,9 +88,7 @@ const MapBoxDriver = (($) => {
       });
 
       // add marker to map
-      const marker = new mapBoxGL.Marker($el[0])
-        .setLngLat(crds)
-        .addTo(ui.map);
+      const marker = new mapBoxGL.Marker($el[0]).setLngLat(crds).addTo(ui.map);
 
       return marker;
     }
@@ -138,8 +148,8 @@ const MapBoxDriver = (($) => {
         ui.addMarker(crds, {
           id,
           content,
-          'icon': marker.icon,
-          'flyToMarker': config['flyToMarker'],
+          icon: marker.icon,
+          flyToMarker: config['flyToMarker'],
         });
 
         bounds.extend(crds);
@@ -158,7 +168,6 @@ const MapBoxDriver = (($) => {
 
         $(e.currentTarget).trigger(Events.MAPPOPUPCLOSE);
       });
-
     }
 
     getMap() {

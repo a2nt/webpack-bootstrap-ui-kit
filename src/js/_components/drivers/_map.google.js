@@ -6,7 +6,6 @@ import MarkerUI from './_map.google.marker';
 
 const GoogleMapsDriver = (($) => {
   class GoogleMapsDriver {
-
     getName() {
       return 'GoogleMapsDriver';
     }
@@ -23,7 +22,11 @@ const GoogleMapsDriver = (($) => {
         ui.googleApiLoaded();
       };
 
-      $('body').append(`<script async defer src="https://maps.googleapis.com/maps/api/js?key=${config['key']}&callback=init${ui.getName()}"></script>`);
+      $('body').append(
+        `<script async defer src="https://maps.googleapis.com/maps/api/js?key=${
+          config['key']
+        }&callback=init${ui.getName()}"></script>`,
+      );
     }
 
     googleApiLoaded() {
@@ -33,15 +36,17 @@ const GoogleMapsDriver = (($) => {
       const config = ui.config;
       const $mapDiv = $el.find('.mapAPI-map');
 
-      const zoom = (config['mapZoom'] ? config['mapZoom'] : 10);
-      const center = (config['center'] ? {
-        lat: config['center'][1],
-        lng: config['center'][0],
-      } : {
-        lat: 0,
-        lng: 0,
-      });
-      const style = (config['style'] ? config['style'] : null);
+      const zoom = config['mapZoom'] ? config['mapZoom'] : 10;
+      const center = config['center']
+        ? {
+          lat: config['center'][1],
+          lng: config['center'][0],
+        }
+        : {
+          lat: 0,
+          lng: 0,
+        };
+      const style = config['style'] ? config['style'] : null;
 
       console.log(`${ui.getName()}: API is loaded`);
       // init fontawesome icons
@@ -50,20 +55,20 @@ const GoogleMapsDriver = (($) => {
       ui.map = new google.maps.Map($mapDiv[0], {
         zoom,
         center,
-        'fullscreenControl': true,
-        'styles': style,
+        fullscreenControl: true,
+        styles: style,
       });
 
       ui.default_zoom = zoom;
 
       $mapDiv.addClass('mapboxgl-map');
 
-
       ui.popup = new ui.MarkerUI({
-        'map': ui.map,
-        'align': ['center', 'top'],
-        'divClass': 'mapboxgl-popup popup mapboxgl-popup-anchor-bottom d-none',
-        'html': '<div class="mapboxgl-popup-tip"></div><div class="mapboxgl-popup-content">' +
+        map: ui.map,
+        align: ['center', 'top'],
+        divClass: 'mapboxgl-popup popup mapboxgl-popup-anchor-bottom d-none',
+        html:
+          '<div class="mapboxgl-popup-tip"></div><div class="mapboxgl-popup-content">' +
           '<div class="mapboxgl-popup-close-button" type="button" aria-label="Close popup">×</div>' +
           '<div class="html"></div>' +
           '</div>',
@@ -71,8 +76,7 @@ const GoogleMapsDriver = (($) => {
 
       ui.geocoder = new google.maps.Geocoder();
 
-
-      $el.trigger(Events.MAPLOADED);
+      $el.trigger(Events.MAPAPILOADED);
     }
 
     addMarker(crds, config) {
@@ -83,13 +87,12 @@ const GoogleMapsDriver = (($) => {
         lng: crds[0],
       };
 
-
       const marker = new ui.MarkerUI({
-        'position': pos,
-        'map': ui.map,
-        'html': `<div class="mapboxgl-marker"><div id="Marker${ config['id'] }" data-id="${ config['id'] }" class="marker">${ config['icon'] }</div></div>`,
-        'onClick': () => {
-          const $el = $(`#Marker${ config['id'] }`);
+        position: pos,
+        map: ui.map,
+        html: `<div class="mapboxgl-marker"><div id="Marker${config['id']}" data-id="${config['id']}" class="marker">${config['icon']}</div></div>`,
+        onClick: () => {
+          const $el = $(`#Marker${config['id']}`);
           ui.showPopup(pos, config['content']);
 
           $el.trigger(Events.MAPMARKERCLICK);
@@ -97,7 +100,6 @@ const GoogleMapsDriver = (($) => {
       });
 
       ui.markers.push(marker);
-
 
       return marker;
     }
@@ -112,7 +114,7 @@ const GoogleMapsDriver = (($) => {
       }
 
       $popup.css({
-        'opacity': '0',
+        opacity: '0',
       });
       $popup.removeClass('d-none');
 
@@ -126,7 +128,7 @@ const GoogleMapsDriver = (($) => {
 
       $popup.css({
         'margin-left': '1rem',
-        'opacity': '1',
+        opacity: '1',
       });
     }
 
@@ -143,41 +145,51 @@ const GoogleMapsDriver = (($) => {
     geocode(addr, callback) {
       const ui = this;
 
-      ui.geocoder.geocode({
-        'address': addr,
-      }, (results, status) => {
-        if (status === 'OK') {
-          //results[0].geometry.location;
+      ui.geocoder.geocode(
+        {
+          address: addr,
+        },
+        (results, status) => {
+          if (status === 'OK') {
+            //results[0].geometry.location;
 
-          if (typeof callback === 'function') {
-            callback(results);
+            if (typeof callback === 'function') {
+              callback(results);
+            }
+
+            return results;
+          } else {
+            console.error(
+              `${ui.getName()}: Geocode was not successful for the following reason: ${status}`,
+            );
           }
-
-          return results;
-        } else {
-          console.error(`${ui.getName()}: Geocode was not successful for the following reason: ${status}`);
-        }
-      });
+        },
+      );
     }
 
     reverseGeocode(latLng, callback) {
       const ui = this;
 
-      ui.geocoder.geocode({
-        'location': latlng,
-      }, (results, status) => {
-        if (status === 'OK') {
-          //results[0].formatted_address;
+      ui.geocoder.geocode(
+        {
+          location: latlng,
+        },
+        (results, status) => {
+          if (status === 'OK') {
+            //results[0].formatted_address;
 
-          if (typeof callback === 'function') {
-            callback(results);
+            if (typeof callback === 'function') {
+              callback(results);
+            }
+
+            return results;
+          } else {
+            console.error(
+              `${ui.getName()}: Reverse Geocoding was not successful for the following reason: ${status}`,
+            );
           }
-
-          return results;
-        } else {
-          console.error(`${ui.getName()}: Reverse Geocoding was not successful for the following reason: ${status}`);
-        }
-      });
+        },
+      );
     }
 
     addGeoJson(config) {
@@ -196,8 +208,8 @@ const GoogleMapsDriver = (($) => {
         ui.addMarker(crds, {
           id,
           content,
-          'icon': marker.icon,
-          'flyToMarker': config['flyToMarker'],
+          icon: marker.icon,
+          flyToMarker: config['flyToMarker'],
         });
 
         bounds.extend({

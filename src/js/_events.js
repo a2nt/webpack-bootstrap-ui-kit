@@ -6,6 +6,7 @@ module.exports = {
   AJAX: 'ajax-load',
   LOADED: 'load',
   MAPLOADED: 'map-loaded',
+  MAPAPILOADED: 'map-api-loaded',
   MAPMARKERCLICK: 'map-marker-click',
   MAPPOPUPCLOSE: 'map-popup-close',
   SCROLL: 'scroll',

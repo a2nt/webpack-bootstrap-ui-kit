@@ -8,7 +8,6 @@ import '../../scss/_components/_ui.map.scss';
 import CONSTS from 'js/_consts';
 
 const MapAPI = (($) => {
-
   // Constants
   const NAME = 'jsMapAPI';
   const DATA_KEY = NAME;
@@ -29,16 +28,19 @@ const MapAPI = (($) => {
       const config = $el.data();
 
       config['center'] = [
-        (config['lng'] ? config['lng'] : $BODY.data('default-lng')),
-        (config['lat'] ? config['lat'] : $BODY.data('default-lat')),
+        config['lng'] ? config['lng'] : $BODY.data('default-lng'),
+        config['lat'] ? config['lat'] : $BODY.data('default-lat'),
       ];
 
       config['font-family'] = $BODY.css('font-family');
 
       console.log(`${NAME}: initializing ${Drv.getName()}...`);
-      ui.map = Drv.init($el, config);
+      Drv.init($el, config);
+      ui.drv = Drv;
 
-      $el.on(Events.MAPLOADED, (e) => {
+      $el.on(Events.MAPAPILOADED, (e) => {
+        ui.map = Drv.getMap();
+
         if (config['geojson']) {
           console.log(`${NAME}: setting up geocode data`);
           Drv.addGeoJson(config);
@@ -63,6 +65,8 @@ const MapAPI = (($) => {
 
       $el.data(DATA_KEY, ui);
       $el.addClass(`${NAME}-active`);
+
+      $el.trigger(Events.MAPLOADED);
     }
 
     // Public methods
