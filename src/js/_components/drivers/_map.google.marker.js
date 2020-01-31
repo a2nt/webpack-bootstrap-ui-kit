@@ -16,7 +16,7 @@ const Obj = {
         ui.onClick = options.onClick;
         ui.onMouseOver = options.onMouseOver;
 
-        ui.isBoolean = (arg) => {
+        ui.isBoolean = arg => {
           if (typeof arg === 'boolean') {
             return true;
           } else {
@@ -24,7 +24,7 @@ const Obj = {
           }
         };
 
-        ui.isNotUndefined = (arg) => {
+        ui.isNotUndefined = arg => {
           if (typeof arg !== 'undefined') {
             return true;
           } else {
@@ -32,7 +32,7 @@ const Obj = {
           }
         };
 
-        ui.hasContent = (arg) => {
+        ui.hasContent = arg => {
           if (arg.length > 0) {
             return true;
           } else {
@@ -40,7 +40,7 @@ const Obj = {
           }
         };
 
-        ui.isString = (arg) => {
+        ui.isString = arg => {
           if (typeof arg === 'string') {
             return true;
           } else {
@@ -48,7 +48,7 @@ const Obj = {
           }
         };
 
-        ui.isFunction = (arg) => {
+        ui.isFunction = arg => {
           if (typeof arg === 'function') {
             return true;
           } else {
@@ -97,13 +97,13 @@ const Obj = {
         ui.getPanes().overlayMouseTarget.appendChild(ui.div);
 
         // Add listeners to the element.
-        google.maps.event.addDomListener(ui.div, 'click', (event) => {
+        google.maps.event.addDomListener(ui.div, 'click', event => {
           google.maps.event.trigger(ui, 'click');
           if (ui.isFunction(ui.onClick)) ui.onClick();
           event.stopPropagation();
         });
 
-        google.maps.event.addDomListener(ui.div, 'mouseover', (event) => {
+        google.maps.event.addDomListener(ui.div, 'mouseover', event => {
           google.maps.event.trigger(ui, 'mouseover');
           if (ui.isFunction(ui.onMouseOver)) ui.onMouseOver();
           event.stopPropagation();
@@ -131,8 +131,6 @@ const Obj = {
         };
         const divWidth = $div.outerWidth();
         const divHeight = $div.outerHeight();
-        console.log(divWidth);
-        console.log(divHeight);
 
         switch (Array.isArray(ui.align) ? ui.align.join(' ') : '') {
           case 'left top':
