@@ -4,7 +4,7 @@ import $ from 'jquery';
 import Events from '../../_events';
 import MarkerUI from './_map.google.marker';
 
-const GoogleMapsDriver = (($) => {
+const GoogleMapsDriver = ($ => {
   class GoogleMapsDriver {
     getName() {
       return 'GoogleMapsDriver';
@@ -39,13 +39,13 @@ const GoogleMapsDriver = (($) => {
       const zoom = config['mapZoom'] ? config['mapZoom'] : 10;
       const center = config['center']
         ? {
-          lat: config['center'][1],
-          lng: config['center'][0],
-        }
+            lat: config['center'][1],
+            lng: config['center'][0],
+          }
         : {
-          lat: 0,
-          lng: 0,
-        };
+            lat: 0,
+            lng: 0,
+          };
       const style = config['style'] ? config['style'] : null;
 
       console.log(`${ui.getName()}: API is loaded`);
@@ -90,6 +90,7 @@ const GoogleMapsDriver = (($) => {
       const marker = new ui.MarkerUI({
         position: pos,
         map: ui.map,
+        align: ['center', 'top'],
         html: `<div class="mapboxgl-marker"><div id="Marker${config['id']}" data-id="${config['id']}" class="marker">${config['icon']}</div></div>`,
         onClick: () => {
           const $el = $(`#Marker${config['id']}`);
@@ -113,21 +114,25 @@ const GoogleMapsDriver = (($) => {
         ui.map.setZoom(18);
       }
 
+      // keep it hidden to render content
       $popup.css({
         opacity: '0',
       });
       $popup.removeClass('d-none');
 
-      ui.popup.setPosition(pos, ['center', 'top']);
       $popup.find('.mapboxgl-popup-content .html').html(content);
 
-      $popup.find('.mapboxgl-popup-close-button').on('click', (e) => {
+      $popup.find('.mapboxgl-popup-close-button').on('click', e => {
         e.preventDefault();
         ui.hidePopup();
       });
 
+      // set position when content was rendered
+      ui.popup.setPosition(pos, ['center', 'top']);
+
+      // display popup
       $popup.css({
-        'margin-left': '1rem',
+        'margin-top': '-1rem',
         opacity: '1',
       });
     }
@@ -200,7 +205,7 @@ const GoogleMapsDriver = (($) => {
       const bounds = new google.maps.LatLngBounds();
 
       // add markers to map
-      config['geojson'].features.forEach((marker) => {
+      config['geojson'].features.forEach(marker => {
         const id = marker.id;
         const crds = marker.geometry.coordinates;
         const content = marker.properties.content;

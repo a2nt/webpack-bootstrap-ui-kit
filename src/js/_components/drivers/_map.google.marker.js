@@ -7,18 +7,16 @@ const Obj = {
 
         ui.setMap(options.map);
         ui.position = options.position;
-        ui.html =
-          (options.html ?
-            options.html :
-            '<div class="mapboxgl-marker"><i class="marker-icon fas fa-map-marker-alt"></i></div>'
-          );
+        ui.html = options.html
+          ? options.html
+          : '<div class="mapboxgl-marker"><i class="marker-icon fas fa-map-marker-alt"></i></div>';
         ui.divClass = options.divClass;
         ui.align = options.align;
         ui.isDebugMode = options.debug;
         ui.onClick = options.onClick;
         ui.onMouseOver = options.onMouseOver;
 
-        ui.isBoolean = (arg) => {
+        ui.isBoolean = arg => {
           if (typeof arg === 'boolean') {
             return true;
           } else {
@@ -26,7 +24,7 @@ const Obj = {
           }
         };
 
-        ui.isNotUndefined = (arg) => {
+        ui.isNotUndefined = arg => {
           if (typeof arg !== 'undefined') {
             return true;
           } else {
@@ -34,7 +32,7 @@ const Obj = {
           }
         };
 
-        ui.hasContent = (arg) => {
+        ui.hasContent = arg => {
           if (arg.length > 0) {
             return true;
           } else {
@@ -42,7 +40,7 @@ const Obj = {
           }
         };
 
-        ui.isString = (arg) => {
+        ui.isString = arg => {
           if (typeof arg === 'string') {
             return true;
           } else {
@@ -50,7 +48,7 @@ const Obj = {
           }
         };
 
-        ui.isFunction = (arg) => {
+        ui.isFunction = arg => {
           if (typeof arg === 'function') {
             return true;
           } else {
@@ -86,12 +84,12 @@ const Obj = {
           ui.div.setAttribute(
             'style',
             'position: absolute;' +
-            'border: 5px dashed red;' +
-            'height: 150px;' +
-            'width: 150px;' +
-            'display: flex;' +
-            'justify-content: center;' +
-            'align-items: center;'
+              'border: 5px dashed red;' +
+              'height: 150px;' +
+              'width: 150px;' +
+              'display: flex;' +
+              'justify-content: center;' +
+              'align-items: center;',
           );
         }
 
@@ -99,13 +97,13 @@ const Obj = {
         ui.getPanes().overlayMouseTarget.appendChild(ui.div);
 
         // Add listeners to the element.
-        google.maps.event.addDomListener(ui.div, 'click', (event) => {
+        google.maps.event.addDomListener(ui.div, 'click', event => {
           google.maps.event.trigger(ui, 'click');
           if (ui.isFunction(ui.onClick)) ui.onClick();
           event.stopPropagation();
         });
 
-        google.maps.event.addDomListener(ui.div, 'mouseover', (event) => {
+        google.maps.event.addDomListener(ui.div, 'mouseover', event => {
           google.maps.event.trigger(ui, 'mouseover');
           if (ui.isFunction(ui.onMouseOver)) ui.onMouseOver();
           event.stopPropagation();
@@ -114,63 +112,74 @@ const Obj = {
 
       draw() {
         const ui = this;
+        let $div = $(ui.div).find(
+          '.mapboxgl-marker,.marker-pin,.mapboxgl-popup,.popup',
+        );
+        if (!$div.length) {
+          $div = $(ui.div);
+        }
 
         // Calculate position of div
-        var positionInPixels = ui.getProjection().fromLatLngToDivPixel(
-          new google.maps.LatLng(ui.position)
-        );
+        const positionInPixels = ui
+          .getProjection()
+          .fromLatLngToDivPixel(new google.maps.LatLng(ui.position));
 
         // Align HTML overlay relative to original position
-        var divOffset = {
+        const offset = {
           y: undefined,
           x: undefined,
         };
+        const divWidth = $div.outerWidth();
+        const divHeight = $div.outerHeight();
+        console.log(divWidth);
+        console.log(divHeight);
 
         switch (Array.isArray(ui.align) ? ui.align.join(' ') : '') {
           case 'left top':
-            divOffset.y = ui.div.offsetHeight;
-            divOffset.x = ui.div.offsetWidth;
+            offset.y = divHeight;
+            offset.x = divWidth;
             break;
           case 'left center':
-            divOffset.y = ui.div.offsetHeight / 2;
-            divOffset.x = ui.div.offsetWidth;
+            offset.y = divHeight / 2;
+            offset.x = divWidth;
             break;
           case 'left bottom':
-            divOffset.y = 0;
-            divOffset.x = ui.div.offsetWidth;
+            offset.y = 0;
+            offset.x = divWidth;
             break;
           case 'center top':
-            divOffset.y = ui.div.offsetHeight;
-            divOffset.x = ui.div.offsetWidth / 2;
+            offset.y = divHeight;
+            offset.x = divWidth / 2;
             break;
           case 'center center':
-            divOffset.y = ui.div.offsetHeight / 2;
-            divOffset.x = ui.div.offsetWidth / 2;
+            offset.y = divHeight / 2;
+            offset.x = divWidth / 2;
             break;
           case 'center bottom':
-            divOffset.y = 0;
-            divOffset.x = ui.div.offsetWidth / 2;
+            offset.y = 0;
+            offset.x = divWidth / 2;
             break;
           case 'right top':
-            divOffset.y = ui.div.offsetHeight;
-            divOffset.x = 0;
+            offset.y = divHeight;
+            offset.x = 0;
             break;
           case 'right center':
-            divOffset.y = ui.div.offsetHeight / 2;
-            divOffset.x = 0;
+            offset.y = divHeight / 2;
+            offset.x = 0;
             break;
           case 'right bottom':
-            divOffset.y = 0;
-            divOffset.x = 0;
+            offset.y = 0;
+            offset.x = 0;
             break;
           default:
-            divOffset.y = ui.div.offsetHeight / 2;
-            divOffset.x = ui.div.offsetWidth / 2;
+            offset.y = divHeight / 2;
+            offset.x = divWidth / 2;
+            break;
         }
 
         // Set position
-        ui.div.style.top = `${positionInPixels.y - divOffset.y  }px`;
-        ui.div.style.left = `${positionInPixels.x - divOffset.x  }px`;
+        ui.div.style.top = `${positionInPixels.y - offset.y}px`;
+        ui.div.style.left = `${positionInPixels.x - offset.x}px`;
       }
 
       getPosition() {
@@ -192,6 +201,6 @@ const Obj = {
     }
     return GoogleMapsHtmlOverlay;
   },
-}
+};
 
 export default Obj;
