@@ -15361,6 +15361,11 @@ textarea,
   padding-right: 0.5rem;
 }
 
+#ForgotPassword {
+  margin: 1rem 0;
+  width: 100%;
+}
+
 input.date[readonly],
 input.time[readonly] {
   background-color: #fff;

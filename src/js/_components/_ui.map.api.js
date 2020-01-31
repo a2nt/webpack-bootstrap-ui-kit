@@ -7,7 +7,7 @@ import '../../scss/_components/_ui.map.scss';
 
 import CONSTS from 'js/_consts';
 
-const MapAPI = ($ => {
+const MapAPI = (($) => {
   // Constants
   const NAME = 'jsMapAPI';
   const DATA_KEY = NAME;
@@ -42,7 +42,7 @@ const MapAPI = ($ => {
       Drv.init($el, config);
       ui.drv = Drv;
 
-      $el.on(Events.MAPAPILOADED, e => {
+      $el.on(Events.MAPAPILOADED, (e) => {
         ui.map = Drv.getMap();
 
         if (config['geojson']) {
@@ -51,7 +51,7 @@ const MapAPI = ($ => {
         } else if (config['address']) {
           console.log(config['address']);
           console.log(`${NAME}: setting up address marker`);
-          Drv.geocode(config['address'], result => {
+          Drv.geocode(config['address'], (result) => {
             console.log(result);
           });
         } else if (config['lat'] && config['lng']) {
