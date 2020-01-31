@@ -32,8 +32,8 @@
         padding: 10px 10px 15px;
         border-radius: 3px;
         background: $white;
-        width: 240px;
-        height: 5rem;
+        min-width: 240px;
+        min-height: 5rem;
         box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.4);
     }
 
