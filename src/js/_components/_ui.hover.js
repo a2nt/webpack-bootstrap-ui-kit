@@ -80,6 +80,7 @@ const HoverUI = (($) => {
         }
       });
 
+      $el.data(NAME, ui);
       $triger.addClass(`${NAME}-active`);
     }
 
@@ -155,6 +156,12 @@ const HoverUI = (($) => {
 
     const $el = $(e.currentTarget);
     const $parent = $el.parent('.dropdown');
+
+    // hide siblings
+    $parent
+      .parent()
+      .find('.dropdown, .dropdown-menu')
+      .removeClass('show');
 
     if ($parent.hasClass('show')) {
       $parent.removeClass('show');
