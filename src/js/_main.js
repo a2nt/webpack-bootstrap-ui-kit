@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 import $ from 'jquery';
 
@@ -15,8 +15,7 @@ import FormBasics from './_components/_ui.form.basics';
 import SmoothScroll from 'smooth-scroll';
 const smoothScroll = SmoothScroll();
 
-
-const MainUI = (($) => {
+const MainUI = ($ => {
   // Constants
   const W = window;
   const D = document;
@@ -48,7 +47,6 @@ const MainUI = (($) => {
     }
   });
 
-
   // update online/offline state
   const updateOnlineStatus = () => {
     if (!navigator.onLine) {
@@ -63,13 +61,21 @@ const MainUI = (($) => {
   };
 
   if (typeof navigator.onLine !== 'undefined') {
-    W.addEventListener('offline', () => {
-      updateOnlineStatus();
-    }, false);
+    W.addEventListener(
+      'offline',
+      () => {
+        updateOnlineStatus();
+      },
+      false,
+    );
 
-    W.addEventListener('online', () => {
-      updateOnlineStatus();
-    }, false);
+    W.addEventListener(
+      'online',
+      () => {
+        updateOnlineStatus();
+      },
+      false,
+    );
 
     W.addEventListener('load', () => {
       updateOnlineStatus();
@@ -78,17 +84,14 @@ const MainUI = (($) => {
 
   // scrollTo
   const ScrollTo = (trigger, selector) => {
-    smoothScroll.animateScroll(
-      D.querySelector(selector),
-      trigger, {
-        speed: 500,
-        offset: -20,
-        //easing: 'easeInOutCubic',
-        // Callback API
-        //before: (anchor, toggle) => {}, // Callback to run before scroll
-        //`after: (anchor, toggle) => {} // Callback to run after scroll
-      }
-    );
+    smoothScroll.animateScroll(D.querySelector(selector), trigger, {
+      speed: 500,
+      offset: -20,
+      //easing: 'easeInOutCubic',
+      // Callback API
+      //before: (anchor, toggle) => {}, // Callback to run before scroll
+      //`after: (anchor, toggle) => {} // Callback to run after scroll
+    });
   };
 
   // session ping
@@ -118,9 +121,9 @@ const MainUI = (($) => {
   }, 300000); // 5 min in ms
 
   W.URLDetails = {
-    'base': $('base').attr('href'),
-    'relative': '/',
-    'hash': '',
+    base: $('base').attr('href'),
+    relative: '/',
+    hash: '',
   };
 
   class MainUI {
@@ -171,7 +174,7 @@ const MainUI = (($) => {
       //
 
       // scroll links
-      $('.js-scrollTo').on('click', (e) => {
+      $('.js-scrollTo').on('click', e => {
         e.preventDefault();
         const el = e.currentTarget;
         const $el = $(e.currentTarget);
@@ -181,23 +184,26 @@ const MainUI = (($) => {
 
       // load external fonts
       if ($('[data-extfont]').length) {
-        $.getScript('//ajax.googleapis.com/ajax/libs/webfont/1/webfont.js', () => {
-          const fonts = [];
+        $.getScript(
+          '//ajax.googleapis.com/ajax/libs/webfont/1/webfont.js',
+          () => {
+            const fonts = [];
 
-          $('[data-extfont]').each((i, el) => {
-            fonts[i] = $(el).attr('data-extfont');
-          });
+            $('[data-extfont]').each((i, el) => {
+              fonts[i] = $(el).attr('data-extfont');
+            });
 
-          W.WebFont.load({
-            google: {
-              families: fonts,
-            },
-          });
-        });
+            W.WebFont.load({
+              google: {
+                families: fonts,
+              },
+            });
+          },
+        );
       }
 
       // data-set links
-      $('[data-set-target]').on('click', (e) => {
+      $('[data-set-target]').on('click', e => {
         const $el = $(e.currentTarget);
         const $target = $($el.data('set-target'));
 
@@ -261,14 +267,17 @@ const MainUI = (($) => {
       const hash = location.indexOf('#');
 
       W.URLDetails.relative = location.split('#')[0];
-      W.URLDetails.hash = (hash >= 0) ? location.substr(location.indexOf('#')) : '';
+      W.URLDetails.hash =
+        hash >= 0 ? location.substr(location.indexOf('#')) : '';
     }
 
     // show site-wide alert
     static alert(msg, cls) {
       $SiteWideMessage.fadeOut('fast');
 
-      $SiteWideMessage.html(`<div class="page-alert"><div class="alert alert-${cls}"><i class="close" data-dismiss="alert">&times;</i>${msg}</div></div>`);
+      $SiteWideMessage.html(
+        `<div class="page-alert"><div class="alert alert-${cls}"><i class="close" data-dismiss="alert">&times;</i>${msg}</div></div>`,
+      );
       $SiteWideMessage.find('.page-alert').alert();
 
       $SiteWideMessage.find('.close[data-dismiss="alert"]').click(() => {
@@ -294,10 +303,7 @@ const MainUI = (($) => {
         });
       }
 
-      if (
-        $AlertNotify.length &&
-        typeof $AlertNotify[0].stop !== 'undefined'
-      ) {
+      if ($AlertNotify.length && typeof $AlertNotify[0].stop !== 'undefined') {
         $AlertNotify[0].stop();
       }
 
@@ -330,6 +336,26 @@ const MainUI = (($) => {
             $el.removeClass('loading');
 
             $el.trigger('image-lazy-loaded');
+          });
+        }
+      });
+
+      // load lazy backgrounds
+      $Body.find('[data-lazy-bg]').each((i, el) => {
+        const $el = $(el);
+        const lazySrc = $el.data('lazy-bg');
+
+        if (lazySrc && lazySrc.length) {
+          $imgLazyUrls.push(lazySrc);
+          $el.addClass('loading');
+
+          AjaxUI.preload([lazySrc]).then(() => {
+            $el.css({ 'background-image': lazySrc });
+
+            $el.addClass('loaded');
+            $el.removeClass('loading');
+
+            $el.trigger('image-lazy-bg-loaded');
           });
         }
       });
