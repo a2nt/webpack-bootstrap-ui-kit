@@ -350,7 +350,7 @@ const MainUI = (($) => {
           $el.addClass('loading');
 
           AjaxUI.preload([lazySrc]).then(() => {
-            $el.css({ 'background-image': lazySrc });
+            $el.css({ 'background-image': `url(${  lazySrc  })` });
 
             $el.addClass('loaded');
             $el.removeClass('loading');
