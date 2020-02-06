@@ -15,7 +15,7 @@ import FormBasics from './_components/_ui.form.basics';
 import SmoothScroll from 'smooth-scroll';
 const smoothScroll = SmoothScroll();
 
-const MainUI = (($) => {
+const MainUI = ($ => {
   // Constants
   const W = window;
   const D = document;
@@ -174,7 +174,7 @@ const MainUI = (($) => {
       //
 
       // scroll links
-      $('.js-scrollTo').on('click', (e) => {
+      $('.js-scrollTo').on('click', e => {
         e.preventDefault();
         const el = e.currentTarget;
         const $el = $(e.currentTarget);
@@ -203,7 +203,7 @@ const MainUI = (($) => {
       }
 
       // data-set links
-      $('[data-set-target]').on('click', (e) => {
+      $('[data-set-target]').on('click', e => {
         const $el = $(e.currentTarget);
         const $target = $($el.data('set-target'));
 
@@ -224,6 +224,18 @@ const MainUI = (($) => {
 
         $el.trigger(Events.SET_TARGET_UPDATE);
         $target.closest('form').trigger(Events.SET_TARGET_UPDATE);
+      });
+
+      // emulate links
+      $('.a[data-href]').on('click', e => {
+        const $el = $(e.currentTarget);
+        const href = $el.data('href');
+        if (!href.length) {
+          console.warn('Missing data-href');
+          console.warn($el);
+        }
+
+        W.location.assign(href);
       });
 
       // hide spinner
@@ -350,7 +362,7 @@ const MainUI = (($) => {
           $el.addClass('loading');
 
           AjaxUI.preload([lazySrc]).then(() => {
-            $el.css({ 'background-image': `url(${  lazySrc  })` });
+            $el.css({ 'background-image': `url(${lazySrc})` });
 
             $el.addClass('loaded');
             $el.removeClass('loading');
