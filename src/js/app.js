@@ -79,6 +79,9 @@ import '@a2nt/meta-lightbox/src/js/index';
 import './_main';
 import './_layout';
 
+// Google Analytics
+import './_components/drivers/_google.track.external.links';
+
 function importAll(r) {
   return r.keys().map(r);
 }
