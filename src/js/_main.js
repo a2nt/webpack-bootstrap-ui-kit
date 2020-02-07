@@ -253,12 +253,14 @@ const MainUI = (($) => {
 
     static detectBootstrapScreenSize() {
       const $el = $('<div class="env-test"></div>');
-      const envs = [...Consts.ENVS];
-
+      let envs = [...Consts.ENVS];
       $Body.append($el);
-      let curEnv = envs.shift();
 
-      for (const env of envs.reverse()) {
+      let curEnv = envs.shift();
+      envs = envs.reverse();
+
+      for (let i = 0; i < envs.length; ++i) {
+        const env = envs[i];
         $el.addClass(`d-${env}-none`);
         if ($el.is(':hidden')) {
           curEnv = env;
