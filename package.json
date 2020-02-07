@@ -1,6 +1,6 @@
 {
   "name": "@a2nt/ss-bootstrap-ui-webpack-boilerplate",
-  "version": "1.7.3",
+  "version": "1.7.4",
   "author": "Tony Air <tony@twma.pro>",
   "license": "MIT",
   "description": "This UI Kit allows you to build Bootstrap 4 webapp with some extra UI features. It's easy to extend and easy to convert HTML templates to CMS templates.",
@@ -48,7 +48,7 @@
     "jquery-hoverintent": "^1.10.1",
     "jquery-zoom": "^1.7.21",
     "jquery.appear": "^1.0.1",
-    "jquery.inputmask": "^3.3.4",
+    "inputmask": "^5.0.3",
     "laravel-mix": "^4.1.2",
     "mapbox-gl": "^1.6.1",
     "offcanvas-bootstrap": "^2.5.2",
@@ -65,13 +65,12 @@
   "devDependencies": {
     "@a2nt/image-sprite-webpack-plugin": "^0.2.5",
     "autoprefixer": "^7.2.5",
-    "babel-core": "^6.26.3",
+    "@babel/core": "^7.8.4",
+    "@babel/plugin-proposal-object-rest-spread": "^7.8.3",
+    "@babel/plugin-transform-react-jsx": "*",
+    "@babel/preset-env": "^7.8.4",
     "babel-eslint": "^8.2.6",
-    "babel-loader": "^7.1.2",
-    "babel-plugin-transform-react-jsx": "^6.24.1",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-2": "^6.24.1",
+    "babel-loader": "^8.0.6",
     "browser-sync": "^2.24.5",
     "browser-sync-webpack-plugin": "^2.2.2",
     "copy-webpack-plugin": "^4.6.0",
@@ -124,7 +123,8 @@
     "registry": "https://npm.pkg.github.com/"
   },
   "browserslist": [
-    "defaults"
+    "defaults",
+    "ie>=11"
   ],
   "stylelint": {
     "rules": {

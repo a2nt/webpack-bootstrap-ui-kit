@@ -2,11 +2,12 @@ import $ from 'jquery';
 
 //import 'bootstrap-select/dist/js/bootstrap-select';
 //$.fn.selectpicker.Constructor.BootstrapVersion = '4';
-import 'select2/dist/js/select2.js';
+import select2 from 'select2/dist/js/select2.js';
+import Inputmask from 'inputmask';
 
-import select2 from 'jquery.inputmask/dist/jquery.inputmask.bundle';
+//import select2 from 'jquery.inputmask/dist/jquery.inputmask.bundle';
 
-import Events from "../_events";
+import Events from '../_events';
 import SpinnerUI from './_ui.spinner';
 import FormFieldUI from './_ui.form.fields';
 
@@ -19,7 +20,6 @@ const FormBasics = (($) => {
   const D = document;
 
   class FormBasics {
-
     constructor(el) {
       const ui = this;
       const $el = $(el);
@@ -27,7 +27,7 @@ const FormBasics = (($) => {
       ui._el = el;
       $el.data(DATA_KEY, this);
 
-      $('[data-inputmask]').inputmask();
+      //$('[data-inputmask]').inputmask();
 
       const $fields = $el.find(Events.FORM_FIELDS);
       // init fields ui

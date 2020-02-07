@@ -67,21 +67,12 @@
  * Licensed under the MIT license */
 
 /*!
- * hoverIntent v1.10.1 // 2019.10.05 // jQuery v1.7.0+
- * http://briancherne.github.io/jquery-hoverIntent/
- *
- * You may use hoverIntent under the terms of the MIT license. Basically that
- * means you are free to use hoverIntent as long as this header is left intact.
- * Copyright 2007-2019 Brian Cherne
+ * dist/inputmask
+ * https://github.com/RobinHerbots/Inputmask
+ * Copyright (c) 2010 - 2020 Robin Herbots
+ * Licensed under the MIT license
+ * Version: 5.0.3
  */
-
-/*!
-* jquery.inputmask.bundle.js
-* https://github.com/RobinHerbots/jquery.inputmask
-* Copyright (c) 2010 - 2016 Robin Herbots
-* Licensed under the MIT license (http://www.opensource.org/licenses/mit-license.php)
-* Version: 3.3.4
-*/
 
 /**!
  * @fileOverview Kickass library to create and place poppers near their reference elements.
@@ -108,10 +99,18 @@
  * SOFTWARE.
  */
 
-/**
- * @license almond 0.3.3 Copyright jQuery Foundation and other contributors.
- * Released under MIT license, http://github.com/requirejs/almond/LICENSE
+/*!
+ * Select2 4.0.12
+ * https://select2.github.io
+ *
+ * Released under the MIT license
+ * https://github.com/select2/select2/blob/master/LICENSE.md
  */
+
+/**
+         * @license almond 0.3.3 Copyright jQuery Foundation and other contributors.
+         * Released under MIT license, http://github.com/requirejs/almond/LICENSE
+         */
 
 /*! smooth-scroll v14.2.1 | (c) 2018 Chris Ferdinandi | MIT License | http://github.com/cferdinandi/smooth-scroll */
 
