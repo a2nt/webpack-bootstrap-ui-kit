@@ -5,7 +5,7 @@ import 'jquery-hammerjs/jquery.hammer';
 
 import Events from '../_events';
 
-const CarouselUI = ($ => {
+const CarouselUI = (($) => {
   // Constants
   const NAME = 'CarouselUI';
 
@@ -87,22 +87,22 @@ const CarouselUI = ($ => {
           }
         });
 
-        $e.find('.carousel-control-prev').on('click', e => {
+        $e.find('.carousel-control-prev').on('click', (e) => {
           e.preventDefault();
           $e.carousel('prev');
         });
 
-        $e.find('.carousel-control-next').on('click', e => {
+        $e.find('.carousel-control-next').on('click', (e) => {
           e.preventDefault();
           $e.carousel('next');
         });
 
         // init touch swipes
-        $e.hammer().bind(Events.SWIPELEFT, e => {
+        $e.hammer().bind(Events.SWIPELEFT, (e) => {
           $(event.target).carousel('next');
         });
 
-        $e.hammer().bind(Events.SWIPERIGHT, e => {
+        $e.hammer().bind(Events.SWIPERIGHT, (e) => {
           $(event.target).carousel('prev');
         });
 
