@@ -5,7 +5,7 @@ import 'jquery-hammerjs/jquery.hammer';
 
 import Events from '../_events';
 
-const CarouselUI = (($) => {
+const CarouselUI = ($ => {
   // Constants
   const NAME = 'CarouselUI';
 
@@ -13,7 +13,7 @@ const CarouselUI = (($) => {
     // Static methods
 
     static each(callback) {
-      $('.js-carousel').each((i, e) => {
+      $(`js${NAME}, .js-carousel`).each((i, e) => {
         callback(i, $(e));
       });
     }
@@ -37,36 +37,49 @@ const CarouselUI = (($) => {
         // create carousel-controls
         if ($e.data('indicators')) {
           const $indicators = $('<ol class="carousel-indicators"></ol>');
-          $indicators.append(`<li data-target="#${  id  }" data-slide-to="0" class="active"></li>`);
+          $indicators.append(
+            `<li data-target="#${id}" data-slide-to="0" class="active"></li>`,
+          );
           for (let i = 1; i < count; i++) {
-            $indicators.append(`<li data-target="#${  id  }" data-slide-to="${  i  }"></li>`);
+            $indicators.append(
+              `<li data-target="#${id}" data-slide-to="${i}"></li>`,
+            );
           }
           $e.prepend($indicators);
         }
 
         // create arrows
         if ($e.data('arrows')) {
-          $e.prepend(`<i class="carousel-control-prev" data-target="#${  id  }" role="button" data-slide="prev"><i class="fas fa-chevron-left" aria-hidden="true"></i><i class="sr-only">Previous</i></i>`);
-          $e.prepend(`<i class="carousel-control-next" data-target="#${  id  }" role="button" data-slide="next"><i class="fas fa-chevron-right" aria-hidden="true"></i><i class="sr-only">Next</i></i>`);
+          $e.prepend(
+            `<i class="carousel-control-prev" data-target="#${id}" role="button" data-slide="prev"><i class="fas fa-chevron-left" aria-hidden="true"></i><i class="sr-only">Previous</i></i>`,
+          );
+          $e.prepend(
+            `<i class="carousel-control-next" data-target="#${id}" role="button" data-slide="next"><i class="fas fa-chevron-right" aria-hidden="true"></i><i class="sr-only">Next</i></i>`,
+          );
         }
 
         // init carousel
         $e.carousel();
 
-        const $youtubeSlides = $e.find('iframe[src^="https://www.youtube.com/embed/"]');
+        const $youtubeSlides = $e.find(
+          'iframe[src^="https://www.youtube.com/embed/"]',
+        );
 
         $e.on('slide.bs.carousel', () => {
           if ($youtubeSlides.length) {
             $youtubeSlides.each((i, e) => {
               const $e = $(e);
               try {
-                $e.data('player', new YT.Player(e, {
-                  events: {
-                    'onReady': () => {
-                      $e.data('player').pauseVideo();
+                $e.data(
+                  'player',
+                  new YT.Player(e, {
+                    events: {
+                      onReady: () => {
+                        $e.data('player').pauseVideo();
+                      },
                     },
-                  },
-                }));
+                  }),
+                );
 
                 $e.data('player').pauseVideo();
               } catch (e) {}
@@ -74,28 +87,31 @@ const CarouselUI = (($) => {
           }
         });
 
-        $e.find('.carousel-control-prev').on('click', (e) => {
+        $e.find('.carousel-control-prev').on('click', e => {
           e.preventDefault();
           $e.carousel('prev');
         });
 
-        $e.find('.carousel-control-next').on('click', (e) => {
+        $e.find('.carousel-control-next').on('click', e => {
           e.preventDefault();
           $e.carousel('next');
         });
 
         // init touch swipes
-        $e.hammer().bind('swipeleft panleft', (e) => {
+        $e.hammer().bind(Events.SWIPELEFT, e => {
           $(event.target).carousel('next');
         });
 
-        $e.hammer().bind('swiperight panright', (e) => {
+        $e.hammer().bind(Events.SWIPERIGHT, e => {
           $(event.target).carousel('prev');
         });
 
         /*$e.find('.carousel-item').hammer().bind('tap', (event) => {
           $(event.target).carousel('next');
         });*/
+
+        $e.addClass(`js${NAME}-active`);
+        $e.trigger(Events.CAROUSEL_READY);
       });
     }
 
@@ -106,7 +122,7 @@ const CarouselUI = (($) => {
     }
   }
 
-  $(window).on(`${Events.AJAX} ${Events.LOADED}`, () => {
+  $(window).on(`${Events.LODEDANDREADY}`, () => {
     CarouselUI.init();
   });
 

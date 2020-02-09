@@ -4,7 +4,7 @@ import $ from 'jquery';
 
 import Events from './_events';
 
-const LayoutUI = (($) => {
+const LayoutUI = ($ => {
   // Constants
   const W = window;
   const D = document;
@@ -27,6 +27,9 @@ const LayoutUI = (($) => {
 
       console.log(`Initializing: ${NAME}`);
       // your custom UI
+
+      // Fire further js when layout is ready
+      $(W).trigger(Events.LODEDANDREADY);
 
       // Custom fonts
       $Body.append(

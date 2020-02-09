@@ -15,7 +15,7 @@ import FormBasics from './_components/_ui.form.basics';
 import SmoothScroll from 'smooth-scroll';
 const smoothScroll = SmoothScroll();
 
-const MainUI = (($) => {
+const MainUI = ($ => {
   // Constants
   const W = window;
   const D = document;
@@ -39,11 +39,11 @@ const MainUI = (($) => {
     if (D.visibilityState === HiddenName) {
       console.log('Tab: hidden');
       $Body.addClass('is-hidden');
-      $Body.trigger('tabHidden');
+      $Body.trigger(Events.TABHIDDEN);
     } else {
       console.log('Tab: focused');
       $Body.removeClass('is-hidden');
-      $Body.trigger('tabFocused');
+      $Body.trigger(Events.TABFOCUSED);
     }
   });
 
@@ -52,11 +52,11 @@ const MainUI = (($) => {
     if (!navigator.onLine) {
       console.log('Tab: offline');
       $Body.addClass('is-offline');
-      $Body.trigger('offline');
+      $Body.trigger(Events.OFFLINE);
     } else {
       console.log('Tab: online');
       $Body.removeClass('is-offline');
-      $Body.trigger('online');
+      $Body.trigger(Events.ONLINE);
     }
   };
 
@@ -174,7 +174,7 @@ const MainUI = (($) => {
       //
 
       // scroll links
-      $('.js-scrollTo').on('click', (e) => {
+      $('.js-scrollTo').on('click', e => {
         e.preventDefault();
         const el = e.currentTarget;
         const $el = $(e.currentTarget);
@@ -203,7 +203,7 @@ const MainUI = (($) => {
       }
 
       // data-set links
-      $('[data-set-target]').on('click', (e) => {
+      $('[data-set-target]').on('click', e => {
         const $el = $(e.currentTarget);
         const $target = $($el.data('set-target'));
 
@@ -227,7 +227,7 @@ const MainUI = (($) => {
       });
 
       // emulate links
-      $('.a[data-href]').on('click', (e) => {
+      $('.a[data-href]').on('click', e => {
         const $el = $(e.currentTarget);
         const href = $el.data('href');
         if (!href.length) {
@@ -306,7 +306,7 @@ const MainUI = (($) => {
         $AlertNotify[0].play();
       }
 
-      $(W).trigger('alert-appeared');
+      $(W).trigger(`${Events.ALLERTAPPEARED}`);
     }
 
     // hide site-wide alert
@@ -321,7 +321,7 @@ const MainUI = (($) => {
         $AlertNotify[0].stop();
       }
 
-      $(W).trigger('alert-removed');
+      $(W).trigger(`${Events.ALLERTREMOVED}`);
     }
 
     // load all images
@@ -349,7 +349,7 @@ const MainUI = (($) => {
             $el.addClass('loaded');
             $el.removeClass('loading');
 
-            $el.trigger('image-lazy-loaded');
+            $el.trigger(`${Events.LAZYIMAGEREADY}`);
           });
         }
       });
@@ -369,7 +369,7 @@ const MainUI = (($) => {
             $el.addClass('loaded');
             $el.removeClass('loading');
 
-            $el.trigger('image-lazy-bg-loaded');
+            $el.trigger(`${Events.LAZYIMAGEREADY}`);
           });
         }
       });
@@ -382,7 +382,7 @@ const MainUI = (($) => {
         AjaxUI.preload($imgLazyUrls).then(() => {
           console.log('All images are loaded!');
 
-          $(W).trigger('images-lazy-loaded');
+          $(W).trigger(`${Events.LAZYIMAGESREADY}`);
         });
       });
     }
