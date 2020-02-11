@@ -2,6 +2,8 @@
 $grid-gutter-element-height: 2rem !default;
 
 .jsMultiSlider {
+	position: relative;
+	display: flex;
 	margin-bottom: $grid-gutter-element-height/2;
 
 	&-active {

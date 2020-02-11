@@ -213,7 +213,7 @@ const MultiSlider = (($) => {
   };
 
   // auto-apply
-  $(W).on(`${Events.AJAX} ${Events.LOADED}`, () => {
+  $(W).on(Events.LODEDANDREADY, () => {
     console.log(`Initializing: ${NAME}`);
 
     $(`.${NAME}`).jsMultiSlider();
