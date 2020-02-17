@@ -14357,6 +14357,7 @@ a.text-dark:focus {
 }*/
 
 .carousel-slide {
+  min-height: 4rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -14384,7 +14385,7 @@ a.text-dark:focus {
 
 .carousel-control-prev,
 .carousel-control-next {
-  z-index: 2;
+  z-index: 11;
   font-size: 3rem;
   text-shadow: 1px 1px #000;
 }
