@@ -15,7 +15,7 @@ import FormBasics from './_components/_ui.form.basics';
 import SmoothScroll from 'smooth-scroll';
 const smoothScroll = SmoothScroll();
 
-const MainUI = (($) => {
+const MainUI = ($ => {
   // Constants
   const W = window;
   const D = document;
@@ -126,6 +126,8 @@ const MainUI = (($) => {
     hash: '',
   };
 
+  W.IsTouchScreen = 'ontouchstart' in window || navigator.msMaxTouchPoints;
+
   class MainUI {
     // Static methods
 
@@ -174,7 +176,7 @@ const MainUI = (($) => {
       //
 
       // scroll links
-      $('.js-scrollTo').on('click', (e) => {
+      $('.js-scrollTo').on('click', e => {
         e.preventDefault();
         const el = e.currentTarget;
         const $el = $(e.currentTarget);
@@ -203,7 +205,7 @@ const MainUI = (($) => {
       }
 
       // data-set links
-      $('[data-set-target]').on('click', (e) => {
+      $('[data-set-target]').on('click', e => {
         const $el = $(e.currentTarget);
         const $target = $($el.data('set-target'));
 
@@ -227,7 +229,7 @@ const MainUI = (($) => {
       });
 
       // emulate links
-      $('.a[data-href]').on('click', (e) => {
+      $('.a[data-href]').on('click', e => {
         const $el = $(e.currentTarget);
         const href = $el.data('href');
         if (!href.length) {
