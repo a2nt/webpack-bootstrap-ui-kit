@@ -126,7 +126,47 @@ const MainUI = ($ => {
     hash: '',
   };
 
-  W.IsTouchScreen = 'ontouchstart' in window || navigator.msMaxTouchPoints;
+  let eventFired = false;
+  const setTouchScreen = bool => {
+    if (W.IsTouchScreen === bool || eventFired) {
+      return;
+    }
+
+    eventFired = true;
+
+    W.IsTouchScreen = bool;
+    $.support.touch = W.IsTouchScreen;
+
+    if (bool) {
+      console.log(`${NAME}: Touch screen enabled`);
+    } else {
+      console.log(`${NAME}: Touch screen disabled`);
+    }
+
+    // prevent firing touch and mouse events together
+    setTimeout(() => {
+      eventFired = false;
+    }, 200);
+  };
+
+  setTouchScreen('ontouchstart' in window || navigator.msMaxTouchPoints > 0);
+
+  // disable touch on mouse events
+  /*D.addEventListener('mousemove', () => {
+    setTouchScreen(false);
+  });
+
+  D.addEventListener('mousedown', () => {
+    setTouchScreen(false);
+  });*/
+
+  // enable touch screen on touch events
+  D.addEventListener('touchmove', () => {
+    setTouchScreen(true);
+  });
+  D.addEventListener('touchstart', () => {
+    setTouchScreen(true);
+  });
 
   class MainUI {
     // Static methods
