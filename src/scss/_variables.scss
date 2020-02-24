@@ -36,6 +36,9 @@ $grid-gutter-height: 2rem !default;
 $grid-gutter-xs-width: $grid-gutter-width / 2 !default;
 $grid-gutter-element-height: $grid-gutter-height * 2 !default;
 
+$field-gutter-height: $grid-gutter-height / 2 !default;
+$col-block-gutter-height: $grid-gutter-height / 4 !default;
+
 $footer-size: 18.5rem !default;
 $footer-bar-size: 2.5rem !default;
 

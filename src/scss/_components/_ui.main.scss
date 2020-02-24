@@ -112,12 +112,12 @@ textarea,
 }
 
 .btn-toolbar {
-    margin-top: $grid-gutter-height / 2;
+    margin-top: $field-gutter-height;
 }
 
 .field {
     position: relative;
-    margin: ($grid-gutter-height / 2) 0;
+    margin: $field-gutter-height 0;
 
     &.composite {
         margin-top: 0;
@@ -173,8 +173,8 @@ textarea,
 
 // element col paddings
 .col-block {
-    padding-top: $grid-gutter-height / 4;
-    padding-bottom: $grid-gutter-height / 4;
+    padding-top: $col-block-gutter-height;
+    padding-bottom: $col-block-gutter-height;
 }
 
 // rewrite btn opacity on hover
