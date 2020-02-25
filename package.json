@@ -1,6 +1,6 @@
 {
   "name": "@a2nt/ss-bootstrap-ui-webpack-boilerplate",
-  "version": "1.8.1",
+  "version": "1.8.2",
   "author": "Tony Air <tony@twma.pro>",
   "license": "MIT",
   "description": "This UI Kit allows you to build Bootstrap 4 webapp with some extra UI features. It's easy to extend and easy to convert HTML templates to CMS templates.",
@@ -85,6 +85,7 @@
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "favicons-webpack-plugin": "^1.0.2",
     "file-loader": "^1.1.5",
+    "hard-source-webpack-plugin": "^0.13.1",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^4.0.0-beta.11",
     "imagemin-gifsicle": "^7.0.0",
@@ -92,6 +93,7 @@
     "imagemin-optipng": "^7.1.0",
     "imagemin-svgo": "^7.0.0",
     "imagemin-webpack": "^5.1.1",
+    "loglevel": "^1.6.7",
     "lost": "^8.3.1",
     "material-design-color": "^2.3.2",
     "node-sass": "^4.13.1",

@@ -7,6 +7,8 @@ const path = require('path');
 const filesystem = require('fs');
 
 const autoprefixer = require('autoprefixer');
+
+const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const TerserPlugin = require('terser-webpack-plugin');
@@ -20,6 +22,7 @@ const plugins = [
       NODE_ENV: JSON.stringify('production'),
     },
   }),
+  new HardSourceWebpackPlugin(),
   new webpack.LoaderOptionsPlugin({
     minimize: COMPRESS,
     debug: false,
@@ -240,10 +243,12 @@ module.exports = {
               ['@babel/transform-react-jsx'],
               ['react-hot-loader/babel'],
             ],
+            cacheDirectory: true,
+            cacheCompression: false,
           },
         },
       },
-      {
+      /*{
         test: /\.tsx?$/,
         use: 'ts-loader',
         exclude: /node_modules/,
@@ -251,7 +256,7 @@ module.exports = {
       {
         test: /\.coffee?$/,
         use: 'coffee-loader',
-      },
+      },*/
       {
         test: /\.worker\.js$/,
         use: {
