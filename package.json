@@ -22,7 +22,10 @@
     "lint:js": "eslint ./src --config .eslintrc",
     "lint:sass": "sass-lint ./src --config .sasslintrc -v -q",
     "prebuild": "yarn lint:fix && rimraf dist",
-    "prepare": "yarn lint:fix && yarn build"
+    "prepare": "yarn lint:fix && yarn build",
+    "prunecaches": "rimraf ./node_modules/.cache/",
+    "postinstall": "npm run prunecaches",
+    "postuninstall": "npm run prunecaches"
   },
   "dependencies": {
     "@a2nt/meta-lightbox": "^1.2.2",
