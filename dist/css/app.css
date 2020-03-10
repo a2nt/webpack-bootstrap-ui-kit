@@ -15367,6 +15367,16 @@ textarea,
   width: 100%;
 }
 
+#BetterNavigator {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  #BetterNavigator {
+    display: block;
+  }
+}
+
 input.date[readonly],
 input.time[readonly] {
   background-color: #fff;
