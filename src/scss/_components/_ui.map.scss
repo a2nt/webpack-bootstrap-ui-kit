@@ -2,22 +2,34 @@
 @import '../_animations';
 
 //@import "~mapbox-gl/src/css/mapbox-gl.css";
+$map-height: 30rem !default;
+
+$map-marker-color: $primary !default;
+$map-marker-size: 30px !default;
+
+$map-popup-font-size: 0.8rem !default;
+$map-popup-width: 16rem !default;
+$map-popup-height: 7rem !default;
+$map-popup-bg: $white !default;
+$map-popup-color: $body-color !default;
 
 .mapAPI-map {
-    height: 30rem;
-    margin-bottom: 1rem;
+    height: $map-height;
+    margin-bottom: $grid-gutter-element-height;
 }
 
 .mapboxgl {
     &-popup {
+        width: $map-popup-width;
+        height: $map-popup-height;
+        font-size: $map-popup-font-size;
+        line-height: 1.2em;
         position: absolute;
         top: 0;
         left: 0;
         display: flex;
         pointer-events: none;
-        font-size: 0.8rem;
         z-index: 4;
-        line-height: 20px;
     }
 
     &-popup-anchor-bottom,
@@ -27,14 +39,15 @@
     }
 
     &-popup-content {
+        min-width: $map-popup-width;
+        background: $map-popup-bg;
+        color: $map-popup-color;
         position: relative;
         pointer-events: auto;
-        padding: 10px 10px 15px;
-        border-radius: 3px;
-        background: $white;
-        min-width: 240px;
+        padding: 0.8rem;
+        border-radius: 0.25rem;
         min-height: 5rem;
-        box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.4);
+        box-shadow: 0 0.1rem 0.8rem 0 rgba(0, 0, 0, 0.4);
     }
 
     &-popup-close-button {
@@ -43,7 +56,7 @@
         top: 0;
         font-size: 2rem;
         padding: 0.5rem;
-        border-top-right-radius: 3px;
+        border-top-right-radius: 0.25rem;
 
         &:hover,
         &:focus {
@@ -55,23 +68,23 @@
     &-popup-tip {
         width: 0;
         height: 0;
-        border: 10px solid transparent;
+        border: 0.8rem solid transparent;
         z-index: 1;
     }
 
     &-popup-anchor-bottom &-popup-tip {
+        border-top-color: $map-popup-bg;
         align-self: center;
         border-bottom: none;
-        border-top-color: #fff;
     }
 
     &-marker {
-        width: 30px;
-        height: 30px;
-        font-size: 30px;
+        width: $map-marker-size;
+        height: $map-marker-size;
+        font-size: $map-marker-size;
+        color: $map-marker-color;
         cursor: pointer;
         text-align: center;
-        color: $primary;
 
         .marker-icon,
         .fas,
