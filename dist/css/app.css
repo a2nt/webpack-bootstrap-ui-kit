@@ -14452,7 +14452,7 @@ a.text-dark:focus {
 .meta-lightbox-content .meta-lightbox-zoom-wrapper:after {
   color: #fff;
   font: normal normal normal 14px/1 FontAwesome;
-  content: "\f00e";
+  content: '\f00e';
   position: absolute;
   right: 1em;
   bottom: 1em;
@@ -14624,7 +14624,7 @@ a.text-dark:focus {
 
 .meta-lightbox-theme-default .meta-lightbox-nav {
   top: 10%;
-  width: 8%;
+  width: 20%;
   height: 80%;
   background-repeat: no-repeat;
   background-position: 50% 50%;
@@ -14633,6 +14633,12 @@ a.text-dark:focus {
   font-size: 3em;
   text-decoration: none;
   text-shadow: 1px 1px 0 #000;
+}
+
+@media (min-width: 576px) {
+  .meta-lightbox-theme-default .meta-lightbox-nav {
+    width: 8%;
+  }
 }
 
 .meta-lightbox-theme-default .meta-lightbox-nav .fa {
@@ -14677,8 +14683,8 @@ a.text-dark:focus {
 .meta-lightbox-theme-default .meta-lightbox-inline {
   background: #fff;
   padding: 2em;
-  -webkit-box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.4);
-          box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.4);
+  -webkit-box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.6);
+          box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.6);
 }
 
 @media (max-width: 576px) {
@@ -14696,7 +14702,7 @@ a.text-dark:focus {
   }
 
   .meta-lightbox-theme-default .meta-lightbox-nav .fa {
-    margin-left: -.4em;
+    margin-left: -0.4em;
   }
 
   .meta-lightbox-theme-default .meta-lightbox-close {
@@ -16331,7 +16337,7 @@ body {
 .meta-lightbox-content .meta-lightbox-zoom-wrapper:after {
   color: #fff;
   font: normal normal normal 14px/1 FontAwesome;
-  content: "\f00e";
+  content: '\f00e';
   position: absolute;
   right: 1em;
   bottom: 1em;
@@ -16503,7 +16509,7 @@ body {
 
 .meta-lightbox-theme-default .meta-lightbox-nav {
   top: 10%;
-  width: 8%;
+  width: 20%;
   height: 80%;
   background-repeat: no-repeat;
   background-position: 50% 50%;
@@ -16512,6 +16518,12 @@ body {
   font-size: 3em;
   text-decoration: none;
   text-shadow: 1px 1px 0 #000;
+}
+
+@media (min-width: 576px) {
+  .meta-lightbox-theme-default .meta-lightbox-nav {
+    width: 8%;
+  }
 }
 
 .meta-lightbox-theme-default .meta-lightbox-nav .fa {
@@ -16556,8 +16568,8 @@ body {
 .meta-lightbox-theme-default .meta-lightbox-inline {
   background: #fff;
   padding: 2em;
-  -webkit-box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.4);
-          box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.4);
+  -webkit-box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.6);
+          box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.6);
 }
 
 @media (max-width: 576px) {
@@ -16575,7 +16587,7 @@ body {
   }
 
   .meta-lightbox-theme-default .meta-lightbox-nav .fa {
-    margin-left: -.4em;
+    margin-left: -0.4em;
   }
 
   .meta-lightbox-theme-default .meta-lightbox-close {
