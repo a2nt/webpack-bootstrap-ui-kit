@@ -383,3 +383,12 @@ textarea,
         display: block;
     }
 }
+
+.alert-offline {
+    display: none;
+}
+body.is-offline {
+    .alert-offline {
+        display: block;
+    }
+}
