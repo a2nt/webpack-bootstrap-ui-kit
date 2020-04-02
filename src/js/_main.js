@@ -49,6 +49,9 @@ const MainUI = (($) => {
 
   // update online/offline state
   const updateOnlineStatus = () => {
+    if (typeof navigator.onLine === 'undefined') {
+      return;
+    }
     if (!navigator.onLine) {
       console.log('Tab: offline');
       $Body.addClass('is-offline');
@@ -60,27 +63,29 @@ const MainUI = (($) => {
     }
   };
 
-  if (typeof navigator.onLine !== 'undefined') {
-    W.addEventListener(
-      'offline',
-      () => {
-        updateOnlineStatus();
-      },
-      false,
-    );
-
-    W.addEventListener(
-      'online',
-      () => {
-        updateOnlineStatus();
-      },
-      false,
-    );
-
-    W.addEventListener('load', () => {
+  W.addEventListener(
+    'offline',
+    () => {
       updateOnlineStatus();
-    });
-  }
+    },
+    false,
+  );
+
+  W.addEventListener(
+    'online',
+    () => {
+      updateOnlineStatus();
+    },
+    false,
+  );
+
+  W.addEventListener('load', () => {
+    updateOnlineStatus();
+  });
+
+  $(W).on(`${Events.AJAX}`, () => {
+    updateOnlineStatus();
+  });
 
   // scrollTo
   const ScrollTo = (trigger, selector) => {
@@ -324,7 +329,7 @@ const MainUI = (($) => {
 
       W.URLDetails.relative = location.split('#')[0];
       W.URLDetails.hash =
-        hash >= 0 ? location.substr(location.indexOf('#')) : '';
+				hash >= 0 ? location.substr(location.indexOf('#')) : '';
     }
 
     // show site-wide alert
@@ -359,7 +364,10 @@ const MainUI = (($) => {
         });
       }
 
-      if ($AlertNotify.length && typeof $AlertNotify[0].stop !== 'undefined') {
+      if (
+        $AlertNotify.length &&
+				typeof $AlertNotify[0].stop !== 'undefined'
+      ) {
         $AlertNotify[0].stop();
       }
 

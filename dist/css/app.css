@@ -15383,6 +15383,14 @@ textarea,
   }
 }
 
+.alert-offline {
+  display: none;
+}
+
+body.is-offline .alert-offline {
+  display: block;
+}
+
 input.date[readonly],
 input.time[readonly] {
   background-color: #fff;

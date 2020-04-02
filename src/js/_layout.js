@@ -4,7 +4,7 @@ import $ from 'jquery';
 
 import Events from './_events';
 
-const LayoutUI = ($ => {
+const LayoutUI = (($) => {
   // Constants
   const W = window;
   const D = document;
