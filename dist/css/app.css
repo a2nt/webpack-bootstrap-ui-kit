@@ -16153,6 +16153,13 @@ h6,
   top: -0.25em;
 }
 
+.typography div,
+.typography table,
+.typography p,
+.typography tr,
+.typography th,
+.typography td,
+.typography img,
 .typography iframe {
   max-width: 100%;
 }
