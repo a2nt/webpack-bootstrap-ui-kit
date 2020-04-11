@@ -15498,6 +15498,10 @@ input.time[readonly] {
  * Basic styles for silverstripe-elemental
  */
 
+.blog-post-info {
+  position: relative;
+}
+
 .element {
   position: relative;
   padding-top: 4rem;
@@ -15561,6 +15565,18 @@ input.time[readonly] {
 .site__elements__sliderelement .container-xxxl {
   padding-left: 0;
   padding-right: 0;
+}
+
+.element .elemental-area .element .container,
+.element .elemental-area .element .container-fluid,
+.element .elemental-area .element .container-sm,
+.element .elemental-area .element .container-md,
+.element .elemental-area .element .container-lg,
+.element .elemental-area .element .container-xl,
+.element .elemental-area .element .container-xxl,
+.element .elemental-area .element .container-xxxl {
+  padding: 0;
+  width: auto;
 }
 
 h1,
