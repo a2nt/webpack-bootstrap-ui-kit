@@ -1,6 +1,9 @@
 /*
  * Basic styles for silverstripe-elemental
  */
+.blog-post-info {
+    position: relative;
+}
 
 // add top/bottom paddings for basic elements
 .element {
@@ -60,5 +63,17 @@
     .container-fluid {
         padding-left: 0;
         padding-right: 0;
+    }
+}
+
+.element {
+    .elemental-area {
+        .element {
+            .container,
+            .container-fluid {
+                padding: 0;
+                width: auto;
+            }
+        }
     }
 }

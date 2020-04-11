@@ -121,5 +121,9 @@ th,
 td,
 img,
 iframe {
-    max-width: 100%;
+    max-width: 100% !important;
+    @media (max-width: map-get($grid-breakpoints, 'sm') - 1) {
+        display: block;
+        width: 100% !important;
+    }
 }

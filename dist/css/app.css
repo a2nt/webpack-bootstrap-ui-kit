@@ -16161,7 +16161,21 @@ h6,
 .typography td,
 .typography img,
 .typography iframe {
-  max-width: 100%;
+  max-width: 100% !important;
+}
+
+@media (max-width: 575px) {
+  .typography div,
+  .typography table,
+  .typography p,
+  .typography tr,
+  .typography th,
+  .typography td,
+  .typography img,
+  .typography iframe {
+    display: block;
+    width: 100% !important;
+  }
 }
 
 .typography > *:last-child {
