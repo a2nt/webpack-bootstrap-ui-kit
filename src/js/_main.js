@@ -329,7 +329,7 @@ const MainUI = (($) => {
 
       W.URLDetails.relative = location.split('#')[0];
       W.URLDetails.hash =
-				hash >= 0 ? location.substr(location.indexOf('#')) : '';
+        hash >= 0 ? location.substr(location.indexOf('#')) : '';
     }
 
     // show site-wide alert
@@ -364,10 +364,7 @@ const MainUI = (($) => {
         });
       }
 
-      if (
-        $AlertNotify.length &&
-				typeof $AlertNotify[0].stop !== 'undefined'
-      ) {
+      if ($AlertNotify.length && typeof $AlertNotify[0].stop !== 'undefined') {
         $AlertNotify[0].stop();
       }
 
@@ -458,6 +455,14 @@ const MainUI = (($) => {
     });
   });
 
+  // hide spinner on target _blank
+  $('[target="_blank"]').on('click submit', () => {
+    setTimeout(() => {
+      Spinner.hide(() => {
+        $Body.addClass('loaded');
+      });
+    }, 1000);
+  });
   W.MainUI = MainUI;
 
   return MainUI;

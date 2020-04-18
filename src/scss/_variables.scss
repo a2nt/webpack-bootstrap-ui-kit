@@ -1,22 +1,26 @@
 @import '_mixings';
 @import '_colors';
 
+// screen size - 32px (ex. 1400 - 32 = 1368)
 $grid-breakpoints: (
 	xs: 0,
 	sm: 576px,
 	md: 768px,
 	lg: 992px,
-	xl: 1200px,
-	xxl: 1390px,
-	xxxl: 1590px
+	xl: 1168px,
+	xxl: 1368px,
+	xxxl: 1568px,
+	xxxxl: 1868px
 ) !default;
+// screen size - (32px * 2) (ex. 1400 - 64 = 1336)
 $container-max-widths: (
 	sm: 540px,
 	md: 720px,
 	lg: 960px,
-	xl: 1140px,
-	xxl: 1330px,
-	xxxl: 1560px
+	xl: 1136px,
+	xxl: 1336px,
+	xxxl: 1536px,
+	xxxxl: 1836px
 ) !default;
 
 $font-family-base: 'Lato', sans-serif !default;
