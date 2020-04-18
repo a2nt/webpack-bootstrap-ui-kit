@@ -456,7 +456,7 @@ const MainUI = (($) => {
   });
 
   // hide spinner on target _blank
-  $('[target="_blank"]').on('click submit', () => {
+  $('[target="_blank"],.external').on('click submit', () => {
     setTimeout(() => {
       Spinner.hide(() => {
         $Body.addClass('loaded');
