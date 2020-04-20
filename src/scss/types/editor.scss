@@ -2,6 +2,8 @@
 
 @import '~bootstrap/scss/tables';
 
+$typography-breakpoint: map-get($grid-breakpoints, 'sm') - 1 !default;
+
 img,
 .captionImage,
 .image,
@@ -122,8 +124,23 @@ td,
 img,
 iframe {
     max-width: 100% !important;
-    @media (max-width: map-get($grid-breakpoints, 'sm') - 1) {
+    @media (max-width: $typography-breakpoint) {
         display: block;
         width: 100% !important;
+        border: 0 !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+}
+
+div,
+table,
+p,
+tr,
+th,
+td,
+img {
+    @media (max-width: $typography-breakpoint) {
+        height: auto !important;
     }
 }

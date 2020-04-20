@@ -15567,7 +15567,8 @@ a.text-dark:focus {
   text-shadow: 1px 1px #000;
 }
 
-.meta-lightbox-overlay {
+.meta-lightbox-overlay,
+.lightbox-overlay-custom {
   position: fixed;
   top: 0;
   left: 0;
@@ -15581,7 +15582,8 @@ a.text-dark:focus {
           box-sizing: border-box;
 }
 
-.meta-lightbox-overlay.meta-lightbox-open {
+.meta-lightbox-overlay.meta-lightbox-open,
+.meta-lightbox-open.lightbox-overlay-custom {
   visibility: visible;
   opacity: 1;
 }
@@ -15688,6 +15690,7 @@ a.text-dark:focus {
  **********************************************/
 
 .meta-lightbox-notouch .meta-lightbox-effect-fade,
+.meta-lightbox-notouch .lightbox-overlay-custom,
 .meta-lightbox-notouch .meta-lightbox-effect-fadeScale,
 .meta-lightbox-notouch .meta-lightbox-effect-slideLeft,
 .meta-lightbox-notouch .meta-lightbox-effect-slideRight,
@@ -15773,12 +15776,14 @@ a.text-dark:focus {
           transform: translateZ(0);
 }
 
-.meta-lightbox-theme-default.meta-lightbox-overlay {
+.meta-lightbox-theme-default.meta-lightbox-overlay,
+.lightbox-overlay-custom {
   background: #666;
   background: rgba(0, 0, 0, 0.6);
 }
 
-.meta-lightbox-theme-default .meta-lightbox-nav {
+.meta-lightbox-theme-default .meta-lightbox-nav,
+.lightbox-overlay-custom .meta-lightbox-nav {
   top: 10%;
   width: 20%;
   height: 80%;
@@ -15792,12 +15797,14 @@ a.text-dark:focus {
 }
 
 @media (min-width: 576px) {
-  .meta-lightbox-theme-default .meta-lightbox-nav {
+  .meta-lightbox-theme-default .meta-lightbox-nav,
+  .lightbox-overlay-custom .meta-lightbox-nav {
     width: 8%;
   }
 }
 
-.meta-lightbox-theme-default .meta-lightbox-nav .fa {
+.meta-lightbox-theme-default .meta-lightbox-nav .fa,
+.lightbox-overlay-custom .meta-lightbox-nav .fa {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -15805,13 +15812,15 @@ a.text-dark:focus {
   margin-left: -0.2em;
 }
 
-.meta-lightbox-theme-default .meta-lightbox-nav:hover {
+.meta-lightbox-theme-default .meta-lightbox-nav:hover,
+.lightbox-overlay-custom .meta-lightbox-nav:hover {
   color: #0a6ebd;
   opacity: 1;
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-.meta-lightbox-theme-default .meta-lightbox-close {
+.meta-lightbox-theme-default .meta-lightbox-close,
+.lightbox-overlay-custom .meta-lightbox-close {
   display: block;
   opacity: 0.5;
   color: #fff;
@@ -15823,20 +15832,24 @@ a.text-dark:focus {
   height: 1.2em;
 }
 
-.meta-lightbox-theme-default .meta-lightbox-close:focus {
+.meta-lightbox-theme-default .meta-lightbox-close:focus,
+.lightbox-overlay-custom .meta-lightbox-close:focus {
   color: #0a6ebd;
   opacity: 1;
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-.meta-lightbox-theme-default .meta-lightbox-title {
+.meta-lightbox-theme-default .meta-lightbox-title,
+.lightbox-overlay-custom .meta-lightbox-title {
   background: #000;
   color: #fff;
   padding: 7px 15px;
 }
 
 .meta-lightbox-theme-default .meta-lightbox-ajax,
-.meta-lightbox-theme-default .meta-lightbox-inline {
+.lightbox-overlay-custom .meta-lightbox-ajax,
+.meta-lightbox-theme-default .meta-lightbox-inline,
+.lightbox-overlay-custom .meta-lightbox-inline {
   background: #fff;
   padding: 2em;
   -webkit-box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.6);
@@ -15851,17 +15864,20 @@ a.text-dark:focus {
     right: 5px;
   }
 
-  .meta-lightbox-theme-default .meta-lightbox-nav {
+  .meta-lightbox-theme-default .meta-lightbox-nav,
+  .lightbox-overlay-custom .meta-lightbox-nav {
     height: 100%;
     opacity: 1;
     font-size: 2em;
   }
 
-  .meta-lightbox-theme-default .meta-lightbox-nav .fa {
+  .meta-lightbox-theme-default .meta-lightbox-nav .fa,
+  .lightbox-overlay-custom .meta-lightbox-nav .fa {
     margin-left: -0.4em;
   }
 
-  .meta-lightbox-theme-default .meta-lightbox-close {
+  .meta-lightbox-theme-default .meta-lightbox-close,
+  .lightbox-overlay-custom .meta-lightbox-close {
     opacity: 1;
   }
 }
@@ -17365,6 +17381,21 @@ h6,
   .typography iframe {
     display: block;
     width: 100% !important;
+    border: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
+@media (max-width: 575px) {
+  .typography div,
+  .typography table,
+  .typography p,
+  .typography tr,
+  .typography th,
+  .typography td,
+  .typography img {
+    height: auto !important;
   }
 }
 
