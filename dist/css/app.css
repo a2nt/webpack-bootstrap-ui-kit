@@ -15567,6 +15567,11 @@ a.text-dark:focus {
   text-shadow: 1px 1px #000;
 }
 
+/*
+ * bootstrap includes
+ * keep it at the end
+ */
+
 .meta-lightbox-overlay,
 .lightbox-overlay-custom {
   position: fixed;
