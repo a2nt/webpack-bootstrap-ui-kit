@@ -1,6 +1,8 @@
 /*
  * some basic styles
  */
+
+@import '../_variables';
 @import '../_animations';
 
 .pulse {
@@ -153,24 +155,6 @@ textarea,
         width: 100%;
     }
 }
-
-.message {
-    @extend .alert;
-
-    @extend .alert-info;
-
-    display: block;
-    margin: 0.5rem 0;
-}
-
-.message.validation,
-.message.required,
-.message.error {
-    @extend .alert;
-
-    @extend .alert-danger;
-}
-
 // element col paddings
 .col-block {
     padding-top: $col-block-gutter-height;
@@ -187,10 +171,27 @@ textarea,
 }
 
 // SS-messages
+.alert,
+.alert-info,
+.alert-danger {
+    display: block;
+}
+
 .message {
     @extend .alert;
 
     @extend .alert-info;
+
+    display: block;
+    margin: 0.5rem 0;
+}
+
+.message.validation,
+.message.required,
+.message.error {
+    @extend .alert;
+
+    @extend .alert-danger;
 }
 
 .message.required,

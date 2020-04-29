@@ -4,6 +4,10 @@
 
 $typography-breakpoint: map-get($grid-breakpoints, 'sm') - 1 !default;
 
+a {
+    color: $link-color;
+}
+
 img,
 .captionImage,
 .image,
