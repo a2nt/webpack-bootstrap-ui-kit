@@ -1,21 +1,46 @@
-h1, h2, h3, h4, h5, h6,
-.h1, .h2, .h3, .h4, .h5, .h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
     color: $dark;
 }
 
 .bg-dark {
-    h1, h2, h3, h4, h5, h6,
-    .h1, .h2, .h3, .h4, .h5, .h6,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    .h1,
+    .h2,
+    .h3,
+    .h4,
+    .h5,
+    .h6,
     .typography,
     a {
         color: $white;
     }
 }
 
+ul:last-child,
+p:last-child {
+    margin-bottom: 0;
+}
+
 .typography {
     @include clearfix;
 
-    @import "./types/editor";
+    @import './types/editor';
 
     > *:last-child {
         margin-bottom: 0;

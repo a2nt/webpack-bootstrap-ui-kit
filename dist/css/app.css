@@ -16839,6 +16839,11 @@ h6,
   color: #fff;
 }
 
+ul:last-child,
+p:last-child {
+  margin-bottom: 0;
+}
+
 .typography {
   /*
  * bootstrap includes
