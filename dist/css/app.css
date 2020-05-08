@@ -16588,6 +16588,10 @@ body.is-offline .alert-offline {
   display: block;
 }
 
+[aria-expanded='true'] .fa-bars:before {
+  content: '\f00d';
+}
+
 input.date[readonly],
 input.time[readonly] {
   background-color: #fff;
