@@ -393,3 +393,11 @@ body.is-offline {
         display: block;
     }
 }
+
+[aria-expanded='true'] {
+    .fa-bars {
+        &:before {
+            content: '\f00d';
+        }
+    }
+}
