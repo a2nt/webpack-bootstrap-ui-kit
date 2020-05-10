@@ -17334,6 +17334,14 @@ p:last-child {
   height: 100% !important;
 }
 
+.typography .captionImage img {
+  margin-bottom: 0.5rem;
+}
+
+.typography .captionImage .caption {
+  font-size: 0.8rem;
+}
+
 .typography .text-left {
   text-align: left;
 }
