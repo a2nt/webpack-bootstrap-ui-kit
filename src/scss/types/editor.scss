@@ -52,6 +52,15 @@ img,
     }
 }
 
+.captionImage {
+    img {
+        margin-bottom: 0.5rem;
+    }
+    .caption {
+        font-size: 0.8rem;
+    }
+}
+
 .text-left {
     text-align: left;
 }
