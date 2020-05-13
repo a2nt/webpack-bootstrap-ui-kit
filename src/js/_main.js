@@ -17,148 +17,148 @@ import SmoothScroll from 'smooth-scroll';
 const smoothScroll = SmoothScroll();
 
 const MainUI = (($) => {
-  // Constants
-  const W = window;
-  const D = document;
-  const $Body = $('body');
+	// Constants
+	const W = window;
+	const D = document;
+	const $Body = $('body');
 
-  const NAME = 'MainUI';
+	const NAME = 'MainUI';
 
-  // get browser locale
-  //const Locale = $('html').attr('lang').substring(0, 2);
+	// get browser locale
+	//const Locale = $('html').attr('lang').substring(0, 2);
 
-  const $AlertNotify = $('#AlertNotify');
-  const $SiteWideMessage = $('#SiteWideMessage');
+	const $AlertNotify = $('#AlertNotify');
+	const $SiteWideMessage = $('#SiteWideMessage');
 
-  // get browser window visibility preferences
-  // Opera 12.10, Firefox >=18, Chrome >=31, IE11
-  const HiddenName = 'hidden';
-  const VisibilityChangeEvent = 'visibilitychange';
+	// get browser window visibility preferences
+	// Opera 12.10, Firefox >=18, Chrome >=31, IE11
+	const HiddenName = 'hidden';
+	const VisibilityChangeEvent = 'visibilitychange';
 
-  // update visibility state
-  D.addEventListener(VisibilityChangeEvent, () => {
-    if (D.visibilityState === HiddenName) {
-      console.log('Tab: hidden');
-      $Body.addClass('is-hidden');
-      $Body.trigger(Events.TABHIDDEN);
-    } else {
-      console.log('Tab: focused');
-      $Body.removeClass('is-hidden');
-      $Body.trigger(Events.TABFOCUSED);
-    }
-  });
+	// update visibility state
+	D.addEventListener(VisibilityChangeEvent, () => {
+		if (D.visibilityState === HiddenName) {
+			console.log('Tab: hidden');
+			$Body.addClass('is-hidden');
+			$Body.trigger(Events.TABHIDDEN);
+		} else {
+			console.log('Tab: focused');
+			$Body.removeClass('is-hidden');
+			$Body.trigger(Events.TABFOCUSED);
+		}
+	});
 
-  // update online/offline state
-  const updateOnlineStatus = () => {
-    if (typeof navigator.onLine === 'undefined') {
-      return;
-    }
-    if (!navigator.onLine) {
-      console.log('Tab: offline');
-      $Body.addClass('is-offline');
-      $Body.trigger(Events.OFFLINE);
-    } else {
-      console.log('Tab: online');
-      $Body.removeClass('is-offline');
-      $Body.trigger(Events.ONLINE);
-    }
-  };
+	// update online/offline state
+	const updateOnlineStatus = () => {
+		if (typeof navigator.onLine === 'undefined') {
+			return;
+		}
+		if (!navigator.onLine) {
+			console.log('Tab: offline');
+			$Body.addClass('is-offline');
+			$Body.trigger(Events.OFFLINE);
+		} else {
+			console.log('Tab: online');
+			$Body.removeClass('is-offline');
+			$Body.trigger(Events.ONLINE);
+		}
+	};
 
-  W.addEventListener(
-    'offline',
-    () => {
-      updateOnlineStatus();
-    },
-    false,
-  );
+	W.addEventListener(
+		'offline',
+		() => {
+			updateOnlineStatus();
+		},
+		false,
+	);
 
-  W.addEventListener(
-    'online',
-    () => {
-      updateOnlineStatus();
-    },
-    false,
-  );
+	W.addEventListener(
+		'online',
+		() => {
+			updateOnlineStatus();
+		},
+		false,
+	);
 
-  W.addEventListener('load', () => {
-    updateOnlineStatus();
-  });
+	W.addEventListener('load', () => {
+		updateOnlineStatus();
+	});
 
-  $(W).on(`${Events.AJAX}`, () => {
-    updateOnlineStatus();
-  });
+	$(W).on(`${Events.AJAX}`, () => {
+		updateOnlineStatus();
+	});
 
-  // scrollTo
-  const ScrollTo = (trigger, selector) => {
-    smoothScroll.animateScroll(D.querySelector(selector), trigger, {
-      speed: 500,
-      offset: -20,
-      //easing: 'easeInOutCubic',
-      // Callback API
-      //before: (anchor, toggle) => {}, // Callback to run before scroll
-      //`after: (anchor, toggle) => {} // Callback to run after scroll
-    });
-  };
+	// scrollTo
+	const ScrollTo = (trigger, selector) => {
+		smoothScroll.animateScroll(D.querySelector(selector), trigger, {
+			speed: 500,
+			offset: -20,
+			//easing: 'easeInOutCubic',
+			// Callback API
+			//before: (anchor, toggle) => {}, // Callback to run before scroll
+			//`after: (anchor, toggle) => {} // Callback to run after scroll
+		});
+	};
 
-  // session ping
-  const pingInterval = setInterval(() => {
-    if ($Body.hasClass('is-offline')) {
-      return;
-    }
+	// session ping
+	const pingInterval = setInterval(() => {
+		if ($Body.hasClass('is-offline')) {
+			return;
+		}
 
-    $.ajax({
-      sync: false,
-      async: true,
-      cache: false,
-      url: '/Security/ping',
-      global: false,
-      type: 'POST',
-      complete(data, datastatus) {
-        if (datastatus !== 'success') {
-          clearInterval(pingInterval);
+		$.ajax({
+			sync: false,
+			async: true,
+			cache: false,
+			url: '/Security/ping',
+			global: false,
+			type: 'POST',
+			complete(data, datastatus) {
+				if (datastatus !== 'success') {
+					clearInterval(pingInterval);
 
-          $Body.addClass('is-offline');
-          //W.location.reload(false);
-        } else {
-          $Body.removeClass('is-offline');
-        }
-      },
-    });
-  }, 300000); // 5 min in ms
+					$Body.addClass('is-offline');
+					//W.location.reload(false);
+				} else {
+					$Body.removeClass('is-offline');
+				}
+			},
+		});
+	}, 300000); // 5 min in ms
 
-  W.URLDetails = {
-    base: $('base').attr('href'),
-    relative: '/',
-    hash: '',
-  };
+	W.URLDetails = {
+		base: $('base').attr('href'),
+		relative: '/',
+		hash: '',
+	};
 
-  let eventFired = false;
-  const setTouchScreen = (bool) => {
-    if (W.IsTouchScreen === bool || eventFired) {
-      return;
-    }
+	let eventFired = false;
+	const setTouchScreen = (bool) => {
+		if (W.IsTouchScreen === bool || eventFired) {
+			return;
+		}
 
-    eventFired = true;
+		eventFired = true;
 
-    W.IsTouchScreen = bool;
-    $.support.touch = W.IsTouchScreen;
+		W.IsTouchScreen = bool;
+		$.support.touch = W.IsTouchScreen;
 
-    if (bool) {
-      console.log(`${NAME}: Touch screen enabled`);
-    } else {
-      console.log(`${NAME}: Touch screen disabled`);
-    }
+		if (bool) {
+			console.log(`${NAME}: Touch screen enabled`);
+		} else {
+			console.log(`${NAME}: Touch screen disabled`);
+		}
 
-    // prevent firing touch and mouse events together
-    setTimeout(() => {
-      eventFired = false;
-    }, 200);
-  };
+		// prevent firing touch and mouse events together
+		setTimeout(() => {
+			eventFired = false;
+		}, 200);
+	};
 
-  setTouchScreen('ontouchstart' in window || navigator.msMaxTouchPoints > 0);
+	setTouchScreen('ontouchstart' in window || navigator.msMaxTouchPoints > 0);
 
-  // disable touch on mouse events
-  /*D.addEventListener('mousemove', () => {
+	// disable touch on mouse events
+	/*D.addEventListener('mousemove', () => {
     setTouchScreen(false);
   });
 
@@ -166,40 +166,40 @@ const MainUI = (($) => {
     setTouchScreen(false);
   });*/
 
-  // enable touch screen on touch events
-  D.addEventListener('touchmove', () => {
-    setTouchScreen(true);
-  });
-  D.addEventListener('touchstart', () => {
-    setTouchScreen(true);
-  });
+	// enable touch screen on touch events
+	D.addEventListener('touchmove', () => {
+		setTouchScreen(true);
+	});
+	D.addEventListener('touchstart', () => {
+		setTouchScreen(true);
+	});
 
-  class MainUI {
-    // Static methods
+	class MainUI {
+		// Static methods
 
-    static init() {
-      this.dispose();
+		static init() {
+			this.dispose();
 
-      console.log(`Initializing: ${NAME}`);
+			console.log(`Initializing: ${NAME}`);
 
-      // update location details
-      this.updateLocation();
+			// update location details
+			this.updateLocation();
 
-      // mark available offline areas
-      if ('caches' in W) {
-        $('a.offline').addClass('offline-available');
-      }
+			// mark available offline areas
+			if ('caches' in W) {
+				$('a.offline').addClass('offline-available');
+			}
 
-      this.loadImages();
+			this.loadImages();
 
-      // detect bootstrap screen size
-      this.detectBootstrapScreenSize();
+			// detect bootstrap screen size
+			this.detectBootstrapScreenSize();
 
-      // mark external links
-      $('a.external,a[rel="external"]').attr('target', '_blank');
+			// mark external links
+			$('a.external,a[rel="external"]').attr('target', '_blank');
 
-      // show encoded emails
-      /*$(D).find('.obm').each(() => {
+			// show encoded emails
+			/*$(D).find('.obm').each(() => {
               if ($(this).attr('data-val') !== undefined) {
                 const email = $(this).attr('data-val').split('')
                   .reverse()
@@ -219,254 +219,275 @@ const MainUI = (($) => {
                 }
               }
             });*/
-      //
+			//
 
-      // scroll links
-      $('.js-scrollTo').on('click', (e) => {
-        e.preventDefault();
-        const el = e.currentTarget;
-        const $el = $(e.currentTarget);
+			// scroll links
+			$('.js-scrollTo').on('click', (e) => {
+				e.preventDefault();
+				const el = e.currentTarget;
+				const $el = $(e.currentTarget);
 
-        ScrollTo(el, $el.attr('data-target'));
-      });
+				ScrollTo(el, $el.attr('data-target'));
+			});
 
-      // load external fonts
-      if ($('[data-extfont]').length) {
-        $.getScript(
-          '//ajax.googleapis.com/ajax/libs/webfont/1/webfont.js',
-          () => {
-            const fonts = [];
+			// load external fonts
+			if ($('[data-extfont]').length) {
+				$.getScript(
+					'//ajax.googleapis.com/ajax/libs/webfont/1/webfont.js',
+					() => {
+						const fonts = [];
 
-            $('[data-extfont]').each((i, el) => {
-              fonts[i] = $(el).attr('data-extfont');
-            });
+						$('[data-extfont]').each((i, el) => {
+							fonts[i] = $(el).attr('data-extfont');
+						});
 
-            W.WebFont.load({
-              google: {
-                families: fonts,
-              },
-            });
-          },
-        );
-      }
+						W.WebFont.load({
+							google: {
+								families: fonts,
+							},
+						});
+					},
+				);
+			}
 
-      // data-set links
-      $('[data-set-target]').on('click', (e) => {
-        const $el = $(e.currentTarget);
-        const $target = $($el.data('set-target'));
+			// data-set links
+			$('[data-set-target]').on('click', (e) => {
+				const $el = $(e.currentTarget);
+				const $target = $($el.data('set-target'));
 
-        if (!$target.length) {
-          return;
-        }
+				if (!$target.length) {
+					return;
+				}
 
-        $target.each((i, targetEl) => {
-          const $targetEl = $(targetEl);
-          const tag = $targetEl.prop('tagName').toLowerCase();
+				$target.each((i, targetEl) => {
+					const $targetEl = $(targetEl);
+					const tag = $targetEl.prop('tagName').toLowerCase();
 
-          if (tag === 'input' || tag === 'select') {
-            $targetEl.val($el.data('set-val'));
-          } else if (!$targetEl.hasClass('field')) {
-            $targetEl.text($el.data('set-val'));
-          }
-        });
+					if (tag === 'input' || tag === 'select') {
+						$targetEl.val($el.data('set-val'));
+					} else if (!$targetEl.hasClass('field')) {
+						$targetEl.text($el.data('set-val'));
+					}
+				});
 
-        $el.trigger(Events.SET_TARGET_UPDATE);
-        $target.closest('form').trigger(Events.SET_TARGET_UPDATE);
-      });
+				$el.trigger(Events.SET_TARGET_UPDATE);
+				$target.closest('form').trigger(Events.SET_TARGET_UPDATE);
+			});
 
-      // emulate links
-      $('.a[data-href]').on('click', (e) => {
-        const $el = $(e.currentTarget);
-        const href = $el.data('href');
-        if (!href.length) {
-          console.warn('Missing data-href');
-          console.warn($el);
-        }
+			// emulate links
+			$('.a[data-href]').on('click', (e) => {
+				const $el = $(e.currentTarget);
+				const href = $el.data('href');
+				if (!href.length) {
+					console.warn('Missing data-href');
+					console.warn($el);
+				}
 
-        W.location.assign(href);
-      });
+				W.location.assign(href);
+			});
 
-      // hide spinner
-      Spinner.hide(() => {
-        $Body.addClass('loaded');
-      });
+			// hide spinner
+			Spinner.hide(() => {
+				$Body.addClass('loaded');
+			});
 
-      // fire page printing
-      if (W.URLDetails['hash'].indexOf('printpage') > -1) {
-        W.print();
-      }
+			// fire page printing
+			if (W.URLDetails['hash'].indexOf('printpage') > -1) {
+				W.print();
+			}
 
-      $Body.data(NAME, this);
-    }
+			$Body.data(NAME, this);
+		}
 
-    static detectBootstrapScreenSize() {
-      const $el = $('<div class="env-test"></div>');
-      let envs = [...Consts.ENVS];
-      $Body.append($el);
+		static detectBootstrapScreenSize() {
+			const $el = $('<div class="env-test"></div>');
+			let envs = [...Consts.ENVS];
+			$Body.append($el);
 
-      let curEnv = envs.shift();
-      envs = envs.reverse();
+			let curEnv = envs.shift();
+			envs = envs.reverse();
 
-      for (let i = 0; i < envs.length; ++i) {
-        const env = envs[i];
-        $el.addClass(`d-${env}-none`);
-        if ($el.is(':hidden')) {
-          curEnv = env;
-          break;
-        }
-      }
+			for (let i = 0; i < envs.length; ++i) {
+				const env = envs[i];
+				$el.addClass(`d-${env}-none`);
+				if ($el.is(':hidden')) {
+					curEnv = env;
+					break;
+				}
+			}
 
-      $el.remove();
-      $Body.removeClass(envs);
-      $Body.addClass(curEnv);
+			$el.remove();
+			$Body.removeClass(envs);
+			$Body.addClass(curEnv);
 
-      return curEnv;
-    }
+			return curEnv;
+		}
 
-    static updateLocation(url) {
-      let location = url || W.location.href;
-      location = location.replace(W.URLDetails['base'], '/');
-      const hash = location.indexOf('#');
+		static updateLocation(url) {
+			let location = url || W.location.href;
+			location = location.replace(W.URLDetails['base'], '/');
+			const hash = location.indexOf('#');
 
-      W.URLDetails.relative = location.split('#')[0];
-      W.URLDetails.hash =
-        hash >= 0 ? location.substr(location.indexOf('#')) : '';
-    }
+			W.URLDetails.relative = location.split('#')[0];
+			W.URLDetails.hash =
+				hash >= 0 ? location.substr(location.indexOf('#')) : '';
+		}
 
-    // show site-wide alert
-    static alert(msg, cls) {
-      $SiteWideMessage.fadeOut('fast');
+		// show site-wide alert
+		static alert(msg, cls) {
+			$SiteWideMessage.fadeOut('fast');
 
-      $SiteWideMessage.html(
-        `<div class="page-alert"><div class="alert alert-${cls}"><i class="close" data-dismiss="alert">&times;</i>${msg}</div></div>`,
-      );
-      $SiteWideMessage.find('.page-alert').alert();
+			$SiteWideMessage.html(
+				`<div class="page-alert"><div class="alert alert-${cls}"><i class="close" data-dismiss="alert">&times;</i>${msg}</div></div>`,
+			);
+			$SiteWideMessage.find('.page-alert').alert();
 
-      $SiteWideMessage.find('.close[data-dismiss="alert"]').click(() => {
-        $SiteWideMessage.fadeOut('slow', () => {
-          $SiteWideMessage.find('.page-alert').alert('close');
-        });
-      });
+			$SiteWideMessage.find('.close[data-dismiss="alert"]').click(() => {
+				$SiteWideMessage.fadeOut('slow', () => {
+					$SiteWideMessage.find('.page-alert').alert('close');
+				});
+			});
 
-      $SiteWideMessage.fadeIn('slow');
+			$SiteWideMessage.fadeIn('slow');
 
-      if ($AlertNotify.length) {
-        $AlertNotify[0].play();
-      }
+			if ($AlertNotify.length) {
+				$AlertNotify[0].play();
+			}
 
-      $(W).trigger(`${Events.ALLERTAPPEARED}`);
-    }
+			$(W).trigger(`${Events.ALLERTAPPEARED}`);
+		}
 
-    // hide site-wide alert
-    static alertHide() {
-      if ($SiteWideMessage.length !== 0) {
-        $SiteWideMessage.fadeOut('slow', () => {
-          $SiteWideMessage.find('.alert').alert('close');
-        });
-      }
+		// hide site-wide alert
+		static alertHide() {
+			if ($SiteWideMessage.length !== 0) {
+				$SiteWideMessage.fadeOut('slow', () => {
+					$SiteWideMessage.find('.alert').alert('close');
+				});
+			}
 
-      if ($AlertNotify.length && typeof $AlertNotify[0].stop !== 'undefined') {
-        $AlertNotify[0].stop();
-      }
+			if (
+				$AlertNotify.length &&
+				typeof $AlertNotify[0].stop !== 'undefined'
+			) {
+				$AlertNotify[0].stop();
+			}
 
-      $(W).trigger(`${Events.ALLERTREMOVED}`);
-    }
+			$(W).trigger(`${Events.ALLERTREMOVED}`);
+		}
 
-    // load all images
-    static loadImages() {
-      const $imgs = $Body.find('img');
-      const $imgUrls = [];
-      const $imgLazyUrls = [];
+		// load all images
+		static loadImages() {
+			const $imgs = $Body.find('img');
+			const $imgUrls = [];
+			const $imgLazyUrls = [];
 
-      // collect image details
-      $imgs.each((i, el) => {
-        const $el = $(el);
-        const src = $el.attr('src');
-        const lazySrc = $el.data('lazy-src');
+			// collect image details
+			$imgs.each((i, el) => {
+				const $el = $(el);
+				const src = $el.attr('src');
+				const lazySrc = $el.data('lazy-src');
 
-        if (src && src.length) {
-          $imgUrls.push(src);
-        }
-        if (lazySrc && lazySrc.length) {
-          $imgLazyUrls.push(lazySrc);
-          $el.addClass('loading');
+				if (src && src.length) {
+					$imgUrls.push(src);
+				}
+				if (lazySrc && lazySrc.length) {
+					$imgLazyUrls.push(lazySrc);
+					$el.addClass('loading');
 
-          AjaxUI.preload([lazySrc]).then(() => {
-            $el.attr('src', lazySrc);
+					AjaxUI.preload([lazySrc]).then(() => {
+						$el.attr('src', lazySrc);
 
-            $el.addClass('loaded');
-            $el.removeClass('loading');
+						$el.addClass('loaded');
+						$el.removeClass('loading');
 
-            $el.trigger(`${Events.LAZYIMAGEREADY}`);
-          });
-        }
-      });
+						$el.trigger(`${Events.LAZYIMAGEREADY}`);
+					});
+				}
+			});
 
-      // load lazy backgrounds
-      $Body.find('[data-lazy-bg]').each((i, el) => {
-        const $el = $(el);
-        const lazySrc = $el.data('lazy-bg');
+			// load lazy backgrounds
+			$Body.find('[data-lazy-bg]').each((i, el) => {
+				const $el = $(el);
+				const lazySrc = $el.data('lazy-bg');
 
-        if (lazySrc && lazySrc.length) {
-          $imgLazyUrls.push(lazySrc);
-          $el.addClass('loading');
+				if (lazySrc && lazySrc.length) {
+					$imgLazyUrls.push(lazySrc);
+					$el.addClass('loading');
 
-          AjaxUI.preload([lazySrc]).then(() => {
-            $el.css({ 'background-image': `url(${lazySrc})` });
+					AjaxUI.preload([lazySrc]).then(() => {
+						$el.css({ 'background-image': `url(${lazySrc})` });
 
-            $el.addClass('loaded');
-            $el.removeClass('loading');
+						$el.addClass('loaded');
+						$el.removeClass('loading');
 
-            $el.trigger(`${Events.LAZYIMAGEREADY}`);
-          });
-        }
-      });
+						$el.trigger(`${Events.LAZYIMAGEREADY}`);
+					});
+				}
+			});
 
-      // load defined images
-      AjaxUI.preload($imgUrls).then(() => {
-        $(W).trigger('images-loaded');
+			// load defined images
+			AjaxUI.preload($imgUrls).then(() => {
+				$(W).trigger('images-loaded');
 
-        // load lazy images
-        AjaxUI.preload($imgLazyUrls).then(() => {
-          console.log('All images are loaded!');
+				// load lazy images
+				AjaxUI.preload($imgLazyUrls).then(() => {
+					console.log('All images are loaded!');
 
-          setTimeout(() => {
-            $(W).trigger(`${Events.LAZYIMAGESREADY}`);
-          }, 100);
-        });
-      });
-    }
+					setTimeout(() => {
+						$(W).trigger(`${Events.LAZYIMAGESREADY}`);
+					}, 100);
+				});
+			});
+		}
 
-    static dispose() {
-      console.log(`Destroying: ${NAME}`);
-    }
-  }
+		static dispose() {
+			console.log(`Destroying: ${NAME}`);
+		}
+	}
 
-  $(W).on(`${Events.AJAX} ${Events.LOADED}`, () => {
-    MainUI.init();
-  });
+	$(W).on(`${Events.AJAX} ${Events.LOADED}`, () => {
+		MainUI.init();
+	});
 
-  $(W).on('resize', () => {
-    MainUI.detectBootstrapScreenSize();
-  });
+	$(W).on('resize', () => {
+		MainUI.detectBootstrapScreenSize();
+	});
 
-  $(W).on('beforeunload unload', () => {
-    Spinner.show(() => {
-      $Body.removeClass('loaded');
-    });
-  });
+	$(W).on('beforeunload unload', () => {
+		Spinner.show(() => {
+			$Body.removeClass('loaded');
+		});
+	});
 
-  // hide spinner on target _blank
-  $('[target="_blank"],.external').on('click submit', () => {
-    setTimeout(() => {
-      Spinner.hide(() => {
-        $Body.addClass('loaded');
-      });
-    }, 1000);
-  });
-  W.MainUI = MainUI;
+	// hide spinner on target _blank
+	$('[target="_blank"],.external').on('click submit', () => {
+		setTimeout(() => {
+			Spinner.hide(() => {
+				$Body.addClass('loaded');
+			});
+		}, 1000);
+	});
 
-  return MainUI;
+	console.clear();
+	console.info(
+		'%cUI Kit: https://github.com/a2nt/webpack-bootstrap-ui-kit by Tony Air (tony@twma.pro)',
+		'color:yellow;font-size:16px',
+	);
+	console.groupCollapsed('Events');
+	Object.keys(Events).forEach((k) => {
+		console.info(k + ': ' + Events[k]);
+	});
+	console.groupEnd('Events');
+
+	console.groupCollapsed('Consts');
+	Object.keys(Consts).forEach((k) => {
+		console.info(k + ': ' + Consts[k]);
+	});
+	console.groupEnd('Events');
+
+	W.MainUI = MainUI;
+
+	return MainUI;
 })($);
 
 export default MainUI;
