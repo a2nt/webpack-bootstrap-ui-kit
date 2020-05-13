@@ -42,8 +42,10 @@ const MainUI = (($) => {
   console.groupEnd('Events');
 
   console.groupCollapsed('Init');
+  console.time('init');
   $(W).on(`${Events.LODEDANDREADY}`, () => {
     console.groupEnd('Init');
+    console.timeEnd('init');
   });
 
   // get browser locale

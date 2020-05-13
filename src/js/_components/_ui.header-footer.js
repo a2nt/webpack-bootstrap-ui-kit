@@ -46,7 +46,7 @@ const HeaderUI = (($) => {
 
     static dispose() {
       $Body.removeClass('shrink');
-       $(`#Header,.js${NAME},.footer,.jsFooterUI,.wrapper`).attr('css', '');
+      $(`#Header,.js${NAME},.footer,.jsFooterUI,.wrapper`).attr('css', '');
     }
   }
 
