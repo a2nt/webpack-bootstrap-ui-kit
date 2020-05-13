@@ -17392,6 +17392,7 @@ p:last-child {
 
 .typography ul li {
   list-style: none;
+  margin: 0.5em 0;
 }
 
 .typography ul li:before {

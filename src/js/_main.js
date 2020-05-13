@@ -11,6 +11,7 @@ import Spinner from './_components/_ui.spinner';
 import AjaxUI from './_components/_ui.ajax';
 
 import FormBasics from './_components/_ui.form.basics';
+import HeaderUI from './_components/_ui.header-footer';
 
 import SmoothScroll from 'smooth-scroll';
 const smoothScroll = SmoothScroll();
