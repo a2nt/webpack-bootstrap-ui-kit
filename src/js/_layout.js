@@ -28,9 +28,6 @@ const LayoutUI = (($) => {
       console.log(`Initializing: ${NAME}`);
       // your custom UI
 
-      // Fire further js when layout is ready
-      $(W).trigger(Events.LODEDANDREADY);
-
       // Custom fonts
       $Body.append(
         '<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,700,700i&display=swap" rel="stylesheet">',
@@ -42,6 +39,10 @@ const LayoutUI = (($) => {
         ga('create', 'UA-********-*', 'auto');
         ga('send', 'pageview');
       });*/
+
+
+      // Fire further js when layout is ready
+      $(W).trigger(Events.LODEDANDREADY);
     }
 
     static dispose() {

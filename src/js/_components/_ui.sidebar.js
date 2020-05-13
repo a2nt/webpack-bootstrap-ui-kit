@@ -35,7 +35,7 @@ const SidebarUI = (($) => {
     }
   }
 
-  $(W).on(`${Events.AJAX} ${Events.LOADED}`, () => {
+  $(W).on(`${Events.LODEDANDREADY}`, () => {
     SidebarUI.init();
   });
 

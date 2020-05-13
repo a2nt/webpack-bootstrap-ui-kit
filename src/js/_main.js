@@ -24,6 +24,28 @@ const MainUI = (($) => {
 
   const NAME = 'MainUI';
 
+  console.clear();
+  console.info(
+    '%cUI Kit: https://github.com/a2nt/webpack-bootstrap-ui-kit by Tony Air (tony@twma.pro)',
+    'color:yellow;font-size:16px',
+  );
+  console.groupCollapsed('Events');
+  Object.keys(Events).forEach((k) => {
+    console.info(`${k}: ${Events[k]}`);
+  });
+  console.groupEnd('Events');
+
+  console.groupCollapsed('Consts');
+  Object.keys(Consts).forEach((k) => {
+    console.info(`${k}: ${Consts[k]}`);
+  });
+  console.groupEnd('Events');
+
+  console.groupCollapsed('Init');
+  $(W).on(`${Events.LODEDANDREADY}`, () => {
+    console.groupEnd('Init');
+  });
+
   // get browser locale
   //const Locale = $('html').attr('lang').substring(0, 2);
 
@@ -330,7 +352,7 @@ const MainUI = (($) => {
 
       W.URLDetails.relative = location.split('#')[0];
       W.URLDetails.hash =
-				hash >= 0 ? location.substr(location.indexOf('#')) : '';
+        hash >= 0 ? location.substr(location.indexOf('#')) : '';
     }
 
     // show site-wide alert
@@ -365,10 +387,7 @@ const MainUI = (($) => {
         });
       }
 
-      if (
-        $AlertNotify.length &&
-				typeof $AlertNotify[0].stop !== 'undefined'
-      ) {
+      if ($AlertNotify.length && typeof $AlertNotify[0].stop !== 'undefined') {
         $AlertNotify[0].stop();
       }
 
@@ -467,23 +486,6 @@ const MainUI = (($) => {
       });
     }, 1000);
   });
-
-  console.clear();
-  console.info(
-    '%cUI Kit: https://github.com/a2nt/webpack-bootstrap-ui-kit by Tony Air (tony@twma.pro)',
-    'color:yellow;font-size:16px',
-  );
-  console.groupCollapsed('Events');
-  Object.keys(Events).forEach((k) => {
-    console.info(`${k  }: ${  Events[k]}`);
-  });
-  console.groupEnd('Events');
-
-  console.groupCollapsed('Consts');
-  Object.keys(Consts).forEach((k) => {
-    console.info(`${k  }: ${  Consts[k]}`);
-  });
-  console.groupEnd('Events');
 
   W.MainUI = MainUI;
 
