@@ -77,7 +77,11 @@ const FormBasics = (($) => {
       });
 
       $el.on('submit', (e) => {
-        SpinnerUI.show();
+        setTimeout(() => {
+          if (!$el.find('.error').length) {
+            SpinnerUI.show();
+          }
+        }, 100);
       });
 
       $el.addClass(`${NAME}-active`);

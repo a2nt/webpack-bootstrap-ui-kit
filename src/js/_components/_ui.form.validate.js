@@ -1,6 +1,8 @@
 import $ from 'jquery';
-import Events from "../_events";
-import FormValidateField from "./_ui.form.validate.field";
+import Events from '../_events';
+
+import FormBasics from './_ui.form.basics';
+import FormValidateField from './_ui.form.validate.field';
 import SpinnerUI from './_ui.spinner';
 
 const FormValidate = (($) => {
@@ -10,13 +12,13 @@ const FormValidate = (($) => {
   const $Html = $('html, body');
 
   class FormValidate {
-
     constructor(element) {
       const ui = this;
       const $element = $(element);
       const $fields = $element.find('input,textarea,select');
 
       ui._element = element;
+      ui.$element = $element;
       $element.data(DATA_KEY, this);
 
       ui._fields = $fields;
@@ -80,14 +82,16 @@ const FormValidate = (($) => {
         const fieldUI = $el.data('jsFormValidateField');
 
         if (fieldUI && !fieldUI.validate()) {
+          SpinnerUI.hide();
+
+          ui.$element.addClass('error');
+          console.log('Invalid form data:');
+          console.log($el);
+
           if (badCallback) {
             badCallback();
           }
 
-          console.log('Invalid form data:');
-          console.log($el);
-
-          SpinnerUI.hide();
           valid = false;
           return false;
         }

@@ -14,13 +14,9 @@ const HeaderUI = (($) => {
       const ui = this;
       ui.dispose();
 
-      if (!$(`.${CLASSNAME}`).length) {
-        return;
-      }
+      //console.log(`Initializing: ${NAME}`);
 
-      console.log(`Initializing: ${NAME}`);
-
-      const $header = $('#Header,.jsHeaderUI');
+      const $header = $(`#Header,.js${NAME}`);
       const updateHeader = () => {
         const h = $header.height();
         const s = $Body.scrollTop();
