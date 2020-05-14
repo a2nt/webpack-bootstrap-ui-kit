@@ -68,7 +68,7 @@ import SidebarUI from './_components/_ui.sidebar';
 import './_components/_ui.video.preview';
 
 // Meta Lightbox
-import '@a2nt/meta-lightbox/src/js/index';
+import '@a2nt/meta-lightbox/src/js/app';
 
 //import Confirmation from 'bootstrap-confirmation2/dist/bootstrap-confirmation';
 //import Table from 'bootstrap-table/dist/bootstrap-table';
