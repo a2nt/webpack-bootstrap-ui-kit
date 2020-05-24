@@ -34,14 +34,25 @@ const HeaderUI = (($) => {
 
       const updateFooter = (i, el) => {
         const $el = $(el);
-        $el.css('height', 'auto');
         const footerHeight = $el.height();
+        $el.css('height', footerHeight);
 
         $el.css('margin-top', -footerHeight);
         $el.siblings('.wrapper').css('padding-bottom', footerHeight);
       };
 
-      $('.footer,.jsFooterUI').each(updateFooter);
+      $('.footer,.jsFooterUI').css('height', 'auto');
+      setTimeout(() => {
+        $('.footer,.jsFooterUI').each(updateFooter);
+      }, 500);
+
+      $Body.on('resize', () => {
+        $('.footer,.jsFooterUI').css('height', 'auto');
+        setTimeout(() => {
+          $('.footer,.jsFooterUI').each(updateFooter);
+        }, 500);
+      });
+
     }
 
     static dispose() {
