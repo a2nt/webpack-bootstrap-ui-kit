@@ -36,7 +36,7 @@ const HoverUI = (($) => {
       $target = $target
         ? $target
         : $parent
-          ? $parent.find('.dropdown-menu')
+          ? $parent.find('.dropdown-menu').first()
           : null;
 
       if (!$target || !$target.length) {
@@ -127,7 +127,7 @@ const HoverUI = (($) => {
     }
 
     static _jQueryInterface() {
-      return this.each(function() {
+      return this.each(function () {
         // attach functionality to el
         const $el = $(this);
         let data = $el.data(DATA_KEY);
@@ -143,7 +143,7 @@ const HoverUI = (($) => {
   // jQuery interface
   $.fn[NAME] = HoverUI._jQueryInterface;
   $.fn[NAME].Constructor = HoverUI;
-  $.fn[NAME].noConflict = function() {
+  $.fn[NAME].noConflict = function () {
     $.fn[NAME] = JQUERY_NO_CONFLICT;
     return HoverUI._jQueryInterface;
   };
@@ -161,10 +161,7 @@ const HoverUI = (($) => {
     const $parent = $el.parent('.dropdown');
 
     // hide siblings
-    $parent
-      .parent()
-      .find('.dropdown, .dropdown-menu')
-      .removeClass('show');
+    $parent.parent().find('.dropdown, .dropdown-menu').removeClass('show');
 
     if ($parent.hasClass('show')) {
       $parent.removeClass('show');

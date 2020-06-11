@@ -85,6 +85,9 @@ $map-popup-color: $body-color !default;
         color: $map-marker-color;
         cursor: pointer;
         text-align: center;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
 
         .marker-icon,
         .fas,
