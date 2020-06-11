@@ -82,6 +82,7 @@ $map-popup-color: $body-color !default;
         width: $map-marker-size;
         height: $map-marker-size;
         font-size: $map-marker-size;
+        line-height: 1em;
         color: $map-marker-color;
         cursor: pointer;
         text-align: center;
