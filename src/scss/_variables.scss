@@ -23,6 +23,8 @@ $container-max-widths: (
 	xxxxl: 1836px
 ) !default;
 
+$full-body-min-width: map-get($grid-breakpoints, 'lg') !default;
+
 $font-family-sans-serif: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
 	'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji',
 	'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji' !default;

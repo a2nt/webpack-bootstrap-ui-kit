@@ -37,6 +37,9 @@ const MultiSlider = (($) => {
       ui.calculate();
 
       $(W).on('resize', () => {
+        ui.$elContainer
+          .find('.act-slider-prev,.act-slider-next')
+          .removeClass('disabled');
         ui.calculate();
       });
 
@@ -175,10 +178,7 @@ const MultiSlider = (($) => {
       const ui = this;
 
       if (ui.$elContainer) {
-        ui.$el
-          .parent()
-          .find('.slider-actions')
-          .remove();
+        ui.$el.parent().find('.slider-actions').remove();
       }
 
       if (ui.$el) {
@@ -207,7 +207,7 @@ const MultiSlider = (($) => {
   // jQuery interface
   $.fn[NAME] = MultiSlider._jQueryInterface;
   $.fn[NAME].Constructor = MultiSlider;
-  $.fn[NAME].noConflict = function() {
+  $.fn[NAME].noConflict = function () {
     $.fn[NAME] = JQUERY_NO_CONFLICT;
     return MultiSlider._jQueryInterface;
   };

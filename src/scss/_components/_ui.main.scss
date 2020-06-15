@@ -5,6 +5,9 @@
 @import '../_variables';
 @import '../_animations';
 
+.loading {
+    animation: fade 0.8s linear infinite;
+}
 .pulse {
     animation: pulse 0.8s linear infinite;
 }
