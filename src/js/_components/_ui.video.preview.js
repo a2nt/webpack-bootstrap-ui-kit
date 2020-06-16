@@ -1,13 +1,12 @@
-"use strict";
+'use strict';
 
 import $ from 'jquery';
 
-import MainUI from "../_main";
+import MainUI from '../_main';
 import Events from '../_events';
 import SpinnerUI from './_ui.spinner';
 
 const VideoPreviewUI = (($) => {
-
   const NAME = 'jsVideoPreviewUI';
   const DATA_KEY = NAME;
 
@@ -15,10 +14,7 @@ const VideoPreviewUI = (($) => {
   const D = document;
 
   class VideoPreviewUI {
-
     constructor(el) {
-      console.log(`Initializing: ${NAME}`);
-
       const ui = this;
       ui.$_el = $(el);
       ui.innerHTML = ui.$_el[0].innerHTML;
@@ -27,16 +23,25 @@ const VideoPreviewUI = (($) => {
       const href = ui.$_el.attr('href') || ui.$_el.data('href');
       const YouTubeGetID = (url) => {
         parsedURL = url.split(/(vi\/|v%3D|v=|\/v\/|youtu\.be\/|\/embed\/)/);
-        return undefined !== parsedURL[2] ? parsedURL[2].split(/[^0-9a-z_-]/i)[0] : parsedURL[0];
+        return undefined !== parsedURL[2]
+          ? parsedURL[2].split(/[^0-9a-z_-]/i)[0]
+          : parsedURL[0];
       };
-
 
       let video;
 
-      if (video = href.match(/(youtube|youtube-nocookie|youtu|vimeo)\.(com|be)\/(watch\?v=([\w-]+)|([\w-]+))/)) {
+      if (
+        (video = href.match(
+          /(youtube|youtube-nocookie|youtu|vimeo)\.(com|be)\/(watch\?v=([\w-]+)|([\w-]+))/,
+        ))
+      ) {
         let video_id;
 
-        if (video[1] === 'youtube' || video[1] === 'youtube-nocookie' || video[1] === 'youtu') {
+        if (
+          video[1] === 'youtube' ||
+          video[1] === 'youtube-nocookie' ||
+          video[1] === 'youtu'
+        ) {
           video_id = YouTubeGetID(href);
         }
 
@@ -45,10 +50,10 @@ const VideoPreviewUI = (($) => {
           ui.$_el.addClass('loading');
           $.ajax({
             type: 'GET',
-            url: `https://vimeo.com/api/v2/video/${  video_id  }.json`,
+            url: `https://vimeo.com/api/v2/video/${video_id}.json`,
             jsonp: 'callback',
             dataType: 'jsonp',
-            success: function(data) {
+            success: function (data) {
               const thumbnail_src = data[0].thumbnail_large;
               ui.show(thumbnail_src);
               ui.$_el.removeClass('loading');
@@ -98,8 +103,12 @@ const VideoPreviewUI = (($) => {
   };
 
   // auto-apply
-  $(window).on(`${Events.AJAX} ${Events.LOADED}`, () => {
-    $('[data-video-preview="true"]').jsVideoPreviewUI();
+  $(window).on(`${Events.LODEDANDREADY}`, () => {
+    console.log(`Initializing: ${NAME}`);
+
+    $('[data-video-preview="true"]').each((i, el) => {
+      $(el).jsVideoPreviewUI();
+    });
   });
 
   return VideoPreviewUI;
