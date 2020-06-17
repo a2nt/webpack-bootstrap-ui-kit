@@ -495,7 +495,7 @@ const MainUI = (($) => {
       return false;
     }
 
-    console.log(NAME +': External link');
+    console.log(`${NAME }: External link`);
     setTimeout(() => {
       Spinner.hide(() => {
         $Body.addClass('loaded');
