@@ -10,7 +10,12 @@
     position: relative;
     padding-top: $grid-gutter-element-height;
     padding-bottom: $grid-gutter-element-height;
-
+    &:first-child {
+        padding-top: 0;
+    }
+    &:last-child {
+        padding-bottom: 0;
+    }
     // remove paddings of the slideshow
     &.dynamic__elements__image__elements__elementimage,
     &.site__elements__sliderelement {
@@ -40,20 +45,21 @@
     // hide default page title cuz elemental object will be used to display titles
     &.page-header-element {
         display: none;
-        padding-bottom: 0;
-        margin-bottom: -$grid-gutter-element-height;
     }
 }
 
 .elements-sm,
 .page-content-sidebar {
-    padding-top: ($grid-gutter-element-height / 2);
-    padding-bottom: ($grid-gutter-element-height / 2);
-
     // Sidebar elements
     .element {
         padding-top: ($grid-gutter-element-height / 2);
         padding-bottom: ($grid-gutter-element-height / 2);
+        &:first-child {
+            padding-top: 0;
+        }
+        &:last-child {
+            padding-bottom: 0;
+        }
     }
 }
 

@@ -247,6 +247,8 @@ const MainUI = (($) => {
 
       // scroll links
       $('.js-scrollTo').on('click', (e) => {
+        console.log(`${NAME}: .js-scrollTo`);
+
         e.preventDefault();
         const el = e.currentTarget;
         const $el = $(e.currentTarget);
@@ -256,6 +258,7 @@ const MainUI = (($) => {
 
       // load external fonts
       if ($('[data-extfont]').length) {
+        console.log(`${NAME}: loading external fonts [data-extfont]`);
         $.getScript(
           '//ajax.googleapis.com/ajax/libs/webfont/1/webfont.js',
           () => {
@@ -276,6 +279,8 @@ const MainUI = (($) => {
 
       // data-set links
       $('[data-set-target]').on('click', (e) => {
+        console.log(`${NAME}: [data-set-target]`);
+
         const $el = $(e.currentTarget);
         const $target = $($el.data('set-target'));
 
@@ -300,6 +305,7 @@ const MainUI = (($) => {
 
       // emulate links
       $('.a[data-href]').on('click', (e) => {
+        console.log(`${NAME}: js link processing .a[data-href]`);
         const $el = $(e.currentTarget);
         const href = $el.data('href');
         if (!href.length) {
@@ -324,6 +330,8 @@ const MainUI = (($) => {
     }
 
     static detectBootstrapScreenSize() {
+      console.log(`${NAME}: Detecting screen size`);
+
       const $el = $('<div class="env-test"></div>');
       let envs = [...Consts.ENVS];
       $Body.append($el);
@@ -481,7 +489,13 @@ const MainUI = (($) => {
   });
 
   // hide spinner on target _blank
-  $('[target="_blank"],.external').on('click submit', () => {
+  $('[target="_blank"],.external').on('click submit', (e) => {
+
+    if($(e.currentTarget).is('[data-toggle="lightbox"],[data-lightbox-gallery]')){
+      return false;
+    }
+
+    console.log(NAME +': External link');
     setTimeout(() => {
       Spinner.hide(() => {
         $Body.addClass('loaded');
