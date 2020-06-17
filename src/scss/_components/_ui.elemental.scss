@@ -2,84 +2,88 @@
  * Basic styles for silverstripe-elemental
  */
 .blog-post-info {
-    position: relative;
+	position: relative;
 }
 
 // add top/bottom paddings for basic elements
 .element {
-    position: relative;
-    padding-top: $grid-gutter-element-height;
-    padding-bottom: $grid-gutter-element-height;
-    &:first-child {
-        padding-top: 0;
-    }
-    &:last-child {
-        padding-bottom: 0;
-    }
-    // remove paddings of the slideshow
-    &.dynamic__elements__image__elements__elementimage,
-    &.site__elements__sliderelement {
-        padding-top: 0;
-        padding-bottom: 0;
-        margin-bottom: $grid-gutter-element-height;
-    }
+	position: relative;
+	padding-top: $grid-gutter-element-height;
+	padding-bottom: $grid-gutter-element-height;
+	&:first-child {
+		padding-top: 0;
+	}
+	&:last-child {
+		padding-bottom: 0;
+	}
+	// remove paddings of the slideshow
+	&.dynamic__elements__image__elements__elementimage,
+	&.site__elements__sliderelement {
+		padding-top: 0;
+		padding-bottom: 0;
+		margin-bottom: $grid-gutter-element-height;
+	}
 
-    // remove paddings for elemental list cuz inner elements will have paddings
-    &.dnadesign__elementallist__model__elementlist {
-        padding-top: 0;
-        padding-bottom: 0;
+	// remove paddings for elemental list cuz inner elements will have paddings
+	&.dnadesign__elementallist__model__elementlist {
+		padding-top: 0;
+		padding-bottom: 0;
 
-        .dynamic__elements__image__elements__elementimage,
-        .site__elements__sliderelement {
-            padding-top: $grid-gutter-element-height;
-            padding-bottom: $grid-gutter-element-height;
-        }
-    }
+		.element {
+			padding-top: $grid-gutter-element-height;
+			padding-bottom: $grid-gutter-element-height;
+		}
+		.dynamic__elements__image__elements__elementimage,
+		.site__elements__sliderelement {
+			padding-top: $grid-gutter-element-height;
+			padding-bottom: $grid-gutter-element-height;
+		}
+	}
 
-    // Sidebar-like elements
-    &.secondary {
-        padding-top: ($grid-gutter-element-height / 2);
-        padding-bottom: ($grid-gutter-element-height / 2);
-    }
+	// Sidebar-like elements
+	&.secondary {
+		padding-top: ($grid-gutter-element-height / 2);
+		padding-bottom: ($grid-gutter-element-height / 2);
+	}
 
-    // hide default page title cuz elemental object will be used to display titles
-    &.page-header-element {
-        display: none;
-    }
+	// hide default page title cuz elemental object will be used to display titles
+	&.page-header-element {
+		display: none;
+	}
 }
 
 .elements-sm,
 .page-content-sidebar {
-    // Sidebar elements
-    .element {
-        padding-top: ($grid-gutter-element-height / 2);
-        padding-bottom: ($grid-gutter-element-height / 2);
-        &:first-child {
-            padding-top: 0;
-        }
-        &:last-child {
-            padding-bottom: 0;
-        }
-    }
+	// Sidebar elements
+	.element {
+		padding-top: ($grid-gutter-element-height / 2);
+		padding-bottom: ($grid-gutter-element-height / 2);
+		&:first-child {
+			padding-top: 0;
+		}
+		&:last-child {
+			padding-bottom: 0;
+		}
+	}
 }
 
 // remove container paddings for the slideshow
 .dynamic__elements__image__elements__elementimage,
 .site__elements__sliderelement {
-    .container-fluid {
-        padding-left: 0;
-        padding-right: 0;
-    }
+	.container-fluid {
+		padding-left: 0;
+		padding-right: 0;
+	}
 }
 
 .element {
-    .elemental-area {
-        .element {
-            .container,
-            .container-fluid {
-                padding: 0;
-                width: auto;
-            }
-        }
-    }
+	.elemental-area {
+		.element {
+			.container,
+			.container-fluid {
+				padding: 0;
+				width: auto;
+			}
+		}
+	}
 }
