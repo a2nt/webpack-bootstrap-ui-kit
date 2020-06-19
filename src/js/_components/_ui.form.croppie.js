@@ -2,7 +2,6 @@
 
 import $ from 'jquery';
 
-import MainUI from "../_main";
 import Events from '../_events';
 import SpinnerUI from './_ui.spinner';
 
