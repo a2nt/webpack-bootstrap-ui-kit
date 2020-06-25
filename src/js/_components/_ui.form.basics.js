@@ -25,6 +25,9 @@ const FormBasics = (($) => {
       const $el = $(el);
 
       ui._el = el;
+      ui.dispose();
+
+      console.log(`${NAME}: init`);
       $el.data(DATA_KEY, this);
 
       //$('[data-inputmask]').inputmask();
@@ -36,7 +39,9 @@ const FormBasics = (($) => {
         new FormFieldUI(el);
       });
 
-      const $selectFields = $el.find('select:not([readonly])');
+      const $selectFields = $el
+        .find('select:not([readonly])')
+        .not('.no-select2');
       const $radioOptions = $el.find('input[type="radio"]');
 
       $selectFields.each((i, el) => {
@@ -90,16 +95,24 @@ const FormBasics = (($) => {
 
     // Public methods
     dispose() {
-      const $el = $(this._el);
+      console.log(`${NAME}: dispose`);
+      const ui = this;
 
-      const $selectFields = $el.find('select:not([readonly])');
+      const $el = $(ui._el);
+
+      const $selectFields = $el
+        .find('select:not([readonly])')
+        .not('.no-select2');
       $selectFields.each((i, el) => {
-        $(el).select2('destroy');
+        const $el = $(el);
+        if ($el.hasClass('select2-hidden-accessible')) {
+          $el.select2('destroy');
+        }
       });
 
+      $.removeData(ui._el, DATA_KEY);
+      ui._el = null;
       $el.removeClass(`${NAME}-active`);
-      $.removeData(this._el, DATA_KEY);
-      this._el = null;
     }
 
     static _jQueryInterface() {
@@ -119,7 +132,7 @@ const FormBasics = (($) => {
   // jQuery interface
   $.fn[NAME] = FormBasics._jQueryInterface;
   $.fn[NAME].Constructor = FormBasics;
-  $.fn[NAME].noConflict = function() {
+  $.fn[NAME].noConflict = function () {
     $.fn[NAME] = JQUERY_NO_CONFLICT;
     return FormBasics._jQueryInterface;
   };
