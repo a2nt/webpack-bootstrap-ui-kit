@@ -416,6 +416,10 @@ const MainUI = (($) => {
         const src = $el.attr('src');
         const lazySrc = $el.data('lazy-src');
 
+        if ($el.hasClass('loaded')) {
+          return;
+        }
+
         if (src && src.length) {
           $imgUrls.push(src);
         }
@@ -441,6 +445,10 @@ const MainUI = (($) => {
         .each((i, el) => {
           const $el = $(el);
           const lazySrc = $el.data('lazy-bg');
+
+          if ($el.hasClass('loaded')) {
+            return;
+          }
 
           if (lazySrc && lazySrc.length) {
             $imgLazyUrls.push(lazySrc);
