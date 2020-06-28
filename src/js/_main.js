@@ -430,10 +430,13 @@ const MainUI = (($) => {
           AjaxUI.preload([lazySrc]).then(() => {
             $el.attr('src', lazySrc);
 
-            $el.addClass('loaded');
-            $el.removeClass('loading');
+            $el.on('load', () => {
+              $el.addClass('loaded');
+              $el.removeClass('loading');
 
-            $el.trigger(`${Events.LAZYIMAGEREADY}`);
+              $el.trigger(`${Events.LAZYIMAGEREADY}`);
+            });
+
           });
         }
       });
