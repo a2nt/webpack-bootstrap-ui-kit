@@ -406,7 +406,7 @@ const MainUI = (($) => {
 
     // load all images
     static loadImages() {
-      const $imgs = $Body.find('img');
+      const $imgs = $Body.find('img').not('.loaded');
       const $imgUrls = [];
       const $imgLazyUrls = [];
 
@@ -435,24 +435,27 @@ const MainUI = (($) => {
       });
 
       // load lazy backgrounds
-      $Body.find('[data-lazy-bg]').each((i, el) => {
-        const $el = $(el);
-        const lazySrc = $el.data('lazy-bg');
+      $Body
+        .find('[data-lazy-bg]')
+        .not('.loaded')
+        .each((i, el) => {
+          const $el = $(el);
+          const lazySrc = $el.data('lazy-bg');
 
-        if (lazySrc && lazySrc.length) {
-          $imgLazyUrls.push(lazySrc);
-          $el.addClass('loading');
+          if (lazySrc && lazySrc.length) {
+            $imgLazyUrls.push(lazySrc);
+            $el.addClass('loading');
 
-          AjaxUI.preload([lazySrc]).then(() => {
-            $el.css({ 'background-image': `url(${lazySrc})` });
+            AjaxUI.preload([lazySrc]).then(() => {
+              $el.css({ 'background-image': `url(${lazySrc})` });
 
-            $el.addClass('loaded');
-            $el.removeClass('loading');
+              $el.addClass('loaded');
+              $el.removeClass('loading');
 
-            $el.trigger(`${Events.LAZYIMAGEREADY}`);
-          });
-        }
-      });
+              $el.trigger(`${Events.LAZYIMAGEREADY}`);
+            });
+          }
+        });
 
       // load defined images
       AjaxUI.preload($imgUrls).then(() => {
@@ -490,12 +493,13 @@ const MainUI = (($) => {
 
   // hide spinner on target _blank
   $('[target="_blank"],.external').on('click submit', (e) => {
-
-    if($(e.currentTarget).is('[data-toggle="lightbox"],[data-lightbox-gallery]')){
+    if (
+      $(e.currentTarget).is('[data-toggle="lightbox"],[data-lightbox-gallery]')
+    ) {
       return false;
     }
 
-    console.log(`${NAME }: External link`);
+    console.log(`${NAME}: External link`);
     setTimeout(() => {
       Spinner.hide(() => {
         $Body.addClass('loaded');
