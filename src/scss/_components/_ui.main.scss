@@ -125,12 +125,29 @@ textarea,
 }
 
 .field {
+    display: flex;
+    flex-wrap: wrap;
+
     position: relative;
     margin: $field-gutter-height 0;
 
+    &.collapse {
+        display: none;
+        &.show {
+            display: flex;
+        }
+    }
+
     &.composite {
+        display: block;
         margin-top: 0;
         margin-bottom: 0;
+        &.collapse {
+            display: none;
+            &.show {
+                display: block;
+            }
+        }
     }
 
     &.required {
@@ -157,7 +174,16 @@ textarea,
             color: $red;
         }
     }
+    .left {
+        flex: 1 1 20%;
+    }
 
+    .middleColumn {
+        flex: 1 1 80%;
+    }
+
+    .right {
+    }
     .bootstrap-select:not([class*='col-']):not([class*='form-control']):not(.input-group-btn) {
         width: 100%;
     }
