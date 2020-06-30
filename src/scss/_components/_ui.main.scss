@@ -142,10 +142,16 @@ textarea,
         display: block;
         margin-top: 0;
         margin-bottom: 0;
+        &.row {
+            display: flex;
+        }
         &.collapse {
             display: none;
             &.show {
                 display: block;
+                &.row {
+                    display: flex;
+                }
             }
         }
     }
