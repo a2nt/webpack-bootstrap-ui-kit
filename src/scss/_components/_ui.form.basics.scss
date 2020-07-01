@@ -1,8 +1,29 @@
+legend {
+    @extend h2;
+}
+
 // date-time fields
 input.date,
 input.time {
     &[readonly] {
         background-color: $white;
+    }
+}
+
+input.checkbox {
+    margin-right: 0.5em;
+}
+
+.checkbox-list {
+    display: flex;
+    flex-wrap: wrap;
+    .field {
+        margin: 0.5rem !important;
+        min-width: 25%;
+        .right {
+            margin: 0;
+            padding: 0;
+        }
     }
 }
 
