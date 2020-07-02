@@ -1,9 +1,9 @@
 .form-stepped {
-    .step {
-        display: none;
+	.step {
+		display: none !important;
 
-        &.active {
-            display: block;
-        }
-    }
+		&.active {
+			display: flex !important;
+		}
+	}
 }

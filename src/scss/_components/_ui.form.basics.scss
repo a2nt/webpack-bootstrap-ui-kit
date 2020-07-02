@@ -14,6 +14,83 @@ input.checkbox {
     margin-right: 0.5em;
 }
 
+/*
+ * Basic class definition at _ui.main.scss
+ */
+.field {
+    &.collapse {
+        display: none;
+        &.show {
+            display: flex;
+        }
+    }
+
+    &.composite {
+        display: block;
+        margin-top: 0;
+        margin-bottom: 0;
+        &.row {
+            display: flex;
+        }
+        &.collapse {
+            display: none;
+            &.show {
+                display: block;
+                &.row {
+                    display: flex;
+                }
+            }
+        }
+    }
+
+    &.required {
+        &:after {
+            display: block;
+            position: absolute;
+            top: 2rem;
+            right: 0.5rem;
+            content: '*';
+            color: $red;
+            z-index: 2;
+        }
+    }
+
+    &.holder-error,
+    &.error {
+        input,
+        select,
+        textarea {
+            border-color: $red;
+        }
+
+        label {
+            color: $red;
+        }
+    }
+
+    .left {
+        flex: 1 1 20%;
+    }
+
+    .middleColumn {
+        flex: 1 1 auto;
+    }
+
+    .right {
+    }
+
+    .message,
+    .alert {
+        margin: 1rem 0;
+        display: block;
+        width: 100%;
+    }
+
+    .bootstrap-select:not([class*='col-']):not([class*='form-control']):not(.input-group-btn) {
+        width: 100%;
+    }
+}
+
 .checkbox-list {
     display: flex;
     flex-wrap: wrap;

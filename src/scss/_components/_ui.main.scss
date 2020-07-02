@@ -27,6 +27,16 @@ img {
     max-width: 100%;
 }
 
+p {
+    &:first-child {
+        margin-top: 0;
+    }
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
 .a {
     cursor: pointer;
     color: $link-color;
@@ -124,76 +134,16 @@ textarea,
     margin-top: $field-gutter-height;
 }
 
+/*
+ * Extra class definition at _ui.form.basics.scss
+ */
 .field {
+    position: relative;
     display: flex;
     flex-wrap: wrap;
-
-    position: relative;
     margin: $field-gutter-height 0;
-
-    &.collapse {
-        display: none;
-        &.show {
-            display: flex;
-        }
-    }
-
-    &.composite {
-        display: block;
-        margin-top: 0;
-        margin-bottom: 0;
-        &.row {
-            display: flex;
-        }
-        &.collapse {
-            display: none;
-            &.show {
-                display: block;
-                &.row {
-                    display: flex;
-                }
-            }
-        }
-    }
-
-    &.required {
-        &:after {
-            display: block;
-            position: absolute;
-            top: 2rem;
-            right: 0.5rem;
-            content: '*';
-            color: $red;
-            z-index: 2;
-        }
-    }
-
-    &.holder-error,
-    &.error {
-        input,
-        select,
-        textarea {
-            border-color: $red;
-        }
-
-        label {
-            color: $red;
-        }
-    }
-    .left {
-        flex: 1 1 20%;
-    }
-
-    .middleColumn {
-        flex: 1 1 auto;
-    }
-
-    .right {
-    }
-    .bootstrap-select:not([class*='col-']):not([class*='form-control']):not(.input-group-btn) {
-        width: 100%;
-    }
 }
+
 // element col paddings
 .col-block {
     padding-top: $col-block-gutter-height;
