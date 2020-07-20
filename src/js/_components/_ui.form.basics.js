@@ -42,7 +42,6 @@ const FormBasics = (($) => {
       const $selectFields = $el
         .find('select:not([readonly])')
         .not('.no-select2');
-      const $radioOptions = $el.find('input[type="radio"]');
 
       $selectFields.each((i, el) => {
         $(el).select2();
@@ -56,6 +55,7 @@ const FormBasics = (($) => {
         }
       });
 
+      const $radioOptions = $el.find('input[type="radio"]');
       $radioOptions.each((e, el) => {
         const $el = $(el);
 

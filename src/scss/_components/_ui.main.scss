@@ -119,13 +119,15 @@ select,
 textarea,
 .btn,
 .btn *,
-.alert,
 .dropdown,
 [data-toggle],
 [data-toggle] *,
 .container,
 .container-fluid,
 .row,
+.alert,
+.alert *,
+.message,
 [class='col-*'] {
     transition: all 0.4s ease;
 }
@@ -164,6 +166,26 @@ textarea,
 .alert-info,
 .alert-danger {
     display: block;
+}
+
+.alert + .alert {
+    border-top: 0;
+}
+
+.alert {
+    .container {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+    .typography {
+        flex: 1 1;
+    }
+    .btn-close {
+        margin-left: 1rem;
+    }
 }
 
 .message {

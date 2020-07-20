@@ -1,227 +1,228 @@
+@import '~select2/dist/css/select2.css';
+
 legend {
-    @extend h2;
+	@extend h2;
 }
 
 // date-time fields
 input.date,
 input.time {
-    &[readonly] {
-        background-color: $white;
-    }
+	&[readonly] {
+		background-color: $white;
+	}
 }
 
 input.checkbox {
-    margin-right: 0.5em;
+	margin-right: 0.5em;
 }
 
 /*
  * Basic class definition at _ui.main.scss
  */
 .field {
-    &.collapse {
-        display: none;
-        &.show {
-            display: flex;
-        }
-    }
+	&.collapse {
+		display: none;
+		&.show {
+			display: flex;
+		}
+	}
 
-    &.composite {
-        display: block;
-        margin-top: 0;
-        margin-bottom: 0;
-        &.row {
-            display: flex;
-        }
-        &.collapse {
-            display: none;
-            &.show {
-                display: block;
-                &.row {
-                    display: flex;
-                }
-            }
-        }
-    }
+	&.CompositeField,
+	&.composite {
+		flex-direction: column;
+		margin-top: 0;
+		margin-bottom: 0;
+		&.row {
+			 flex-direction: row;
+		}
+	}
 
-    &.required {
-        &:after {
-            display: block;
-            position: absolute;
-            top: 2rem;
-            right: 0.5rem;
-            content: '*';
-            color: $red;
-            z-index: 2;
-        }
-    }
+	&.required {
+		&:after {
+			display: block;
+			position: absolute;
+			top: 2rem;
+			right: 0.5rem;
+			content: '*';
+			color: $red;
+			z-index: 2;
+		}
+	}
 
-    &.holder-error,
-    &.error {
-        input,
-        select,
-        textarea {
-            border-color: $red;
-        }
+	&.holder-error,
+	&.error {
+		input,
+		select,
+		textarea {
+			border-color: $red;
+		}
 
-        label {
-            color: $red;
-        }
-    }
+		label {
+			color: $red;
+		}
+	}
 
-    .left {
-        flex: 1 1 20%;
-    }
+	.left {
+		flex: 1 1 20%;
+	}
 
-    .middleColumn {
-        flex: 1 1 auto;
-    }
+	.middleColumn {
+		flex: 1 1 auto;
+	}
 
-    .right {
-    }
+	.right {
+	}
 
-    .message,
-    .alert {
-        margin: 1rem 0;
-        display: block;
-        width: 100%;
-        max-width: 100%;
-    }
+	.message,
+	.alert {
+		margin: 1rem 0;
+		display: block;
+		width: 100%;
+		max-width: 100%;
+	}
 
-    .bootstrap-select:not([class*='col-']):not([class*='form-control']):not(.input-group-btn) {
-        width: 100%;
-        max-width: 100%;
-    }
+	.bootstrap-select:not([class*='col-']):not([class*='form-control']):not(.input-group-btn) {
+		width: 100%;
+		max-width: 100%;
+	}
 }
 
 .checkbox-list {
-    display: flex;
-    flex-wrap: wrap;
-    .field {
-        margin: 0.5rem !important;
-        min-width: 25%;
-        .right {
-            margin: 0;
-            padding: 0;
-        }
-    }
+	display: flex;
+	flex-wrap: wrap;
+	.field {
+		margin: 0.5rem !important;
+		min-width: 25%;
+		.right {
+			margin: 0;
+			padding: 0;
+		}
+	}
 }
 
 .bootstrap-timepicker-widget,
 .datepicker-dropdown {
-    border: 1px solid #ced4da;
-    box-shadow: 0 0 3px #999;
+	border: 1px solid #ced4da;
+	box-shadow: 0 0 3px #999;
 }
 
 .bootstrap-timepicker-widget {
-    .glyphicon {
-        -moz-osx-font-smoothing: grayscale;
-        -webkit-font-smoothing: antialiased;
-        display: inline-block;
-        font-style: normal;
-        font-variant: normal;
-        text-rendering: auto;
-        line-height: 1;
-        font-family: Font awesome\5 Free;
-        font-weight: 900;
-    }
+	.glyphicon {
+		-moz-osx-font-smoothing: grayscale;
+		-webkit-font-smoothing: antialiased;
+		display: inline-block;
+		font-style: normal;
+		font-variant: normal;
+		text-rendering: auto;
+		line-height: 1;
+		font-family: Font awesome\5 Free;
+		font-weight: 900;
+	}
 
-    .glyphicon-chevron-up:before {
-        content: '\f077';
-    }
+	.glyphicon-chevron-up:before {
+		content: '\f077';
+	}
 
-    .glyphicon-chevron-down:before {
-        content: '\f078';
-    }
+	.glyphicon-chevron-down:before {
+		content: '\f078';
+	}
 
-    input {
-        border: 1px solid #ced4da;
-    }
+	input {
+		border: 1px solid #ced4da;
+	}
 }
 
 .form-inline {
-    margin-top: -1rem;
+	position: relative;
+	margin: 2rem 0;
+	.field {
+		margin: 0;
+	}
 
-    fieldset {
-        margin-top: 1rem;
-    }
+	fieldset {
+		margin-top: 1rem;
+	}
 
-    .form-control {
-        width: 100%;
-    }
+	.form-control {
+		width: 100%;
+	}
 }
 
 // select2 dropdowns bootstrap4 styling
+body > .select2-container {
+	position: fixed !important;
+}
 .select2-container {
-    display: block;
-    width: 100% !important;
+	display: block;
+	width: 100% !important;
 }
 
 .select2-container--default {
-    &.select2-container--focus {
-        .select2-selection {
-            color: $input-focus-color;
-            background-color: $input-focus-bg;
-            border-color: $input-focus-border-color;
-            outline: 0;
+	&.select2-container--focus {
+		.select2-selection {
+			color: $input-focus-color;
+			background-color: $input-focus-bg;
+			border-color: $input-focus-border-color;
+			outline: 0;
 
-            // Avoid using mixin so we can pass custom focus shadow properly
-            @if $enable-shadows {
-                box-shadow: $input-box-shadow, $input-focus-box-shadow;
-            } @else {
-                box-shadow: $input-focus-box-shadow;
-            }
+			// Avoid using mixin so we can pass custom focus shadow properly
+			@if $enable-shadows {
+				box-shadow: $input-box-shadow, $input-focus-box-shadow;
+			} @else {
+				box-shadow: $input-focus-box-shadow;
+			}
 
-            &.select2-selection--single {
-            }
+			&.select2-selection--single {
+			}
 
-            &.select2-selection--multiple {
-            }
-        }
-    }
+			&.select2-selection--multiple {
+			}
+		}
+	}
 
-    .select2-selection {
-        @extend .form-control;
+	.select2-selection {
+		@extend .form-control;
 
-        .select2-selection__rendered {
-            line-height: inherit;
-        }
+		.select2-selection__rendered {
+			line-height: inherit;
+		}
 
-        &.select2-selection--single {
-        }
+		&.select2-selection--single {
+		}
 
-        &.select2-selection--multiple {
-            padding-top: 0;
-            padding-bottom: 0;
+		&.select2-selection--multiple {
+			padding-top: 0;
+			padding-bottom: 0;
 
-            .select2-selection__choice {
-                @extend .badge;
+			.select2-selection__choice {
+				@extend .badge;
 
-                @extend .badge-primary;
+				@extend .badge-primary;
 
-                padding: $input-padding-y $input-padding-x;
-                border: 0;
-            }
+				padding: $input-padding-y $input-padding-x;
+				border: 0;
+			}
 
-            .select2-selection__choice__remove {
-                color: color-yiq($primary);
-            }
-        }
-    }
+			.select2-selection__choice__remove {
+				color: color-yiq($primary);
+			}
+		}
+	}
 
-    .select2-results__option--highlighted[aria-selected] {
-        background: $primary;
-        color: color-yiq($primary);
-    }
+	.select2-results__option--highlighted[aria-selected] {
+		background: $primary;
+		color: color-yiq($primary);
+	}
 }
 
 .select2-dropdown {
-    border: $input-border-width solid $input-border-color;
+	border: $input-border-width solid $input-border-color;
 
-    .select2-search--dropdown {
-        padding: $input-padding-y $input-padding-x;
-    }
+	.select2-search--dropdown {
+		padding: $input-padding-y $input-padding-x;
+	}
 
-    .select2-search__field {
-        @extend .form-control;
-    }
+	.select2-search__field {
+		@extend .form-control;
+	}
 }
