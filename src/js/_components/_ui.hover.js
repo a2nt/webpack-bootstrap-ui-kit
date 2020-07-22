@@ -39,8 +39,8 @@ const HoverUI = (($) => {
       $target = $target
         ? $target
         : $parent
-        ? $parent.find('.dropdown-menu').first()
-        : null;
+          ? $parent.find('.dropdown-menu').first()
+          : null;
 
       if (!$target || !$target.length) {
         console.warn(`${NAME}: Missing target for:`);
