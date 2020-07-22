@@ -36,9 +36,18 @@ $grid-gutter-element-height: 2rem !default;
 
 	&-slides-container {
 		overflow: hidden;
+		margin: 0 2rem;
 
 		> .slider-nav {
 			position: relative;
 		}
+	}
+
+	.slide {
+		position: relative;
+		padding: 0 0.5rem;
+	}
+	.slider-actions {
+		font-size: 2rem;
 	}
 }
