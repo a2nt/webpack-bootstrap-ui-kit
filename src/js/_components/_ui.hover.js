@@ -6,6 +6,7 @@
 import $ from 'jquery';
 import Events from '../_events';
 import 'jquery-hoverintent/jquery.hoverIntent.js';
+import MainUI from '../_main';
 
 const HoverUI = (($) => {
   // Constants
@@ -20,6 +21,8 @@ const HoverUI = (($) => {
   class HoverUI {
     // Constructor
     constructor(el) {
+      console.log(`${NAME}: init`);
+
       const ui = this;
       const $el = $(el);
       ui.$el = $el;
@@ -36,8 +39,8 @@ const HoverUI = (($) => {
       $target = $target
         ? $target
         : $parent
-          ? $parent.find('.dropdown-menu').first()
-          : null;
+        ? $parent.find('.dropdown-menu').first()
+        : null;
 
       if (!$target || !$target.length) {
         console.warn(`${NAME}: Missing target for:`);
@@ -52,6 +55,7 @@ const HoverUI = (($) => {
 
       // integrate with dropdown-toggle
       $('[data-toggle="dropdown"]').on('click touch', (e) => {
+        console.log(`${NAME}: dropdown click-touch`);
         ui.hide();
       });
 
@@ -68,11 +72,18 @@ const HoverUI = (($) => {
         });
       }
 
+      $el.off('click touch');
       $el.on('click touch', (e) => {
+        const size = MainUI.detectBootstrapScreenSize();
+        console.log(`${NAME}: click-touch size: ${size}`);
+
         if (
+          size === 'xs' ||
           !$el.data('allow-click') ||
           (W.IsTouchScreen && !$el.data('allow-touch-click'))
         ) {
+          console.log(`${NAME}: click-touch prevent click`);
+          e.stopPropagation();
           e.preventDefault();
         }
 
