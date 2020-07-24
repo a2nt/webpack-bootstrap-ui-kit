@@ -12,7 +12,6 @@ const FormToggleUI = (($) => {
   const FieldUI = 'jsFormFieldUI';
 
   class FormToggleUI {
-
     constructor($el) {
       const ui = this;
       ui.$el = $el;
@@ -24,7 +23,7 @@ const FormToggleUI = (($) => {
 
       ui.toggle();
 
-      ui.$el.on(`change shown.${  FieldUI  } hidden.${  FieldUI}`, (e) => {
+      ui.$el.on(`change shown.${FieldUI} hidden.${FieldUI}`, (e) => {
         ui.toggle();
       });
 
@@ -38,8 +37,10 @@ const FormToggleUI = (($) => {
       const ui = this;
       const $el = ui.$el;
 
-      return ($el.is('[type="radio"],[type="checkbox"]') && $el.parents('.optionset,.checkboxset').length) ?
-        $el.parents('.optionset,.checkboxset') : $el;
+      return $el.is('[type="radio"],[type="checkbox"]') &&
+        $el.parents('.optionset,.checkboxset').length
+        ? $el.parents('.optionset,.checkboxset')
+        : $el;
     }
 
     getCondition() {
@@ -61,7 +62,7 @@ const FormToggleUI = (($) => {
       }
 
       if ($el.attr('type') === 'radio') {
-        return $Html.find(`[name="${  $el.attr('name')  }"]:checked`).val();
+        return $Html.find(`[name="${$el.attr('name')}"]:checked`).val();
       }
 
       return $el.val();
@@ -94,8 +95,7 @@ const FormToggleUI = (($) => {
     }
 
     getElement(target) {
-      return target && target.length && $(target).length ?
-        $(target) : false;
+      return target && target.length && $(target).length ? $(target) : false;
     }
 
     toggle() {
@@ -112,15 +112,17 @@ const FormToggleUI = (($) => {
       }
 
       // yes/no toggler
-      const yesNoVal = (
+      const yesNoVal =
         (condition === true && val && val !== '' && val !== '0') ||
         condition === val
-      ) ? true : false;
+          ? true
+          : false;
 
       const $yesTarget = ui.getTrueTarget();
       const $noTarget = ui.getFalseTarget();
+      const elUI = $el.data(FieldUI);
 
-      if (!$el.data(FieldUI).shown || typeof val === 'undefined') {
+      if ((elUI && !elUI.shown) || typeof val === 'undefined') {
         ui.toggleElement($yesTarget, false);
         ui.toggleElement($noTarget, false);
 
@@ -150,7 +152,7 @@ const FormToggleUI = (($) => {
         $el.collapse(action);
       });
 
-      $el.trigger(`${action  }.${  NAME}`);
+      $el.trigger(`${action}.${NAME}`);
     }
 
     dispose() {
@@ -180,8 +182,10 @@ const FormToggleUI = (($) => {
         const $el = $(el);
         const name = $el.attr('name');
 
-        if ($(`[name="${  name  }"]`).length > 1) {
-          console.warn(`${NAME  }: Module malfunction duplicate "${  name  }" elements found`);
+        if ($(`[name="${name}"]`).length > 1) {
+          console.warn(
+            `${NAME}: Module malfunction duplicate "${name}" elements found`,
+          );
         }
       });
     }
@@ -190,13 +194,13 @@ const FormToggleUI = (($) => {
   // jQuery interface
   $.fn[NAME] = FormToggleUI._jQueryInterface;
   $.fn[NAME].Constructor = FormToggleUI;
-  $.fn[NAME].noConflict = function() {
+  $.fn[NAME].noConflict = function () {
     $.fn[NAME] = JQUERY_NO_CONFLICT;
     return FormToggleUI._jQueryInterface;
   };
 
   // auto-apply
-  $(W).on(`${Events.AJAX} ${Events.LOADED}`, () => {
+  $(W).on(`${Events.LODEDANDREADY}`, () => {
     //FormToggleUI.validate();
     $(Events.FORM_FIELDS).filter('[data-value-toggle]').jsFormToggleUI();
 

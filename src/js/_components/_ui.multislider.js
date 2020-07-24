@@ -216,7 +216,9 @@ const MultiSlider = (($) => {
   $(W).on(Events.LODEDANDREADY, () => {
     console.log(`Initializing: ${NAME}`);
 
-    $(`.${NAME}`).jsMultiSlider();
+    $(`.${NAME}`).each((i,el) => {
+      $(el).jsMultiSlider();
+    });
   });
 
   return MultiSlider;

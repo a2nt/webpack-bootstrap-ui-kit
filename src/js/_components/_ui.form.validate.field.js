@@ -1,142 +1,165 @@
 import $ from 'jquery';
 import Events from '../_events';
-import FormValidateField from './_ui.form.validate.field';
-import SpinnerUI from './_ui.spinner';
 
-const FormValidate = (($) => {
+const FormValidateField = (($) => {
   // Constants
-  const NAME = 'jsFormValidate';
+  const NAME = 'jsFormValidateField';
   const DATA_KEY = NAME;
   const $Html = $('html, body');
 
-  class FormValidate {
-    constructor(element) {
+  const FieldUI = 'jsFormFieldUI';
+
+  class FormValidateField {
+    constructor(el) {
       const ui = this;
-      const $element = $(element);
-      const $fields = $element.find('input,textarea,select');
+      const $el = $(el);
 
-      ui._element = element;
-      $element.data(DATA_KEY, this);
+      ui.$el = $el;
 
-      ui._fields = $fields;
-      ui._stepped_form = $element.data('jsSteppedForm');
+      ui._actions = $el.parents('form').children('.btn-toolbar,.form-actions');
+      $el.data(DATA_KEY, this);
 
       // prevent browsers checks (will do it using JS)
-      $element.attr('novalidate', 'novalidate');
+      $el.attr('novalidate', 'novalidate');
 
-      $element.on(Events.FORM_INIT_STEPPED, () => {
-        ui._stepped_form = $element.data('jsSteppedForm');
+      $el.on('change focusout', (e) => {
+        ui.validate(false);
       });
 
-      // init fields validation
-      $fields.each((i, el) => {
-        // skip some fields here
-        if ($(el).attr('role') === 'combobox') {
-          return;
-        }
-
-        new FormValidateField(el);
-      });
-
-      $element.removeClass('error');
-      // check form
-      $element.on('submit', (e) => {
-        ui.validate(true, () => {
-          e.preventDefault();
-
-          // switch to step
-          if (ui._stepped_form) {
-            const $el = $element.find('.error').first();
-
-            if ($el.length) {
-              ui._stepped_form.step($el.parents('.step'));
-            }
-          }
-
-          $element.addClass('error');
-          SpinnerUI.hide();
-
-          $element.trigger(Events.FORM_VALIDATION_FAILED);
-        });
-      });
-
-      $element.addClass(`${NAME}-active`);
-      $element.trigger(Events.FORM_INIT_VALIDATE);
+      $el.addClass(`${NAME}-active`);
+      $el.trigger(Events.FORM_INIT_VALIDATE_FIELD);
     }
 
     // Public methods
     dispose() {
-      const $element = $(this._element);
+      const $el = ui.$el;
 
-      $element.removeClass(`${NAME}-active`);
-      $.removeData(this._element, DATA_KEY);
-      this._element = null;
+      $el.removeClass(`${NAME}-active`);
+      $.removeData(ui.$el[0], DATA_KEY);
+      ui.$el = null;
     }
 
-    validate(scrollTo = true, badCallback = false) {
-      console.log('Checking the field ...');
+    validate(scrollTo = true) {
       const ui = this;
+      const $el = ui.$el;
+
+      const $field = $el.closest('.field');
+      const extraChecks = $el.data(`${NAME}-extra`);
       let valid = true;
+      let msg = null;
 
-      ui._fields.each((i, el) => {
-        const $el = $(el);
-        const fieldUI = $el.data('jsFormValidateField');
+      const val = $el.val();
 
-        if (fieldUI && !fieldUI.validate()) {
-          SpinnerUI.hide();
+      // browser checks + required
+      if (
+        !ui.$el[0].checkValidity() ||
+        ($el.hasClass('required') &&
+          (!val.length ||
+            !val.trim().length ||
+            (ui.isHtml(val) && !$(val).text().length)))
+      ) {
+        valid = false;
+      }
 
-          console.log('Invalid field data:');
-          console.log($el);
+      // validate URL
+      if ($el.hasClass('url') && val.length && !this.valideURL(val)) {
+        valid = false;
+        msg =
+          'URL must start with http:// or https://. For example: https://your-domain.com/';
+      }
 
-          if (badCallback) {
-            badCallback();
-          }
+      this.removeError();
 
-          valid = false;
-          return false;
-        }
-      });
+      // extra checks
+      if (extraChecks) {
+        extraChecks.forEach((check) => {
+          valid = valid && check();
+        });
+      }
 
-      return valid;
+      if (valid) {
+        return true;
+      }
+
+      this.setError(scrollTo, msg);
+
+      return false;
+    }
+
+    isHtml(str) {
+      const doc = new DOMParser().parseFromString(str, 'text/html');
+      return Array.from(doc.body.childNodes).some(
+        (node) => node.nodeType === 1,
+      );
+    }
+
+    valideURL(str) {
+      const pattern = new RegExp(
+        '^(https?:\\/\\/){1}' + // protocol
+        '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.?)+[a-z]{2,}|' + // domain name
+        '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
+        '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
+        '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
+          '(\\#[-a-z\\d_]*)?$',
+        'i',
+      ); // fragment locator
+      return pattern.test(str);
+    }
+
+    setError(scrollTo = true, msg = null) {
+      const ui = this;
+      const fieldUI = ui.$el.data(FieldUI);
+
+      const $field = ui.$el.closest('.field');
+      const pos = $field.offset().top;
+
+      ui.removeError();
+
+      $field.addClass('error');
+      if (msg) {
+        fieldUI.addMessage(msg, 'alert-error alert-danger', scrollTo);
+      } else if (scrollTo) {
+        $field.focus();
+        $Html.scrollTop(pos - 100);
+      }
+    }
+
+    removeError() {
+      const ui = this;
+      const fieldUI = ui.$el.data(FieldUI);
+
+      const $field = ui.$el.closest('.field');
+
+      $field.removeClass('error');
+
+      $field.removeClass('holder-error');
+      $field.removeClass('holder-validation');
+      $field.find('.alert-error').remove();
     }
 
     static _jQueryInterface() {
-      return this.each(function() {
-        // attach functionality to element
-        const $element = $(this);
-        let data = $element.data(DATA_KEY);
+      return this.each(function () {
+        // attach functionality to el
+        const $el = $(this);
+        let data = $el.data(DATA_KEY);
 
         if (!data) {
-          data = new FormValidate(this);
-          $element.data(DATA_KEY, data);
+          data = new FormValidateField(this);
+          $el.data(DATA_KEY, data);
         }
       });
     }
   }
 
   // jQuery interface
-  $.fn[NAME] = FormValidate._jQueryInterface;
-  $.fn[NAME].Constructor = FormValidate;
-  $.fn[NAME].noConflict = function() {
+  $.fn[NAME] = FormValidateField._jQueryInterface;
+  $.fn[NAME].Constructor = FormValidateField;
+  $.fn[NAME].noConflict = function () {
     $.fn[NAME] = JQUERY_NO_CONFLICT;
-    return FormValidate._jQueryInterface;
+    return FormValidateField._jQueryInterface;
   };
 
-  // auto-apply
-  $(window).on(`${Events.AJAX} ${Events.LOADED}`, () => {
-    $('form').each((i, el) => {
-      const $el = $(el);
-
-      // skip some forms
-      if ($el.hasClass('no-validation')) {
-        return true;
-      }
-
-      $el.jsFormValidate();
-    });
-  });
-
-  return FormValidate;
+  return FormValidateField;
 })($);
 
-export default FormValidate;
+export default FormValidateField;
