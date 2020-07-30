@@ -85,9 +85,7 @@ table {
     @extend .table;
 
     @extend .table-bordered;
-}
 
-table {
     &.table-none {
         border: 0;
 
@@ -97,6 +95,14 @@ table {
             border: 0;
             background: none !important;
         }
+    }
+
+    &:first-child {
+        margin-top: 0;
+    }
+
+    &:last-child {
+        margin-bottom: 0;
     }
 }
 

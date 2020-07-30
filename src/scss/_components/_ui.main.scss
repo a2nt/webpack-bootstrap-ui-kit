@@ -27,6 +27,7 @@ img {
     max-width: 100%;
 }
 
+table,
 p {
     &:first-child {
         margin-top: 0;
@@ -411,4 +412,14 @@ body.is-offline {
             content: '\f00d';
         }
     }
+}
+
+.jsSidebarUI {
+    position: relative;
+    min-height: 100%;
+}
+
+.jsSidebarUI__inner {
+    position: relative;
+    will-change: position, top;
 }
