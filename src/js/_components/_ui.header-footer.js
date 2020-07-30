@@ -28,9 +28,6 @@ const HeaderUI = (($) => {
       };
 
       updateHeader();
-      $Body.on('scroll resize', () => {
-        updateHeader();
-      });
 
       const updateFooter = (i, el) => {
         const $el = $(el);
@@ -45,14 +42,6 @@ const HeaderUI = (($) => {
       setTimeout(() => {
         $('.footer,.jsFooterUI').each(updateFooter);
       }, 500);
-
-      $Body.on('resize', () => {
-        $('.footer,.jsFooterUI').css('height', 'auto');
-        setTimeout(() => {
-          $('.footer,.jsFooterUI').each(updateFooter);
-        }, 500);
-      });
-
     }
 
     static dispose() {
@@ -63,6 +52,13 @@ const HeaderUI = (($) => {
 
   $(W).on(`${Events.AJAX} ${Events.LOADED}`, () => {
     HeaderUI.init();
+  });
+
+  // align event content
+  $(W).on(`${Events.RESIZE}`, () => {
+    setTimeout(() => {
+      HeaderUI.init();
+    }, 200);
   });
 
   W.HeaderUI = new HeaderUI();

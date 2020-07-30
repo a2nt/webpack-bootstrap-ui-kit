@@ -22,7 +22,10 @@ const VideoPreviewUI = (($) => {
       ui.$_el.data(DATA_KEY, this);
       const href = ui.$_el.attr('href') || ui.$_el.data('href');
       const YouTubeGetID = (url) => {
-        parsedURL = url.split(/(vi\/|v%3D|v=|\/v\/|youtu\.be\/|\/embed\/)/);
+        const parsedURL = url.split(
+          /(vi\/|v%3D|v=|\/v\/|youtu\.be\/|\/embed\/)/,
+        );
+        console.log(parsedURL);
         return undefined !== parsedURL[2]
           ? parsedURL[2].split(/[^0-9a-z_-]/i)[0]
           : parsedURL[0];

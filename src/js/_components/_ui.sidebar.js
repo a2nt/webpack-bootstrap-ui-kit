@@ -53,9 +53,9 @@ const SidebarUI = (($) => {
           $innerWrapper.attr('style', '');
         }else if(scrollPos >= (contentOffset + contentOffsetHeight - $innerWrapper[0].offsetHeight)){
           // bottom pos
-          $innerWrapper.attr('style', `position:absolute;bottom:${fontSize}px`);
+            $innerWrapper.attr('style', `position:absolute;bottom:${fontSize}px`);
         }else {
-          // scrolled pos
+           // scrolled pos
           $innerWrapper.attr('style', `position:fixed;top:${fontSize}px;width:${sidebarWidth}px`);
         }
 
