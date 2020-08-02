@@ -276,11 +276,11 @@ const AjaxUI = (($) => {
     pauseAll: () => {
       $.xhrPool.paused = true;
 
-      for (const url in $.xhrPool.requests) {
+      /*for (let url in $.xhrPool.requests) {
         const jqXHR = $.xhrPool.requests[url];
         jqXHR.abort();
         console.log(`AJAX request is paused (${jqXHR.opts.url})`);
-      }
+      }*/
     },
     restoreAll: () => {
       for (const url in $.xhrPool.requests) {
