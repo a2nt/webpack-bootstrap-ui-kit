@@ -25,7 +25,6 @@ const SidebarUI = (($) => {
       //const fontSize = parseInt($Body.css('font-size'));
       const fontSize = 0;
       const contentElement = $(`.${CONTENTHOLDER}`)[0];
-      console.log(contentElement);
 
       //$(`.${CLASSNAME}`).wrapInner(`<div class="${INNERWRAPPER}"></div>`);
       const $el = $(`.${CLASSNAME}`);
@@ -42,23 +41,28 @@ const SidebarUI = (($) => {
 
       $Body.on(`${Events.SCROLL} ${Events.RESIZE}`, (e) => {
         const contentOffset = parseInt(contentElement.offsetTop) + fontSize;
-        const contentOffsetHeight = parseInt(contentElement.offsetHeight) - fontSize;
+        const contentOffsetHeight =
+          parseInt(contentElement.offsetHeight) - fontSize;
         const sidebarWidth = $el[0].offsetWidth;
-
 
         const scrollPos = parseInt($Body.scrollTop());
 
         // normal pos
-        if(contentOffset >= scrollPos){
+        if (contentOffset >= scrollPos) {
           $innerWrapper.attr('style', '');
-        }else if(scrollPos >= (contentOffset + contentOffsetHeight - $innerWrapper[0].offsetHeight)){
+        } else if (
+          scrollPos >=
+          contentOffset + contentOffsetHeight - $innerWrapper[0].offsetHeight
+        ) {
           // bottom pos
           $innerWrapper.attr('style', `position:absolute;bottom:${fontSize}px`);
-        }else {
+        } else {
           // scrolled pos
-          $innerWrapper.attr('style', `position:fixed;top:${fontSize}px;width:${sidebarWidth}px`);
+          $innerWrapper.attr(
+            'style',
+            `position:fixed;top:${fontSize}px;width:${sidebarWidth}px`,
+          );
         }
-
       });
     }
 

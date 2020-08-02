@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 import $ from 'jquery';
 import Events from '../_events';
@@ -21,12 +21,12 @@ const AjaxUI = (($) => {
       const $element = $(this._element);
       $element.addClass(`${NAME}-active`);
 
-      $element.bind('click', function(e) {
+      $element.bind('click', function (e) {
         e.preventDefault();
 
         const $this = $(this);
 
-        $('.ajax').each(function() {
+        $('.ajax').each(function () {
           const $this = $(this);
           $this.removeClass('active');
           $this.parents('.nav-item').removeClass('active');
@@ -52,12 +52,17 @@ const AjaxUI = (($) => {
       // update document location
       G.MainUI.updateLocation(url);
 
-      const absoluteLocation = G.URLDetails['base'] + G.URLDetails['relative'].substring(1);
+      const absoluteLocation =
+        G.URLDetails['base'] + G.URLDetails['relative'].substring(1);
       if (absoluteLocation !== G.location.href) {
-        G.history.pushState({
-          ajax: true,
-          page: absoluteLocation,
-        }, document.title, absoluteLocation);
+        G.history.pushState(
+          {
+            ajax: true,
+            page: absoluteLocation,
+          },
+          document.title,
+          absoluteLocation,
+        );
       }
 
       $.ajax({
@@ -96,31 +101,31 @@ const AjaxUI = (($) => {
       const js = jqXHR.getResponseHeader('X-Include-JS').split(',') || [];
 
       // Replace HTML regions
-      if (typeof(data.regions) === 'object') {
+      if (typeof data.regions === 'object') {
         for (const key in data.regions) {
-          if (typeof(data.regions[key]) === 'string') {
+          if (typeof data.regions[key] === 'string') {
             AjaxUI.replaceRegion(data.regions[key], key);
           }
         }
       }
 
       // remove already loaded scripts
-      $('link[type="text/css"]').each(function() {
+      $('link[type="text/css"]').each(function () {
         const i = css.indexOf($(this).attr('href'));
         if (i > -1) {
           css.splice(i, 1);
         } else if (!$Body.data('unload-blocked')) {
-          console.log(`Unloading: ${  $(this).attr('href')}`);
+          console.log(`Unloading: ${$(this).attr('href')}`);
           $(this).remove();
         }
       });
 
-      $('script[type="text/javascript"]').each(function() {
+      $('script[type="text/javascript"]').each(function () {
         const i = js.indexOf($(this).attr('src'));
         if (i > -1) {
           js.splice(i, 1);
         } else if (!$Body.data('unload-blocked')) {
-          console.log(`Unloading: ${  $(this).attr('src')}`);
+          console.log(`Unloading: ${$(this).attr('src')}`);
           $(this).remove();
         }
       });
@@ -129,20 +134,23 @@ const AjaxUI = (($) => {
       this.preload(css).then(() => {
         const $head = $('head');
         css.forEach((el) => {
-          $head.append(`<link rel="stylesheet" type="text/css" href="${el}" />`);
+          $head.append(
+            `<link rel="stylesheet" type="text/css" href="${el}" />`,
+          );
         });
 
         // preload JS
         this.preload(js, 'script').then(() => {
-
           js.forEach((el) => {
-            $Body.append(`<script type="text/javascript" charset="UTF-8" src="${el}"></script>`);
+            $Body.append(
+              `<script type="text/javascript" charset="UTF-8" src="${el}"></script>`,
+            );
           });
 
           console.log('New page is loaded!');
 
           // trigger events
-          if (typeof(data.events) === 'object') {
+          if (typeof data.events === 'object') {
             for (const eventName in data.events) {
               $(D).trigger(eventName, [data.events[eventName]]);
             }
@@ -203,7 +211,7 @@ const AjaxUI = (($) => {
     }
 
     static _jQueryInterface() {
-      return this.each(function() {
+      return this.each(function () {
         // attach functionality to element
         const $element = $(this);
         let data = $element.data(DATA_KEY);
@@ -219,7 +227,7 @@ const AjaxUI = (($) => {
   // jQuery interface
   $.fn[NAME] = AjaxUI._jQueryInterface;
   $.fn[NAME].Constructor = AjaxUI;
-  $.fn[NAME].noConflict = function() {
+  $.fn[NAME].noConflict = function () {
     $.fn[NAME] = JQUERY_NO_CONFLICT;
     return AjaxUI._jQueryInterface;
   };
@@ -241,8 +249,8 @@ const AjaxUI = (($) => {
   });
 
   // Back/Forward functionality
-  G.onpopstate = function(event) {
-    const $existingLink = $(`a[href^="${  D.location  }"]`);
+  G.onpopstate = function (event) {
+    const $existingLink = $(`a[href^="${D.location}"]`);
 
     if (event.state !== null && event.state.ajax) {
       console.log('GOBACK (AJAX state)');
@@ -255,6 +263,54 @@ const AjaxUI = (($) => {
       G.location.href = D.location;
     }
   };
+
+  // manage AJAX requests
+  $.ajaxPrefilter((options, originalOptions, jqXHR) => {
+    jqXHR.opts = options;
+    $.xhrPool.requests[jqXHR.opts.url] = jqXHR;
+  });
+
+  $.xhrPool = {
+    requests: {},
+    paused: false,
+    pauseAll: () => {
+      $.xhrPool.paused = true;
+
+      for (let url in $.xhrPool.requests) {
+        const jqXHR = $.xhrPool.requests[url];
+        jqXHR.abort();
+        console.log(`AJAX request is paused (${jqXHR.opts.url})`);
+      }
+    },
+    restoreAll: () => {
+      for (let url in $.xhrPool.requests) {
+        const jqXHR = $.xhrPool.requests[url];
+        $.ajax(jqXHR.opts);
+        console.log(`AJAX request is restored (${jqXHR.opts.url})`);
+      }
+
+      $.xhrPool.paused = false;
+    },
+  };
+
+  $.ajaxSetup({
+    beforeSend: (jqXHR) => {}, //  and connection to list
+    complete: (jqXHR) => {
+      if (!$.xhrPool.paused) {
+        console.log(`AJAX request is done (${jqXHR.opts.url})`);
+        delete $.xhrPool.requests[jqXHR.opts.url];
+      }
+    },
+  });
+
+  // attach events
+  $Body.on(`${Events.OFFLINE}`, () => {
+    $.xhrPool.pauseAll();
+  });
+
+  $Body.on(`${Events.ONLINE}`, () => {
+    $.xhrPool.restoreAll();
+  });
 
   return AjaxUI;
 })($);

@@ -436,7 +436,6 @@ const MainUI = (($) => {
 
               $el.trigger(`${Events.LAZYIMAGEREADY}`);
             });
-
           });
         }
       });
