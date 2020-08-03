@@ -54,7 +54,7 @@ body.cms {
 }
 
 // short fields margins/paddings
-.fields-short {
+.fields-compact {
 	.form-group {
 		padding-bottom: 0.5rem;
 		margin-bottom: 0.25rem;
@@ -64,6 +64,21 @@ body.cms {
 		&:after {
 			margin-bottom: 0.25rem;
 		}
+	}
+
+	.form-group:after,
+	.form__divider:after {
+		display: none;
+	}
+
+	.mce-edit-area {
+		height: 5em;
+		iframe {
+			height: 5em !important;
+		}
+	}
+	.form-control.textarea {
+		height: 13.5em;
 	}
 }
 
