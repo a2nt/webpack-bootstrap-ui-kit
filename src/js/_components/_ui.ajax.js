@@ -283,7 +283,7 @@ const AjaxUI = (($) => {
       }*/
     },
     restoreAll: () => {
-      for (let url in $.xhrPool.requests) {
+      for (const url in $.xhrPool.requests) {
         const jqXHR = $.xhrPool.requests[url];
         $.ajax(jqXHR.opts);
         console.log(`AJAX request is restored (${jqXHR.opts.url})`);
