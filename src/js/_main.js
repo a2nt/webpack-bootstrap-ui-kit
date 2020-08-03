@@ -89,7 +89,7 @@ const MainUI = (($) => {
   };
 
   W.addEventListener(
-    'offline',
+    `${Events.OFFLINE}`,
     () => {
       updateOnlineStatus();
     },
@@ -97,14 +97,14 @@ const MainUI = (($) => {
   );
 
   W.addEventListener(
-    'online',
+    `${Events.ONLINE}`,
     () => {
       updateOnlineStatus();
     },
     false,
   );
 
-  W.addEventListener('load', () => {
+  W.addEventListener(`${Events.LOADED}`, () => {
     updateOnlineStatus();
   });
 
@@ -430,7 +430,7 @@ const MainUI = (($) => {
           AjaxUI.preload([lazySrc]).then(() => {
             $el.attr('src', lazySrc);
 
-            $el.on('load', () => {
+            $el.on(`${Events.LOADED}`, () => {
               $el.addClass('loaded');
               $el.removeClass('loading');
 
@@ -491,7 +491,7 @@ const MainUI = (($) => {
     MainUI.init();
   });
 
-  $(W).on('resize', () => {
+  $(W).on(`${Events.RESIZE}`, () => {
     MainUI.detectBootstrapScreenSize();
   });
 

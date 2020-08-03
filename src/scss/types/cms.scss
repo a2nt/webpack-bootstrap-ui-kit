@@ -71,7 +71,7 @@ body.cms {
 		display: none;
 	}
 
-	.mce-edit-area {
+	/*.mce-edit-area {
 		height: 5em;
 		iframe {
 			height: 5em !important;
@@ -79,16 +79,17 @@ body.cms {
 	}
 	.form-control.textarea {
 		height: 13.5em;
-	}
+	}*/
 }
 
 .fields-row {
 	margin: 0 !important;
-	padding: 0;
-	width: 90%;
+	padding: 0 0 2em !important;
+	width: 100%;
+
 	.form__fieldgroup {
 		margin: 0 !important;
-		padding: 0;
+		padding: 0 !important;
 		width: 100% !important;
 		max-width: 100% !important;
 		flex: 0 0 100% !important;
@@ -96,6 +97,7 @@ body.cms {
 		flex-wrap: wrap;
 		> .form-group {
 			padding: 0 1rem;
+			margin: 0 !important;
 			flex: 1 1 50%;
 			max-width: 50%;
 		}
