@@ -121,16 +121,17 @@ textarea,
 .btn,
 .btn *,
 .dropdown,
-[data-toggle],
-[data-toggle] *,
-.container,
-.container-fluid,
 .row,
 .alert,
 .alert *,
 .message,
-[class='col-*'] {
+[data-toggle],
+[data-toggle] * {
     transition: all 0.4s ease;
+}
+
+.navbar-toggler {
+    transition: transform ease 0.4s;
 }
 
 .btn-toolbar {

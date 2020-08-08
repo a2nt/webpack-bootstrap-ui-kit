@@ -12,6 +12,10 @@ const ShrinkUI = (($) => {
   console.log(`${NAME}: init`);
 
   $(W).on(`${Events.LOADED} ${Events.SCROLL} ${Events.RESIZE}`, () => {
+    if ($('#Navigation > .navbar-collapse').hasClass('show')) {
+      return;
+    }
+
     let h1 = $('#SiteWideMessage').height();
     if (!h1) {
       h1 = 0;
