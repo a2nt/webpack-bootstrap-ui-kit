@@ -5,7 +5,7 @@ const FormValidateField = (($) => {
   // Constants
   const NAME = 'jsFormValidateField';
   const DATA_KEY = NAME;
-  const $Html = $('html, body');
+  const $Body = $('body');
 
   const FieldUI = 'jsFormFieldUI';
 
@@ -50,15 +50,21 @@ const FormValidateField = (($) => {
 
       const val = $el.val();
 
-      // browser checks + required
+      // browser checks
+      if (!ui.$el[0].checkValidity()) {
+        valid = false;
+        console.warn(`Browser check validity is failed #${$el.attr('id')}`);
+      }
+
+      // required
       if (
-        !ui.$el[0].checkValidity() ||
-        ($el.hasClass('required') &&
-          (!val.length ||
-            !val.trim().length ||
-            (ui.isHtml(val) && !$(val).text().length)))
+        $el.hasClass('required') &&
+        (!val.length ||
+          !val.trim().length ||
+          (ui.isHtml(val) && !$(val).text().length))
       ) {
         valid = false;
+        console.warn(`Required field is missing #${$el.attr('id')}`);
       }
 
       // validate URL
@@ -66,6 +72,7 @@ const FormValidateField = (($) => {
         valid = false;
         msg =
           'URL must start with http:// or https://. For example: https://your-domain.com/';
+        console.warn(`Wrong URL #${$el.attr('id')}`);
       }
 
       this.removeError();
@@ -73,7 +80,12 @@ const FormValidateField = (($) => {
       // extra checks
       if (extraChecks) {
         extraChecks.forEach((check) => {
-          valid = valid && check();
+          const result = check();
+          valid = valid && result;
+          if (!result) {
+            console.log(check);
+            console.warn(`Extra check is failed #${$el.attr('id')}`);
+          }
         });
       }
 
@@ -111,16 +123,19 @@ const FormValidateField = (($) => {
       const fieldUI = ui.$el.data(FieldUI);
 
       const $field = ui.$el.closest('.field');
-      const pos = $field.offset().top;
 
+      const bodyScroll = $Body.scrollTop();
+      const pos = $field[0].getBoundingClientRect().top; //$field.offset().top;
+
+      const rowCorrection = parseInt($field.css('font-size')) * 4;
       ui.removeError();
 
       $field.addClass('error');
       if (msg) {
         fieldUI.addMessage(msg, 'alert-error alert-danger', scrollTo);
-      } else if (scrollTo) {
+      } else if (pos && scrollTo) {
         $field.focus();
-        $Html.scrollTop(pos - 100);
+        $Body.scrollTop(bodyScroll + pos - rowCorrection);
       }
     }
 

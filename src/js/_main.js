@@ -327,6 +327,7 @@ const MainUI = (($) => {
       }
 
       $Body.data(NAME, this);
+      $(W).removeClass('lock-main-init');
     }
 
     static detectBootstrapScreenSize() {
@@ -467,6 +468,24 @@ const MainUI = (($) => {
           }
         });
 
+      // replace img src
+      $Body
+        .find('[data-src-replace]')
+        .not('.loaded')
+        .each((i, el) => {
+          const $el = $(el);
+          const lazySrc = $el.data('src-replace');
+
+          if ($el.hasClass('loaded')) {
+            return;
+          }
+
+          if (lazySrc && lazySrc.length) {
+            $el.addClass('loaded');
+            $el.attr('src', lazySrc);
+          }
+        });
+
       // load defined images
       AjaxUI.preload($imgUrls).then(() => {
         $(W).trigger('images-loaded');
@@ -487,9 +506,20 @@ const MainUI = (($) => {
     }
   }
 
-  $(W).on(`${Events.AJAX} ${Events.LOADED}`, () => {
-    MainUI.init();
-  });
+  $(W).on(
+    `${Events.MAININIT} ${Events.AJAX} ${Events.AJAXMAIN} ${Events.LOADED}`,
+    () => {
+      const $w = $(W);
+
+      if ($w.hasClass('lock-main-init')) {
+        console.warn('MainUI is locked');
+        return;
+      }
+
+      $w.addClass('lock-main-init');
+      MainUI.init();
+    },
+  );
 
   $(W).on(`${Events.RESIZE}`, () => {
     MainUI.detectBootstrapScreenSize();

@@ -178,25 +178,15 @@ textarea,
     .container {
         position: relative;
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         align-items: center;
         justify-content: center;
-        @media (min-width: map-get($grid-breakpoints, 'sm')) {
-            flex-direction: row;
-        }
     }
     .typography {
         flex: 1 1;
     }
     .btn-close {
-        position: absolute;
-        top: 0;
-        right: 0;
-
-        @media (min-width: map-get($grid-breakpoints, 'sm')) {
-            position: static;
-            margin-left: 1rem;
-        }
+        margin-left: 1rem;
     }
 }
 

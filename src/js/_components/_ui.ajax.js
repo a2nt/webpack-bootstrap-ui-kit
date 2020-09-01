@@ -286,7 +286,7 @@ const AjaxUI = (($) => {
       for (const url in $.xhrPool.requests) {
         const jqXHR = $.xhrPool.requests[url];
         $.ajax(jqXHR.opts);
-        console.log(`AJAX request is restored (${jqXHR.opts.url})`);
+        //console.log(`AJAX request is restored (${jqXHR.opts.url})`);
       }
 
       $.xhrPool.paused = false;
@@ -297,7 +297,7 @@ const AjaxUI = (($) => {
     beforeSend: (jqXHR) => {}, //  and connection to list
     complete: (jqXHR) => {
       if (!$.xhrPool.paused) {
-        console.log(`AJAX request is done (${jqXHR.opts.url})`);
+        //console.log(`AJAX request is done (${jqXHR.opts.url})`);
         delete $.xhrPool.requests[jqXHR.opts.url];
       }
     },

@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 import $ from 'jquery';
 
@@ -9,7 +9,6 @@ import 'croppie/croppie.js';
 import 'exif-js/exif.js';
 
 const CroppieUI = (($) => {
-
   const NAME = 'jsCroppieUI';
   const DATA_KEY = NAME;
 
@@ -28,10 +27,11 @@ const CroppieUI = (($) => {
   };
 
   class CroppieUI {
-
     constructor(element) {
       const ui = this;
       const $el = $(element);
+
+      console.log(`${NAME}: init ...`);
 
       ui.$el = $el;
       $el.data(DATA_KEY, this);
@@ -44,7 +44,7 @@ const CroppieUI = (($) => {
 
       $el.append(
         '<div class="cropper-wrap"><div class="cropper-container"></div>' +
-        '<a href="#" class="btn-remove" style="display:none"><i class="fas fa-times"></i> Remove</a></div>'
+          '<a href="#" class="btn-remove" style="display:none"><i class="fas fa-times"></i> Remove</a></div>',
       );
       //$el.append(ui.inputData);
 
@@ -102,103 +102,127 @@ const CroppieUI = (($) => {
           ui.uploadCrop.show();
           ui.uploadCropWrap.show();
           ui.$btnRemove.show();
-        }
+        };
 
         reader.readAsDataURL(input.files[0]);
 
+        $form.off('submit');
         $form.on('submit', (e) => {
-          //$(input).val('');
+          console.log(`${NAME}: Processing submission ...`);
+
+          e.preventDefault();
+
+          if ($form.data('locked')) {
+            console.warn(`${NAME}: Form#${$form.attr('id')} is locked.`);
+            return false;
+          }
+
+          $form.data('locked', true);
+
           SpinnerUI.show();
 
           if (!ui.uploadCrop.hasClass('ready')) {
             return true;
           }
 
-          ui.uploadCrop.croppie('result', {
-            type: 'blob',
-            size: {
-              width: ui.width,
-              height: ui.height,
-            },
-            format: 'png',
-          }).then((blob) => {
-            const form = e.currentTarget;
-            const data = new FormData(form);
-            const name = $(input).attr('name');
-
-            data.delete('BackURL');
-            data.delete(name);
-            data.append(name, blob, `${name  }-image.png`);
-            data.append('ajax', '1');
-
-            if (!$(form).data('jsFormValidate').validate()) {
-              return false;
-            }
-
-            $.ajax({
-              url: $(form).attr('action'),
-              data,
-              processData: false,
-              contentType: false,
-              type: $(form).attr('method'),
-              success: function(data) {
-                let IS_JSON = false;
-                let json = {};
-                try {
-                  IS_JSON = true;
-                  json = $.parseJSON(data);
-                } catch (e) {
-                  IS_JSON = false;
-                }
-
-                if (IS_JSON) {
-                  /*for (let k in json) {
-                                        $form.find('select[name="' + k + '"],input[name="' + k + '"],textarea[name="' + k + '"]').setError(true, json[k]);
-                                    }*/
-
-                  if (typeof json['status'] !== 'undefined') {
-                    if (json['status'] === 'success') {
-                      MainUI.alert(json['message'], json['status']);
-
-                      if (typeof json['link'] !== 'undefined') {
-                        setTimeout(() => {
-                          G.location = json['link'];
-                        }, 2000);
-                      } else {
-                        //G.location.reload(false);
-                      }
-                    } else if (json['status'] === 'error') {
-                      MainUI.alert(json['message'], json['status']);
-                    }
-                  }
-
-                  if (typeof json['form'] !== 'undefined') {
-                    $(form).replaceWith(json['form']);
-                  }
-                } else {
-                  $(form).replaceWith(data);
-                  //G.location.reload(false);
-                }
-
-                SpinnerUI.hide();
-                $(G).trigger(Events.AJAX);
+          ui.uploadCrop
+            .croppie('result', {
+              type: 'blob',
+              size: {
+                width: ui.width,
+                height: ui.height,
               },
+              format: 'png',
+            })
+            .then((blob) => {
+              const form = e.currentTarget;
+              const data = new FormData(form);
+              const name = $(input).attr('name');
+
+              data.delete('BackURL');
+              data.delete(name);
+              data.append(name, blob, `${name}-image.png`);
+              data.append('ajax', '1');
+
+              if (!$(form).data('jsFormValidate').validate()) {
+                return false;
+              }
+
+              $.ajax({
+                url: $(form).attr('action'),
+                data,
+                processData: false,
+                contentType: false,
+                type: $(form).attr('method'),
+                success: function (data) {
+                  $form.data('locked', false);
+
+                  let IS_JSON = false;
+                  let json = {};
+                  try {
+                    IS_JSON = true;
+                    json = $.parseJSON(data);
+                  } catch (e) {
+                    IS_JSON = false;
+                  }
+
+                  if (IS_JSON) {
+                    if (typeof json['status'] !== 'undefined') {
+                      if (json['status'] === 'success') {
+                        MainUI.alert(json['message'], json['status']);
+
+                        if (typeof json['link'] !== 'undefined') {
+                          console.log(
+                            `${NAME}: Finished submission > JSON ... Redirecting to ${json['link']}.`,
+                          );
+
+                          setTimeout(() => {
+                            G.location = json['link'];
+                          }, 2000);
+                        } else {
+                          console.warn(
+                            `${NAME}: Finished submission > JSON no redirect link.`,
+                          );
+                        }
+                      } else if (json['status'] === 'error') {
+                        MainUI.alert(json['message'], json['status']);
+                      }
+                    }
+
+                    if (typeof json['form'] !== 'undefined') {
+                      console.log(
+                        `${NAME}: Finished submission > JSON. Got new form response.`,
+                      );
+
+                      $(form).replaceWith(json['form']);
+                      $(G).trigger(Events.AJAX);
+                    }
+                  } else {
+                    console.log(
+                      `${NAME}: Finished submission > DATA response.`,
+                    );
+
+                    $(form).replaceWith(data);
+                    $(G).trigger(Events.AJAX);
+                    //G.location.reload(false);
+                  }
+
+                  SpinnerUI.hide();
+                },
+              });
+
+              //ui.inputData.val(data);
             });
-
-            //ui.inputData.val(data);
-
-          });
-
-          e.preventDefault();
         });
-
       } else {
-        console.log('Sorry - your browser doesn\'t support the FileReader API');
+        console.log(
+          `${NAME}: Sorry - your browser doesn't support the FileReader API.`,
+        );
       }
     }
 
     static dispose() {
-      console.log(`Destroying: ${NAME}`);
+      console.log(`${NAME}: destroying.`);
     }
 
     static _jQueryInterface() {

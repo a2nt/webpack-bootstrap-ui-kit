@@ -85,8 +85,6 @@ const FormValidate = (($) => {
           SpinnerUI.hide();
 
           ui.$element.addClass('error');
-          console.log('Invalid form data:');
-          console.log($el);
 
           if (badCallback) {
             badCallback();
@@ -101,7 +99,7 @@ const FormValidate = (($) => {
     }
 
     static _jQueryInterface() {
-      return this.each(function() {
+      return this.each(function () {
         // attach functionality to element
         const $element = $(this);
         let data = $element.data(DATA_KEY);
@@ -117,7 +115,7 @@ const FormValidate = (($) => {
   // jQuery interface
   $.fn[NAME] = FormValidate._jQueryInterface;
   $.fn[NAME].Constructor = FormValidate;
-  $.fn[NAME].noConflict = function() {
+  $.fn[NAME].noConflict = function () {
     $.fn[NAME] = JQUERY_NO_CONFLICT;
     return FormValidate._jQueryInterface;
   };

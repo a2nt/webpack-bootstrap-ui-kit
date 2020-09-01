@@ -4,6 +4,8 @@
 
 module.exports = {
   AJAX: 'ajax-load',
+  AJAXMAIN: 'ajax-main-load',
+  MAININIT: 'main-init',
   TABHIDDEN: 'tab-hidden',
   TABFOCUSED: 'tab-focused',
   OFFLINE: 'offline',

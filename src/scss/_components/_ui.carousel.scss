@@ -17,6 +17,7 @@ $carousel-controls-font-size: 3rem;
 $carousel-controls-zindex: 11 !default;
 $carousel-controls-shadow: 1px 1px $black !default;
 $carousel-controls-hover-bg: transparentize($black, 0.4) !default;
+$carousel-slide-img-loading-max-height: 25vh !default;
 
 .carousel-slide {
     min-height: $carousel-slide-min-height;
@@ -36,6 +37,10 @@ $carousel-controls-hover-bg: transparentize($black, 0.4) !default;
     .img {
         display: block;
         width: 100%;
+    }
+
+    img.loading {
+        max-height: $carousel-slide-img-loading-max-height;
     }
 }
 
