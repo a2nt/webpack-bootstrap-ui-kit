@@ -73,7 +73,8 @@ const FormValidate = (($) => {
     }
 
     validate(scrollTo = true, badCallback = false) {
-      console.log('Checking the form ...');
+      console.log(`${NAME}: checking the form ...`);
+
       const ui = this;
       let valid = true;
 
@@ -121,7 +122,7 @@ const FormValidate = (($) => {
   };
 
   // auto-apply
-  $(window).on(`${Events.AJAX} ${Events.LOADED}`, () => {
+  $(window).on(`${NAME}.init ${Events.AJAX} ${Events.LOADED}`, () => {
     $('form').each((i, el) => {
       const $el = $(el);
 

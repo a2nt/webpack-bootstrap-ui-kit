@@ -14,7 +14,7 @@ const HeaderUI = (($) => {
       const ui = this;
       ui.dispose();
 
-      //console.log(`Initializing: ${NAME}`);
+      console.log(`${NAME}: init`);
 
       const $header = $(`#Header,.js${NAME}`);
       const updateHeader = () => {
@@ -45,6 +45,8 @@ const HeaderUI = (($) => {
     }
 
     static dispose() {
+    	console.log(`${NAME}: dispose`);
+
       $Body.removeClass('shrink');
       $(`#Header,.js${NAME},.footer,.jsFooterUI,.wrapper`).attr('css', '');
     }

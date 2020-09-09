@@ -22,6 +22,8 @@ const MultiSlider = (($) => {
     constructor(el) {
       this.dispose();
 
+      console.log(`${NAME}: init ...`);
+
       const ui = this;
       const $el = $(el);
       ui.$el = $el;
@@ -71,6 +73,8 @@ const MultiSlider = (($) => {
 
       let num = ui.$el.data(`length-${size}`);
       num = num ? num : ui.$el.data('length');
+
+      console.log(`${NAME}: size ${size} | num ${num}`);
 
       return num ? num : 1;
     }
@@ -213,10 +217,8 @@ const MultiSlider = (($) => {
   };
 
   // auto-apply
-  $(W).on(Events.LODEDANDREADY, () => {
-    console.log(`Initializing: ${NAME}`);
-
-    $(`.${NAME}`).each((i,el) => {
+  $(W).on(`MultiSlider.init ${Events.LODEDANDREADY}`, () => {
+    $(`.${NAME}`).each((i, el) => {
       $(el).jsMultiSlider();
     });
   });

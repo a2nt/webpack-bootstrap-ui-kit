@@ -15,6 +15,7 @@ const VideoPreviewUI = (($) => {
 
   class VideoPreviewUI {
     constructor(el) {
+
       const ui = this;
       ui.$_el = $(el);
       ui.innerHTML = ui.$_el[0].innerHTML;
@@ -25,7 +26,7 @@ const VideoPreviewUI = (($) => {
         const parsedURL = url.split(
           /(vi\/|v%3D|v=|\/v\/|youtu\.be\/|\/embed\/)/,
         );
-        console.log(parsedURL);
+        console.log(`${NAME}: ${parsedURL}`);
         return undefined !== parsedURL[2]
           ? parsedURL[2].split(/[^0-9a-z_-]/i)[0]
           : parsedURL[0];
@@ -79,7 +80,7 @@ const VideoPreviewUI = (($) => {
     }
 
     static dispose() {
-      console.log(`Destroying: ${NAME}`);
+      console.log(`${NAME}: dispose`);
       ui.$_el[0].innerHTML = ui.innerHTML;
     }
 
@@ -107,7 +108,7 @@ const VideoPreviewUI = (($) => {
 
   // auto-apply
   $(window).on(`${Events.LODEDANDREADY}`, () => {
-    console.log(`Initializing: ${NAME}`);
+    console.log(`${NAME}: init`);
 
     $('[data-video-preview="true"]').each((i, el) => {
       $(el).jsVideoPreviewUI();

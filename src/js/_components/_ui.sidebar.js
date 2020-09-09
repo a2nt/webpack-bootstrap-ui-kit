@@ -21,7 +21,7 @@ const SidebarUI = (($) => {
         return;
       }
 
-      console.log(`Initializing: ${NAME}`);
+      console.log(`${NAME}: init ...`);
       //const fontSize = parseInt($Body.css('font-size'));
       const fontSize = 0;
       const contentElement = $(`.${CONTENTHOLDER}`)[0];
@@ -67,11 +67,11 @@ const SidebarUI = (($) => {
     }
 
     static dispose() {
-      console.log(`Destroying: ${NAME}`);
+      console.log(`${NAME}: dispose`);
     }
   }
 
-  $(W).on(`${Events.LODEDANDREADY}`, () => {
+  $(W).on(`${NAME}.init ${Events.LODEDANDREADY}`, () => {
     SidebarUI.init();
   });
 

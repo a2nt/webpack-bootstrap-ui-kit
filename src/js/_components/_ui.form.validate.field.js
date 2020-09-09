@@ -53,7 +53,7 @@ const FormValidateField = (($) => {
       // browser checks
       if (!ui.$el[0].checkValidity()) {
         valid = false;
-        console.warn(`Browser check validity is failed #${$el.attr('id')}`);
+        console.warn(`${NAME}: Browser check validity is failed #${$el.attr('id')}`);
       }
 
       // required
@@ -64,7 +64,7 @@ const FormValidateField = (($) => {
           (ui.isHtml(val) && !$(val).text().length))
       ) {
         valid = false;
-        console.warn(`Required field is missing #${$el.attr('id')}`);
+        console.warn(`${NAME}: Required field is missing #${$el.attr('id')}`);
       }
 
       // validate URL
@@ -72,7 +72,7 @@ const FormValidateField = (($) => {
         valid = false;
         msg =
           'URL must start with http:// or https://. For example: https://your-domain.com/';
-        console.warn(`Wrong URL #${$el.attr('id')}`);
+        console.warn(`${NAME}: Wrong URL #${$el.attr('id')}`);
       }
 
       this.removeError();
@@ -84,7 +84,7 @@ const FormValidateField = (($) => {
           valid = valid && result;
           if (!result) {
             console.log(check);
-            console.warn(`Extra check is failed #${$el.attr('id')}`);
+            console.warn(`${NAME}: Extra check is failed #${$el.attr('id')}`);
           }
         });
       }

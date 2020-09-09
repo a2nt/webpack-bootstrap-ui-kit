@@ -142,7 +142,7 @@ const FormBasics = (($) => {
   };
 
   // auto-apply
-  $(W).on(`${Events.AJAX} ${Events.LOADED}`, () => {
+  $(W).on(`${NAME}.init ${Events.AJAX} ${Events.LOADED}`, () => {
     init();
   });
 

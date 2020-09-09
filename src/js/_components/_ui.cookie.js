@@ -15,12 +15,12 @@ const CookieUI = (($) => {
     static set(name, value, days = 7, path = "/") {
       const expires = new Date(Date.now() + days * 864e5).toUTCString();
       D.cookie =
-        `${name 
-        }=${ 
-          encodeURIComponent(value) 
-        }; expires=${ 
-          expires 
-        }; path=${ 
+        `${name
+        }=${
+          encodeURIComponent(value)
+        }; expires=${
+          expires
+        }; path=${
           path}`;
     }
   }

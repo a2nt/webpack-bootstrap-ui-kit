@@ -30,6 +30,8 @@ const JqteUI = (($) => {
   class JqteUI {
 
     constructor(element) {
+	   	console.log(`${NAME}: init`);
+
       const ui = this;
       const $element = $(element);
       const validationUI = $element.data('jsFormValidateField');
@@ -47,7 +49,7 @@ const JqteUI = (($) => {
     }
 
     static dispose() {
-      console.log(`Destroying: ${NAME}`);
+      console.log(`${NAME}: dispose`);
     }
 
     static _jQueryInterface() {

@@ -10,6 +10,8 @@ const FormStorage = (($) => {
   class FormStorage {
 
     constructor(element) {
+      console.log(`${NAME}: init`);
+
       const ui = this;
       const $element = $(element);
       const $elements = $element.find('input, textarea, select');

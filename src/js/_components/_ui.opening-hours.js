@@ -17,6 +17,9 @@ const OpeningHoursUI = (($) => {
 
     static init() {
       this.dispose();
+
+      console.log(`${NAME}: init ...`);
+
       const hours = $.parseJSON($('.oppening-hours-json').html());
       const date = new Date();
       const dateYMD = this.Date_toYMD(date);
@@ -66,8 +69,8 @@ const OpeningHoursUI = (($) => {
         typeof hours['holidays'] !== 'undefined' &&
                 typeof hours['holidays'][dateYMD] !== 'undefined'
       ) {
-        html = `<b class="opening-hours-status opening-hours-status-closed">Closed today${ 
-          hours['holidays'][dateYMD] ? ` for ${  hours['holidays'][dateYMD]}` : '' 
+        html = `<b class="opening-hours-status opening-hours-status-closed">Closed today${
+          hours['holidays'][dateYMD] ? ` for ${  hours['holidays'][dateYMD]}` : ''
         }</b>`;
       }
 
@@ -92,13 +95,14 @@ const OpeningHoursUI = (($) => {
     }
 
     static dispose() {
+    	console.log(`${NAME}: dispose`);
       this.each((i, e) => {
         $(e).html('');
       });
     }
   }
 
-  $(window).on(`${Events.AJAX} ${Events.LOADED}`, () => {
+  $(window).on(`${NAME}.init ${Events.AJAX} ${Events.LOADED}`, () => {
     OpeningHoursUI.init();
   });
 

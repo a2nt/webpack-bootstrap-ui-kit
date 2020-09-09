@@ -14,6 +14,8 @@ const SteppedForm = (($) => {
   class SteppedForm {
 
     constructor(element) {
+    	console.log(`${NAME}: init`);
+
       const ui = this;
       const $element = $(element);
 
@@ -93,6 +95,7 @@ const SteppedForm = (($) => {
 
     // Public methods
     dispose() {
+    	console.log(`${NAME}: dispose`);
       const ui = this;
       const $element = $(ui._element);
 
@@ -205,7 +208,7 @@ const SteppedForm = (($) => {
   };
 
   // auto-apply
-  $(window).on(`${Events.AJAX} ${Events.LOADED}`, () => {
+  $(window).on(`${NAME}.init ${Events.AJAX} ${Events.LOADED}`, () => {
     $('.form-stepped').jsSteppedForm();
   });
 

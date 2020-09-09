@@ -18,7 +18,7 @@ const ImagePositionUI = (($) => {
         return;
       }
 
-      console.log(`Initializing: ${NAME}`);
+      console.log(`${NAME}: init`);
       $(`.${CLASSNAME}`).on('click', (e) => {
         e.preventDefault();
         console.log(e);
@@ -26,11 +26,11 @@ const ImagePositionUI = (($) => {
     }
 
     static dispose() {
-      console.log(`Destroying: ${NAME}`);
+      console.log(`${NAME}: dispose`);
     }
   }
 
-  $(W).on(`${Events.AJAX} ${Events.LOADED}`, () => {
+  $(W).on(`${NAME}.init ${Events.AJAX} ${Events.LOADED}`, () => {
     ImagePositionUI.init();
   });
 

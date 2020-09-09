@@ -38,7 +38,7 @@ const MapAPI = (($) => {
 
       config['font-family'] = $BODY.css('font-family');
 
-      console.log(`${NAME}: initializing ${Drv.getName()}...`);
+      console.log(`${NAME}: init ${Drv.getName()}...`);
       Drv.init($el, config);
       ui.drv = Drv;
 

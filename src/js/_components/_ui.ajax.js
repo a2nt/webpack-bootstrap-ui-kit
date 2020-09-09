@@ -73,7 +73,7 @@ const AjaxUI = (($) => {
         method: 'GET',
         cache: false,
         error(jqXHR) {
-          console.warn(`AJAX request failure: ${jqXHR.statusText}`);
+          console.warn(`${NAME}: AJAX request failure: ${jqXHR.statusText}`);
           G.location.href = url;
 
           // google analytics
@@ -115,7 +115,7 @@ const AjaxUI = (($) => {
         if (i > -1) {
           css.splice(i, 1);
         } else if (!$Body.data('unload-blocked')) {
-          console.log(`Unloading: ${$(this).attr('href')}`);
+          console.log(`${NAME}: Unloading | ${$(this).attr('href')}`);
           $(this).remove();
         }
       });
@@ -125,7 +125,7 @@ const AjaxUI = (($) => {
         if (i > -1) {
           js.splice(i, 1);
         } else if (!$Body.data('unload-blocked')) {
-          console.log(`Unloading: ${$(this).attr('src')}`);
+          console.log(`${NAME}: Unloading | ${$(this).attr('src')}`);
           $(this).remove();
         }
       });
@@ -147,7 +147,7 @@ const AjaxUI = (($) => {
             );
           });
 
-          console.log('New page is loaded!');
+          console.log(`${NAME}: New page is loaded!`);
 
           // trigger events
           if (typeof data.events === 'object') {
@@ -198,7 +198,7 @@ const AjaxUI = (($) => {
       if ($region.length) {
         $region.empty().append(html);
       } else {
-        console.warn('Region returned without class or id!');
+        console.warn(`${NAME}: Region returned without class or id!`);
       }
     }
 
@@ -253,13 +253,13 @@ const AjaxUI = (($) => {
     const $existingLink = $(`a[href^="${D.location}"]`);
 
     if (event.state !== null && event.state.ajax) {
-      console.log('GOBACK (AJAX state)');
+      console.log(`${NAME}: GOBACK (AJAX state)`);
       AjaxUI.load(event.state.page);
     } else if ($existingLink.length && $existingLink.hasClass('ajax')) {
-      console.log('GOBACK (AJAX link)');
+      console.log(`${NAME}: GOBACK (AJAX link)`);
       $existingLink.trigger('click');
     } else {
-      console.log('GOBACK (HTTP)');
+      console.log(`${NAME}: GOBACK (HTTP)`);
       G.location.href = D.location;
     }
   };
@@ -279,14 +279,14 @@ const AjaxUI = (($) => {
       /*for (let url in $.xhrPool.requests) {
         const jqXHR = $.xhrPool.requests[url];
         jqXHR.abort();
-        console.log(`AJAX request is paused (${jqXHR.opts.url})`);
+        console.log(`${NAME}: AJAX request is paused (${jqXHR.opts.url})`);
       }*/
     },
     restoreAll: () => {
       for (const url in $.xhrPool.requests) {
         const jqXHR = $.xhrPool.requests[url];
         $.ajax(jqXHR.opts);
-        //console.log(`AJAX request is restored (${jqXHR.opts.url})`);
+        //console.log(`${NAME}: AJAX request is restored (${jqXHR.opts.url})`);
       }
 
       $.xhrPool.paused = false;
@@ -297,7 +297,7 @@ const AjaxUI = (($) => {
     beforeSend: (jqXHR) => {}, //  and connection to list
     complete: (jqXHR) => {
       if (!$.xhrPool.paused) {
-        //console.log(`AJAX request is done (${jqXHR.opts.url})`);
+        //console.log(`${NAME}: AJAX request is done (${jqXHR.opts.url})`);
         delete $.xhrPool.requests[jqXHR.opts.url];
       }
     },

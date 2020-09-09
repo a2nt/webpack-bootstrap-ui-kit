@@ -248,7 +248,7 @@ const CroppieUI = (($) => {
   };
 
   // auto-apply
-  $(window).on(`${Events.AJAX} ${Events.LOADED}`, () => {
+  $(window).on(`${NAME}.init ${Events.AJAX} ${Events.LOADED}`, () => {
     $('.field.croppie').jsCroppieUI();
   });
 

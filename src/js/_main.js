@@ -19,6 +19,7 @@ const smoothScroll = SmoothScroll();
 const MainUI = (($) => {
   // Constants
   const W = window;
+  const $W = $(W);
   const D = document;
   const $Body = $('body');
 
@@ -43,7 +44,7 @@ const MainUI = (($) => {
 
   console.groupCollapsed('Init');
   console.time('init');
-  $(W).on(`${Events.LODEDANDREADY}`, () => {
+  $W.on(`${Events.LODEDANDREADY}`, () => {
     console.groupEnd('Init');
     console.timeEnd('init');
   });
@@ -62,13 +63,15 @@ const MainUI = (($) => {
   // update visibility state
   D.addEventListener(VisibilityChangeEvent, () => {
     if (D.visibilityState === HiddenName) {
-      console.log('Tab: hidden');
+      console.log(`${NAME}: Tab: hidden`);
       $Body.addClass('is-hidden');
       $Body.trigger(Events.TABHIDDEN);
+      $W.trigger(Events.TABHIDDEN);
     } else {
-      console.log('Tab: focused');
+      console.log(`${NAME}: Tab: focused`);
       $Body.removeClass('is-hidden');
       $Body.trigger(Events.TABFOCUSED);
+      $W.trigger(Events.TABFOCUSED);
     }
   });
 
@@ -78,13 +81,15 @@ const MainUI = (($) => {
       return;
     }
     if (!navigator.onLine) {
-      console.log('Tab: offline');
+      console.log(`${NAME}: Tab: offline`);
       $Body.addClass('is-offline');
       $Body.trigger(Events.OFFLINE);
+      $W.trigger(Events.OFFLINE);
     } else {
-      console.log('Tab: online');
+      console.log(`${NAME}: Tab: online`);
       $Body.removeClass('is-offline');
       $Body.trigger(Events.ONLINE);
+      $W.trigger(Events.ONLINE);
     }
   };
 
@@ -108,7 +113,7 @@ const MainUI = (($) => {
     updateOnlineStatus();
   });
 
-  $(W).on(`${Events.AJAX}`, () => {
+  $W.on(`${Events.AJAX}`, () => {
     updateOnlineStatus();
   });
 
@@ -142,9 +147,13 @@ const MainUI = (($) => {
           clearInterval(pingInterval);
 
           $Body.addClass('is-offline');
+          $Body.trigger(Events.OFFLINE);
+      	  $W.trigger(Events.OFFLINE);
           //W.location.reload(false);
         } else {
           $Body.removeClass('is-offline');
+          $Body.trigger(Events.ONLINE);
+      	  $W.trigger(Events.ONLINE);
         }
       },
     });
@@ -169,8 +178,12 @@ const MainUI = (($) => {
 
     if (bool) {
       console.log(`${NAME}: Touch screen enabled`);
+      $Body.trigger(Events.TOUCHENABLE);
+      $W.trigger(Events.TOUCHENABLE);
     } else {
       console.log(`${NAME}: Touch screen disabled`);
+      $Body.trigger(Events.TOUCHDISABLED);
+      $W.trigger(Events.TOUCHDISABLED);
     }
 
     // prevent firing touch and mouse events together
@@ -204,7 +217,7 @@ const MainUI = (($) => {
     static init() {
       this.dispose();
 
-      console.log(`Initializing: ${NAME}`);
+      console.log(`${NAME}: init`);
 
       // update location details
       this.updateLocation();
@@ -306,10 +319,11 @@ const MainUI = (($) => {
       // emulate links
       $('.a[data-href]').on('click', (e) => {
         console.log(`${NAME}: js link processing .a[data-href]`);
+
         const $el = $(e.currentTarget);
         const href = $el.data('href');
         if (!href.length) {
-          console.warn('Missing data-href');
+          console.warn(`${NAME}: .a[data-href] | Missing data-href`);
           console.warn($el);
         }
 
@@ -327,11 +341,10 @@ const MainUI = (($) => {
       }
 
       $Body.data(NAME, this);
-      $(W).removeClass('lock-main-init');
+      $W.removeClass('lock-main-init');
     }
 
     static detectBootstrapScreenSize() {
-      console.log(`${NAME}: Detecting screen size`);
 
       const $el = $('<div class="env-test"></div>');
       let envs = [...Consts.ENVS];
@@ -352,6 +365,8 @@ const MainUI = (($) => {
       $el.remove();
       $Body.removeClass(envs);
       $Body.addClass(curEnv);
+
+      console.log(`${NAME}: screen size detected ${curEnv}`);
 
       return curEnv;
     }
@@ -387,7 +402,7 @@ const MainUI = (($) => {
         $AlertNotify[0].play();
       }
 
-      $(W).trigger(`${Events.ALLERTAPPEARED}`);
+      $W.trigger(`${Events.ALLERTAPPEARED}`);
     }
 
     // hide site-wide alert
@@ -402,7 +417,7 @@ const MainUI = (($) => {
         $AlertNotify[0].stop();
       }
 
-      $(W).trigger(`${Events.ALLERTREMOVED}`);
+      $W.trigger(`${Events.ALLERTREMOVED}`);
     }
 
     // load all images
@@ -488,44 +503,42 @@ const MainUI = (($) => {
 
       // load defined images
       AjaxUI.preload($imgUrls).then(() => {
-        $(W).trigger('images-loaded');
+        $W.trigger('images-loaded');
 
         // load lazy images
         AjaxUI.preload($imgLazyUrls).then(() => {
-          console.log('All images are loaded!');
+          console.log(`${NAME}: All images are loaded!`);
 
           setTimeout(() => {
-            $(W).trigger(`${Events.LAZYIMAGESREADY}`);
+            $W.trigger(`${Events.LAZYIMAGESREADY}`);
           }, 100);
         });
       });
     }
 
     static dispose() {
-      console.log(`Destroying: ${NAME}`);
+      console.log(`${NAME}: dispose`);
     }
   }
 
-  $(W).on(
+  $W.on(
     `${Events.MAININIT} ${Events.AJAX} ${Events.AJAXMAIN} ${Events.LOADED}`,
     () => {
-      const $w = $(W);
-
-      if ($w.hasClass('lock-main-init')) {
+      if ($W.hasClass('lock-main-init')) {
         console.warn('MainUI is locked');
         return;
       }
 
-      $w.addClass('lock-main-init');
+      $W.addClass('lock-main-init');
       MainUI.init();
     },
   );
 
-  $(W).on(`${Events.RESIZE}`, () => {
+  $W.on(`${Events.RESIZE}`, () => {
     MainUI.detectBootstrapScreenSize();
   });
 
-  $(W).on('beforeunload unload', () => {
+  $W.on('beforeunload unload', () => {
     Spinner.show(() => {
       $Body.removeClass('loaded');
     });

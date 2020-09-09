@@ -6,8 +6,6 @@ const webpack = require('webpack');
 const path = require('path');
 const filesystem = require('fs');
 
-const autoprefixer = require('autoprefixer');
-
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
@@ -62,6 +60,7 @@ if (COMPRESS) {
 			canPrint: true,
 		}),
 	);
+	plugins.push(require('autoprefixer'));
 
 	plugins.push(
 		new ImageminPlugin({
@@ -279,7 +278,6 @@ module.exports = {
 						loader: 'postcss-loader',
 						options: {
 							sourceMap: !COMPRESS,
-							plugins: [autoprefixer()],
 						},
 					},
 					{

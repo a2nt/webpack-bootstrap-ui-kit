@@ -8,6 +8,7 @@ const SlidingMenu = (($) => {
   class SlidingMenu {
     // Constructor
     constructor(element) {
+    	console.log(`${NAME}: init`);
       this._element = element;
       const $element = $(this._element);
       $element.addClass(`${NAME}-active`);
@@ -22,7 +23,7 @@ const SlidingMenu = (($) => {
 
     // Public methods
     dispose() {
-      console.log(`Disposing: ${NAME} elements`);
+      console.log(`${NAME}: dispose`);
 
       $(this._element).removeClass(`${NAME}-active`);
       $.removeData(this._element, DATA_KEY);

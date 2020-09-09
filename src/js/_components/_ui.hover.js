@@ -128,6 +128,8 @@ const HoverUI = (($) => {
       const ui = this;
       const $el = ui.$el;
 
+      console.log(`${NAME}: dispose`);
+
       ui.$triger.removeClass(`${NAME}-active`);
       $.removeData($el, DATA_KEY);
 

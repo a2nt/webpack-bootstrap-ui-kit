@@ -15,19 +15,19 @@ const NoCaptcha = (($) => {
       const ui = this;
       ui.dispose();
 
-      console.log(`Initializing: ${NAME}`);
+      console.log(`${NAME}: init`);
       this.renderCaptcha();
     }
 
     static dispose() {
-      console.log(`Destroying: ${NAME}`);
+      console.log(`${NAME}: dispose`);
     }
 
     static renderCaptcha() {
-      console.log(`Rendering Captcha: ${NAME}`);
+      console.log(`${NAME}: Rendering Captcha`);
 
       if (typeof grecaptcha === 'undefined') {
-        console.log('Captcha API isn\'t available yet');
+        console.log(`${NAME}: Captcha API isn't available yet`);
       }
 
       const $_noCaptchaFields = $('.g-recaptcha');

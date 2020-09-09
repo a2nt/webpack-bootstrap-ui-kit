@@ -20,6 +20,7 @@ const CarouselUI = (($) => {
 
     static init() {
       this.dispose();
+      console.log(`${NAME}: init`);
 
       this.each((i, e) => {
         const $e = $(e),

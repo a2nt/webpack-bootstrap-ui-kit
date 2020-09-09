@@ -11,7 +11,7 @@ const ShrinkUI = (($) => {
 
   console.log(`${NAME}: init`);
 
-  $(W).on(`${Events.LOADED} ${Events.SCROLL} ${Events.RESIZE}`, () => {
+  $(W).on(`${NAME}.init ${Events.LOADED} ${Events.SCROLL} ${Events.RESIZE}`, () => {
     if ($('#Navigation > .navbar-collapse').hasClass('show')) {
       return;
     }

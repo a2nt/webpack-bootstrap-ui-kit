@@ -16,6 +16,7 @@ const FlyoutUI = (($) => {
 
   class FlyoutUI {
     static init() {
+    	console.log(`${NAME}: init`);
       const ui = this;
 
       ui.$modal = $(`.flyout-${NAME}`);
@@ -57,7 +58,7 @@ const FlyoutUI = (($) => {
     }
   }
 
-  $(W).on(`${Events.AJAX} ${Events.LOADED}`, () => {
+  $(W).on(`${NAME}.init ${Events.AJAX} ${Events.LOADED}`, () => {
     FlyoutUI.init();
   });
 

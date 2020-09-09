@@ -24,6 +24,8 @@ const DatetimeUI = (($) => {
 
   class DatetimeUI {
     constructor(el) {
+    	console.log(`${NAME}: init`);
+
       const ui = this;
       const $el = $(el);
 
@@ -71,7 +73,7 @@ const DatetimeUI = (($) => {
     }
 
     static dispose() {
-      console.log(`Destroying: ${NAME}`);
+      console.log(`${NAME}: dispose`);
     }
 
     static _jQueryInterface() {
@@ -97,7 +99,7 @@ const DatetimeUI = (($) => {
   };
 
   // auto-apply
-  $(window).on(`${Events.AJAX} ${Events.LOADED}`, () => {
+  $(window).on(`${NAME}.init ${Events.AJAX} ${Events.LOADED}`, () => {
     $('input.date, input.time,input[type="date"], input[type="time"]').jsDatetimeUI();
   });
 
