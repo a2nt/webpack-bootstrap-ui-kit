@@ -16,17 +16,18 @@ const EventsUI = (($) => {
 
   class EventsUI {
     static process(el, args) {
+      let modEl = el;
       const eventName = args[0];
       const tagName = typeof el !== undefined ? $(el).prop('tagName') : null;
 
       switch (tagName) {
         case 'HTML':
         case 'BODY':
-          el = $W;
+          modEl = $W;
           break;
       }
 
-      return [el, args];
+      return [modEl, args];
     }
   }
 
