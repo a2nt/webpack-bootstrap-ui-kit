@@ -148,12 +148,12 @@ const MainUI = (($) => {
 
           $Body.addClass('is-offline');
           $Body.trigger(Events.OFFLINE);
-      	  $W.trigger(Events.OFFLINE);
+          $W.trigger(Events.OFFLINE);
           //W.location.reload(false);
         } else {
           $Body.removeClass('is-offline');
           $Body.trigger(Events.ONLINE);
-      	  $W.trigger(Events.ONLINE);
+          $W.trigger(Events.ONLINE);
         }
       },
     });
@@ -215,22 +215,23 @@ const MainUI = (($) => {
     // Static methods
 
     static init() {
-      this.dispose();
+      const ui = this;
+      ui.dispose();
 
       console.log(`${NAME}: init`);
 
       // update location details
-      this.updateLocation();
+      ui.updateLocation();
 
       // mark available offline areas
       if ('caches' in W) {
         $('a.offline').addClass('offline-available');
       }
 
-      this.loadImages();
+      ui.loadImages();
 
       // detect bootstrap screen size
-      this.detectBootstrapScreenSize();
+      ui.detectBootstrapScreenSize();
 
       // mark external links
       $('a.external,a[rel="external"]').attr('target', '_blank');
@@ -340,12 +341,11 @@ const MainUI = (($) => {
         W.print();
       }
 
-      $Body.data(NAME, this);
+      $Body.data(NAME, ui);
       $W.removeClass('lock-main-init');
     }
 
     static detectBootstrapScreenSize() {
-
       const $el = $('<div class="env-test"></div>');
       let envs = [...Consts.ENVS];
       $Body.append($el);
@@ -366,7 +366,20 @@ const MainUI = (($) => {
       $Body.removeClass(envs);
       $Body.addClass(curEnv);
 
-      console.log(`${NAME}: screen size detected ${curEnv}`);
+      let landscape = true;
+      if ($W.width() > $W.height()) {
+        $Body.removeClass('portrait');
+        $Body.addClass('landscape');
+      } else {
+        landscape = false;
+
+        $Body.removeClass('landscape');
+        $Body.addClass('portrait');
+      }
+
+      console.log(
+        `${NAME}: screen size detected ${curEnv} | landscape ${landscape}`,
+      );
 
       return curEnv;
     }
