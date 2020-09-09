@@ -5,6 +5,7 @@ import $ from 'jquery';
 import Events from './_events';
 import Consts from './_consts';
 
+import EventsRouter from './_events.router';
 import Spinner from './_components/_ui.spinner';
 
 // AJAX functionality
@@ -47,6 +48,9 @@ const MainUI = (($) => {
   $W.on(`${Events.LODEDANDREADY}`, () => {
     console.groupEnd('Init');
     console.timeEnd('init');
+
+    console.time('Post-init');
+    console.groupCollapsed('Post-init');
   });
 
   // get browser locale
@@ -524,6 +528,9 @@ const MainUI = (($) => {
 
           setTimeout(() => {
             $W.trigger(`${Events.LAZYIMAGESREADY}`);
+
+            console.groupEnd('Post-init');
+            console.timeEnd('Post-init');
           }, 100);
         });
       });
