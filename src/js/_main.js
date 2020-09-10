@@ -121,7 +121,13 @@ const MainUI = (($) => {
   };
 
   // update online/offline state
+  let statusLock = false;
   const updateOnlineStatus = () => {
+    if (statusLock) {
+      return;
+    }
+    statusLock = true;
+
     if (typeof navigator.onLine === 'undefined') {
       return false;
     }
@@ -138,6 +144,7 @@ const MainUI = (($) => {
       $Body.trigger(Events.OFFLINE);
       $W.trigger(Events.OFFLINE);
 
+      statusLock = false;
       return true;
     }
 
@@ -158,6 +165,7 @@ const MainUI = (($) => {
     $Body.trigger(Events.ONLINE);
     $W.trigger(Events.ONLINE);
 
+    statusLock = false;
     return true;
   };
 
