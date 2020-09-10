@@ -46,7 +46,7 @@ const EventsUI = (($) => {
   // rewrite scrollTop
   $.fn.scrollTop = function () {
     let el = this;
-    let args = arguments;
+    const args = arguments;
 
     const tagName = typeof el !== undefined ? $(el).prop('tagName') : null;
 

@@ -27,10 +27,18 @@ const MainUI = (($) => {
   const NAME = 'MainUI';
 
   console.clear();
-  console.info(
-    '%cUI Kit: https://github.com/a2nt/webpack-bootstrap-ui-kit by Tony Air (tony@twma.pro)',
-    'color:yellow;font-size:16px',
-  );
+
+  if (typeof UINAME !== 'undefined') {
+    console.info(
+      `%cUI Kit ${UINAME} ${UIVERSION}`,
+      'color:yellow;font-size:14px',
+    );
+    console.info(
+      `%chttps://github.com/a2nt/webpack-bootstrap-ui-kit by ${UIAUTHOR}`,
+      'color:yellow;font-size:10px',
+    );
+  }
+
   console.groupCollapsed('Events');
   Object.keys(Events).forEach((k) => {
     console.info(`${k}: ${Events[k]}`);
