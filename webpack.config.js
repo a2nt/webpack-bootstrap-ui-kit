@@ -14,6 +14,9 @@ const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const ImageminPlugin = require('imagemin-webpack');
 const ImageSpritePlugin = require('@a2nt/image-sprite-webpack-plugin');
 
+const UIInfo = require('./package.json');
+const UIMetaInfo = require('./node_modules/@a2nt/meta-lightbox/package.json');
+
 const plugins = [
 	new webpack.DefinePlugin({
 		'process.env': {
@@ -32,6 +35,13 @@ const plugins = [
 	/**/
 	new HtmlWebpackPlugin({
 		template: './src/index.html',
+	}),
+	new webpack.DefinePlugin({
+		UINAME: JSON.stringify(UIInfo.name),
+		UIVERSION: JSON.stringify(UIInfo.version),
+		UIAUTHOR: JSON.stringify(UIInfo.author),
+		UIMetaName: JSON.stringify(UIMetaInfo.name),
+		UIMetaVersion: JSON.stringify(UIMetaInfo.version),
 	}),
 ];
 
