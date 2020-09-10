@@ -40,7 +40,7 @@ const plugins = [
 		UINAME: JSON.stringify(UIInfo.name),
 		UIVERSION: JSON.stringify(UIInfo.version),
 		UIAUTHOR: JSON.stringify(UIInfo.author),
-		UIMetaName: JSON.stringify(UIMetaInfo.name),
+		UIMetaNAME: JSON.stringify(UIMetaInfo.name),
 		UIMetaVersion: JSON.stringify(UIMetaInfo.version),
 	}),
 ];
