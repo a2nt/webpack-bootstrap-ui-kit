@@ -10,6 +10,7 @@ module.exports = {
   TABFOCUSED: 'tab-focused',
   OFFLINE: 'offline',
   ONLINE: 'online',
+  BACKONLINE: 'back-online',
   TOUCHENABLE: 'touch-enabled',
   TOUCHDISABLED: 'touch-disabled',
   LOADED: 'load',

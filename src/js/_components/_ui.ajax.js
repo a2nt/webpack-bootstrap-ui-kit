@@ -286,7 +286,7 @@ const AjaxUI = (($) => {
       for (const url in $.xhrPool.requests) {
         const jqXHR = $.xhrPool.requests[url];
         $.ajax(jqXHR.opts);
-        //console.log(`${NAME}: AJAX request is restored (${jqXHR.opts.url})`);
+        console.log(`${NAME}: AJAX request is restored (${jqXHR.opts.url})`);
       }
 
       $.xhrPool.paused = false;
@@ -308,7 +308,7 @@ const AjaxUI = (($) => {
     $.xhrPool.pauseAll();
   });
 
-  $Body.on(`${Events.ONLINE}`, () => {
+  $Body.on(`${Events.BACKONLINE}`, () => {
     $.xhrPool.restoreAll();
   });
 
