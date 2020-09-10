@@ -18,198 +18,199 @@ import SmoothScroll from 'smooth-scroll';
 const smoothScroll = SmoothScroll();
 
 const MainUI = (($) => {
-  // Constants
-  const W = window;
-  const $W = $(W);
-  const D = document;
-  const $Body = $('body');
+	// Constants
+	const W = window;
+	const $W = $(W);
+	const D = document;
+	const $Body = $('body');
 
-  const NAME = 'MainUI';
+	const NAME = 'MainUI';
 
-  console.clear();
+	console.clear();
 
-  console.info(
-    `%cUI Kit ${UINAME} ${UIVERSION}`,
-    'color:yellow;font-size:14px',
-  );
-  console.info(
-    `%c${UIMetaNAME} ${UIMetaVersion}`,
-    'color:yellow;font-size:12px',
-  );
-  console.info(
-    `%chttps://github.com/a2nt/webpack-bootstrap-ui-kit by ${UIAUTHOR}`,
-    'color:yellow;font-size:10px',
-  );
+	console.info(
+		`%cUI Kit ${UINAME} ${UIVERSION}`,
+		'color:yellow;font-size:14px',
+	);
+	console.info(
+		`%c${UIMetaNAME} ${UIMetaVersion}`,
+		'color:yellow;font-size:12px',
+	);
+	console.info(
+		`%chttps://github.com/a2nt/webpack-bootstrap-ui-kit by ${UIAUTHOR}`,
+		'color:yellow;font-size:10px',
+	);
 
-  console.groupCollapsed('Events');
-  Object.keys(Events).forEach((k) => {
-    console.info(`${k}: ${Events[k]}`);
-  });
-  console.groupEnd('Events');
+	console.groupCollapsed('Events');
+	Object.keys(Events).forEach((k) => {
+		console.info(`${k}: ${Events[k]}`);
+	});
+	console.groupEnd('Events');
 
-  console.groupCollapsed('Consts');
-  Object.keys(Consts).forEach((k) => {
-    console.info(`${k}: ${Consts[k]}`);
-  });
-  console.groupEnd('Events');
+	console.groupCollapsed('Consts');
+	Object.keys(Consts).forEach((k) => {
+		console.info(`${k}: ${Consts[k]}`);
+	});
+	console.groupEnd('Events');
 
-  console.groupCollapsed('Init');
-  console.time('init');
-  $W.on(`${Events.LODEDANDREADY}`, () => {
-    console.groupEnd('Init');
-    console.timeEnd('init');
+	console.groupCollapsed('Init');
+	console.time('init');
+	$W.on(`${Events.LODEDANDREADY}`, () => {
+		console.groupEnd('Init');
+		console.timeEnd('init');
 
-    console.time('Post-init');
-    console.groupCollapsed('Post-init');
-  });
+		console.time('Post-init');
+		console.groupCollapsed('Post-init');
+	});
 
-  // get browser locale
-  //const Locale = $('html').attr('lang').substring(0, 2);
+	// get browser locale
+	//const Locale = $('html').attr('lang').substring(0, 2);
 
-  const $AlertNotify = $('#AlertNotify');
-  const $SiteWideMessage = $('#SiteWideMessage');
+	const $AlertNotify = $('#AlertNotify');
+	const $SiteWideMessage = $('#SiteWideMessage');
 
-  // get browser window visibility preferences
-  // Opera 12.10, Firefox >=18, Chrome >=31, IE11
-  const HiddenName = 'hidden';
-  const VisibilityChangeEvent = 'visibilitychange';
+	// get browser window visibility preferences
+	// Opera 12.10, Firefox >=18, Chrome >=31, IE11
+	const HiddenName = 'hidden';
+	const VisibilityChangeEvent = 'visibilitychange';
 
-  // update visibility state
-  D.addEventListener(VisibilityChangeEvent, () => {
-    if (D.visibilityState === HiddenName) {
-      console.log(`${NAME}: Tab: hidden`);
-      $Body.addClass('is-hidden');
-      $Body.trigger(Events.TABHIDDEN);
-      $W.trigger(Events.TABHIDDEN);
-    } else {
-      console.log(`${NAME}: Tab: focused`);
-      $Body.removeClass('is-hidden');
-      $Body.trigger(Events.TABFOCUSED);
-      $W.trigger(Events.TABFOCUSED);
-    }
-  });
+	// update visibility state
+	D.addEventListener(VisibilityChangeEvent, () => {
+		if (D.visibilityState === HiddenName) {
+			console.log(`${NAME}: Tab: hidden`);
+			$Body.addClass('is-hidden');
+			$Body.trigger(Events.TABHIDDEN);
+			$W.trigger(Events.TABHIDDEN);
+		} else {
+			console.log(`${NAME}: Tab: focused`);
+			$Body.removeClass('is-hidden');
+			$Body.trigger(Events.TABFOCUSED);
+			$W.trigger(Events.TABFOCUSED);
+		}
+	});
 
-  // update online/offline state
-  const updateOnlineStatus = () => {
-    if (typeof navigator.onLine === 'undefined') {
-      return;
-    }
-    if (!navigator.onLine) {
-      console.log(`${NAME}: Tab: offline`);
-      $Body.addClass('is-offline');
-      $Body.trigger(Events.OFFLINE);
-      $W.trigger(Events.OFFLINE);
-    } else {
-      console.log(`${NAME}: Tab: online`);
-      $Body.removeClass('is-offline');
-      $Body.trigger(Events.ONLINE);
-      $W.trigger(Events.ONLINE);
-    }
-  };
+	// session ping
+	const sessionPing = () => {
+		if ($Body.hasClass('is-offline')) {
+			return;
+		}
 
-  W.addEventListener(
-    `${Events.OFFLINE}`,
-    () => {
-      updateOnlineStatus();
-    },
-    false,
-  );
+		console.log(`${NAME}: session ping`);
 
-  W.addEventListener(
-    `${Events.ONLINE}`,
-    () => {
-      updateOnlineStatus();
-    },
-    false,
-  );
+		$.ajax({
+			sync: false,
+			async: true,
+			cache: false,
+			url: '/Security/ping',
+			global: false,
+			type: 'POST',
+			complete: (data, datastatus) => {
+				if (datastatus !== 'success') {
+					console.warn(`${NAME}: ping failed`);
+					clearInterval(pingInterval);
+				}
+				updateOnlineStatus();
+			},
+		});
+	};
 
-  W.addEventListener(`${Events.LOADED}`, () => {
-    updateOnlineStatus();
-  });
+	let pingInterval = setInterval(sessionPing, 300000); // 5 min in ms
 
-  $W.on(`${Events.AJAX}`, () => {
-    updateOnlineStatus();
-  });
+	// update online/offline state
+	const updateOnlineStatus = () => {
+		if (typeof navigator.onLine === 'undefined') {
+			return;
+		}
+		if (!navigator.onLine) {
+			console.log(`${NAME}: Tab: offline`);
+			clearInterval(pingInterval);
 
-  // scrollTo
-  const ScrollTo = (trigger, selector) => {
-    smoothScroll.animateScroll(D.querySelector(selector), trigger, {
-      speed: 500,
-      offset: -20,
-      //easing: 'easeInOutCubic',
-      // Callback API
-      //before: (anchor, toggle) => {}, // Callback to run before scroll
-      //`after: (anchor, toggle) => {} // Callback to run after scroll
-    });
-  };
+			$Body.addClass('is-offline');
+			$Body.trigger(Events.OFFLINE);
+			$W.trigger(Events.OFFLINE);
+		} else {
+			console.log(`${NAME}: Tab: online`);
+			pingInterval = setInterval(sessionPing, 300000); // 5 min in ms
 
-  // session ping
-  const pingInterval = setInterval(() => {
-    if ($Body.hasClass('is-offline')) {
-      return;
-    }
+			$Body.removeClass('is-offline');
+			$Body.trigger(Events.ONLINE);
+			$W.trigger(Events.ONLINE);
+		}
+	};
 
-    $.ajax({
-      sync: false,
-      async: true,
-      cache: false,
-      url: '/Security/ping',
-      global: false,
-      type: 'POST',
-      complete(data, datastatus) {
-        if (datastatus !== 'success') {
-          clearInterval(pingInterval);
+	W.addEventListener(
+		`${Events.OFFLINE}`,
+		() => {
+			updateOnlineStatus();
+		},
+		false,
+	);
 
-          $Body.addClass('is-offline');
-          $Body.trigger(Events.OFFLINE);
-          $W.trigger(Events.OFFLINE);
-          //W.location.reload(false);
-        } else {
-          $Body.removeClass('is-offline');
-          $Body.trigger(Events.ONLINE);
-          $W.trigger(Events.ONLINE);
-        }
-      },
-    });
-  }, 300000); // 5 min in ms
+	W.addEventListener(
+		`${Events.ONLINE}`,
+		() => {
+			updateOnlineStatus();
+		},
+		false,
+	);
 
-  W.URLDetails = {
-    base: $('base').attr('href'),
-    relative: '/',
-    hash: '',
-  };
+	W.addEventListener(`${Events.LOADED}`, () => {
+		updateOnlineStatus();
+	});
 
-  let eventFired = false;
-  const setTouchScreen = (bool) => {
-    if (W.IsTouchScreen === bool || eventFired) {
-      return;
-    }
+	$W.on(`${Events.AJAX}`, () => {
+		updateOnlineStatus();
+	});
 
-    eventFired = true;
+	// scrollTo
+	const ScrollTo = (trigger, selector) => {
+		smoothScroll.animateScroll(D.querySelector(selector), trigger, {
+			speed: 500,
+			offset: -20,
+			//easing: 'easeInOutCubic',
+			// Callback API
+			//before: (anchor, toggle) => {}, // Callback to run before scroll
+			//`after: (anchor, toggle) => {} // Callback to run after scroll
+		});
+	};
 
-    W.IsTouchScreen = bool;
-    $.support.touch = W.IsTouchScreen;
+	W.URLDetails = {
+		base: $('base').attr('href'),
+		relative: '/',
+		hash: '',
+	};
 
-    if (bool) {
-      console.log(`${NAME}: Touch screen enabled`);
-      $Body.trigger(Events.TOUCHENABLE);
-      $W.trigger(Events.TOUCHENABLE);
-    } else {
-      console.log(`${NAME}: Touch screen disabled`);
-      $Body.trigger(Events.TOUCHDISABLED);
-      $W.trigger(Events.TOUCHDISABLED);
-    }
+	let eventFired = false;
+	const setTouchScreen = (bool) => {
+		if (W.IsTouchScreen === bool || eventFired) {
+			return;
+		}
 
-    // prevent firing touch and mouse events together
-    setTimeout(() => {
-      eventFired = false;
-    }, 200);
-  };
+		eventFired = true;
 
-  setTouchScreen('ontouchstart' in window || navigator.msMaxTouchPoints > 0);
+		W.IsTouchScreen = bool;
+		$.support.touch = W.IsTouchScreen;
 
-  // disable touch on mouse events
-  /*D.addEventListener('mousemove', () => {
+		if (bool) {
+			console.log(`${NAME}: Touch screen enabled`);
+			$Body.trigger(Events.TOUCHENABLE);
+			$W.trigger(Events.TOUCHENABLE);
+		} else {
+			console.log(`${NAME}: Touch screen disabled`);
+			$Body.trigger(Events.TOUCHDISABLED);
+			$W.trigger(Events.TOUCHDISABLED);
+		}
+
+		// prevent firing touch and mouse events together
+		setTimeout(() => {
+			eventFired = false;
+		}, 200);
+	};
+
+	setTouchScreen('ontouchstart' in window || navigator.msMaxTouchPoints > 0);
+
+	// disable touch on mouse events
+	/*D.addEventListener('mousemove', () => {
     setTouchScreen(false);
   });
 
@@ -217,41 +218,41 @@ const MainUI = (($) => {
     setTouchScreen(false);
   });*/
 
-  // enable touch screen on touch events
-  D.addEventListener('touchmove', () => {
-    setTouchScreen(true);
-  });
-  D.addEventListener('touchstart', () => {
-    setTouchScreen(true);
-  });
+	// enable touch screen on touch events
+	D.addEventListener('touchmove', () => {
+		setTouchScreen(true);
+	});
+	D.addEventListener('touchstart', () => {
+		setTouchScreen(true);
+	});
 
-  class MainUI {
-    // Static methods
+	class MainUI {
+		// Static methods
 
-    static init() {
-      const ui = this;
-      ui.dispose();
+		static init() {
+			const ui = this;
+			ui.dispose();
 
-      console.log(`${NAME}: init`);
+			console.log(`${NAME}: init`);
 
-      // update location details
-      ui.updateLocation();
+			// update location details
+			ui.updateLocation();
 
-      // mark available offline areas
-      if ('caches' in W) {
-        $('a.offline').addClass('offline-available');
-      }
+			// mark available offline areas
+			if ('caches' in W) {
+				$('a.offline').addClass('offline-available');
+			}
 
-      ui.loadImages();
+			ui.loadImages();
 
-      // detect bootstrap screen size
-      ui.detectBootstrapScreenSize();
+			// detect bootstrap screen size
+			ui.detectBootstrapScreenSize();
 
-      // mark external links
-      $('a.external,a[rel="external"]').attr('target', '_blank');
+			// mark external links
+			$('a.external,a[rel="external"]').attr('target', '_blank');
 
-      // show encoded emails
-      /*$(D).find('.obm').each(() => {
+			// show encoded emails
+			/*$(D).find('.obm').each(() => {
               if ($(this).attr('data-val') !== undefined) {
                 const email = $(this).attr('data-val').split('')
                   .reverse()
@@ -271,333 +272,333 @@ const MainUI = (($) => {
                 }
               }
             });*/
-      //
+			//
 
-      // scroll links
-      $('.js-scrollTo').on('click', (e) => {
-        console.log(`${NAME}: .js-scrollTo`);
+			// scroll links
+			$('.js-scrollTo').on('click', (e) => {
+				console.log(`${NAME}: .js-scrollTo`);
 
-        e.preventDefault();
-        const el = e.currentTarget;
-        const $el = $(e.currentTarget);
+				e.preventDefault();
+				const el = e.currentTarget;
+				const $el = $(e.currentTarget);
 
-        ScrollTo(el, $el.attr('data-target'));
-      });
+				ScrollTo(el, $el.attr('data-target'));
+			});
 
-      // load external fonts
-      if ($('[data-extfont]').length) {
-        console.log(`${NAME}: loading external fonts [data-extfont]`);
-        $.getScript(
-          '//ajax.googleapis.com/ajax/libs/webfont/1/webfont.js',
-          () => {
-            const fonts = [];
+			// load external fonts
+			if ($('[data-extfont]').length) {
+				console.log(`${NAME}: loading external fonts [data-extfont]`);
+				$.getScript(
+					'//ajax.googleapis.com/ajax/libs/webfont/1/webfont.js',
+					() => {
+						const fonts = [];
 
-            $('[data-extfont]').each((i, el) => {
-              fonts[i] = $(el).attr('data-extfont');
-            });
+						$('[data-extfont]').each((i, el) => {
+							fonts[i] = $(el).attr('data-extfont');
+						});
 
-            W.WebFont.load({
-              google: {
-                families: fonts,
-              },
-            });
-          },
-        );
-      }
+						W.WebFont.load({
+							google: {
+								families: fonts,
+							},
+						});
+					},
+				);
+			}
 
-      // data-set links
-      $('[data-set-target]').on('click', (e) => {
-        console.log(`${NAME}: [data-set-target]`);
+			// data-set links
+			$('[data-set-target]').on('click', (e) => {
+				console.log(`${NAME}: [data-set-target]`);
 
-        const $el = $(e.currentTarget);
-        const $target = $($el.data('set-target'));
+				const $el = $(e.currentTarget);
+				const $target = $($el.data('set-target'));
 
-        if (!$target.length) {
-          return;
-        }
+				if (!$target.length) {
+					return;
+				}
 
-        $target.each((i, targetEl) => {
-          const $targetEl = $(targetEl);
-          const tag = $targetEl.prop('tagName').toLowerCase();
+				$target.each((i, targetEl) => {
+					const $targetEl = $(targetEl);
+					const tag = $targetEl.prop('tagName').toLowerCase();
 
-          if (tag === 'input' || tag === 'select') {
-            $targetEl.val($el.data('set-val'));
-          } else if (!$targetEl.hasClass('field')) {
-            $targetEl.text($el.data('set-val'));
-          }
-        });
+					if (tag === 'input' || tag === 'select') {
+						$targetEl.val($el.data('set-val'));
+					} else if (!$targetEl.hasClass('field')) {
+						$targetEl.text($el.data('set-val'));
+					}
+				});
 
-        $el.trigger(Events.SET_TARGET_UPDATE);
-        $target.closest('form').trigger(Events.SET_TARGET_UPDATE);
-      });
+				$el.trigger(Events.SET_TARGET_UPDATE);
+				$target.closest('form').trigger(Events.SET_TARGET_UPDATE);
+			});
 
-      // emulate links
-      $('.a[data-href]').on('click', (e) => {
-        console.log(`${NAME}: js link processing .a[data-href]`);
+			// emulate links
+			$('.a[data-href]').on('click', (e) => {
+				console.log(`${NAME}: js link processing .a[data-href]`);
 
-        const $el = $(e.currentTarget);
-        const href = $el.data('href');
-        if (!href.length) {
-          console.warn(`${NAME}: .a[data-href] | Missing data-href`);
-          console.warn($el);
-        }
+				const $el = $(e.currentTarget);
+				const href = $el.data('href');
+				if (!href.length) {
+					console.warn(`${NAME}: .a[data-href] | Missing data-href`);
+					console.warn($el);
+				}
 
-        W.location.assign(href);
-      });
+				W.location.assign(href);
+			});
 
-      // hide spinner
-      Spinner.hide(() => {
-        $Body.addClass('loaded');
-      });
+			// hide spinner
+			Spinner.hide(() => {
+				$Body.addClass('loaded');
+			});
 
-      // fire page printing
-      if (W.URLDetails['hash'].indexOf('printpage') > -1) {
-        W.print();
-      }
+			// fire page printing
+			if (W.URLDetails['hash'].indexOf('printpage') > -1) {
+				W.print();
+			}
 
-      $Body.data(NAME, ui);
-      $W.removeClass('lock-main-init');
-    }
+			$Body.data(NAME, ui);
+			$W.removeClass('lock-main-init');
+		}
 
-    static detectBootstrapScreenSize() {
-      const $el = $('<div class="env-test"></div>');
-      let envs = [...Consts.ENVS];
-      $Body.append($el);
+		static detectBootstrapScreenSize() {
+			const $el = $('<div class="env-test"></div>');
+			let envs = [...Consts.ENVS];
+			$Body.append($el);
 
-      let curEnv = envs.shift();
-      envs = envs.reverse();
+			let curEnv = envs.shift();
+			envs = envs.reverse();
 
-      for (let i = 0; i < envs.length; ++i) {
-        const env = envs[i];
-        $el.addClass(`d-${env}-none`);
-        if ($el.is(':hidden')) {
-          curEnv = env;
-          break;
-        }
-      }
+			for (let i = 0; i < envs.length; ++i) {
+				const env = envs[i];
+				$el.addClass(`d-${env}-none`);
+				if ($el.is(':hidden')) {
+					curEnv = env;
+					break;
+				}
+			}
 
-      $el.remove();
-      $Body.removeClass(envs);
-      $Body.addClass(curEnv);
+			$el.remove();
+			$Body.removeClass(envs);
+			$Body.addClass(curEnv);
 
-      let landscape = true;
-      if ($W.width() > $W.height()) {
-        $Body.removeClass('portrait');
-        $Body.addClass('landscape');
-      } else {
-        landscape = false;
+			let landscape = true;
+			if ($W.width() > $W.height()) {
+				$Body.removeClass('portrait');
+				$Body.addClass('landscape');
+			} else {
+				landscape = false;
 
-        $Body.removeClass('landscape');
-        $Body.addClass('portrait');
-      }
+				$Body.removeClass('landscape');
+				$Body.addClass('portrait');
+			}
 
-      console.log(
-        `${NAME}: screen size detected ${curEnv} | landscape ${landscape}`,
-      );
+			console.log(
+				`${NAME}: screen size detected ${curEnv} | landscape ${landscape}`,
+			);
 
-      return curEnv;
-    }
+			return curEnv;
+		}
 
-    static updateLocation(url) {
-      let location = url || W.location.href;
-      location = location.replace(W.URLDetails['base'], '/');
-      const hash = location.indexOf('#');
+		static updateLocation(url) {
+			let location = url || W.location.href;
+			location = location.replace(W.URLDetails['base'], '/');
+			const hash = location.indexOf('#');
 
-      W.URLDetails.relative = location.split('#')[0];
-      W.URLDetails.hash =
+			W.URLDetails.relative = location.split('#')[0];
+			W.URLDetails.hash =
 				hash >= 0 ? location.substr(location.indexOf('#')) : '';
-    }
+		}
 
-    // show site-wide alert
-    static alert(msg, cls) {
-      $SiteWideMessage.fadeOut('fast');
+		// show site-wide alert
+		static alert(msg, cls) {
+			$SiteWideMessage.fadeOut('fast');
 
-      $SiteWideMessage.html(
-        `<div class="page-alert"><div class="alert alert-${cls}"><i class="close" data-dismiss="alert">&times;</i>${msg}</div></div>`,
-      );
-      $SiteWideMessage.find('.page-alert').alert();
+			$SiteWideMessage.html(
+				`<div class="page-alert"><div class="alert alert-${cls}"><i class="close" data-dismiss="alert">&times;</i>${msg}</div></div>`,
+			);
+			$SiteWideMessage.find('.page-alert').alert();
 
-      $SiteWideMessage.find('.close[data-dismiss="alert"]').click(() => {
-        $SiteWideMessage.fadeOut('slow', () => {
-          $SiteWideMessage.find('.page-alert').alert('close');
-        });
-      });
+			$SiteWideMessage.find('.close[data-dismiss="alert"]').click(() => {
+				$SiteWideMessage.fadeOut('slow', () => {
+					$SiteWideMessage.find('.page-alert').alert('close');
+				});
+			});
 
-      $SiteWideMessage.fadeIn('slow');
+			$SiteWideMessage.fadeIn('slow');
 
-      if ($AlertNotify.length) {
-        $AlertNotify[0].play();
-      }
+			if ($AlertNotify.length) {
+				$AlertNotify[0].play();
+			}
 
-      $W.trigger(`${Events.ALLERTAPPEARED}`);
-    }
+			$W.trigger(`${Events.ALLERTAPPEARED}`);
+		}
 
-    // hide site-wide alert
-    static alertHide() {
-      if ($SiteWideMessage.length !== 0) {
-        $SiteWideMessage.fadeOut('slow', () => {
-          $SiteWideMessage.find('.alert').alert('close');
-        });
-      }
+		// hide site-wide alert
+		static alertHide() {
+			if ($SiteWideMessage.length !== 0) {
+				$SiteWideMessage.fadeOut('slow', () => {
+					$SiteWideMessage.find('.alert').alert('close');
+				});
+			}
 
-      if (
-        $AlertNotify.length &&
+			if (
+				$AlertNotify.length &&
 				typeof $AlertNotify[0].stop !== 'undefined'
-      ) {
-        $AlertNotify[0].stop();
-      }
+			) {
+				$AlertNotify[0].stop();
+			}
 
-      $W.trigger(`${Events.ALLERTREMOVED}`);
-    }
+			$W.trigger(`${Events.ALLERTREMOVED}`);
+		}
 
-    // load all images
-    static loadImages() {
-      const $imgs = $Body.find('img').not('.loaded');
-      const $imgUrls = [];
-      const $imgLazyUrls = [];
+		// load all images
+		static loadImages() {
+			const $imgs = $Body.find('img').not('.loaded');
+			const $imgUrls = [];
+			const $imgLazyUrls = [];
 
-      // collect image details
-      $imgs.each((i, el) => {
-        const $el = $(el);
-        const src = $el.attr('src');
-        const lazySrc = $el.data('lazy-src');
+			// collect image details
+			$imgs.each((i, el) => {
+				const $el = $(el);
+				const src = $el.attr('src');
+				const lazySrc = $el.data('lazy-src');
 
-        if ($el.hasClass('loaded')) {
-          return;
-        }
+				if ($el.hasClass('loaded')) {
+					return;
+				}
 
-        if (src && src.length) {
-          $imgUrls.push(src);
-        }
-        if (lazySrc && lazySrc.length) {
-          $imgLazyUrls.push(lazySrc);
-          $el.addClass('loading');
+				if (src && src.length) {
+					$imgUrls.push(src);
+				}
+				if (lazySrc && lazySrc.length) {
+					$imgLazyUrls.push(lazySrc);
+					$el.addClass('loading');
 
-          AjaxUI.preload([lazySrc]).then(() => {
-            $el.attr('src', lazySrc);
+					AjaxUI.preload([lazySrc]).then(() => {
+						$el.attr('src', lazySrc);
 
-            $el.on(`${Events.LOADED}`, () => {
-              $el.addClass('loaded');
-              $el.removeClass('loading');
+						$el.on(`${Events.LOADED}`, () => {
+							$el.addClass('loaded');
+							$el.removeClass('loading');
 
-              $el.trigger(`${Events.LAZYIMAGEREADY}`);
-            });
-          });
-        }
-      });
+							$el.trigger(`${Events.LAZYIMAGEREADY}`);
+						});
+					});
+				}
+			});
 
-      // load lazy backgrounds
-      $Body
-        .find('[data-lazy-bg]')
-        .not('.loaded')
-        .each((i, el) => {
-          const $el = $(el);
-          const lazySrc = $el.data('lazy-bg');
+			// load lazy backgrounds
+			$Body
+				.find('[data-lazy-bg]')
+				.not('.loaded')
+				.each((i, el) => {
+					const $el = $(el);
+					const lazySrc = $el.data('lazy-bg');
 
-          if ($el.hasClass('loaded')) {
-            return;
-          }
+					if ($el.hasClass('loaded')) {
+						return;
+					}
 
-          if (lazySrc && lazySrc.length) {
-            $imgLazyUrls.push(lazySrc);
-            $el.addClass('loading');
+					if (lazySrc && lazySrc.length) {
+						$imgLazyUrls.push(lazySrc);
+						$el.addClass('loading');
 
-            AjaxUI.preload([lazySrc]).then(() => {
-              $el.css({ 'background-image': `url(${lazySrc})` });
+						AjaxUI.preload([lazySrc]).then(() => {
+							$el.css({ 'background-image': `url(${lazySrc})` });
 
-              $el.addClass('loaded');
-              $el.removeClass('loading');
+							$el.addClass('loaded');
+							$el.removeClass('loading');
 
-              $el.trigger(`${Events.LAZYIMAGEREADY}`);
-            });
-          }
-        });
+							$el.trigger(`${Events.LAZYIMAGEREADY}`);
+						});
+					}
+				});
 
-      // replace img src
-      $Body
-        .find('[data-src-replace]')
-        .not('.loaded')
-        .each((i, el) => {
-          const $el = $(el);
-          const lazySrc = $el.data('src-replace');
+			// replace img src
+			$Body
+				.find('[data-src-replace]')
+				.not('.loaded')
+				.each((i, el) => {
+					const $el = $(el);
+					const lazySrc = $el.data('src-replace');
 
-          if ($el.hasClass('loaded')) {
-            return;
-          }
+					if ($el.hasClass('loaded')) {
+						return;
+					}
 
-          if (lazySrc && lazySrc.length) {
-            $el.addClass('loaded');
-            $el.attr('src', lazySrc);
-          }
-        });
+					if (lazySrc && lazySrc.length) {
+						$el.addClass('loaded');
+						$el.attr('src', lazySrc);
+					}
+				});
 
-      // load defined images
-      AjaxUI.preload($imgUrls).then(() => {
-        $W.trigger('images-loaded');
+			// load defined images
+			AjaxUI.preload($imgUrls).then(() => {
+				$W.trigger('images-loaded');
 
-        // load lazy images
-        AjaxUI.preload($imgLazyUrls).then(() => {
-          console.log(`${NAME}: All images are loaded!`);
+				// load lazy images
+				AjaxUI.preload($imgLazyUrls).then(() => {
+					console.log(`${NAME}: All images are loaded!`);
 
-          setTimeout(() => {
-            $W.trigger(`${Events.LAZYIMAGESREADY}`);
+					setTimeout(() => {
+						$W.trigger(`${Events.LAZYIMAGESREADY}`);
 
-            console.groupEnd('Post-init');
-            console.timeEnd('Post-init');
-          }, 100);
-        });
-      });
-    }
+						console.groupEnd('Post-init');
+						console.timeEnd('Post-init');
+					}, 100);
+				});
+			});
+		}
 
-    static dispose() {
-      console.log(`${NAME}: dispose`);
-    }
-  }
+		static dispose() {
+			console.log(`${NAME}: dispose`);
+		}
+	}
 
-  $W.on(
-    `${Events.MAININIT} ${Events.AJAX} ${Events.AJAXMAIN} ${Events.LOADED}`,
-    () => {
-      if ($W.hasClass('lock-main-init')) {
-        console.warn('MainUI is locked');
-        return;
-      }
+	$W.on(
+		`${Events.MAININIT} ${Events.AJAX} ${Events.AJAXMAIN} ${Events.LOADED}`,
+		() => {
+			if ($W.hasClass('lock-main-init')) {
+				console.warn('MainUI is locked');
+				return;
+			}
 
-      $W.addClass('lock-main-init');
-      MainUI.init();
-    },
-  );
+			$W.addClass('lock-main-init');
+			MainUI.init();
+		},
+	);
 
-  $W.on(`${Events.RESIZE}`, () => {
-    MainUI.detectBootstrapScreenSize();
-  });
+	$W.on(`${Events.RESIZE}`, () => {
+		MainUI.detectBootstrapScreenSize();
+	});
 
-  $W.on('beforeunload unload', () => {
-    Spinner.show(() => {
-      $Body.removeClass('loaded');
-    });
-  });
+	$W.on('beforeunload unload', () => {
+		Spinner.show(() => {
+			$Body.removeClass('loaded');
+		});
+	});
 
-  // hide spinner on target _blank
-  $('[target="_blank"],.external').on('click submit', (e) => {
-    if (
-      $(e.currentTarget).is(
-        '[data-toggle="lightbox"],[data-lightbox-gallery]',
-      )
-    ) {
-      return false;
-    }
+	// hide spinner on target _blank
+	$('[target="_blank"],.external').on('click submit', (e) => {
+		if (
+			$(e.currentTarget).is(
+				'[data-toggle="lightbox"],[data-lightbox-gallery]',
+			)
+		) {
+			return false;
+		}
 
-    console.log(`${NAME}: External link`);
-    setTimeout(() => {
-      Spinner.hide(() => {
-        $Body.addClass('loaded');
-      });
-    }, 1000);
-  });
+		console.log(`${NAME}: External link`);
+		setTimeout(() => {
+			Spinner.hide(() => {
+				$Body.addClass('loaded');
+			});
+		}, 1000);
+	});
 
-  W.MainUI = MainUI;
+	W.MainUI = MainUI;
 
-  return MainUI;
+	return MainUI;
 })($);
 
 export default MainUI;
