@@ -133,7 +133,7 @@ const MainUI = (($) => {
     }
 
     if (!navigator.onLine) {
-      console.log(`${NAME}: Tab: offline`);
+      console.log(`${NAME}: Offline`);
 
       clearInterval(pingInterval);
       pingInterval = null;
@@ -152,11 +152,13 @@ const MainUI = (($) => {
       pingInterval = setInterval(sessionPing, 300000); // 5 min in ms
     }
 
-    console.log(`${NAME}: Tab: online`);
     if ($Body.hasClass('is-offline')) {
       sessionPing();
 
+      console.log(`${NAME}: is back online`);
       $Body.trigger(Events.BACKONLINE);
+    } else {
+      console.log(`${NAME}: Online`);
     }
 
     $Body.addClass('is-online');
@@ -583,7 +585,7 @@ const MainUI = (($) => {
     `${Events.MAININIT} ${Events.AJAX} ${Events.AJAXMAIN} ${Events.LOADED}`,
     () => {
       if ($W.hasClass('lock-main-init')) {
-        console.warn('MainUI is locked');
+        console.warn(`${NAME}: locked`);
         return;
       }
 
