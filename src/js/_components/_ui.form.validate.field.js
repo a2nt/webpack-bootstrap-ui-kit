@@ -70,9 +70,37 @@ const FormValidateField = (($) => {
       // validate URL
       if ($el.hasClass('url') && val.length && !this.valideURL(val)) {
         valid = false;
+
         msg =
           'URL must start with http:// or https://. For example: https://your-domain.com/';
         console.warn(`${NAME}: Wrong URL #${$el.attr('id')}`);
+      }
+
+      let unmaskedVal = val;
+      if(typeof $el.inputmask === 'function'){
+        unmaskedVal = $el.inputmask('unmaskedvalue');
+      }
+
+      // maxlength
+      const maxLength = $el.attr('maxlength');
+      if(maxLength && maxLength.length) {
+        if(unmaskedVal.length > maxLength){
+          valid = false;
+
+          msg = `The value is limited to ${maxLength} chars`;
+          console.warn(`${NAME}: Too long value #${$el.attr('id')}`);
+        }
+      }
+
+      // minlength
+      const minLength = $el.attr('minlength');
+      if(minLength && minLength.length) {
+        if(unmaskedVal.length < minLength){
+          valid = false;
+
+          msg = `The value should contain more than ${minLength} chars`;
+          console.warn(`${NAME}: Too short value #${$el.attr('id')}`);
+        }
       }
 
       this.removeError();
