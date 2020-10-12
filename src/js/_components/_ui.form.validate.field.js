@@ -56,12 +56,17 @@ const FormValidateField = (($) => {
         console.warn(`${NAME}: Browser check validity is failed #${$el.attr('id')}`);
       }
 
+      let unmaskedVal = val;
+      if(typeof $el.inputmask === 'function'){
+        unmaskedVal = $el.inputmask('unmaskedvalue');
+      }
+
       // required
       if (
         $el.hasClass('required') &&
-        (!val.length ||
-          !val.trim().length ||
-          (ui.isHtml(val) && !$(val).text().length))
+        (!unmaskedVal.length ||
+          !unmaskedVal.trim().length ||
+          (ui.isHtml(val) && !$(unmaskedVal).text().length))
       ) {
         valid = false;
         console.warn(`${NAME}: Required field is missing #${$el.attr('id')}`);
@@ -74,11 +79,6 @@ const FormValidateField = (($) => {
         msg =
           'URL must start with http:// or https://. For example: https://your-domain.com/';
         console.warn(`${NAME}: Wrong URL #${$el.attr('id')}`);
-      }
-
-      let unmaskedVal = val;
-      if(typeof $el.inputmask === 'function'){
-        unmaskedVal = $el.inputmask('unmaskedvalue');
       }
 
       // maxlength
