@@ -66,7 +66,7 @@ const MapAPI = (($) => {
             );
 
             Drv.addMarker([lng, lat], config);
-            ui.map.setCenter({ lat: lat, lng: lng });
+            ui.map.setCenter({ lat, lng });
           });
         } else if (config['lat'] && config['lng']) {
           const lat = config['lat'];
