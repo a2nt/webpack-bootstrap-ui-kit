@@ -38,6 +38,10 @@ const MapAPI = (($) => {
 
       config['font-family'] = $BODY.css('font-family');
 
+      if (!config['icon']) {
+        config['icon'] = '<i class="fas fa-map-marker-alt"></i>';
+      }
+
       console.log(`${NAME}: init ${Drv.getName()}...`);
       Drv.init($el, config);
       ui.drv = Drv;
@@ -51,17 +55,28 @@ const MapAPI = (($) => {
         } else if (config['address']) {
           console.log(config['address']);
           console.log(`${NAME}: setting up address marker`);
-          Drv.geocode(config['address'], (result) => {
-            console.log(result);
+          Drv.geocode(config['address'], (results) => {
+            console.log(results);
+
+            const lat = results[0].geometry.location.lat();
+            const lng = results[0].geometry.location.lng();
+
+            console.log(
+              `${NAME}: setting up single lat/lng marker lat: ${lat} lng: ${lng}`,
+            );
+
+            Drv.addMarker([lng, lat], config);
+            ui.map.setCenter({ lat: lat, lng: lng });
           });
         } else if (config['lat'] && config['lng']) {
-          console.log(`${NAME}: setting up single lat/lng marker`);
+          const lat = config['lat'];
+          const lng = config['lng'];
 
-          if (!config['icon']) {
-            config['icon'] = '<i class="fas fa-map-marker-alt"></i>';
-          }
+          console.log(
+            `${NAME}: setting up single lat/lng marker lat: ${lat} lng: ${lng}`,
+          );
 
-          Drv.addMarker([config['lng'], config['lat']], config);
+          Drv.addMarker([lng, lat], config);
         }
 
         $el.data(DATA_KEY, ui);
@@ -88,7 +103,7 @@ const MapAPI = (($) => {
 
     static _jQueryInterface() {
       if (typeof W.localStorage !== 'undefined') {
-        return this.each(function() {
+        return this.each(function () {
           // attach functionality to el
           const $el = $(this);
           let data = $el.data(DATA_KEY);
@@ -105,7 +120,7 @@ const MapAPI = (($) => {
   // jQuery interface
   $.fn[NAME] = MapAPI._jQueryInterface;
   $.fn[NAME].Constructor = MapAPI;
-  $.fn[NAME].noConflict = function() {
+  $.fn[NAME].noConflict = function () {
     $.fn[NAME] = JQUERY_NO_CONFLICT;
     return MapAPI._jQueryInterface;
   };
