@@ -33,7 +33,7 @@ input.checkbox {
 		margin-top: 0;
 		margin-bottom: 0;
 		&.row {
-			 flex-direction: row;
+			flex-direction: row;
 		}
 	}
 
@@ -149,9 +149,9 @@ input.checkbox {
 }
 
 // select2 dropdowns bootstrap4 styling
-body > .select2-container {
+/*body > .select2-container {
 	position: fixed !important;
-}
+}*/
 .select2-container {
 	display: block;
 	width: 100% !important;
