@@ -78,7 +78,7 @@ const FormValidate = (($) => {
       const ui = this;
       let valid = true;
 
-      ui._fields.each((i, el) => {
+      ui._fields.filter(':visible').each((i, el) => {
         const $el = $(el);
         const fieldUI = $el.data('jsFormValidateField');
 
