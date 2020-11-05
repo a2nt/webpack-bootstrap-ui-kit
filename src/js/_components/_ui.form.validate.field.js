@@ -53,11 +53,13 @@ const FormValidateField = (($) => {
       // browser checks
       if (!ui.$el[0].checkValidity()) {
         valid = false;
-        console.warn(`${NAME}: Browser check validity is failed #${$el.attr('id')}`);
+        console.warn(
+          `${NAME}: Browser check validity is failed #${$el.attr('id')}`,
+        );
       }
 
       let unmaskedVal = val;
-      if(typeof $el.inputmask === 'function'){
+      if (typeof $el.inputmask === 'function') {
         unmaskedVal = $el.inputmask('unmaskedvalue');
       }
 
@@ -83,8 +85,8 @@ const FormValidateField = (($) => {
 
       // maxlength
       const maxLength = $el.attr('maxlength');
-      if(maxLength && maxLength.length) {
-        if(unmaskedVal.length > maxLength){
+      if (unmaskedVal.length && maxLength && maxLength.length) {
+        if (unmaskedVal.length > maxLength) {
           valid = false;
 
           msg = `The value is limited to ${maxLength} chars`;
@@ -94,8 +96,8 @@ const FormValidateField = (($) => {
 
       // minlength
       const minLength = $el.attr('minlength');
-      if(minLength && minLength.length) {
-        if(unmaskedVal.length < minLength){
+      if (unmaskedVal.length && minLength && minLength.length) {
+        if (unmaskedVal.length < minLength) {
           valid = false;
 
           msg = `The value should contain more than ${minLength} chars`;
