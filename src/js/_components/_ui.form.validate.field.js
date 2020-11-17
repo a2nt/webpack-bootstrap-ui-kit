@@ -75,11 +75,15 @@ const FormValidateField = (($) => {
       }
 
       // validate URL
-      if ($el.hasClass('url') && val.length && !this.valideURL(val)) {
+      if (
+        $el.hasClass('url') &&
+        unmaskedVal.length &&
+        !ui.valideURL(unmaskedVal)
+      ) {
         valid = false;
 
         msg =
-          'URL must start with http:// or https://. For example: https://your-domain.com/';
+          'Invalid URL: URL must start with http:// or https://. For example: https://your-domain.com/bla-bla/?p1=b&p2=a#tag';
         console.warn(`${NAME}: Wrong URL #${$el.attr('id')}`);
       }
 
@@ -110,7 +114,7 @@ const FormValidateField = (($) => {
       // extra checks
       if (extraChecks) {
         extraChecks.forEach((check) => {
-          const result = check();
+          const result = check($el);
           valid = valid && result;
           if (!result) {
             console.log(check);
@@ -136,16 +140,15 @@ const FormValidateField = (($) => {
     }
 
     valideURL(str) {
-      const pattern = new RegExp(
-        '^(https?:\\/\\/){1}' + // protocol
-        '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.?)+[a-z]{2,}|' + // domain name
-        '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
-        '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
-        '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
-          '(\\#[-a-z\\d_]*)?$',
-        'i',
-      ); // fragment locator
-      return pattern.test(str);
+      let url;
+
+      try {
+        url = new URL(str);
+      } catch (_) {
+        return false;
+      }
+
+      return url.protocol === 'http:' || url.protocol === 'https:';
     }
 
     setError(scrollTo = true, msg = null) {
