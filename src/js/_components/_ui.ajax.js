@@ -258,7 +258,7 @@ const AjaxUI = (($) => {
     } else if ($existingLink.length && $existingLink.hasClass('ajax')) {
       console.log(`${NAME}: GOBACK (AJAX link)`);
       $existingLink.trigger('click');
-    } else {
+    } else if (D.location.href !== G.location.href) {
       console.log(`${NAME}: GOBACK (HTTP)`);
       G.location.href = D.location;
     }
