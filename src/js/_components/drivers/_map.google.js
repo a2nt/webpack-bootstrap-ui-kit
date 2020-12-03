@@ -3,6 +3,7 @@
 import $ from 'jquery';
 import Events from '../../_events';
 import MarkerUI from './_map.google.marker';
+import MarkerClusterer from '@googlemaps/markerclustererplus';
 
 const GoogleMapsDriver = (($) => {
   class GoogleMapsDriver {

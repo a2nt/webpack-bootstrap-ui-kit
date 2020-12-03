@@ -362,7 +362,7 @@ const MainUI = (($) => {
       });
 
       // emulate links
-      $('.a[data-href]').on('click', (e) => {
+      $('.a[data-href]').not('[data-toggle="lightbox"],[data-lightbox-gallery],.jsMetaLightboxUI').on('click', (e) => {
         console.log(`${NAME}: js link processing .a[data-href]`);
 
         const $el = $(e.currentTarget);

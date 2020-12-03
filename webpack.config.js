@@ -1,17 +1,17 @@
 const SOURCEDIR = './src';
-const COMPRESS = false;
+const DISTDIR = './dist';
+const COMPRESS = true;
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 const path = require('path');
 const filesystem = require('fs');
 
-const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const TerserPlugin = require('terser-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const ImageminPlugin = require('imagemin-webpack');
+const ImageminPlugin = require('image-minimizer-webpack-plugin');
 const ImageSpritePlugin = require('@a2nt/image-sprite-webpack-plugin');
 
 const UIInfo = require('./package.json');
@@ -23,18 +23,17 @@ const plugins = [
 			NODE_ENV: JSON.stringify('production'),
 		},
 	}),
-	new HardSourceWebpackPlugin(),
 	new webpack.LoaderOptionsPlugin({
 		minimize: COMPRESS,
 		debug: false,
 	}),
 	new MiniCssExtractPlugin({
 		filename: 'css/[name].css',
-		allChunks: true,
+		//allChunks: true,
 	}),
 	/**/
 	new HtmlWebpackPlugin({
-		template: './src/index.html',
+		template: SOURCEDIR + '/index.html',
 	}),
 	new webpack.DefinePlugin({
 		UINAME: JSON.stringify(UIInfo.name),
@@ -74,16 +73,9 @@ if (COMPRESS) {
 
 	plugins.push(
 		new ImageminPlugin({
-			bail: false, // Ignore errors on corrupted images
-			cache: true,
-			filter: (source, sourcePath) => {
-				if (source.byteLength < 512000) {
-					return false;
-				}
-
-				return true;
-			},
-			imageminOptions: {
+			minimizerOptions: {
+				// Lossless optimization with custom option
+				// Feel free to experiment with options for better result for you
 				plugins: [
 					['gifsicle', { interlaced: true }],
 					['jpegtran', { progressive: true }],
@@ -175,30 +167,25 @@ const _addAppFiles = (theme) => {
 
 _addAppFiles(SOURCEDIR);
 
-// remove unnecessary elements for the demo
-delete includes['app_cms'];
-delete includes['app_editor'];
-delete includes['app_order'];
-
 module.exports = {
 	entry: includes,
 	output: {
-		path: path.resolve(__dirname, 'dist'),
+		path: path.resolve(__dirname, DISTDIR),
 		filename: path.join('js', '[name].js'),
-		publicPath: path.resolve(__dirname, 'dist'),
+		publicPath: path.resolve(__dirname, DISTDIR),
 	},
-	devtool: COMPRESS ? '' : 'source-map',
+	//devtool: COMPRESS ? '' : 'source-map',
 	externals: {
 		jquery: 'jQuery',
 	},
 	optimization: {
-		namedModules: true, // NamedModulesPlugin()
+		//namedModules: true, // NamedModulesPlugin()
 		splitChunks: {
 			// CommonsChunkPlugin()
 			name: 'vendor',
 			minChunks: 2,
 		},
-		noEmitOnErrors: true, // NoEmitOnErrorsPlugin
+		//noEmitOnErrors: true, // NoEmitOnErrorsPlugin
 		concatenateModules: true, //ModuleConcatenationPlugin
 		minimizer: [
 			new TerserPlugin({
@@ -235,7 +222,7 @@ module.exports = {
 				// Default number of concurrent runs: os.cpus().length - 1
 				parallel: true,
 				// Enable file caching
-				cache: true,
+				//cache: true,
 			}),
 		],
 	},
@@ -248,10 +235,7 @@ module.exports = {
 					loader: 'babel-loader',
 					options: {
 						presets: ['@babel/preset-env'], //Preset used for env setup
-						plugins: [
-							['@babel/transform-react-jsx'],
-							['react-hot-loader/babel'],
-						],
+						plugins: [['@babel/transform-react-jsx']],
 						cacheDirectory: true,
 						cacheCompression: false,
 					},
@@ -280,12 +264,6 @@ module.exports = {
 					},
 					{
 						loader: 'css-loader',
-						options: {
-							sourceMap: !COMPRESS,
-						},
-					},
-					{
-						loader: 'postcss-loader',
 						options: {
 							sourceMap: !COMPRESS,
 						},
