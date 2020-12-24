@@ -362,7 +362,7 @@ const MainUI = (($) => {
       });
 
       // emulate links
-      $('.a[data-href]').not('[data-toggle="lightbox"],[data-lightbox-gallery],.jsMetaLightboxUI').on('click', (e) => {
+      $('.a[data-href]').on('click', (e) => {
         console.log(`${NAME}: js link processing .a[data-href]`);
 
         const $el = $(e.currentTarget);
@@ -435,7 +435,7 @@ const MainUI = (($) => {
 
       W.URLDetails.relative = location.split('#')[0];
       W.URLDetails.hash =
-        hash >= 0 ? location.substr(location.indexOf('#')) : '';
+				hash >= 0 ? location.substr(location.indexOf('#')) : '';
     }
 
     // show site-wide alert
@@ -470,7 +470,10 @@ const MainUI = (($) => {
         });
       }
 
-      if ($AlertNotify.length && typeof $AlertNotify[0].stop !== 'undefined') {
+      if (
+        $AlertNotify.length &&
+				typeof $AlertNotify[0].stop !== 'undefined'
+      ) {
         $AlertNotify[0].stop();
       }
 
@@ -607,7 +610,9 @@ const MainUI = (($) => {
   // hide spinner on target _blank
   $('[target="_blank"],.external').on('click submit', (e) => {
     if (
-      $(e.currentTarget).is('[data-toggle="lightbox"],[data-lightbox-gallery]')
+      $(e.currentTarget).is(
+        '[data-toggle="lightbox"],[data-lightbox-gallery]',
+      )
     ) {
       return false;
     }

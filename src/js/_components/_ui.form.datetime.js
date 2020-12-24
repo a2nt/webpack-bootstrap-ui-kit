@@ -1,3 +1,5 @@
+'use strict';
+
 import $ from 'jquery';
 
 import Events from '../_events';
@@ -24,7 +26,7 @@ const DatetimeUI = (($) => {
 
   class DatetimeUI {
     constructor(el) {
-    	console.log(`${NAME}: init`);
+      console.log(`${NAME}: init`);
 
       const ui = this;
       const $el = $(el);
@@ -33,42 +35,57 @@ const DatetimeUI = (($) => {
 
       // datepicker
       if ($el.hasClass('date') || $el.attr('type') === 'date') {
-        const defaultDate = ($el.attr('name').toLowerCase().indexOf('end') !== -1) ?
-          '+4d' :
-          '+3d';
+        const defaultDate =
+          $el.attr('name').toLowerCase().indexOf('end') !== -1 ? '+4d' : '+3d';
 
         $el.attr('readonly', 'true');
-        $el.datepicker($.extend(datepickerOptions, {
-          defaultViewDate: defaultDate,
-          multidate: $el.data('multidate'),
-        }, $el.data()));
-      } else
+        $el.datepicker(
+          $.extend(
+            datepickerOptions,
+            {
+              defaultViewDate: defaultDate,
+              multidate: $el.data('multidate'),
+            },
+            $el.data(),
+          ),
+        );
+      }
 
       // timepicker
-      if ($el.hasClass('time') || $el.attr('type') === 'time') {
+      else if ($el.hasClass('time') || $el.attr('type') === 'time') {
         $el.attr('readonly', 'true');
-        $el.timepicker($.extend({
-          snapToStep: true,
-          icons: {
-            up: 'fas fa-chevron-up',
-            down: 'fas fa-chevron-down',
-          },
-        }, $el.data())).on('show.timepicker', (e) => {
-          const $el = $(e.currentTarget);
-          const $dropdown = $Body.find('.bootstrap-timepicker-widget');
+        $el
+          .timepicker(
+            $.extend(
+              {
+                snapToStep: true,
+                icons: {
+                  up: 'fas fa-chevron-up',
+                  down: 'fas fa-chevron-down',
+                },
+              },
+              $el.data(),
+            ),
+          )
+          .on('show.timepicker', (e) => {
+            const $el = $(e.currentTarget);
+            const $dropdown = $Body.find('.bootstrap-timepicker-widget');
 
-          if (!$dropdown.find('[data-action="clear"]').length) {
-            $dropdown.find('tbody').append('<tr><td colspan="5"><a href="#" data-action="clear">Clear</a></td></tr>');
-          }
+            if (!$dropdown.find('[data-action="clear"]').length) {
+              $dropdown
+                .find('tbody')
+                .append(
+                  '<tr><td colspan="5"><a href="#" data-action="clear">Clear</a></td></tr>',
+                );
+            }
 
-          const $clearBtn = $dropdown.find('[data-action="clear"]');
-          $clearBtn.on('click', (e) => {
-            e.preventDefault();
-            $el.timepicker('clear');
-            $el.timepicker('hideWidget');
-          })
-        });
-
+            const $clearBtn = $dropdown.find('[data-action="clear"]');
+            $clearBtn.on('click', (e) => {
+              e.preventDefault();
+              $el.timepicker('clear');
+              $el.timepicker('hideWidget');
+            });
+          });
       }
     }
 
@@ -77,7 +94,7 @@ const DatetimeUI = (($) => {
     }
 
     static _jQueryInterface() {
-      return this.each(function() {
+      return this.each(function () {
         // attach functionality to element
         const $el = $(this);
         let data = $el.data(DATA_KEY);
@@ -93,14 +110,16 @@ const DatetimeUI = (($) => {
   // jQuery interface
   $.fn[NAME] = DatetimeUI._jQueryInterface;
   $.fn[NAME].Constructor = DatetimeUI;
-  $.fn[NAME].noConflict = function() {
+  $.fn[NAME].noConflict = function () {
     $.fn[NAME] = JQUERY_NO_CONFLICT;
     return DatetimeUI._jQueryInterface;
   };
 
   // auto-apply
   $(window).on(`${NAME}.init ${Events.AJAX} ${Events.LOADED}`, () => {
-    $('input.date, input.time,input[type="date"], input[type="time"]').jsDatetimeUI();
+    $(
+      'input.date, input.time,input[type="date"], input[type="time"]',
+    ).jsDatetimeUI();
   });
 
   return DatetimeUI;

@@ -103,7 +103,7 @@ const MapAPI = (($) => {
 
     static _jQueryInterface() {
       if (typeof W.localStorage !== 'undefined') {
-        return this.each(function () {
+        return this.each(() => {
           // attach functionality to el
           const $el = $(this);
           let data = $el.data(DATA_KEY);
@@ -120,7 +120,7 @@ const MapAPI = (($) => {
   // jQuery interface
   $.fn[NAME] = MapAPI._jQueryInterface;
   $.fn[NAME].Constructor = MapAPI;
-  $.fn[NAME].noConflict = function () {
+  $.fn[NAME].noConflict = () => {
     $.fn[NAME] = JQUERY_NO_CONFLICT;
     return MapAPI._jQueryInterface;
   };

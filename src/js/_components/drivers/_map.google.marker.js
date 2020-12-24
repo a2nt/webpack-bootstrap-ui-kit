@@ -1,3 +1,7 @@
+'use strict';
+
+import $ from 'jquery';
+
 const Obj = {
   init: () => {
     class GoogleMapsHtmlOverlay extends google.maps.OverlayView {

@@ -1,5 +1,6 @@
 'use strict';
 
+import $ from 'jquery';
 import Events from '../_events';
 
 const HeaderUI = (($) => {
@@ -45,7 +46,7 @@ const HeaderUI = (($) => {
     }
 
     static dispose() {
-    	console.log(`${NAME}: dispose`);
+      console.log(`${NAME}: dispose`);
 
       $Body.removeClass('shrink');
       $(`#Header,.js${NAME},.footer,.jsFooterUI,.wrapper`).attr('css', '');

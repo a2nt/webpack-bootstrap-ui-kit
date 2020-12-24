@@ -1,3 +1,7 @@
+'use strict';
+
+import $ from 'jquery';
+
 /**
  * Route side-wide events
  */

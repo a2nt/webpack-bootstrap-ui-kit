@@ -1,3 +1,5 @@
+'use strict';
+
 import $ from 'jquery';
 
 //import 'bootstrap-select/dist/js/bootstrap-select';

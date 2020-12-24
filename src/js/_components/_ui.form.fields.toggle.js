@@ -1,3 +1,5 @@
+'use strict';
+
 import $ from 'jquery';
 import Events from '../_events';
 

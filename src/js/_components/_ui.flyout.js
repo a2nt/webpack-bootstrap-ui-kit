@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 import $ from 'jquery';
 
@@ -16,7 +16,7 @@ const FlyoutUI = (($) => {
 
   class FlyoutUI {
     static init() {
-    	console.log(`${NAME}: init`);
+      console.log(`${NAME}: init`);
       const ui = this;
 
       ui.$modal = $(`.flyout-${NAME}`);
@@ -41,7 +41,6 @@ const FlyoutUI = (($) => {
           ui.show();
         }, TIMEOUT);
       }
-
     }
 
     static show(callback) {

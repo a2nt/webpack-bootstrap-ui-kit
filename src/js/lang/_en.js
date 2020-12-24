@@ -2,7 +2,7 @@
  * Add your global events here
  */
 
-module.exports = {
+export default {
   en: {
     jsSteppedForm: {
       STEPCOUNTER: '<div class="steps-counter">Step <b class="current-step"></b> of <b class="total-steps"></b></div>',

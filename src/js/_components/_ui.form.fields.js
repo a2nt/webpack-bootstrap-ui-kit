@@ -1,3 +1,5 @@
+'use strict';
+
 import $ from 'jquery';
 import Events from '../_events';
 
@@ -8,7 +10,6 @@ const FormFieldUI = (($) => {
   const $Html = $('html, body');
 
   class FormFieldUI {
-
     constructor(el) {
       const ui = this;
 
@@ -19,13 +20,16 @@ const FormFieldUI = (($) => {
       //ui.$actions = ui.$el.parents('form').children('.btn-toolbar,.form-actions');
 
       ui.vals = {
-        'val': ui.$el.val(),
-        'checked': ui.$el.is(':checked'),
+        val: ui.$el.val(),
+        checked: ui.$el.is(':checked'),
       };
 
       // bootstrap collapse integration
       ui.$el.parents('.optionset').not('.field').removeClass('collapse');
-      ui.$collapse = ui.$el.parents('.field.collapse').not('.composite').first();
+      ui.$collapse = ui.$el
+        .parents('.field.collapse')
+        .not('.composite')
+        .first();
       if (ui.$collapse.length) {
         ui.$el.removeClass('collapse');
 
@@ -67,7 +71,7 @@ const FormFieldUI = (($) => {
         $el.collapse('show');
       }*/
 
-      $el.trigger(`shown.${  NAME}`);
+      $el.trigger(`shown.${NAME}`);
     }
 
     hide() {
@@ -86,7 +90,7 @@ const FormFieldUI = (($) => {
       }
 
       $el.trigger('change');*/
-      $el.trigger(`hidden.${  NAME}`);
+      $el.trigger(`hidden.${NAME}`);
     }
 
     wipe() {
@@ -94,9 +98,9 @@ const FormFieldUI = (($) => {
       const $el = ui.$el;
 
       ui.vals = {
-        'name': $el.attr('name'),
-        'val': $el.val(),
-        'checked': $el.is(':checked'),
+        name: $el.attr('name'),
+        val: $el.val(),
+        checked: $el.is(':checked'),
       };
 
       $el.val('');
@@ -116,10 +120,9 @@ const FormFieldUI = (($) => {
       const ui = this;
       const $field = ui.$el.closest('.field');
 
-
       $field.addClass('has-message');
       if (msg) {
-        $field.append(`<div class="message alert ${  type  }">${  msg  }</div>`);
+        $field.append(`<div class="message alert ${type}">${msg}</div>`);
       }
 
       if (scrollTo) {
@@ -138,7 +141,7 @@ const FormFieldUI = (($) => {
     }
 
     static _jQueryInterface() {
-      return this.each(function() {
+      return this.each(function () {
         // attach functionality to el
         const $el = $(this);
         let data = $el.data(DATA_KEY);
@@ -154,7 +157,7 @@ const FormFieldUI = (($) => {
   // jQuery interface
   $.fn[NAME] = FormFieldUI._jQueryInterface;
   $.fn[NAME].Constructor = FormFieldUI;
-  $.fn[NAME].noConflict = function() {
+  $.fn[NAME].noConflict = function () {
     $.fn[NAME] = JQUERY_NO_CONFLICT;
     return FormFieldUI._jQueryInterface;
   };

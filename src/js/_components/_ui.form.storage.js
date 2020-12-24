@@ -1,5 +1,7 @@
+'use strict';
+
 import $ from 'jquery';
-import Events from "../_events";
+import Events from '../_events';
 
 const FormStorage = (($) => {
   // Constants
@@ -8,7 +10,6 @@ const FormStorage = (($) => {
   const STORAGE = window.localStorage;
 
   class FormStorage {
-
     constructor(element) {
       console.log(`${NAME}: init`);
 
@@ -16,7 +17,7 @@ const FormStorage = (($) => {
       const $element = $(element);
       const $elements = $element.find('input, textarea, select');
 
-      const setRangeValues = function(el) {
+      const setRangeValues = function (el) {
         const $el = $(el);
         $el.siblings('.value').text($el.val());
       };
@@ -85,9 +86,12 @@ const FormStorage = (($) => {
         $element.data(DATA_KEY).clear();
       });
 
-      $element.find('.btn-toolbar,.form-actions').children('button,[type="submit"],[type="clear"]').on('click', () => {
-        $element.data(DATA_KEY).clear();
-      });
+      $element
+        .find('.btn-toolbar,.form-actions')
+        .children('button,[type="submit"],[type="clear"]')
+        .on('click', () => {
+          $element.data(DATA_KEY).clear();
+        });
 
       $element.addClass(`${NAME}-active`);
       $element.trigger(Events.FORM_INIT_STORAGE);
@@ -108,7 +112,7 @@ const FormStorage = (($) => {
 
     static _jQueryInterface() {
       if (typeof window.localStorage !== 'undefined') {
-        return this.each(function() {
+        return this.each(function () {
           // attach functionality to element
           const $element = $(this);
           let data = $element.data(DATA_KEY);
@@ -125,7 +129,7 @@ const FormStorage = (($) => {
   // jQuery interface
   $.fn[NAME] = FormStorage._jQueryInterface;
   $.fn[NAME].Constructor = FormStorage;
-  $.fn[NAME].noConflict = function() {
+  $.fn[NAME].noConflict = function () {
     $.fn[NAME] = JQUERY_NO_CONFLICT;
     return FormStorage._jQueryInterface;
   };

@@ -1,18 +1,15 @@
-"use strict";
+'use strict';
 
 import $ from 'jquery';
 
 import Events from '../_events';
 import Spinner from '../_components/_ui.spinner';
-import FormValidateField from "./_ui.form.validate.field";
-
+import FormValidateField from './_ui.form.validate.field';
 
 import '../../thirdparty/jQuery-TE_v.1.4.0/jquery-te-1.4.0.css';
 import '../../thirdparty/jQuery-TE_v.1.4.0/uncompressed/jquery-te-1.4.0.js';
 
-
 const JqteUI = (($) => {
-
   const NAME = 'jsJqteUI';
   const DATA_KEY = NAME;
 
@@ -28,9 +25,8 @@ const JqteUI = (($) => {
   };
 
   class JqteUI {
-
     constructor(element) {
-	   	console.log(`${NAME}: init`);
+      console.log(`${NAME}: init`);
 
       const ui = this;
       const $element = $(element);
@@ -42,9 +38,12 @@ const JqteUI = (($) => {
 
       // dynamic error control
       if (validationUI) {
-        $element.parents('.jqte').find('.jqte_editor').on('change', (e) => {
-          validationUI.validate();
-        });
+        $element
+          .parents('.jqte')
+          .find('.jqte_editor')
+          .on('change', (e) => {
+            validationUI.validate();
+          });
       }
     }
 
@@ -53,7 +52,7 @@ const JqteUI = (($) => {
     }
 
     static _jQueryInterface() {
-      return this.each(function() {
+      return this.each(function () {
         // attach functionality to element
         const $element = $(this);
         let data = $element.data(DATA_KEY);
@@ -69,7 +68,7 @@ const JqteUI = (($) => {
   // jQuery interface
   $.fn[NAME] = JqteUI._jQueryInterface;
   $.fn[NAME].Constructor = JqteUI;
-  $.fn[NAME].noConflict = function() {
+  $.fn[NAME].noConflict = function () {
     $.fn[NAME] = JQUERY_NO_CONFLICT;
     return JqteUI._jQueryInterface;
   };

@@ -1,3 +1,5 @@
+'use strict';
+
 import $ from 'jquery';
 import Events from '../_events';
 import Spinner from './_ui.spinner';
@@ -44,7 +46,9 @@ const NoCaptcha = (($) => {
           return;
         }
 
-        const $form = $field.data('form') ? $(`#${  $field.data('form')}`) : $field.parents('form');
+        const $form = $field.data('form')
+          ? $(`#${$field.data('form')}`)
+          : $field.parents('form');
 
         const widget_id = grecaptcha.render(field, $field.data());
         $field.data('widgetid', widget_id);

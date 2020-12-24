@@ -1,3 +1,7 @@
+'use strict';
+
+import $ from 'jquery';
+
 $(() => {
   const $searchLat = $('[name="search-lat"]');
   const $searchLng = $('[name="search-lng"]');
@@ -28,26 +32,31 @@ $(() => {
     $('.search-location .current-val').text(newLocation);
     const geoUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${newLocation}&key=AIzaSyC00L0023LPBhzj12uTCL-4EwJ_6zgwcTU&sensor=true`;
 
-    $.getJSON(geoUrl)
-      .done((data) => {
-        if (data.status === 'OK') {
-          updatePosition(data.results[0].geometry.location.lat, data.results[0].geometry.location.lng);
-          //getCategories();
-        }
-      });
+    $.getJSON(geoUrl).done((data) => {
+      if (data.status === 'OK') {
+        updatePosition(
+          data.results[0].geometry.location.lat,
+          data.results[0].geometry.location.lng,
+        );
+        //getCategories();
+      }
+    });
   };
 
   const getCurrentPosition = () => {
     $('.search-location .current-val').text('Current Location');
 
-    navigator.geolocation.getCurrentPosition((position) => {
-      updatePosition(position.coords.latitude, position.coords.longitude);
-      //hideDistancesThatDontMatter();
-    }, () => {
-      $('.search-location .current-val').text('Unable to get your location');
-      updatePosition('', '');
-    });
-  }
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        updatePosition(position.coords.latitude, position.coords.longitude);
+        //hideDistancesThatDontMatter();
+      },
+      () => {
+        $('.search-location .current-val').text('Unable to get your location');
+        updatePosition('', '');
+      },
+    );
+  };
 
   if ($newLocation.length && $newLocation.val().length) {
     getGeoPosition();
@@ -77,7 +86,6 @@ $(() => {
     $newlocationholder.toggle();
   });
 
-
   $newLocation.blur(() => {
     getGeoPosition();
   });
@@ -85,9 +93,12 @@ $(() => {
   $('.new-search').on('click', (e) => {
     e.preventDefault();
 
-    $('.section-search-secondary').animate({
-      'max-height': 300,
-    }, 'slow');
+    $('.section-search-secondary').animate(
+      {
+        'max-height': 300,
+      },
+      'slow',
+    );
   });
 
   /*$radius.on('change', () => {
@@ -127,13 +138,13 @@ $(() => {
       directionsDisplay = new google.maps.DirectionsRenderer(),
       directionsService = new google.maps.DirectionsService(),
       currentPosition = {
-        'lat': $map.data('lat'),
-        'lng': $map.data('lng'),
+        lat: $map.data('lat'),
+        lng: $map.data('lng'),
       },
       map = new google.maps.Map($map[0], {
-        'zoom': 15,
-        'mapTypeControl': true,
-        'mapTypeId': google.maps.MapTypeId.ROADMAP,
+        zoom: 15,
+        mapTypeControl: true,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
       });
 
     directionsDisplay.setMap(map);
@@ -142,7 +153,7 @@ $(() => {
     map.setCenter(currentPosition);
     new google.maps.Marker({
       map,
-      'position': currentPosition,
+      position: currentPosition,
     });
 
     $getDirections.click((e) => {
@@ -151,15 +162,18 @@ $(() => {
       const fromLocation = $fromAddress.val();
 
       if (fromLocation.length) {
-        directionsService.route({
-          origin: fromLocation,
-          destination: currentPosition,
-          travelMode: google.maps.DirectionsTravelMode.DRIVING,
-        }, (response, status) => {
-          if (status === google.maps.DirectionsStatus.OK) {
-            directionsDisplay.setDirections(response);
-          }
-        });
+        directionsService.route(
+          {
+            origin: fromLocation,
+            destination: currentPosition,
+            travelMode: google.maps.DirectionsTravelMode.DRIVING,
+          },
+          (response, status) => {
+            if (status === google.maps.DirectionsStatus.OK) {
+              directionsDisplay.setDirections(response);
+            }
+          },
+        );
 
         $directionContainer.slideDown();
       }

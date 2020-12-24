@@ -1,3 +1,4 @@
+'use strict';
 import $ from 'jquery';
 
 const G = window;
@@ -8,11 +9,6 @@ const D = document;
   console.log(arguments);
   console.log(new Error().stack);
 };*/
-
-
-
-
-
 
 /*G.addEventListener(G.visibilityChangeEvent, () => {
   if (currentPage && typeof currentPage !== 'undefined') {

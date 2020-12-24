@@ -1,6 +1,7 @@
 'use strict';
 
 //import StickySidebar from 'sticky-sidebar/src/sticky-sidebar';
+import $ from 'jquery';
 import Events from '../_events';
 
 const SidebarUI = (($) => {

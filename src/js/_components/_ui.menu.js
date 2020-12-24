@@ -1,3 +1,5 @@
+'use strict';
+
 import $ from 'jquery';
 
 const SlidingMenu = (($) => {
@@ -8,17 +10,17 @@ const SlidingMenu = (($) => {
   class SlidingMenu {
     // Constructor
     constructor(element) {
-    	console.log(`${NAME}: init`);
+      console.log(`${NAME}: init`);
       this._element = element;
       const $element = $(this._element);
       $element.addClass(`${NAME}-active`);
 
       // esc button
-      $(window).on('keyup',((e) => {
+      $(window).on('keyup', (e) => {
         if (e.which === 27) {
           $element.find('.is-open[data-toggle="offcanvas"]').click();
         }
-      }));
+      });
     }
 
     // Public methods

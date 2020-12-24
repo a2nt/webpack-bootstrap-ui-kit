@@ -2,7 +2,7 @@
  * Add your global events here
  */
 
-module.exports = {
+export default {
   AJAX: 'ajax-load',
   AJAXMAIN: 'ajax-main-load',
   MAININIT: 'main-init',

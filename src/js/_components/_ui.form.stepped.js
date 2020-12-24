@@ -1,10 +1,11 @@
+'use strict';
+
 import $ from 'jquery';
 import Events from '../_events';
 import LANG from '../lang/_en';
-import FormValidateField from "./_ui.form.validate.field";
+import FormValidateField from './_ui.form.validate.field';
 
 import '../../scss/_components/_ui.form.stepped.scss';
-
 
 const SteppedForm = (($) => {
   // Constants
@@ -12,9 +13,8 @@ const SteppedForm = (($) => {
   const DATA_KEY = NAME;
 
   class SteppedForm {
-
     constructor(element) {
-    	console.log(`${NAME}: init`);
+      console.log(`${NAME}: init`);
 
       const ui = this;
       const $element = $(element);
@@ -56,7 +56,9 @@ const SteppedForm = (($) => {
 
       // check if one of the steps already has an error
       const $hasError = ui._steps
-        .find('.field.error,.field.holder-error,.field.holder-validation,.field.holder-info,.field.holder-warning,.field.holder-good')
+        .find(
+          '.field.error,.field.holder-error,.field.holder-validation,.field.holder-info,.field.holder-warning,.field.holder-good',
+        )
         .first();
       if ($hasError.length) {
         const $modal = $element.parents('.modal');
@@ -66,11 +68,12 @@ const SteppedForm = (($) => {
           $modal.modal('show');
         }
 
-        ui._currentStep = $hasError.parents('.step').data('step') || ui._currentStep;
+        ui._currentStep =
+          $hasError.parents('.step').data('step') || ui._currentStep;
       }
       //
 
-      ui.step(`.step[data-step="${  ui._currentStep  }"]`);
+      ui.step(`.step[data-step="${ui._currentStep}"]`);
 
       ui._stepNext.on('click', (e) => {
         e.preventDefault();
@@ -95,7 +98,7 @@ const SteppedForm = (($) => {
 
     // Public methods
     dispose() {
-    	console.log(`${NAME}: dispose`);
+      console.log(`${NAME}: dispose`);
       const ui = this;
       const $element = $(ui._element);
 
@@ -111,7 +114,7 @@ const SteppedForm = (($) => {
         return;
       }
 
-      ui.step(`.step[data-step="${  ui._currentStep + 1  }"]`);
+      ui.step(`.step[data-step="${ui._currentStep + 1}"]`);
     }
 
     prev() {
@@ -134,14 +137,16 @@ const SteppedForm = (($) => {
       let valid = true;
 
       if (targetStep > ui._currentStep) {
-        ui.currentStep().find('input,textarea,select').each((i, el) => {
-          const $el = $(el);
-          const fieldUI = $el.data('jsFormValidateField');
+        ui.currentStep()
+          .find('input,textarea,select')
+          .each((i, el) => {
+            const $el = $(el);
+            const fieldUI = $el.data('jsFormValidateField');
 
-          if (fieldUI && !fieldUI.validate()) {
-            valid = false;
-          }
-        });
+            if (fieldUI && !fieldUI.validate()) {
+              valid = false;
+            }
+          });
       }
 
       if (!valid) {
@@ -186,7 +191,7 @@ const SteppedForm = (($) => {
     }
 
     static _jQueryInterface() {
-      return this.each(function() {
+      return this.each(function () {
         // attach functionality to element
         const $element = $(this);
         let data = $element.data(DATA_KEY);
@@ -202,7 +207,7 @@ const SteppedForm = (($) => {
   // jQuery interface
   $.fn[NAME] = SteppedForm._jQueryInterface;
   $.fn[NAME].Constructor = SteppedForm;
-  $.fn[NAME].noConflict = function() {
+  $.fn[NAME].noConflict = function () {
     $.fn[NAME] = JQUERY_NO_CONFLICT;
     return SteppedForm._jQueryInterface;
   };
