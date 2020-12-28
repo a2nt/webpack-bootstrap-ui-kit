@@ -36,9 +36,12 @@
 
 // correct primary buttons coloring
 .toolbar--south {
-	.btn-outline-primary,
 	.btn-primary {
 		color: #fff;
+	}
+
+	.btn-outline-primary {
+		color: #999;
 	}
 }
 

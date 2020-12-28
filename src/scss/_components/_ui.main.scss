@@ -442,3 +442,13 @@ body.is-offline {
     position: relative;
     will-change: position, top;
 }
+
+#BetterNavigator {
+    a,
+    button,
+    div,
+    i,
+    span {
+        background-size: auto;
+    }
+}
