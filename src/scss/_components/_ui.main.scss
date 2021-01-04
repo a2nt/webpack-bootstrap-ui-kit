@@ -41,6 +41,12 @@ p {
 .a {
     cursor: pointer;
     color: $link-color;
+    text-decoration: $link-decoration;
+    &:hover,
+    &:focus {
+        text-decoration: $link-hover-decoration;
+        color: $link-hover-color;
+    }
 }
 
 .a,
@@ -225,6 +231,12 @@ textarea,
     @extend .alert-danger;
 }
 
+.list-group-item.active {
+    a,
+    .a {
+        color: $list-group-active-color;
+    }
+}
 // dropdown icon
 .navbar-toggler {
     &[aria-expanded='true'] {
