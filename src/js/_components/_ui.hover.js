@@ -25,6 +25,15 @@ const HoverUI = (($) => {
 
       const ui = this;
       const $el = $(el);
+
+      if (
+        $el.is(
+          '[target="_blank"],.external,[data-toggle="lightbox"],[data-lightbox-gallery]',
+        )
+      ) {
+        return true;
+      }
+
       ui.$el = $el;
 
       // find parent

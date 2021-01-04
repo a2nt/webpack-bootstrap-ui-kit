@@ -435,7 +435,7 @@ const MainUI = (($) => {
 
       W.URLDetails.relative = location.split('#')[0];
       W.URLDetails.hash =
-				hash >= 0 ? location.substr(location.indexOf('#')) : '';
+        hash >= 0 ? location.substr(location.indexOf('#')) : '';
     }
 
     // show site-wide alert
@@ -470,10 +470,7 @@ const MainUI = (($) => {
         });
       }
 
-      if (
-        $AlertNotify.length &&
-				typeof $AlertNotify[0].stop !== 'undefined'
-      ) {
+      if ($AlertNotify.length && typeof $AlertNotify[0].stop !== 'undefined') {
         $AlertNotify[0].stop();
       }
 
@@ -608,22 +605,17 @@ const MainUI = (($) => {
   });
 
   // hide spinner on target _blank
-  $('[target="_blank"],.external').on('click submit', (e) => {
-    if (
-      $(e.currentTarget).is(
-        '[data-toggle="lightbox"],[data-lightbox-gallery]',
-      )
-    ) {
-      return false;
-    }
+  $('[target="_blank"],.external')
+    .not('[data-toggle="lightbox"],[data-lightbox-gallery]')
+    .on('click submit touch', (e) => {
+      console.log(`${NAME}: External link`);
 
-    console.log(`${NAME}: External link`);
-    setTimeout(() => {
-      Spinner.hide(() => {
-        $Body.addClass('loaded');
-      });
-    }, 1000);
-  });
+      setTimeout(() => {
+        Spinner.hide(() => {
+          $Body.addClass('loaded');
+        });
+      }, 1000);
+    });
 
   W.MainUI = MainUI;
 

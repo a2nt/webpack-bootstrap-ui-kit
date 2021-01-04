@@ -340,6 +340,37 @@ textarea,
     }
 }
 
+@keyframes expand {
+    from {
+        max-height: 0;
+    }
+    to {
+        max-height: 1000rem;
+    }
+}
+
+.dropdown-menu {
+    padding: 0;
+    border-radius: 0;
+    will-change: max-height, display;
+    overflow: hidden;
+    transition: none;
+
+    &.show {
+        animation: expand 1s;
+        animation-fill-mode: both;
+        overflow: visible;
+    }
+    .dropdown-list {
+        @extend .list-unstyled;
+    }
+
+    .dropdown-menu {
+        top: 0;
+        left: 100%;
+    }
+}
+
 .dropdown-menu.bg-dark {
     border-color: $dark;
 
