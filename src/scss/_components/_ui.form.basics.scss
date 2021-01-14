@@ -226,3 +226,11 @@ input.checkbox {
 		@extend .form-control;
 	}
 }
+
+.field.password {
+	.show-password {
+		position: absolute;
+		top: 0.5em;
+		right: 0.5em;
+	}
+}

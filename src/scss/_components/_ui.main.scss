@@ -244,112 +244,25 @@ textarea,
     }
 }
 
+.dropdown-toggle {
+    position: relative;
+    padding-right: 1.5em;
+
+    &:after {
+        position: absolute;
+        right: 0.5em;
+        bottom: 1em;
+    }
+}
+
+.navbar-nav .dropdown-toggle.nav-link {
+    padding-right: 1.5em;
+}
+
 .dropdown.show .dropdown-toggle::after,
 .dropdown-toggle.active-dropdown::after,
 .dropdown-toggle.active::after {
     transform: rotate(-90deg);
-}
-
-// dropdown hover
-/*
-.dropdown.show {
-    .dropdown {
-        &:hover,&.active,
-        &:focus {
-            .dropdown-menu {
-                display: block;
-            }
-        }
-    }
-}
-@media only screen and (min-width: map-get($grid-breakpoints, "md")) {
-    .dropdown-hover ul li {
-        position: relative;
-    }
-
-    .dropdown-hover ul li {
-        &:hover,&.active,
-        &:focus {
-            > .dropdown-toggle::after {
-                transform: rotate(-90deg);
-            }
-
-            > ul {
-                display: block;
-            }
-        }
-    }
-
-    .dropdown-hover ul ul {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        min-width: 250px;
-        display: none;
-    }
-
-    .dropdown-hover ul ul li {
-        position: relative;
-    }
-
-    .dropdown-hover ul ul li {
-        &:hover,&.active,
-        &:focus {
-            > ul {
-                display: block;
-            }
-        }
-    }
-
-    .dropdown-hover ul ul ul {
-        position: absolute;
-        top: 0;
-        left: 100%;
-        min-width: 250px;
-        display: none;
-    }
-
-    .dropdown-hover ul ul ul li {
-        position: relative;
-    }
-
-    .dropdown-hover ul ul ul li {
-        &:hover,&.active,
-        &:focus {
-            ul {
-                display: block;
-            }
-        }
-    }
-
-    .dropdown-hover ul ul ul ul {
-        position: absolute;
-        top: 0;
-        left: -100%;
-        min-width: 250px;
-        display: none;
-        z-index: 1;
-    }
-}*/
-
-// dark dropdowns
-.navbar-dark {
-    .nav-link {
-        @include hover-focus {
-            background: $navbar-dark-hover-background;
-        }
-    }
-
-    .active > .nav-link,
-    .nav-link.active {
-        background: $navbar-dark-active-background;
-    }
-
-    .nav-link.show,
-    .navbar-nav .show > .nav-link {
-        background: $navbar-dark-show-background;
-        color: $navbar-dark-show-color;
-    }
 }
 
 @keyframes expand {
@@ -357,7 +270,8 @@ textarea,
         max-height: 0;
     }
     to {
-        max-height: 1000rem;
+        max-height: 500rem;
+        max-height: 200vh;
     }
 }
 
@@ -369,7 +283,7 @@ textarea,
     transition: none;
 
     &.show {
-        animation: expand 1s;
+        animation: expand 2s;
         animation-fill-mode: both;
         overflow: visible;
     }
@@ -380,46 +294,6 @@ textarea,
     .dropdown-menu {
         top: 0;
         left: 100%;
-    }
-}
-
-.dropdown-menu.bg-dark {
-    border-color: $dark;
-
-    .nav-link {
-        color: $navbar-dark-color;
-
-        @include hover-focus {
-            color: $navbar-dark-hover-color;
-        }
-
-        &.disabled {
-            cursor: default;
-            color: $navbar-dark-disabled-color;
-        }
-    }
-
-    .show > .nav-link,
-    .active > .nav-link,
-    .nav-link.show,
-    .nav-link.active {
-        color: $navbar-dark-active-color;
-    }
-
-    .dropdown-item {
-        @include hover-focus {
-            color: $navbar-dark-hover-color;
-            background: $navbar-dark-hover-background;
-        }
-
-        &.active,
-        &:active {
-            background: $navbar-dark-active-background;
-        }
-
-        .nav-link {
-            background: none;
-        }
     }
 }
 

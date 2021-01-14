@@ -21,7 +21,7 @@
 	&.site__elements__sliderelement {
 		padding-top: 0;
 		padding-bottom: 0;
-		margin-bottom: $grid-gutter-element-height;
+		margin-bottom: $grid-gutter-element-height/2;
 	}
 
 	// remove paddings for elemental list cuz inner elements will have paddings
@@ -30,13 +30,13 @@
 		padding-bottom: 0;
 
 		.element {
-			padding-top: $grid-gutter-element-height;
-			padding-bottom: $grid-gutter-element-height;
+			padding-top: $grid-gutter-element-height/2;
+			padding-bottom: $grid-gutter-element-height/2;
 		}
 		.dynamic__elements__image__elements__elementimage,
 		.site__elements__sliderelement {
-			padding-top: $grid-gutter-element-height;
-			padding-bottom: $grid-gutter-element-height;
+			padding-top: $grid-gutter-element-height/2;
+			padding-bottom: $grid-gutter-element-height/2;
 		}
 	}
 

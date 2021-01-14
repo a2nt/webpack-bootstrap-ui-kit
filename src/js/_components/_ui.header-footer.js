@@ -21,7 +21,7 @@ const HeaderUI = (($) => {
       const updateHeader = () => {
         const h = $header.height();
         const s = $Body.scrollTop();
-        if (s > h) {
+        if (s + 50 > h) {
           $Body.addClass('shrink');
         } else {
           $Body.removeClass('shrink');

@@ -91,6 +91,23 @@ const FormBasics = (($) => {
         }, 100);
       });
 
+      $('.field.password .show-password').on('click', (e) => {
+        console.log(`${NAME}: .field.password .show-password (click)`);
+
+        const $el = $(e.currentTarget);
+        const $field = $el.siblings('input');
+        const $icon = $el.find('.fas');
+        const attr = $field.attr('type');
+
+        if (attr === 'password') {
+          $field.attr('type', 'text');
+          $icon.removeClass('fa-eye').addClass('fa-eye-slash');
+        } else {
+          $field.attr('type', 'password');
+          $icon.removeClass('fa-eye-slash').addClass('fa-eye');
+        }
+      });
+
       $el.addClass(`${NAME}-active`);
       $el.trigger(Events.FORM_INIT_BASICS);
     }
