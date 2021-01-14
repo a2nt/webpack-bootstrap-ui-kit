@@ -2,13 +2,6 @@
 
 import $ from 'jquery';
 
-//import 'bootstrap-select/dist/js/bootstrap-select';
-//$.fn.selectpicker.Constructor.BootstrapVersion = '4';
-import select2 from 'select2/dist/js/select2.js';
-//import Inputmask from 'inputmask';
-
-//import select2 from 'jquery.inputmask/dist/jquery.inputmask.bundle';
-
 import Events from '../_events';
 import SpinnerUI from './_ui.spinner';
 import FormFieldUI from './_ui.form.fields';
@@ -39,14 +32,6 @@ const FormBasics = (($) => {
       $fields.each((i, el) => {
         // skip some fields here
         new FormFieldUI(el);
-      });
-
-      const $selectFields = $el
-        .find('select:not([readonly])')
-        .not('.no-select2');
-
-      $selectFields.each((i, el) => {
-        $(el).select2();
       });
 
       $fields.each((e, el) => {
@@ -118,17 +103,6 @@ const FormBasics = (($) => {
       const ui = this;
 
       const $el = $(ui._el);
-
-      const $selectFields = $el
-        .find('select:not([readonly])')
-        .not('.no-select2');
-      $selectFields.each((i, el) => {
-        const $el = $(el);
-        if ($el.hasClass('select2-hidden-accessible')) {
-          $el.select2('destroy');
-        }
-      });
-
       $.removeData(ui._el, DATA_KEY);
       ui._el = null;
       $el.removeClass(`${NAME}-active`);

@@ -6,10 +6,10 @@
 @import '../_animations';
 
 .loading {
-    animation: fade 0.8s linear infinite;
+	animation: fade 0.8s linear infinite;
 }
 .pulse {
-    animation: pulse 0.8s linear infinite;
+	animation: pulse 0.8s linear infinite;
 }
 
 // don't let images be wider than the parent layer
@@ -18,35 +18,35 @@ a,
 span,
 button,
 i {
-    background-repeat: no-repeat;
-    background-size: contain;
+	background-repeat: no-repeat;
+	background-size: contain;
 }
 
 iframe,
 img {
-    max-width: 100%;
+	max-width: 100%;
 }
 
 table,
 p {
-    &:first-child {
-        margin-top: 0;
-    }
+	&:first-child {
+		margin-top: 0;
+	}
 
-    &:last-child {
-        margin-bottom: 0;
-    }
+	&:last-child {
+		margin-bottom: 0;
+	}
 }
 
 .a {
-    cursor: pointer;
-    color: $link-color;
-    text-decoration: $link-decoration;
-    &:hover,
-    &:focus {
-        text-decoration: $link-hover-decoration;
-        color: $link-hover-color;
-    }
+	cursor: pointer;
+	color: $link-color;
+	text-decoration: $link-decoration;
+	&:hover,
+	&:focus {
+		text-decoration: $link-hover-decoration;
+		color: $link-hover-color;
+	}
 }
 
 .a,
@@ -54,63 +54,63 @@ a,
 [data-toggle],
 button,
 .btn {
-    &:hover,
-    &.active,
-    &:focus,
-    &[aria-expanded='true'] {
-        opacity: 0.8;
+	&:hover,
+	&.active,
+	&:focus,
+	&[aria-expanded='true'] {
+		opacity: 0.8;
 
-        > .fa,
-        > .far,
-        > .fas,
-        > .fab,
-        &.fa,
-        &.far,
-        &.fas,
-        &.fab {
-            transform: rotate(-180deg);
-        }
-    }
+		> .fa,
+		> .far,
+		> .fas,
+		> .fab,
+		&.fa,
+		&.far,
+		&.fas,
+		&.fab {
+			transform: rotate(-180deg);
+		}
+	}
 
-    &.disabled {
-        opacity: 0.5;
-        cursor: default;
+	&.disabled {
+		opacity: 0.5;
+		cursor: default;
 
-        &:hover,
-        &.active,
-        &:focus,
-        &[aria-expanded='true'] {
-            > .fa,
-            > .far,
-            > .fas,
-            > .fab,
-            &.fa,
-            &.far,
-            &.fas,
-            &.fab {
-                transform: rotate(0deg);
-            }
-        }
-    }
+		&:hover,
+		&.active,
+		&:focus,
+		&[aria-expanded='true'] {
+			> .fa,
+			> .far,
+			> .fas,
+			> .fab,
+			&.fa,
+			&.far,
+			&.fas,
+			&.fab {
+				transform: rotate(0deg);
+			}
+		}
+	}
 }
 
 // exclude bootstrap-table
 [data-toggle='table'] {
-    &:hover,
-    &.active,
-    &:focus {
-        opacity: 1;
-    }
+	&:hover,
+	&.active,
+	&:focus {
+		opacity: 1;
+	}
 }
 
 [data-toggle='collapse'] {
-    &[aria-expanded='true'] {
-        .accordion-icon {
-            &:before {
-                content: '\f068';
-            }
-        }
-    }
+	&[aria-expanded='true'] {
+		.accordion-icon {
+			&:before {
+				content: '\f068';
+			}
+		}
+	}
 }
 
 // transactions
@@ -133,239 +133,241 @@ textarea,
 .message,
 [data-toggle],
 [data-toggle] * {
-    transition: all 0.4s ease;
+	transition: all 0.4s ease;
 }
 
 .navbar-toggler {
-    transition: transform ease 0.4s;
+	transition: transform ease 0.4s;
 }
 
 .btn-toolbar {
-    margin-top: $field-gutter-height;
+	margin-top: $field-gutter-height;
 }
 
 /*
  * Extra class definition at _ui.form.basics.scss
  */
 .field {
-    position: relative;
-    display: flex;
-    flex-wrap: wrap;
-    margin: $field-gutter-height 0;
+	position: relative;
+	display: flex;
+	flex-wrap: wrap;
+	margin: $field-gutter-height 0;
 }
 
 // element col paddings
 .col-block {
-    padding-top: $col-block-gutter-height;
-    padding-bottom: $col-block-gutter-height;
+	padding-top: $col-block-gutter-height;
+	padding-bottom: $col-block-gutter-height;
 }
 
 // rewrite btn opacity on hover
 .btn {
-    &:hover,
-    &.active,
-    &:focus {
-        opacity: 1;
-    }
+	&:hover,
+	&.active,
+	&:focus {
+		opacity: 1;
+	}
 }
 
 // SS-messages
 .alert,
 .alert-info,
 .alert-danger {
-    display: block;
+	display: block;
 }
 
 .alert + .alert {
-    border-top: 0;
+	border-top: 0;
 }
 
 .alert {
-    .container {
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
+	.container {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
 
-        @media (min-width: map-get($grid-breakpoints, 'sm')) {
-            flex-direction: row;
-        }
-    }
-    .typography {
-        flex: 1 1;
-    }
-    .btn-close {
-        position: absolute;
-        top: 0;
-        right: 0;
+		@media (min-width: map-get($grid-breakpoints, 'sm')) {
+			flex-direction: row;
+		}
+	}
+	.typography {
+		flex: 1 1;
+	}
+	.btn-close {
+		position: absolute;
+		top: 0;
+		right: 0;
 
-        @media (min-width: map-get($grid-breakpoints, 'sm')) {
-            position: static;
-            margin-left: 1rem;
-        }
-    }
+		@media (min-width: map-get($grid-breakpoints, 'sm')) {
+			position: static;
+			margin-left: 1rem;
+		}
+	}
 }
 
 .message {
-    @extend .alert;
+	@extend .alert;
 
-    @extend .alert-info;
+	@extend .alert-info;
 
-    display: block;
-    margin: 0.5rem 0;
+	display: block;
+	margin: 0.5rem 0;
 }
 
 .message.validation,
 .message.required,
 .message.error {
-    @extend .alert;
+	@extend .alert;
 
-    @extend .alert-danger;
+	@extend .alert-danger;
 }
 
 .message.required,
 .message.error {
-    @extend .alert;
+	@extend .alert;
 
-    @extend .alert-danger;
+	@extend .alert-danger;
 }
 
 .list-group-item.active {
-    a,
-    .a {
-        color: $list-group-active-color;
-    }
+	a,
+	.a {
+		color: $list-group-active-color;
+	}
 }
 // dropdown icon
 .navbar-toggler {
-    &[aria-expanded='true'] {
-        transform: rotate(90deg);
-    }
+	&[aria-expanded='true'] {
+		transform: rotate(90deg);
+	}
 }
 
 .dropdown-toggle {
-    position: relative;
-    padding-right: 1.5em;
+	position: relative;
+	padding-right: 1.5em;
 
-    &:after {
-        position: absolute;
-        right: 0.5em;
-        bottom: 1em;
-    }
+	&:after {
+		position: absolute;
+		right: 0.5em;
+		bottom: 1em;
+	}
 }
 
 .navbar-nav .dropdown-toggle.nav-link {
-    padding-right: 1.5em;
+	padding-right: 1.5em;
 }
 
 .dropdown.show .dropdown-toggle::after,
 .dropdown-toggle.active-dropdown::after,
 .dropdown-toggle.active::after {
-    transform: rotate(-90deg);
+	transform: rotate(-90deg);
 }
 
 @keyframes expand {
-    from {
-        max-height: 0;
-    }
-    to {
-        max-height: 500rem;
-        max-height: 200vh;
-    }
+	from {
+		max-height: 0;
+		overflow: hidden;
+	}
+	to {
+		max-height: 500rem;
+		max-height: 200vh;
+		overflow: auto;
+	}
 }
 
 .dropdown-menu {
-    padding: 0;
-    border-radius: 0;
-    will-change: max-height, display;
-    overflow: hidden;
-    transition: none;
+	padding: 0;
+	border-radius: 0;
+	will-change: max-height, display;
+	overflow: hidden;
+	transition: none;
 
-    &.show {
-        animation: expand 2s;
-        animation-fill-mode: both;
-        overflow: visible;
-    }
-    .dropdown-list {
-        @extend .list-unstyled;
-    }
+	&.show {
+		animation: expand 2s;
+		animation-fill-mode: both;
+		overflow: visible;
+	}
+	.dropdown-list {
+		@extend .list-unstyled;
+	}
 
-    .dropdown-menu {
-        top: 0;
-        left: 100%;
-    }
+	.dropdown-menu {
+		top: 0;
+		left: 100%;
+	}
 }
 
 .row,
 .row-xs {
-    > [class^='col-'] > .card {
-        height: 100%;
-    }
+	> [class^='col-'] > .card {
+		height: 100%;
+	}
 }
 
 .row-xs {
-    margin-right: -($grid-gutter-xs-width / 2);
-    margin-left: -($grid-gutter-xs-width / 2);
+	margin-right: -($grid-gutter-xs-width / 2);
+	margin-left: -($grid-gutter-xs-width / 2);
 
-    [class^='col-'] {
-        padding-left: $grid-gutter-xs-width / 2;
-        padding-right: $grid-gutter-xs-width / 2;
-    }
+	[class^='col-'] {
+		padding-left: $grid-gutter-xs-width / 2;
+		padding-right: $grid-gutter-xs-width / 2;
+	}
 }
 
 #ForgotPassword {
-    margin: 1rem 0;
-    width: 100%;
+	margin: 1rem 0;
+	width: 100%;
 }
 
 #BetterNavigator {
-    display: none;
-    @media (min-width: map-get($grid-breakpoints,'md')) {
-        display: block;
-    }
+	display: none;
+	@media (min-width: map-get($grid-breakpoints,'md')) {
+		display: block;
+	}
 }
 #SiteWideOffline {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 99999;
-    width: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 99999;
+	width: 100%;
 }
 
 .alert-offline {
-    display: none;
+	display: none;
 }
 body.is-offline {
-    .alert-offline {
-        display: block;
-    }
+	.alert-offline {
+		display: block;
+	}
 }
 
 [aria-expanded='true'] {
-    .fa-bars {
-        &:before {
-            content: '\f00d';
-        }
-    }
+	.fa-bars {
+		&:before {
+			content: '\f00d';
+		}
+	}
 }
 
 .jsSidebarUI {
-    position: relative;
-    min-height: 100%;
+	position: relative;
+	min-height: 100%;
 }
 
 .jsSidebarUI__inner {
-    position: relative;
-    will-change: position, top;
+	position: relative;
+	will-change: position, top;
 }
 
 #BetterNavigator {
-    a,
-    button,
-    div,
-    i,
-    span {
-        background-size: auto;
-    }
+	a,
+	button,
+	div,
+	i,
+	span {
+		background-size: auto;
+	}
 }
