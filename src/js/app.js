@@ -86,12 +86,12 @@ import './_layout';
 import './_components/drivers/_google.track.external.links';
 
 function importAll(r) {
-	return r.keys().map(r);
+  return r.keys().map(r);
 }
 
 const images = importAll(
-	require.context('../img/', false, /\.(png|jpe?g|svg)$/),
+  require.context('../img/', false, /\.(png|jpe?g|svg)$/),
 );
 const fontAwesome = importAll(
-	require.context('font-awesome', false, /\.(otf|eot|svg|ttf|woff|woff2)$/),
+  require.context('font-awesome', false, /\.(otf|eot|svg|ttf|woff|woff2)$/),
 );
