@@ -18,7 +18,19 @@ const NoCaptcha = (($) => {
       ui.dispose();
 
       console.log(`${NAME}: init`);
-      this.renderCaptcha();
+
+      if ($('.g-recaptcha').length && typeof grecaptcha === 'undefined') {
+        console.log(`${NAME}: Loading Captcha API`);
+
+        $.getScript(
+          'https://www.google.com/recaptcha/api.js?render=explicit&hl=en&onload=noCaptchaFieldRender',
+          () => {
+            this.renderCaptcha();
+          },
+        );
+      } else {
+        this.renderCaptcha();
+      }
     }
 
     static dispose() {
@@ -28,11 +40,12 @@ const NoCaptcha = (($) => {
     static renderCaptcha() {
       console.log(`${NAME}: Rendering Captcha`);
 
-      if (typeof grecaptcha === 'undefined') {
-        console.log(`${NAME}: Captcha API isn't available yet`);
-      }
-
       const $_noCaptchaFields = $('.g-recaptcha');
+
+      if (!$('.g-recaptcha').length) {
+        console.log(`${NAME}: No Captcha fields`);
+        return;
+      }
 
       const submitListener = (e) => {
         const $field = $(e.currentTarget).find('.g-recaptcha');
@@ -42,7 +55,7 @@ const NoCaptcha = (($) => {
       $_noCaptchaFields.each((i, field) => {
         const $field = $(field);
 
-        if ($field.data('widgetid')) {
+        if ($field.data('widgetid') || $field.html().length) {
           return;
         }
 
@@ -62,7 +75,7 @@ const NoCaptcha = (($) => {
     }
   }
 
-  $(W).on(`${Events.AJAX}`, () => {
+  $(W).on(`${NAME}.init ${Events.AJAX} ${Events.LOADED}`, () => {
     NoCaptcha.init();
   });
 
