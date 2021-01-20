@@ -87,10 +87,10 @@
       },
       "modules": {
         "byIdentifier": {
-          "./node_modules/.pnpm/cache-loader@4.1.0_webpack@5.16.0/node_modules/cache-loader/dist/cjs.js?{\"cacheDirectory\":\"/mnt/data/srv/dist/repositories/webpack-bootstrap-ui-kit/node_modules/.cache/favicons-webpack-plugin\"}!./node_modules/.pnpm/github.com/jantimon/favicons-webpack-plugin@ee2818afa97c4b4bf1c6f919a403e56203e26606_webpack@5.16.0/node_modules/favicons-webpack-plugin/src/loader.js?{\"prefix\":\"/icons/\",\"options\":{\"appName\":\"@a2nt/ss-bootstrap-ui-webpack-boilerplate\",\"appDescription\":\"This UI Kit allows you to build Bootstrap 4 webapp with some extra UI features. It's easy to extend and easy to convert HTML templates to CMS templates.\",\"version\":\"2.8.3\",\"developerName\":\"Tony Air\"},\"path\":\"dist\"}!./src/favicon.png": 392
+          "./node_modules/.pnpm/cache-loader@4.1.0_webpack@5.16.0/node_modules/cache-loader/dist/cjs.js?{\"cacheDirectory\":\"/mnt/data/srv/dist/repositories/webpack-bootstrap-ui-kit/node_modules/.cache/favicons-webpack-plugin\"}!./node_modules/.pnpm/github.com/jantimon/favicons-webpack-plugin@ee2818afa97c4b4bf1c6f919a403e56203e26606_webpack@5.16.0/node_modules/favicons-webpack-plugin/src/loader.js?{\"prefix\":\"/icons/\",\"options\":{\"appName\":\"@a2nt/ss-bootstrap-ui-webpack-boilerplate\",\"appDescription\":\"This UI Kit allows you to build Bootstrap 4 webapp with some extra UI features. It's easy to extend and easy to convert HTML templates to CMS templates.\",\"version\":\"2.8.4\",\"developerName\":\"Tony Air\"},\"path\":\"dist\"}!./src/favicon.png": 132
         },
         "usedIds": [
-          392
+          132
         ]
       }
     }
@@ -270,6 +270,7 @@
       "./node_modules/.pnpm/babel-loader@8.2.2_f0c87bb7cbf8c08531ee428ecaa3548a/node_modules/babel-loader/lib/index.js??ruleSet[1].rules[0].use!./src/js/types/Site.Controllers.MapElementController.js|d172e17c91be9337ee76b73d3e06f932": 406,
       "./node_modules/.pnpm/file-loader@6.2.0_webpack@5.16.0/node_modules/file-loader/dist/cjs.js??ruleSet[1].rules[3].use[0]!./node_modules/.pnpm/img-optimize-loader@1.0.7_file-loader@6.2.0+webpack@5.16.0/node_modules/img-optimize-loader/dist/index.js??ruleSet[1].rules[4].use[0]!./node_modules/.pnpm/image-minimizer-webpack-plugin@2.2.0_webpack@5.16.0/node_modules/image-minimizer-webpack-plugin/dist/loader.js??ruleSet[1].rules[5]!./src/img/photo3.svg": 770,
       "./node_modules/.pnpm/img-optimize-loader@1.0.7_file-loader@6.2.0+webpack@5.16.0/node_modules/img-optimize-loader/dist/index.js??ruleSet[1].rules[4].use[0]!./node_modules/.pnpm/image-minimizer-webpack-plugin@2.2.0_webpack@5.16.0/node_modules/image-minimizer-webpack-plugin/dist/loader.js??ruleSet[1].rules[5]!./src/img/bg.png": 705,
+      "./node_modules/.pnpm/img-optimize-loader@1.0.7_file-loader@6.2.0+webpack@5.16.0/node_modules/img-optimize-loader/dist/index.js??ruleSet[1].rules[4].use[0]!./node_modules/.pnpm/image-minimizer-webpack-plugin@2.2.0_webpack@5.16.0/node_modules/image-minimizer-webpack-plugin/dist/loader.js??ruleSet[1].rules[5]!./src/img/logo.png": 172,
       "./node_modules/.pnpm/img-optimize-loader@1.0.7_file-loader@6.2.0+webpack@5.16.0/node_modules/img-optimize-loader/dist/index.js??ruleSet[1].rules[4].use[0]!./node_modules/.pnpm/image-minimizer-webpack-plugin@2.2.0_webpack@5.16.0/node_modules/image-minimizer-webpack-plugin/dist/loader.js??ruleSet[1].rules[5]!./src/img/photo1.png": 759,
       "./node_modules/.pnpm/img-optimize-loader@1.0.7_file-loader@6.2.0+webpack@5.16.0/node_modules/img-optimize-loader/dist/index.js??ruleSet[1].rules[4].use[0]!./node_modules/.pnpm/image-minimizer-webpack-plugin@2.2.0_webpack@5.16.0/node_modules/image-minimizer-webpack-plugin/dist/loader.js??ruleSet[1].rules[5]!./src/img/photo2.jpg": 220,
       "./node_modules/.pnpm/mini-css-extract-plugin@1.3.4_webpack@5.16.0/node_modules/mini-css-extract-plugin/dist/loader.js!./node_modules/.pnpm/css-loader@5.0.1_webpack@5.16.0/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/.pnpm/resolve-url-loader@3.1.2/node_modules/resolve-url-loader/index.js!./node_modules/.pnpm/sass-loader@10.1.1_node-sass@5.0.0+webpack@5.16.0/node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[3]!./src/scss/types/cms.scss": 41,
@@ -288,6 +289,7 @@
       105,
       121,
       154,
+      172,
       220,
       222,
       310,

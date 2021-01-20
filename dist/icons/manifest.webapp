@@ -1,5 +1,5 @@
 {
-  "version": "2.8.3",
+  "version": "2.8.4",
   "name": "@a2nt/ss-bootstrap-ui-webpack-boilerplate",
   "description": "This UI Kit allows you to build Bootstrap 4 webapp with some extra UI features. It's easy to extend and easy to convert HTML templates to CMS templates.",
   "icons": {
