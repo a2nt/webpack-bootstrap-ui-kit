@@ -1,7 +1,7 @@
 {
-  "name": "ss-webpack-boilerplate",
-  "short_name": "ss-webpack-boilerplate",
-  "description": "Lets you create SilverStripe faster",
+  "name": "@a2nt/ss-bootstrap-ui-webpack-boilerplate",
+  "short_name": "@a2nt/ss-bootstrap-ui-webpack-boilerplate",
+  "description": "This UI Kit allows you to build Bootstrap 4 webapp with some extra UI features. It's easy to extend and easy to convert HTML templates to CMS templates.",
   "dir": "auto",
   "lang": "en-US",
   "display": "standalone",

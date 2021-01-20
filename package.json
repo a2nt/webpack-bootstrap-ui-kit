@@ -1,13 +1,14 @@
 {
-	"name": "ss-webpack-boilerplate",
-	"version": "2.0.2",
-	"description": "Lets you create SilverStripe faster",
+	"name": "@a2nt/ss-bootstrap-ui-webpack-boilerplate",
+	"version": "2.8.3",
 	"author": "Tony Air <tony@twma.pro>",
 	"license": "MIT",
+	"description": "This UI Kit allows you to build Bootstrap 4 webapp with some extra UI features. It's easy to extend and easy to convert HTML templates to CMS templates.",
 	"private": false,
+	"main": "src/js/app.js",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/a2nt/silverstripe-webpack"
+		"url": "git+https://github.com/a2nt/webpack-bootstrap-ui-kit"
 	},
 	"engines": {
 		"yarn": ">= 1.0.0"
@@ -31,8 +32,7 @@
 		"ie>=11"
 	],
 	"dependencies": {
-		"@a2nt/meta-lightbox": "^2.7.1",
-		"@a2nt/ss-bootstrap-ui-webpack-boilerplate": "^2.8.2",
+		"@a2nt/meta-lightbox": "^2.7.3",
 		"aos": "^2.3.4",
 		"bootbox": "^5.5.2",
 		"bootstrap": "^4.6.0",

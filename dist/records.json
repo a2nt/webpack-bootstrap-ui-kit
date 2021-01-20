@@ -14,7 +14,7 @@
       },
       "modules": {
         "byIdentifier": {
-          "./node_modules/.pnpm/html-loader@1.3.2_webpack@5.16.0/node_modules/html-loader/dist/cjs.js!./node_modules/.pnpm/@a2nt/meta-lightbox@2.7.1/node_modules/@a2nt/meta-lightbox/src/html/meta-lightbox.html": 952,
+          "./node_modules/.pnpm/html-loader@1.3.2_webpack@5.16.0/node_modules/html-loader/dist/cjs.js!./node_modules/.pnpm/@a2nt/meta-lightbox@2.7.3/node_modules/@a2nt/meta-lightbox/src/html/meta-lightbox.html": 50,
           "./node_modules/.pnpm/html-loader@1.3.2_webpack@5.16.0/node_modules/html-loader/dist/cjs.js!./src/html/Elements/Accordion.html": 813,
           "./node_modules/.pnpm/html-loader@1.3.2_webpack@5.16.0/node_modules/html-loader/dist/cjs.js!./src/html/Elements/Content.html": 87,
           "./node_modules/.pnpm/html-loader@1.3.2_webpack@5.16.0/node_modules/html-loader/dist/cjs.js!./src/html/Elements/ElementsList.html": 962,
@@ -29,6 +29,7 @@
           "./node_modules/.pnpm/html-webpack-plugin@4.5.1_webpack@5.16.0/node_modules/html-webpack-plugin/lib/loader.js!./src/index.html": 864
         },
         "usedIds": [
+          50,
           87,
           154,
           374,
@@ -40,7 +41,6 @@
           779,
           813,
           864,
-          952,
           962
         ]
       }
@@ -87,15 +87,15 @@
       },
       "modules": {
         "byIdentifier": {
-          "./node_modules/.pnpm/cache-loader@4.1.0_webpack@5.16.0/node_modules/cache-loader/dist/cjs.js?{\"cacheDirectory\":\"/mnt/data/srv/dist/repositories/webpack-bootstrap-ui-kit/node_modules/.cache/favicons-webpack-plugin\"}!./node_modules/.pnpm/github.com/jantimon/favicons-webpack-plugin@ee2818afa97c4b4bf1c6f919a403e56203e26606_webpack@5.16.0/node_modules/favicons-webpack-plugin/src/loader.js?{\"prefix\":\"/icons/\",\"options\":{\"appName\":\"ss-webpack-boilerplate\",\"appDescription\":\"Lets you create SilverStripe faster\",\"version\":\"2.0.2\",\"developerName\":\"Tony Air\"},\"path\":\"dist\"}!./src/favicon.png": 509
+          "./node_modules/.pnpm/cache-loader@4.1.0_webpack@5.16.0/node_modules/cache-loader/dist/cjs.js?{\"cacheDirectory\":\"/mnt/data/srv/dist/repositories/webpack-bootstrap-ui-kit/node_modules/.cache/favicons-webpack-plugin\"}!./node_modules/.pnpm/github.com/jantimon/favicons-webpack-plugin@ee2818afa97c4b4bf1c6f919a403e56203e26606_webpack@5.16.0/node_modules/favicons-webpack-plugin/src/loader.js?{\"prefix\":\"/icons/\",\"options\":{\"appName\":\"@a2nt/ss-bootstrap-ui-webpack-boilerplate\",\"appDescription\":\"This UI Kit allows you to build Bootstrap 4 webapp with some extra UI features. It's easy to extend and easy to convert HTML templates to CMS templates.\",\"version\":\"2.8.3\",\"developerName\":\"Tony Air\"},\"path\":\"dist\"}!./src/favicon.png": 392
         },
         "usedIds": [
-          509
+          392
         ]
       }
     }
   ],
-  "mini-css-extract-plugin /mnt/data/srv/dist/repositories/webpack-bootstrap-ui-kit/node_modules/.pnpm/css-loader@5.0.1_webpack@5.16.0/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/.pnpm/resolve-url-loader@3.1.2/node_modules/resolve-url-loader/index.js!./node_modules/.pnpm/sass-loader@10.1.1_node-sass@5.0.0+webpack@5.16.0/node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[3]!./node_modules/.pnpm/@a2nt/meta-lightbox@2.7.1/node_modules/@a2nt/meta-lightbox/src/scss/app.scss": [
+  "mini-css-extract-plugin /mnt/data/srv/dist/repositories/webpack-bootstrap-ui-kit/node_modules/.pnpm/css-loader@5.0.1_webpack@5.16.0/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/.pnpm/resolve-url-loader@3.1.2/node_modules/resolve-url-loader/index.js!./node_modules/.pnpm/sass-loader@10.1.1_node-sass@5.0.0+webpack@5.16.0/node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[3]!./node_modules/.pnpm/@a2nt/meta-lightbox@2.7.3/node_modules/@a2nt/meta-lightbox/src/scss/app.scss": [
     {
       "chunks": {
         "byName": {
@@ -111,11 +111,11 @@
       "modules": {
         "byIdentifier": {
           "./node_modules/.pnpm/babel-loader@8.2.2_f0c87bb7cbf8c08531ee428ecaa3548a/node_modules/babel-loader/lib/index.js??ruleSet[1].rules[0].use!./node_modules/.pnpm/css-loader@5.0.1_webpack@5.16.0/node_modules/css-loader/dist/runtime/api.js": 183,
-          "./node_modules/.pnpm/css-loader@5.0.1_webpack@5.16.0/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/.pnpm/resolve-url-loader@3.1.2/node_modules/resolve-url-loader/index.js!./node_modules/.pnpm/sass-loader@10.1.1_node-sass@5.0.0+webpack@5.16.0/node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[3]!./node_modules/.pnpm/@a2nt/meta-lightbox@2.7.1/node_modules/@a2nt/meta-lightbox/src/scss/app.scss": 291
+          "./node_modules/.pnpm/css-loader@5.0.1_webpack@5.16.0/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/.pnpm/resolve-url-loader@3.1.2/node_modules/resolve-url-loader/index.js!./node_modules/.pnpm/sass-loader@10.1.1_node-sass@5.0.0+webpack@5.16.0/node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[3]!./node_modules/.pnpm/@a2nt/meta-lightbox@2.7.3/node_modules/@a2nt/meta-lightbox/src/scss/app.scss": 430
         },
         "usedIds": [
           183,
-          291
+          430
         ]
       }
     }
@@ -265,7 +265,7 @@
       "./node_modules/.pnpm/babel-loader@8.2.2_f0c87bb7cbf8c08531ee428ecaa3548a/node_modules/babel-loader/lib/index.js??ruleSet[1].rules[0].use!./node_modules/.pnpm/popper.js@1.16.1/node_modules/popper.js/dist/esm/popper.js": 314,
       "./node_modules/.pnpm/babel-loader@8.2.2_f0c87bb7cbf8c08531ee428ecaa3548a/node_modules/babel-loader/lib/index.js??ruleSet[1].rules[0].use!./node_modules/.pnpm/smooth-scroll@16.1.3/node_modules/smooth-scroll/dist/smooth-scroll.polyfills.min.js": 893,
       "./node_modules/.pnpm/babel-loader@8.2.2_f0c87bb7cbf8c08531ee428ecaa3548a/node_modules/babel-loader/lib/index.js??ruleSet[1].rules[0].use!./src/js/_components/drivers/_google.track.external.links.js": 976,
-      "./node_modules/.pnpm/babel-loader@8.2.2_f0c87bb7cbf8c08531ee428ecaa3548a/node_modules/babel-loader/lib/index.js??ruleSet[1].rules[0].use!./src/js/app.js|019cdae23f24695db99492ad981efa62": 2,
+      "./node_modules/.pnpm/babel-loader@8.2.2_f0c87bb7cbf8c08531ee428ecaa3548a/node_modules/babel-loader/lib/index.js??ruleSet[1].rules[0].use!./src/js/app.js|b7e4c2e3ce6e27c5ad1dc397096e5f63": 80,
       "./node_modules/.pnpm/babel-loader@8.2.2_f0c87bb7cbf8c08531ee428ecaa3548a/node_modules/babel-loader/lib/index.js??ruleSet[1].rules[0].use!./src/js/types/SilverShop.Page.CheckoutPageController.js|2e45a6c9d93595136f96bdb6c2ec7005": 105,
       "./node_modules/.pnpm/babel-loader@8.2.2_f0c87bb7cbf8c08531ee428ecaa3548a/node_modules/babel-loader/lib/index.js??ruleSet[1].rules[0].use!./src/js/types/Site.Controllers.MapElementController.js|d172e17c91be9337ee76b73d3e06f932": 406,
       "./node_modules/.pnpm/file-loader@6.2.0_webpack@5.16.0/node_modules/file-loader/dist/cjs.js??ruleSet[1].rules[3].use[0]!./node_modules/.pnpm/img-optimize-loader@1.0.7_file-loader@6.2.0+webpack@5.16.0/node_modules/img-optimize-loader/dist/index.js??ruleSet[1].rules[4].use[0]!./node_modules/.pnpm/image-minimizer-webpack-plugin@2.2.0_webpack@5.16.0/node_modules/image-minimizer-webpack-plugin/dist/loader.js??ruleSet[1].rules[5]!./src/img/photo3.svg": 770,
@@ -280,9 +280,9 @@
       "external \"jQuery\"": 609
     },
     "usedIds": [
-      2,
       41,
       71,
+      80,
       89,
       93,
       105,

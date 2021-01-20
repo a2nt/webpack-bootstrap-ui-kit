@@ -9,7 +9,7 @@ const conf = commonVariables.configuration;
 const path = require('path');
 const filesystem = require('fs');
 
-const UIInfo = require('./node_modules/@a2nt/ss-bootstrap-ui-webpack-boilerplate/package.json');
+const UIInfo = require('./package.json');
 const UINAME = JSON.stringify(UIInfo.name);
 const UIVERSION = JSON.stringify(UIInfo.version);
 console.info(`%cUI Kit ${UINAME} ${UIVERSION}`, 'color:yellow;font-size:14px');
