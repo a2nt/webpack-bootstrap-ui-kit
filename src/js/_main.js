@@ -375,6 +375,29 @@ const MainUI = (($) => {
         W.location.assign(href);
       });
 
+      // set attributes for mobile friendly tables
+      $('.typography table').each((i, el) => {
+        const $table = $(el);
+        let $header = $table.find('thead tr:first-child');
+        if (!$header.length) {
+          $header = $(el).find('tr:first-child');
+        }
+
+        $header.find('td').each((i, h) => {
+          const $h = $(h);
+          $table
+            .find('tr')
+            .find(`td:eq(${i})`)
+            .each((i, el) => {
+              const $el = $(el);
+              if (!$el.attr('data-label')) {
+                $el.attr('data-label', $h.text());
+              }
+            });
+        });
+      });
+      //
+
       // hide spinner
       Spinner.hide(() => {
         $Body.addClass('loaded');
