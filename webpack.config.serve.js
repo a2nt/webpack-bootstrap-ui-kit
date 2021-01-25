@@ -17,8 +17,7 @@ const conf = commonVariables.configuration;
 const IP = process.env.IP || conf.HOSTNAME;
 const PORT = process.env.PORT || conf.PORT;
 
-const UIInfo = require('./node_modules/@a2nt/ss-bootstrap-ui-webpack-boilerplate/package.json');
-const UIMetaInfo = require('./node_modules/@a2nt/meta-lightbox/package.json');
+const UIInfo = require('./package.json');
 
 const config = merge(common, {
   mode: 'development',
@@ -122,8 +121,6 @@ const config = merge(common, {
       UINAME: JSON.stringify(UIInfo.name),
       UIVERSION: JSON.stringify(UIInfo.version),
       UIAUTHOR: JSON.stringify(UIInfo.author),
-      UIMetaNAME: JSON.stringify(UIMetaInfo.name),
-      UIMetaVersion: JSON.stringify(UIMetaInfo.version),
     }),
   ],
 

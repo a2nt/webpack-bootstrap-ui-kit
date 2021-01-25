@@ -2,6 +2,8 @@
 
 import $ from 'jquery';
 
+import MarkerClusterer from '@googlemaps/markerclustererplus';
+
 import Events from '../../_events';
 import MarkerUI from './_map.google.marker';
 
@@ -74,8 +76,17 @@ const GoogleMapsDriver = (($) => {
           '<div class="html"></div>' +
           '</div>',
       });
+      ui.popup.setMap(ui.map);
 
       ui.geocoder = new google.maps.Geocoder();
+
+      ui.cluster = new MarkerClusterer(ui.map, null, {
+        styles: [{
+          width: 30,
+          height: 30,
+          className: 'mapboxgl-cluster',
+        }],
+      });
 
       $el.trigger(Events.MAPAPILOADED);
     }
@@ -102,6 +113,8 @@ const GoogleMapsDriver = (($) => {
       });
 
       ui.markers.push(marker);
+
+      ui.cluster.addMarker(marker);
 
       return marker;
     }

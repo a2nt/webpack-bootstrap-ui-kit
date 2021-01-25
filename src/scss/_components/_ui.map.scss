@@ -57,6 +57,7 @@ $map-popup-color: $body-color !default;
         font-size: 2rem;
         padding: 0.5rem;
         border-top-right-radius: 0.25rem;
+        z-index: 2;
 
         &:hover,
         &:focus {
@@ -95,6 +96,39 @@ $map-popup-color: $body-color !default;
         .fab,
         .far {
             animation: pulse 0.8s linear infinite;
+        }
+    }
+
+    &-cluster {
+        background: $info;
+        color: color-yiq($info);
+        border-radius: 100%;
+        font-weight: bold;
+        font-size: 1.2rem;
+        display: flex;
+        align-items: center;
+        animation: pulse 0.8s linear infinite;
+
+        &::before,
+        &::after {
+            content: "";
+            display: block;
+            position: absolute;
+            width: 140%;
+            height: 140%;
+
+            transform: translate(-50%, -50%);
+            top: 50%;
+            left: 50%;
+            background: $info;
+            opacity: 0.2;
+            border-radius: 100%;
+            z-index: -1;
+        }
+
+        &::after {
+            width: 180%;
+            height: 180%;
         }
     }
 }

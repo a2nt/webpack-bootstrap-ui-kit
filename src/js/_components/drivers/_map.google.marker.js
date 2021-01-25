@@ -9,7 +9,8 @@ const Obj = {
         super();
         const ui = this;
 
-        ui.setMap(options.map);
+        ui.ownerMap = options.map;
+        //ui.setMap(options.map);
         ui.position = options.position;
         ui.html = options.html
           ? options.html
@@ -116,6 +117,7 @@ const Obj = {
 
       draw() {
         const ui = this;
+
         let $div = $(ui.div).find(
           '.mapboxgl-marker,.marker-pin,.mapboxgl-popup,.popup',
         );
@@ -124,9 +126,14 @@ const Obj = {
         }
 
         // Calculate position of div
-        const positionInPixels = ui
-          .getProjection()
-          .fromLatLngToDivPixel(new google.maps.LatLng(ui.position));
+        const projection = ui.getProjection();
+
+        if(!projection) {
+          console.log('GoogleMapsHtmlOverlay: current map is missing');
+          return null;
+        }
+
+        const positionInPixels = projection.fromLatLngToDivPixel(ui.getPosition());
 
         // Align HTML overlay relative to original position
         const offset = {
@@ -186,7 +193,7 @@ const Obj = {
 
       getPosition() {
         const ui = this;
-        return ui.position;
+        return new google.maps.LatLng(ui.position);
       }
 
       getDiv() {
@@ -199,6 +206,17 @@ const Obj = {
         ui.position = position;
         ui.align = align;
         ui.draw();
+      }
+
+      remove() {
+        const ui = this;
+        ui.setMap(null);
+        ui.div.remove();
+      }
+
+      // emulate google.maps.Marker functionality for compatibility (for example with @googlemaps/markerclustererplus)
+      getDraggable() {
+        return false;
       }
     }
     return GoogleMapsHtmlOverlay;

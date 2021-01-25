@@ -9,11 +9,6 @@ const conf = commonVariables.configuration;
 const path = require('path');
 const filesystem = require('fs');
 
-const UIInfo = require('./package.json');
-const UINAME = JSON.stringify(UIInfo.name);
-const UIVERSION = JSON.stringify(UIInfo.version);
-console.info(`%cUI Kit ${UINAME} ${UIVERSION}`, 'color:yellow;font-size:14px');
-
 const includes = {};
 const modules = [
 	path.resolve(__dirname, conf.APPDIR, conf.SRC),
@@ -27,7 +22,7 @@ const modules = [
 ];
 
 const _addAppFiles = (theme) => {
-	const dirPath = path.resolve(__dirname, theme);
+	const dirPath = './' + theme;
 	let themeName = path.basename(theme);
 	if (themeName == '.') {
 		themeName = 'app';
@@ -105,6 +100,8 @@ module.exports = {
 	entry: includes,
 	externals: {
 		jquery: 'jQuery',
+		react: 'React',
+		'react-dom': 'ReactDOM',
 	},
 	resolve: {
 		modules: modules,
@@ -113,6 +110,8 @@ module.exports = {
 			$: require.resolve('jquery'),
 			jquery: require.resolve('jquery'),
 			jQuery: require.resolve('jquery'),
+			react: require.resolve('react'),
+			'react-dom': require.resolve('react-dom'),
 		},
 	},
 };

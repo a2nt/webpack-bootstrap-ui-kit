@@ -1,8 +1,6 @@
 /*
  * Production assets generation
  */
-const COMPRESS = true;
-
 const webpack = require('webpack');
 const commonVariables = require('./webpack.configuration');
 const conf = commonVariables.configuration;
@@ -23,15 +21,21 @@ const ImageSpritePlugin = require('@a2nt/image-sprite-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const UIInfo = require('./package.json');
-const UIMetaInfo = require('./node_modules/@a2nt/meta-lightbox/package.json');
 const UIVERSION = JSON.stringify(UIInfo.version);
 
+const NODE_ENV = conf.NODE_ENV || process.env.NODE_ENV;
+const COMPRESS = NODE_ENV === 'production' ? true : false;
+
+console.log('NODE_ENV: ' + NODE_ENV);
+console.log('COMPRESS: ' + COMPRESS);
 console.log('WebP images: ' + conf['webp']);
 
 let plugins = [
 	new webpack.ProvidePlugin({
 		$: 'jquery',
 		jQuery: 'jquery',
+		react: 'React',
+		'react-dom': 'ReactDOM',
 		Popper: ['popper.js', 'default'],
 		Util: 'exports-loader?Util!bootstrap/js/dist/util',
 		Alert: 'exports-loader?Alert!bootstrap/js/dist/alert',
@@ -47,78 +51,86 @@ let plugins = [
 	}),
 	new webpack.DefinePlugin({
 		'process.env': {
-			NODE_ENV: JSON.stringify('production'),
+			NODE_ENV: JSON.stringify(NODE_ENV),
 		},
 		UINAME: JSON.stringify(UIInfo.name),
 		UIVERSION: UIVERSION,
 		UIAUTHOR: JSON.stringify(UIInfo.author),
-		UIMetaNAME: JSON.stringify(UIMetaInfo.name),
-		UIMetaVersion: JSON.stringify(UIMetaInfo.version),
 	}),
 	new webpack.LoaderOptionsPlugin({
-		minimize: true,
-		debug: false,
+		minimize: COMPRESS,
+		debug: !COMPRESS,
 	}),
 	new MiniCssExtractPlugin({
 		filename: 'css/[name].css',
 		//allChunks: true,
 	}),
-	new OptimizeCssAssetsPlugin({
-		//assetNameRegExp: /\.optimize\.css$/g,
-		cssProcessor: require('cssnano'),
-		cssProcessorPluginOptions: {
-			preset: ['default'],
-		},
-		cssProcessorOptions: {
-			zindex: true,
-			cssDeclarationSorter: true,
-			reduceIdents: false,
-			mergeIdents: true,
-			mergeRules: true,
-			mergeLonghand: true,
-			discardUnused: true,
-			discardOverridden: true,
-			discardDuplicates: true,
-			discardComments: {
-				removeAll: true,
-			},
-		},
-		canPrint: true,
-	}),
-	require('autoprefixer'),
-	new ImageminPlugin({
-		minimizerOptions: {
-			// Lossless optimization with custom option
-			// Feel free to experiment with options for better result for you
-			plugins: [
-				['gifsicle', { interlaced: true }],
-				['jpegtran', { progressive: true }],
-				['optipng', { optimizationLevel: 5 }],
-				[
-					'svgo',
-					{
-						plugins: [
-							{
-								removeViewBox: false,
-							},
-						],
-					},
-				],
-			],
-		},
-	}),
-	new ImageSpritePlugin({
-		exclude: /exclude|original|default-|icons|sprite|svg|logo|favicon/,
-		commentOrigin: false,
-		compress: COMPRESS,
-		extensions: ['png'],
-		indent: '',
-		log: true,
-		//outputPath: path.join(__dirname, conf.APPDIR, conf.DIST),
-		outputFilename: 'img/sprite-[hash].png',
-		padding: 0,
-	}),
 ];
+
+if (COMPRESS) {
+	plugins.push(
+		new OptimizeCssAssetsPlugin({
+			//assetNameRegExp: /\.optimize\.css$/g,
+			cssProcessor: require('cssnano'),
+			cssProcessorPluginOptions: {
+				preset: ['default'],
+			},
+			cssProcessorOptions: {
+				zindex: true,
+				cssDeclarationSorter: true,
+				reduceIdents: false,
+				mergeIdents: true,
+				mergeRules: true,
+				mergeLonghand: true,
+				discardUnused: true,
+				discardOverridden: true,
+				discardDuplicates: true,
+				discardComments: {
+					removeAll: true,
+				},
+			},
+			canPrint: true,
+		}),
+	);
+	plugins.push(require('autoprefixer'));
+	plugins.push(
+		new ImageminPlugin({
+			minimizerOptions: {
+				// Lossless optimization with custom option
+				// Feel free to experiment with options for better result for you
+				plugins: [
+					['gifsicle', { interlaced: true }],
+					['jpegtran', { progressive: true }],
+					['optipng', { optimizationLevel: 5 }],
+					[
+						'svgo',
+						{
+							plugins: [
+								{
+									removeViewBox: false,
+								},
+							],
+						},
+					],
+				],
+			},
+		}),
+	);
+
+	plugins.push(
+		new ImageSpritePlugin({
+			exclude: /exclude|original|default-|icons|sprite|svg|logo|favicon/,
+			commentOrigin: false,
+			compress: COMPRESS,
+			extensions: ['png'],
+			indent: '',
+			log: true,
+			//outputPath: path.join(__dirname, conf.APPDIR, conf.DIST),
+			outputFilename: 'img/sprite-[hash].png',
+			padding: 0,
+		}),
+	);
+}
 
 const indexPath = path.join(__dirname, conf.APPDIR, conf.SRC, 'index.html');
 if (filesystem.existsSync(indexPath)) {
@@ -126,6 +138,13 @@ if (filesystem.existsSync(indexPath)) {
 		new HtmlWebpackPlugin({
 			publicPath: '',
 			template: path.join(conf.APPDIR, conf.SRC, 'index.html'),
+			templateParameters: {
+				NODE_ENV: NODE_ENV,
+				REACT_SCRIPTS:
+					NODE_ENV === 'production'
+						? '<script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script><script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>'
+						: '<script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script><script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>',
+			},
 		}),
 	);
 }
@@ -202,11 +221,12 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
 plugins.push(
 	new BundleAnalyzerPlugin({
 		analyzerMode: 'static',
+		openAnalyzer: false,
 	}),
 );
 
 const cfg = merge(common, {
-	mode: 'production',
+	mode: NODE_ENV,
 	cache: {
 		type: 'filesystem',
 	},
@@ -278,7 +298,15 @@ const cfg = merge(common, {
 				use: {
 					loader: 'babel-loader',
 					options: {
-						presets: ['@babel/preset-env'], //Preset used for env setup
+						presets: [
+							'@babel/preset-env',
+							'@babel/react',
+							{
+								plugins: [
+									'@babel/plugin-proposal-class-properties',
+								],
+							},
+						], //Preset used for env setup
 						plugins: [['@babel/transform-react-jsx']],
 						cacheDirectory: true,
 						cacheCompression: true,

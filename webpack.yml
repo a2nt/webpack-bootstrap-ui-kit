@@ -5,10 +5,11 @@
 Site\Templates\WebpackTemplateProvider:
   APPDIR: ./
   THEMESDIR: themes
-  HOSTNAME: localhost
+  HOSTNAME: 127.0.0.1
   PORT: 3000
   SRC: src
   DIST: dist
   TYPESJS: src/js/types
   TYPESSCSS: src/scss/types
+  NODE_ENV: development #production,development
   webp: false
