@@ -16,7 +16,7 @@
   \************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
-eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extract-plugin\n\n\n//# sourceURL=webpack://@a2nt/meta-lightbox/./src/scss/types/editor.scss?");
+eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extract-plugin\n\n\n//# sourceURL=webpack://@a2nt/ss-bootstrap-ui-webpack-boilerplate/./src/scss/types/editor.scss?");
 
 /***/ })
 
