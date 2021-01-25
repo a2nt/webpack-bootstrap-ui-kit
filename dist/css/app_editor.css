@@ -431,3 +431,12 @@ iframe {
   img {
     height: auto !important; } }
 
+@media (max-width: 575px) {
+  td {
+    display: flex; }
+    td:before {
+      content: attr(data-label);
+      font-weight: bold;
+      width: 12rem;
+      min-width: 12rem; } }
+

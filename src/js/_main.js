@@ -383,6 +383,8 @@ const MainUI = (($) => {
           $header = $(el).find('tr:first-child');
         }
 
+        $header.addClass('d-sm-none d-typography-breakpoint-none');
+
         $header.find('td').each((i, h) => {
           const $h = $(h);
           $table

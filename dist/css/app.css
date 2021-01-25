@@ -10825,6 +10825,14 @@ p:last-child {
     .typography td,
     .typography img {
       height: auto !important; } }
+  @media (max-width: 575px) {
+    .typography td {
+      display: flex; }
+      .typography td:before {
+        content: attr(data-label);
+        font-weight: bold;
+        width: 12rem;
+        min-width: 12rem; } }
   .typography > *:last-child {
     margin-bottom: 0; }
 
