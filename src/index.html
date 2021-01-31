@@ -5,8 +5,8 @@
 		<%= require('html-loader!./html/Head.html') %>
 	</head>
 	<body data-default-lng="0" data-default-lat="0" class="is-offlines">
-		<%= require('html-loader!./html/First.html') %>
-		<%= require('html-loader!./html/_components/Flyout.html') %>
+		<%= require('html-loader!./html/First.html') %> <%=
+		require('html-loader!./html/_components/Flyout.html') %>
 		<div class="wrapper">
 			<header id="Header" class="bg-dark">
 				<div class="container-fluid">
@@ -15,47 +15,73 @@
 			</header>
 			<main id="MainContent" class="page-content">
 				<!-- Slider -->
-				<section id="Slider" class="element site__elements__sliderelement">
+				<section
+					id="Slider"
+					class="element site__elements__sliderelement"
+				>
 					<div class="element-container container-fluid">
 						<%= require('html-loader!./html/Slider.html') %>
 					</div>
 				</section>
 				<!-- /Slider -->
 				<!-- Lightbox -->
-				<section id="Lightbox" class="element dnadesign__elemental__models__elementcontent">
+				<section
+					id="Lightbox"
+					class="element dnadesign__elemental__models__elementcontent"
+				>
 					<div class="element-container container">
-						<div class="content-element__content ">
-							<h2 class="content-element__title">Lightbox Demo</h2>
+						<div class="content-element__content">
+							<h2 class="content-element__title">
+								Lightbox Demo
+							</h2>
 							<div class="typography">
-								<%= require('html-loader!../node_modules/@a2nt/meta-lightbox/src/html/meta-lightbox.html') %>
+								<%=
+								require('html-loader!../node_modules/@a2nt/meta-lightbox-react/src/html/meta-lightbox.html')
+								%>
 							</div>
 						</div>
 					</div>
 				</section>
 				<!-- /Lightbox -->
 				<!-- Content -->
-				<section id="Content" class="element dnadesign__elemental__models__elementcontent">
+				<section
+					id="Content"
+					class="element dnadesign__elemental__models__elementcontent"
+				>
 					<div class="element-container container">
-						<%= require('html-loader!./html/Elements/Content.html') %>
+						<%= require('html-loader!./html/Elements/Content.html')
+						%>
 					</div>
 				</section>
 				<!-- /Content -->
 				<!-- List -->
-				<section id="List" class="element dnadesign__elementallist__model__elementlist bg-dark">
+				<section
+					id="List"
+					class="element dnadesign__elementallist__model__elementlist bg-dark"
+				>
 					<div class="element-container container">
-						<%= require('html-loader!./html/Elements/ElementsList.html') %>
+						<%=
+						require('html-loader!./html/Elements/ElementsList.html')
+						%>
 					</div>
 				</section>
 				<!-- /List -->
 				<!-- Accordion List -->
-				<section id="AccordionList" class="element site__elements__accordion">
+				<section
+					id="AccordionList"
+					class="element site__elements__accordion"
+				>
 					<div class="element-container container">
-						<%= require('html-loader!./html/Elements/Accordion.html') %>
+						<%=
+						require('html-loader!./html/Elements/Accordion.html') %>
 					</div>
 				</section>
 				<!-- /Accordion List -->
 				<!-- Map Element -->
-				<section id="MapElement" class="element site__elements__mapelement">
+				<section
+					id="MapElement"
+					class="element site__elements__mapelement"
+				>
 					<div class="element-container container">
 						<%= require('html-loader!./html/Elements/Map.html') %>
 					</div>

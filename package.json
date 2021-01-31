@@ -1,8 +1,7 @@
 {
-	"name": "@a2nt/ss-bootstrap-ui-webpack-boilerplate",
-	"version": "2.8.7",
+	"name": "@a2nt/ss-bootstrap-ui-webpack-boilerplate-react",
+	"version": "3.0.0",
 	"description": "This UI Kit allows you to build Bootstrap 4 webapp with some extra UI features. It's easy to extend and easy to convert HTML templates to CMS templates.",
-	"main": "src/js/app.js",
 	"author": "Tony Air <tony@twma.pro>",
 	"license": "BSD-2-Clause",
 	"repository": {
@@ -29,14 +28,30 @@
 		"postuninstall": "npm run prunecaches",
 		"preinstall": "npx only-allow pnpm"
 	},
-	"browser": "./src/js/app.js",
+	"directories": {
+		"assets": {
+			"css": [
+				"dist/css/app.css"
+			],
+			"js": [
+				"dist/js/app.js"
+			]
+		}
+	},
+	"main": "./dist/js/app.js",
+	"browser": {
+		"app": "./dist/js/app.js"
+	},
+	"module": "./src/js/app.js",
 	"browserslist": [
 		"defaults",
 		"ie>=11"
 	],
 	"dependencies": {
-		"@a2nt/meta-lightbox": "^2.8.5",
+		"@a2nt/meta-lightbox-react": "^3",
 		"aos": "^2.3.4",
+		"axios": "^0.21.1",
+		"balanced-match": "^1.0.0",
 		"bootbox": "^5.5.2",
 		"bootstrap": "^4.6.0",
 		"bootstrap-confirmation2": "^4.2.0",
@@ -44,6 +59,7 @@
 		"bootstrap-offcanvas": "^1.0.0",
 		"bootstrap-table": "^1.18.2",
 		"bootstrap-timepicker": "^0.5.2",
+		"brace-expansion": "^2.0.0",
 		"events": "^3.2.0",
 		"font-awesome": "^4.7.0",
 		"fsevents": "^2.3.1",
@@ -59,6 +75,7 @@
 		"lodash.throttle": "^4.1.1",
 		"mapbox-gl": "^2.0.1",
 		"material-design-color": "^2.3.2",
+		"minimatch": "^3.0.4",
 		"moment": "^2.29.1",
 		"offcanvas-bootstrap": "^2.5.2",
 		"popper.js": "*",
@@ -66,6 +83,7 @@
 		"querystring": "^0.2.0",
 		"react": "^17.0.1",
 		"react-dom": "^17.0.1",
+		"react-tiny-oembed": "^1.0.1",
 		"select2": "^4.0.13",
 		"setimmediate": "^1.0.5",
 		"smooth-scroll": "^16.1.3",

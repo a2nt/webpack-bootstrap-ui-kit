@@ -19,7 +19,7 @@ const PORT = process.env.PORT || conf.PORT;
 
 const UIInfo = require('./package.json');
 const UIVERSION = JSON.stringify(UIInfo.version);
-const UIMetaInfo = require('./node_modules/@a2nt/meta-lightbox/package.json');
+const UIMetaInfo = require('./node_modules/@a2nt/meta-lightbox-react/package.json');
 
 const NODE_ENV = 'development'; //conf.NODE_ENV || process.env.NODE_ENV;
 const COMPRESS = NODE_ENV === 'production' ? true : false;
