@@ -87,10 +87,10 @@
       },
       "modules": {
         "byIdentifier": {
-          "./node_modules/.pnpm/cache-loader@4.1.0_webpack@5.19.0/node_modules/cache-loader/dist/cjs.js?{\"cacheDirectory\":\"/mnt/data/srv/dist/repositories/webpack-bootstrap-ui-kit/node_modules/.cache/favicons-webpack-plugin\"}!./node_modules/.pnpm/github.com/jantimon/favicons-webpack-plugin@ee2818afa97c4b4bf1c6f919a403e56203e26606_webpack@5.19.0/node_modules/favicons-webpack-plugin/src/loader.js?{\"prefix\":\"/icons/\",\"options\":{\"appName\":\"@a2nt/ss-bootstrap-ui-webpack-boilerplate\",\"appDescription\":\"This UI Kit allows you to build Bootstrap 4 webapp with some extra UI features. It's easy to extend and easy to convert HTML templates to CMS templates.\",\"version\":\"2.8.6\",\"developerName\":\"Tony Air\"},\"path\":\"dist\"}!./src/favicon.png": 154
+          "./node_modules/.pnpm/cache-loader@4.1.0_webpack@5.19.0/node_modules/cache-loader/dist/cjs.js?{\"cacheDirectory\":\"/mnt/data/srv/dist/repositories/webpack-bootstrap-ui-kit/node_modules/.cache/favicons-webpack-plugin\"}!./node_modules/.pnpm/github.com/jantimon/favicons-webpack-plugin@ee2818afa97c4b4bf1c6f919a403e56203e26606_webpack@5.19.0/node_modules/favicons-webpack-plugin/src/loader.js?{\"prefix\":\"/icons/\",\"options\":{\"appName\":\"@a2nt/ss-bootstrap-ui-webpack-boilerplate\",\"appDescription\":\"This UI Kit allows you to build Bootstrap 4 webapp with some extra UI features. It's easy to extend and easy to convert HTML templates to CMS templates.\",\"version\":\"2.8.7\",\"developerName\":\"Tony Air\"},\"path\":\"dist\"}!./src/favicon.png": 921
         },
         "usedIds": [
-          154
+          921
         ]
       }
     }
