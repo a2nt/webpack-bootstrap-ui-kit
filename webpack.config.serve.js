@@ -2,13 +2,13 @@
  * Development assets generation
  */
 
-const COMPRESS = false;
-
 const path = require('path');
 //const autoprefixer = require('autoprefixer');
 const webpack = require('webpack');
 const { merge } = require('webpack-merge');
+
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const common = require('./webpack.config.common.js');
 const commonVariables = require('./webpack.configuration');
@@ -18,16 +18,25 @@ const IP = process.env.IP || conf.HOSTNAME;
 const PORT = process.env.PORT || conf.PORT;
 
 const UIInfo = require('./package.json');
+const UIVERSION = JSON.stringify(UIInfo.version);
+const UIMetaInfo = require('./node_modules/@a2nt/meta-lightbox/package.json');
+
+const NODE_ENV = 'development'; //conf.NODE_ENV || process.env.NODE_ENV;
+const COMPRESS = NODE_ENV === 'production' ? true : false;
+
+console.log('NODE_ENV: ' + NODE_ENV);
+console.log('COMPRESS: ' + COMPRESS);
+console.log('WebP images: ' + conf['webp']);
 
 const config = merge(common, {
   mode: 'development',
 
   entry: {
-    hot: [
+    /*hot: [
       'react-hot-loader/patch',
-      'webpack-dev-server/client?https://' + conf.HOSTNAME + ':' + conf.PORT,
+      'webpack-dev-server/?https://' + conf.HOSTNAME + ':' + conf.PORT,
       'webpack/hot/only-dev-server',
-    ],
+    ],*/
   },
 
   output: {
@@ -45,10 +54,16 @@ const config = merge(common, {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env'], //Preset used for env setup
+            presets: [
+              '@babel/preset-env',
+              '@babel/react',
+              {
+                plugins: ['@babel/plugin-proposal-class-properties'],
+              },
+            ], //Preset used for env setup
             plugins: [['@babel/transform-react-jsx']],
             cacheDirectory: true,
-            cacheCompression: false,
+            cacheCompression: true,
           },
         },
       },
@@ -116,18 +131,32 @@ const config = merge(common, {
       Scrollspy: 'exports-loader?Scrollspy!bootstrap/js/dist/scrollspy',
       Tab: 'exports-loader?Tab!bootstrap/js/dist/tab',
     }),
-    new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
       UINAME: JSON.stringify(UIInfo.name),
-      UIVERSION: JSON.stringify(UIInfo.version),
+      UIVERSION: UIVERSION,
       UIAUTHOR: JSON.stringify(UIInfo.author),
+      UIMetaNAME: JSON.stringify(UIMetaInfo.name),
+      UIMetaVersion: JSON.stringify(UIMetaInfo.version),
+    }),
+    //new webpack.HotModuleReplacementPlugin(),
+    new MiniCssExtractPlugin(),
+    new HtmlWebpackPlugin({
+      publicPath: '',
+      template: path.join(conf.APPDIR, conf.SRC, 'index.html'),
+      templateParameters: {
+        NODE_ENV: NODE_ENV,
+        REACT_SCRIPTS:
+          NODE_ENV === 'production'
+            ? '<script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script><script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>'
+            : '<script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script><script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>',
+      },
     }),
   ],
 
   devServer: {
     host: IP,
     port: PORT,
-    historyApiFallback: true,
+    historyApiFallback: false,
     //hot: true,
     /*clientLogLevel: 'info',
     disableHostCheck: true,
