@@ -432,6 +432,16 @@ iframe {
     height: auto !important; } }
 
 @media (max-width: 575px) {
+  .d-typography-breakpoint-none {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0; }
   td {
     display: flex; }
     td:before {

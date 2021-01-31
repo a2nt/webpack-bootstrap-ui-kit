@@ -10826,6 +10826,16 @@ p:last-child {
     .typography img {
       height: auto !important; } }
   @media (max-width: 575px) {
+    .typography .d-typography-breakpoint-none {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0; }
     .typography td {
       display: flex; }
       .typography td:before {
