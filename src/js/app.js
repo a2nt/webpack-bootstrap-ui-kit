@@ -3,7 +3,12 @@
 //import $ from 'jquery';
 import '../scss/app.scss';
 
-import Button from 'react-bootstrap/Button';
+import Page from './_components/_page.jsx';
+
+const GraphPage = ReactDOM.render(
+	<Page />,
+	document.getElementById('MainContent'),
+);
 
 //import 'hammerjs/hammer';
 //import 'jquery-hammerjs/jquery.hammer';
@@ -80,12 +85,12 @@ import '@a2nt/meta-lightbox-react/src/js/app';
 //import './_components/drivers/_google.track.external.links';
 
 function importAll(r) {
-  return r.keys().map(r);
+	return r.keys().map(r);
 }
 
 const images = importAll(
-  require.context('../img/', false, /\.(png|jpe?g|svg)$/),
+	require.context('../img/', false, /\.(png|jpe?g|svg)$/),
 );
 const fontAwesome = importAll(
-  require.context('font-awesome', false, /\.(otf|eot|svg|ttf|woff|woff2)$/),
+	require.context('font-awesome', false, /\.(otf|eot|svg|ttf|woff|woff2)$/),
 );

@@ -1,16 +1,25 @@
-<nav id="Navigation" class="fixed-top navbar-dark bg-dark navbar navbar-expand-lg dropdown-hover">
+<nav
+	id="Navigation"
+	class="fixed-top navbar-dark bg-dark navbar navbar-expand-lg dropdown-hover"
+>
 	<a class="navbar-brand" href="#">UI Kit</a>
 	<button
-	data-target="#NavbarResponsive" aria-controls="NavbarResponsive"
-	class="navbar-toggler navbar-toggler-right"
-	type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation"
+		data-target="#NavbarResponsive"
+		aria-controls="NavbarResponsive"
+		class="navbar-toggler navbar-toggler-right"
+		type="button"
+		data-toggle="collapse"
+		aria-expanded="false"
+		aria-label="Toggle navigation"
 	>
-	<span class="navbar-toggler-icon"></span>
+		<span class="navbar-toggler-icon"></span>
 	</button>
 	<div id="NavbarResponsive" class="collapse navbar-collapse">
 		<ul class="navbar-nav mr-auto nav-fill w-100">
 			<li class="nav-item active">
-				<a class="nav-link js-scrollTo" href="#PageTopAnchor">Home <span class="sr-only">(current)</span></a>
+				<a class="nav-link js-scrollTo" href="#PageTopAnchor"
+					>Home <span class="sr-only">(current)</span></a
+				>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link js-scrollTo" href="#Slider">Slider</a>
@@ -22,32 +31,59 @@
 					href="#"
 					role="button"
 					data-toggle="dropdown"
-					aria-haspopup="true" aria-expanded="false"
-					>
+					aria-haspopup="true"
+					aria-expanded="false"
+				>
 					Dropdown
 				</a>
-				<div class="dropdown-menu bg-dark" aria-labelledby="NavbarDropdown">
+				<div
+					class="dropdown-menu bg-dark"
+					aria-labelledby="NavbarDropdown"
+				>
 					<a class="dropdown-item" href="#">Action</a>
-					<a class="dropdown-item js-scrollTo" href="#AccordionList">Scroll to AccordionList</a>
+					<a class="dropdown-item js-scrollTo" href="#AccordionList"
+						>Scroll to AccordionList</a
+					>
 					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="https://google.com" target="_blank" rel="nofollow">Go to Google.com</a>
+					<a
+						class="dropdown-item"
+						href="https://google.com"
+						target="_blank"
+						rel="nofollow"
+						>Go to Google.com</a
+					>
 				</div>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link js-scrollTo" href="#Content">Content</a>
+				<a
+					id="LoadGraphQL"
+					class="nav-link js-scrollTo graphql"
+					href="../src/_graphql/readPages.json"
+					>Load GraphQL</a
+				>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link js-scrollTo" href="#List">List</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link js-scrollTo" href="#AccordionList">Accordion List</a>
+				<a class="nav-link js-scrollTo" href="#AccordionList"
+					>Accordion List</a
+				>
 			</li>
 			<li>
 				<form class="form-inline my-2 my-lg-0">
-					<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-					<i class="fas fa-search"></i>
-					<span class="sr-only">Search</span>
+					<input
+						class="form-control mr-sm-2"
+						type="search"
+						placeholder="Search"
+						aria-label="Search"
+					/>
+					<button
+						class="btn btn-outline-success my-2 my-sm-0"
+						type="submit"
+					>
+						<i class="fas fa-search"></i>
+						<span class="sr-only">Search</span>
 					</button>
 				</form>
 			</li>
