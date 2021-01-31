@@ -92,6 +92,8 @@
 		<footer id="Footer" class="footer site-footer">
 			<%= require('html-loader!./html/Footer.html') %>
 		</footer>
-		<%= require('html-loader!./html/Last.html') %>
+
+		<!-- React is required -->
+		<%= REACT_SCRIPTS %> <%= require('html-loader!./html/Last.html') %>
 	</body>
 </html>

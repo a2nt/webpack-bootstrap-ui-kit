@@ -1,18 +1,12 @@
 'use strict';
 
-import $ from 'jquery';
+//import $ from 'jquery';
 import '../scss/app.scss';
 
-// import Bootstrap
-import 'popper.js';
-import 'bootstrap/js/dist/util';
-import 'bootstrap/js/dist/alert';
-import 'bootstrap/js/dist/button';
-import 'bootstrap/js/dist/carousel';
-import 'bootstrap/js/dist/collapse';
+import Button from 'react-bootstrap/Button';
 
-import 'hammerjs/hammer';
-import 'jquery-hammerjs/jquery.hammer';
+//import 'hammerjs/hammer';
+//import 'jquery-hammerjs/jquery.hammer';
 
 // Routie
 //import 'pouchdb/dist/pouchdb';
@@ -20,7 +14,7 @@ import 'jquery-hammerjs/jquery.hammer';
 
 // conflicts with _components/_ui.hover.js (shows dropdown on hover)
 //import 'bootstrap/js/dist/dropdown';
-import './_components/_ui.hover';
+/*import './_components/_ui.hover';
 
 import './_components/_ui.carousel';
 import './_components/_ui.menu';
@@ -29,7 +23,7 @@ import 'bootstrap/js/dist/modal';
 import 'bootstrap/js/dist/tooltip';
 import 'bootstrap/js/dist/popover';
 import 'bootstrap/js/dist/scrollspy';
-import 'bootstrap/js/dist/tab';
+import 'bootstrap/js/dist/tab';*/
 //
 
 // Offcanvas menu
@@ -39,10 +33,10 @@ import 'bootstrap/js/dist/tab';
 //import 'jquery-zoom/jquery.zoom';
 
 // FlyoutUI
-import FlyoutUI from './_components/_ui.flyout';
+//import FlyoutUI from './_components/_ui.flyout';
 
 // Sticky sidebar
-import SidebarUI from './_components/_ui.sidebar';
+//import SidebarUI from './_components/_ui.sidebar';
 
 // Toggle bootstrap form fields
 //import FormToggleUI from './_components/_ui.form.fields.toggle';
@@ -66,7 +60,7 @@ import SidebarUI from './_components/_ui.sidebar';
 //import NoCaptcha from './_components/_ui.nocaptcha';
 
 // youtube video preview image
-import './_components/_ui.video.preview';
+//import './_components/_ui.video.preview';
 
 // Meta Lightbox
 import '@a2nt/meta-lightbox-react/src/js/app';
@@ -79,11 +73,11 @@ import '@a2nt/meta-lightbox-react/src/js/app';
 
 //import FormSelect2 from './_components/_ui.form.select2';
 
-import './_main';
-import './_layout';
+//import './_main';
+//import './_layout';
 
 // Google Analytics
-import './_components/drivers/_google.track.external.links';
+//import './_components/drivers/_google.track.external.links';
 
 function importAll(r) {
   return r.keys().map(r);
