@@ -46,7 +46,7 @@ $h6-font-size: $font-size-base * 1.25 !default;
 $grid-gutter-width: 2rem !default;
 $grid-gutter-height: 2rem !default;
 $grid-gutter-xs-width: $grid-gutter-width / 2 !default;
-$grid-gutter-element-height: $grid-gutter-height * 2 !default;
+$grid-gutter-element-height: $grid-gutter-height !default;
 
 $field-gutter-height: $grid-gutter-height / 2 !default;
 $col-block-gutter-height: $grid-gutter-height / 4 !default;
@@ -71,3 +71,35 @@ $enable-responsive-font-sizes: true !default;
 @import '~bootstrap/scss/functions';
 @import '~bootstrap/scss/variables';
 @import '~bootstrap/scss/mixins';
+
+// Add your site-wide + content editor typography styling
+$nav-link-hover-bg: darken($body-bg, 10%);
+$nav-link-hover-color: lighten($body-color, 10%);
+
+$full-body-min-width: map-get($grid-breakpoints, 'md');
+
+$header-bg: $dark;
+$header-color: darken($white, 5%);
+$header-link: $white;
+
+$main-nav-link-color: $white;
+$main-nav-link-bg: none;
+
+$main-nav-toggler-size: 2rem;
+
+$main-nav-link-hover-bg: none;
+$main-nav-link-hover-color: $primary;
+
+$main-nav-dropdown-bg: $header-bg;
+$main-nav-dropdown-color: $header-link;
+$main-nav-dropdown-hover-bg: darken($header-bg, 10%);
+$main-nav-dropdown-hover-color: $primary;
+
+$footer-size: 7rem;
+$footer-bar-size: 2rem;
+
+$footer-bg: $dark;
+$footer-color: darken($white, 5%);
+$footer-link: $white;
+
+$footer-footer-bg: darken($dark, 5%);

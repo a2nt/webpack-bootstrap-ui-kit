@@ -91,6 +91,11 @@ const _addAppFiles = (theme) => {
 
 _addAppFiles(conf.APPDIR);
 
+// remove some backend includes
+delete includes['app_editor'];
+delete includes['app_cms'];
+delete includes['app_order'];
+
 // add themes
 commonVariables.themes.forEach((theme) => {
 	_addAppFiles(theme);

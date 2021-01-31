@@ -48,7 +48,7 @@
 		"ie>=11"
 	],
 	"dependencies": {
-		"@a2nt/meta-lightbox-react": "^3",
+		"@a2nt/meta-lightbox-react": "^3.0.1",
 		"aos": "^2.3.4",
 		"axios": "^0.21.1",
 		"balanced-match": "^1.0.0",
