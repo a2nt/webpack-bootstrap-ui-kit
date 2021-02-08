@@ -4,14 +4,12 @@
 		<title>Webpack Bootstrap 4 UI Demo</title>
 		<%= require('html-loader!./html/Head.html') %>
 	</head>
-	<body data-default-lng="0" data-default-lat="0" class="is-offlines">
+	<body data-default-lng="0" data-default-lat="0">
 		<%= require('html-loader!./html/First.html') %> <%=
 		require('html-loader!./html/_components/Flyout.html') %>
 		<div class="wrapper">
 			<header id="Header" class="bg-dark">
-				<div class="container-fluid">
-					<%= require('html-loader!./html/Navigation.html') %>
-				</div>
+				<%= require('html-loader!./html/Navigation.html') %>
 			</header>
 			<main id="MainContent" class="page-content">
 				<div class="elemental-area">

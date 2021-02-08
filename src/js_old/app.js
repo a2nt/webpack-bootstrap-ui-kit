@@ -4,10 +4,7 @@
 import '../scss/app.scss';
 
 import { Dropdown } from 'bootstrap';
-
-import Events from './_events';
-
-import MainUI from './_components/_main';
+import Page from './_components/_page.jsx';
 
 //import 'hammerjs/hammer';
 //import 'jquery-hammerjs/jquery.hammer';
@@ -68,6 +65,11 @@ import 'bootstrap/js/dist/tab';*/
 
 // Meta Lightbox
 import '@a2nt/meta-lightbox-react/src/js/app';
+
+const GraphPage = ReactDOM.render(
+  <Page />,
+  document.getElementById('MainContent'),
+);
 
 //import Confirmation from 'bootstrap-confirmation2/dist/bootstrap-confirmation';
 //import Table from 'bootstrap-table/dist/bootstrap-table';

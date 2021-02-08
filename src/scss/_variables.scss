@@ -76,7 +76,7 @@ $enable-responsive-font-sizes: true !default;
 $nav-link-hover-bg: darken($body-bg, 10%);
 $nav-link-hover-color: lighten($body-color, 10%);
 
-$full-body-min-width: map-get($grid-breakpoints, 'md');
+$full-body-min-width: map-get($grid-breakpoints, 'lg');
 
 $header-bg: $dark;
 $header-color: darken($white, 5%);

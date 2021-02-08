@@ -2,6 +2,7 @@
  * Lightbox window
  */
 import { Component } from 'react';
+import Events from '../_events';
 const axios = require('axios');
 
 class Page extends Component {
@@ -14,8 +15,30 @@ class Page extends Component {
 		ID: null,
 		ClassName: 'Page',
 		Title: null,
+		URL: null,
 		Elements: [],
+		page: null,
 	};
+
+	componentDidUpdate() {
+		const ui = this;
+
+		if (ui.state.Title) {
+			document.title = ui.state.Title;
+
+			if (ui.state.URL) {
+				window.history.pushState(
+					{ page: JSON.stringify(ui.state) },
+					ui.state.Title,
+					ui.state.URL,
+				);
+			}
+		}
+
+		if (ui.state.Elements.length) {
+			window.dispatchEvent(new Event(Events.AJAX));
+		}
+	}
 
 	constructor(props) {
 		super(props);
@@ -25,20 +48,6 @@ class Page extends Component {
 		console.log(`${ui.name}: init`);
 
 		ui.axios = axios;
-
-		document.querySelectorAll('.graphql').forEach((el) => {
-			el.addEventListener('click', (e) => {
-				e.preventDefault();
-
-				const el = e.currentTarget;
-				const link =
-					el.getAttribute('href') || el.getAttribute('data-href');
-
-				ui.state.current = el;
-
-				ui.load(link);
-			});
-		});
 	}
 
 	reset = () => {
@@ -51,6 +60,7 @@ class Page extends Component {
 			error: false,
 			ID: null,
 			Title: null,
+			URL: null,
 			Elements: [],
 		});
 	};
@@ -60,7 +70,10 @@ class Page extends Component {
 		const axios = ui.axios;
 
 		ui.reset();
-		ui.setState({ loading: true });
+		ui.setState({
+			Title: 'Loading ...',
+			loading: true,
+		});
 
 		axios
 			.get(link)
@@ -71,11 +84,12 @@ class Page extends Component {
 				);
 
 				const page = resp.data.data.readPages.edges[0].node;
-				console.log(page);
 				ui.setState({
 					ID: page.ID,
 					Title: page.Title,
 					Elements: page.Elements.edges,
+					URL: page.URL || link,
+					loading: false,
 				});
 			})
 			.catch((error) => {
@@ -102,9 +116,6 @@ class Page extends Component {
 				}
 
 				ui.setState({ error: msg });
-			})
-			.then(() => {
-				ui.setState({ loading: false });
 			});
 	};
 

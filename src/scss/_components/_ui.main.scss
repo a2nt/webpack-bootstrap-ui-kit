@@ -145,6 +145,59 @@ textarea,
 /*
  * Extra class definition at _ui.form.basics.scss
  */
+
+// navs
+.navbar-toggler-icon {
+	width: auto;
+	height: auto;
+}
+
+.nav-item,
+.nav-link {
+	display: flex;
+}
+
+button.nav-link {
+	border: 0;
+	outline: 0;
+	text-transform: inherit;
+	letter-spacing: inherit;
+}
+
+// display dropdown on hover + focus
+@media (min-width: $full-body-min-width) {
+	.dropdown-hover {
+		&:hover,
+		&:focus {
+			.dropdown-menu {
+				display: block;
+			}
+		}
+	}
+}
+
+// custom toggler for mobile view
+.dropdown {
+	> .dropdown-toggle-sm {
+		@media (min-width: $full-body-min-width) {
+			display: none;
+		}
+	}
+	> .dropdown-toggle-fl {
+		display: none;
+		@media (min-width: $full-body-min-width) {
+			display: flex;
+		}
+	}
+}
+
+.meta-MetaWindow {
+	z-index: 1031;
+	.meta-nav {
+		text-decoration: none;
+	}
+}
+
 .field {
 	position: relative;
 	display: flex;

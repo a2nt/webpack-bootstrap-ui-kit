@@ -5,7 +5,8 @@
         {
           "node": {
             "ID": "1",
-            "Title": "Home",
+            "Title": "GraphQL demo",
+            "URL": "/demo",
             "Elements": {
               "edges": [
                 {

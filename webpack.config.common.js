@@ -104,17 +104,19 @@ commonVariables.themes.forEach((theme) => {
 module.exports = {
 	entry: includes,
 	externals: {
-		jquery: 'jQuery',
+		// comment out jQuery if you don't use it to prevent bootstrap thinking that there's jQuery present
+		//jquery: 'jQuery',
 		react: 'React',
 		'react-dom': 'ReactDOM',
 	},
 	resolve: {
 		modules: modules,
 		alias: {
-			'window.jQuery': require.resolve('jquery'),
+			// comment out jQuery if you don't use it to prevent bootstrap thinking that there's jQuery present
+			/*'window.jQuery': require.resolve('jquery'),
 			$: require.resolve('jquery'),
 			jquery: require.resolve('jquery'),
-			jQuery: require.resolve('jquery'),
+			jQuery: require.resolve('jquery'),*/
 			react: require.resolve('react'),
 			'react-dom': require.resolve('react-dom'),
 		},
