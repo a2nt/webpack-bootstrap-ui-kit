@@ -4,7 +4,6 @@
 import Events from '../_events';
 import Consts from '../_consts';
 import Page from './_page.jsx';
-
 const axios = require('axios');
 
 const MainUI = ((W) => {
@@ -27,6 +26,7 @@ const MainUI = ((W) => {
     'color:yellow;font-size:10px',
   );
 
+  console.info(`%cENV: ${process.env.NODE_ENV}`, 'color:green;font-size:10px');
   console.groupCollapsed('Events');
   Object.keys(Events).forEach((k) => {
     console.info(`${k}: ${Events[k]}`);
@@ -181,24 +181,35 @@ const MainUI = ((W) => {
       touch_timeout = setTimeout(() => {
         clearTimeout(touch_timeout);
         touch_timeout = null;
-      }, 10000);
+      }, 500);
     }
   };
 
   SET_TOUCH_SCREEN(
-    'ontouchstart' in window ||
+    'ontouchstart' in W ||
       navigator.MaxTouchPoints > 0 ||
-      navigator.msMaxTouchPoints > 0,
+      navigator.msMaxTouchPoints > 0 ||
+      window.matchMedia('(hover: none)').matches,
     'init',
   );
 
-  D.addEventListener('touchstart', () => {
-    SET_TOUCH_SCREEN(true, 'touchstart');
+  D.addEventListener('touchend', (e) => {
+    let touch = false;
+    if (e.type !== 'click') {
+      touch = true;
+    }
+
+    SET_TOUCH_SCREEN(touch, 'click-touchend');
   });
 
   // disable touch on mouse events
-  D.addEventListener('mousemove', () => {
-    SET_TOUCH_SCREEN(false, 'mousemove');
+  D.addEventListener('click', (e) => {
+    let touch = false;
+    if (e.type !== 'click') {
+      touch = true;
+    }
+
+    SET_TOUCH_SCREEN(touch, 'click-touchend');
   });
 
   class MainUI {

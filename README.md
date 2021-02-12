@@ -13,7 +13,6 @@ https://rawcdn.githack.com/a2nt/webpack-bootstrap-ui-kit/master/dist/index.html
 
 ## Requirements:
 
--   composer
 -   node
 -   yarn
 -   pnpm package manager
@@ -32,9 +31,11 @@ pnpm install
 
 ## Edit files at ./src
 
-## Start development server at https://127.0.0.1:8001:
+## Start development server at http://127.0.0.1:3001
 
 yarn start
+
+Define your GraphQL mocks at src/mocks/handlers.js
 
 ## Build your files to ./dist:
 

@@ -122,4 +122,7 @@ module.exports = {
 		},
 		fallback: { path: false },
 	},
+	experiments: {
+		topLevelAwait: true,
+	},
 };

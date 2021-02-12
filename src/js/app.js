@@ -69,6 +69,20 @@ import 'bootstrap/js/dist/tab';*/
 // Meta Lightbox
 import '@a2nt/meta-lightbox-react/src/js/app';
 
+// mock service worker
+if (process.env.NODE_ENV === 'development') {
+  const regeneratorRuntime = require('regenerator-runtime');
+  const { worker } = require('../mocks/browser');
+  worker.start({
+    serviceWorker: {
+      url: 'src/_graphql/mockServiceWorker.js',
+      options: {
+        scope: '/',
+      },
+    },
+  });
+}
+
 //import Confirmation from 'bootstrap-confirmation2/dist/bootstrap-confirmation';
 //import Table from 'bootstrap-table/dist/bootstrap-table';
 

@@ -186,7 +186,16 @@ button.nav-link {
 	> .dropdown-toggle-fl {
 		display: none;
 		@media (min-width: $full-body-min-width) {
-			display: flex;
+			display: inherit;
+		}
+	}
+
+	@media (hover: none) {
+		> .dropdown-toggle-touch {
+			display: inherit;
+		}
+		> .dropdown-toggle-notouch {
+			display: none;
 		}
 	}
 }

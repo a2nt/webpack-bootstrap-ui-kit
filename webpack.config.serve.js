@@ -27,6 +27,7 @@ const COMPRESS = NODE_ENV === 'production' ? true : false;
 console.log('NODE_ENV: ' + NODE_ENV);
 console.log('COMPRESS: ' + COMPRESS);
 console.log('WebP images: ' + conf['webp']);
+console.log('GRAPHQL_API_KEY: ' + conf['GRAPHQL_API_KEY']);
 
 const config = merge(common, {
   mode: 'development',
@@ -43,7 +44,7 @@ const config = merge(common, {
     path: path.join(__dirname),
     filename: '[name].js',
     // necessary for HMR to know where to load the hot update chunks
-    publicPath: 'https://' + conf.HOSTNAME + ':' + conf.PORT + '/',
+    publicPath: 'http://' + conf.HOSTNAME + ':' + conf.PORT + '/',
   },
 
   module: {
@@ -58,10 +59,16 @@ const config = merge(common, {
               '@babel/preset-env',
               '@babel/react',
               {
-                plugins: ['@babel/plugin-proposal-class-properties'],
+                plugins: [
+                  '@babel/plugin-proposal-class-properties',
+                  '@babel/plugin-syntax-top-level-await',
+                ],
               },
             ], //Preset used for env setup
-            plugins: [['@babel/transform-react-jsx']],
+            plugins: [
+              ['@babel/transform-react-jsx'],
+              ['@babel/plugin-syntax-top-level-await'],
+            ],
             cacheDirectory: true,
             cacheCompression: true,
           },
@@ -137,6 +144,7 @@ const config = merge(common, {
       UIAUTHOR: JSON.stringify(UIInfo.author),
       UIMetaNAME: JSON.stringify(UIMetaInfo.name),
       UIMetaVersion: JSON.stringify(UIMetaInfo.version),
+      GRAPHQL_API_KEY: JSON.stringify(conf['GRAPHQL_API_KEY']),
     }),
     //new webpack.HotModuleReplacementPlugin(),
     new MiniCssExtractPlugin(),
@@ -173,6 +181,7 @@ const config = merge(common, {
     },
     headers: {
       'Access-Control-Allow-Origin': '*',
+      'service-worker-allowed': '/',
     },
   },
 });

@@ -30,6 +30,7 @@ const COMPRESS = NODE_ENV === 'production' ? true : false;
 console.log('NODE_ENV: ' + NODE_ENV);
 console.log('COMPRESS: ' + COMPRESS);
 console.log('WebP images: ' + conf['webp']);
+console.log('GRAPHQL_API_KEY: ' + conf['GRAPHQL_API_KEY']);
 
 let plugins = [
 	new webpack.ProvidePlugin({
@@ -59,6 +60,7 @@ let plugins = [
 		UIAUTHOR: JSON.stringify(UIInfo.author),
 		UIMetaNAME: JSON.stringify(UIMetaInfo.name),
 		UIMetaVersion: JSON.stringify(UIMetaInfo.version),
+		GRAPHQL_API_KEY: JSON.stringify(conf['GRAPHQL_API_KEY']),
 	}),
 	new webpack.LoaderOptionsPlugin({
 		minimize: COMPRESS,

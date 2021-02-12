@@ -21,6 +21,7 @@
         ]
     ],
     "plugins": [
+        "@babel/plugin-syntax-top-level-await",
         "@babel/plugin-proposal-object-rest-spread",
         "@babel/plugin-syntax-jsx"
     ]

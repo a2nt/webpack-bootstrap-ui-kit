@@ -3,7 +3,9 @@
  */
 import { Component } from 'react';
 import Events from '../_events';
-const axios = require('axios');
+
+import { client } from './_apollo';
+import { gql } from '@apollo/client';
 
 class Page extends Component {
 	state = {
@@ -13,8 +15,12 @@ class Page extends Component {
 		error: false,
 		current: null,
 		ID: null,
+		URLSegment: null,
 		ClassName: 'Page',
+		CSSClass: null,
 		Title: null,
+		Summary: null,
+		Link: null,
 		URL: null,
 		Elements: [],
 		page: null,
@@ -46,8 +52,6 @@ class Page extends Component {
 		const ui = this;
 		ui.name = ui.constructor.name;
 		console.log(`${ui.name}: init`);
-
-		ui.axios = axios;
 	}
 
 	reset = () => {
@@ -67,28 +71,74 @@ class Page extends Component {
 
 	load = (link) => {
 		const ui = this;
-		const axios = ui.axios;
+		const query = gql(`
+			query Pages {
+			  readPages(URLSegment: "home", limit: 1, offset: 0) {
+			    edges {
+			      node {
+			        __typename
+			        _id
+			        ID
+			        Title
+			        ClassName
+			        CSSClass
+			        Summary
+			        Link
+			        URLSegment
+			        Elements {
+			          edges {
+			            node {
+			              __typename
+			        	 _id
+			              ID
+			              Title
+			              Render
+			            }
+			          }
+			          pageInfo {
+			            hasNextPage
+			            hasPreviousPage
+			            totalCount
+			          }
+			        }
+			      }
+			    }
+			    pageInfo {
+			      hasNextPage
+			      hasPreviousPage
+			      totalCount
+			    }
+			  }
+			}
+		`);
 
 		ui.reset();
 		ui.setState({
 			Title: 'Loading ...',
 			loading: true,
 		});
-
-		axios
-			.get(link)
+		console.log(client.readQuery({ query }));
+		client
+			.query({
+				query: query,
+			})
 			.then((resp) => {
-				// handle success
-				console.log(
-					`${ui.name}: response content-type: ${resp.headers['content-type']}`,
-				);
+				const page = resp.data.readPages.edges[0].node;
 
-				const page = resp.data.data.readPages.edges[0].node;
+				// write to cache
+				client.writeQuery({ query, data: { resp } });
+				console.log(client.readQuery({ query }));
+
 				ui.setState({
 					ID: page.ID,
 					Title: page.Title,
+					ClassName: page.ClassName,
+					URLSegment: page.URLSegment,
+					CSSClass: page.CSSClass,
+					Summary: page.Summary,
+					Link: page.Link,
 					Elements: page.Elements.edges,
-					URL: page.URL || link,
+					URL: page.Link || link,
 					loading: false,
 				});
 			})
@@ -131,19 +181,24 @@ class Page extends Component {
 	render() {
 		const ui = this;
 		const name = ui.name;
+		const className = `elemental-area page-${ui.state.CSSClass} url-${ui.state.URLSegment}`;
 
 		const ElementItem = (props) => (
 			<div dangerouslySetInnerHTML={props.html}></div>
 		);
 
 		let html = '';
-		ui.state.Elements.map((el) => {
-			html += el.node.Render;
-		});
+		if (ui.state.Elements.length) {
+			ui.state.Elements.map((el) => {
+				html += el.node.Render;
+			});
+		} else {
+			html += '<div class="loading">Loading ...</div>';
+		}
 
 		return (
 			<div
-				className="elemental-area"
+				className={className}
 				dangerouslySetInnerHTML={ui.getHtml(html)}
 			></div>
 		);
