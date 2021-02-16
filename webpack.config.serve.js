@@ -153,6 +153,7 @@ const config = merge(common, {
       template: path.join(conf.APPDIR, conf.SRC, 'index.html'),
       templateParameters: {
         NODE_ENV: NODE_ENV,
+        GRAPHQL_URL: conf['GRAPHQL_URL'],
         REACT_SCRIPTS:
           NODE_ENV === 'production'
             ? '<script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script><script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>'

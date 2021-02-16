@@ -39,7 +39,7 @@ export const handlers = [
             {
               node: {
                 ID: '1',
-                Title: 'Home',
+                Title: 'Home-Mocked',
                 ClassName: 'Site\\Pages\\HomePage',
                 CSSClass: 'Site-Pages-HomePage',
                 Summary:

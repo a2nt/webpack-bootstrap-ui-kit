@@ -3,6 +3,8 @@
 	<head>
 		<title>Webpack Bootstrap 4 UI Demo</title>
 		<%= require('html-loader!./html/Head.html') %>
+		<meta name="ping" content="/Security/ping" />
+		<meta name="api_url" content="<%= GRAPHQL_URL %>" />
 	</head>
 	<body data-default-lng="0" data-default-lat="0">
 		<%= require('html-loader!./html/First.html') %> <%=
