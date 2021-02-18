@@ -49,17 +49,6 @@ const MainUILinks = ((W) => {
     static popState(e) {
       const ui = this;
 
-      if (!ui.GraphPage) {
-        console.log(
-          `${NAME}: [popstate] GraphPage is missing. Have to render it first`,
-        );
-
-        ui.GraphPage = ReactDOM.render(
-          <Page />,
-          document.getElementById('MainContent'),
-        );
-      }
-
       if (e.state && e.state.page) {
         console.log(`${NAME}: [popstate] load`);
         const state = JSON.parse(e.state.page);
@@ -73,6 +62,17 @@ const MainUILinks = ((W) => {
             el.classList.add('active');
           },
         );
+
+        if (!ui.GraphPage) {
+          console.log(
+            `${NAME}: [popstate] GraphPage is missing. Have to render it first`,
+          );
+
+          ui.GraphPage = ReactDOM.render(
+            <Page />,
+            document.getElementById('MainContent'),
+          );
+        }
 
         ui.GraphPage.setState(state);
       } else if (e.state && e.state.landing) {
@@ -127,7 +127,15 @@ const MainUILinks = ((W) => {
           console.log(e);
 
           el.classList.remove('loading');
-          el.classList.add('not-found');
+          el.classList.add(`response-${e.status}`);
+          /*switch (e.status) {
+            case 404:
+              el.classList.add('not-found');
+              break;
+            case 523:
+              el.classList.add('unreachable');
+              break;
+          }*/
 
           console.groupEnd(`${NAME}: load on click`);
         });

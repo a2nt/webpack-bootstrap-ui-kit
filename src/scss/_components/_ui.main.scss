@@ -4,10 +4,9 @@
 
 @import '../_variables';
 @import '../_animations';
+@import './_ui.main.graphql';
+@import './_ui.main.alerts';
 
-.loading {
-	animation: fade 0.8s linear infinite;
-}
 .pulse {
 	animation: pulse 0.8s linear infinite;
 }
@@ -57,8 +56,6 @@ button,
 	&:hover,
 	&.active,
 	&[aria-expanded='true'] {
-		opacity: 0.8;
-
 		> .fa,
 		> .far,
 		> .fas,
@@ -69,6 +66,11 @@ button,
 		&.fab {
 			transform: rotate(-180deg);
 		}
+	}
+
+	&:hover,
+	&[aria-expanded='true'] {
+		opacity: 0.8;
 	}
 
 	&.disabled {
@@ -230,44 +232,12 @@ button.nav-link {
 }
 
 // SS-messages
-.alert,
-.alert-info,
-.alert-danger {
-	display: block;
-}
 
 .alert + .alert {
 	border-top: 0;
 }
 
-.alert {
-	.container {
-		position: relative;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-
-		@media (min-width: map-get($grid-breakpoints, 'sm')) {
-			flex-direction: row;
-		}
-	}
-	.typography {
-		flex: 1 1;
-	}
-	.btn-close {
-		position: absolute;
-		top: 0;
-		right: 0;
-
-		@media (min-width: map-get($grid-breakpoints, 'sm')) {
-			position: static;
-			margin-left: 1rem;
-		}
-	}
-}
-
-.message {
+/*.message {
 	@extend .alert;
 
 	@extend .alert-info;
@@ -289,7 +259,7 @@ button.nav-link {
 	@extend .alert;
 
 	@extend .alert-danger;
-}
+}*/
 
 .list-group-item.active {
 	a,
@@ -323,18 +293,6 @@ button.nav-link {
 .dropdown-toggle.active-dropdown::after,
 .dropdown-toggle.active::after {
 	transform: rotate(-90deg);
-}
-
-@keyframes expand {
-	from {
-		max-height: 0;
-		overflow: hidden;
-	}
-	to {
-		max-height: 500rem;
-		max-height: 200vh;
-		overflow: visible;
-	}
 }
 
 .dropdown-menu {
@@ -384,22 +342,6 @@ button.nav-link {
 #BetterNavigator {
 	display: none;
 	@media (min-width: map-get($grid-breakpoints,'md')) {
-		display: block;
-	}
-}
-#SiteWideOffline {
-	position: fixed;
-	top: 0;
-	left: 0;
-	z-index: 99999;
-	width: 100%;
-}
-
-.alert-offline {
-	display: none;
-}
-body.is-offline {
-	.alert-offline {
 		display: block;
 	}
 }

@@ -1,5 +1,33 @@
 'use strict';
 
+// mock service worker
+/*if (process.env.NODE_ENV === 'development') {
+  const regeneratorRuntime = require('regenerator-runtime');
+  const { worker } = require('../mocks/browser');
+  worker.start({
+    serviceWorker: {
+      url: 'src/_graphql/mockServiceWorker.js',
+      options: {
+        scope: '/',
+      },
+    },
+  });
+}*/
+
+// caching service worker
+if ('serviceWorker' in navigator) {
+  const baseHref = (document.getElementsByTagName('base')[0] || {}).href;
+  const version = (document.querySelector('meta[name="swversion"]') || {})
+    .content;
+  if (baseHref) {
+    navigator.serviceWorker
+      .register(`${baseHref}app_sw.js?v=${version}`)
+      .then(() => {
+        console.log('SW: Registered');
+      });
+  }
+}
+
 //import $ from 'jquery';
 import '../scss/app.scss';
 
@@ -68,20 +96,6 @@ import 'bootstrap/js/dist/tab';*/
 
 // Meta Lightbox
 import '@a2nt/meta-lightbox-react/src/js/app';
-
-// mock service worker
-if (process.env.NODE_ENV === 'development') {
-  const regeneratorRuntime = require('regenerator-runtime');
-  const { worker } = require('../mocks/browser');
-  worker.start({
-    serviceWorker: {
-      url: 'src/_graphql/mockServiceWorker.js',
-      options: {
-        scope: '/',
-      },
-    },
-  });
-}
 
 //import Confirmation from 'bootstrap-confirmation2/dist/bootstrap-confirmation';
 //import Table from 'bootstrap-table/dist/bootstrap-table';

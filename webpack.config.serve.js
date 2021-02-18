@@ -122,9 +122,10 @@ const config = merge(common, {
   },
   plugins: [
     new webpack.ProvidePlugin({
-      $: 'jquery',
+      react: 'React',
+      'react-dom': 'ReactDOM',
+      /*$: 'jquery',
       jQuery: 'jquery',
-      'window.jQuery': 'jquery',
       Popper: ['popper.js', 'default'],
       Util: 'exports-loader?Util!bootstrap/js/dist/util',
       Alert: 'exports-loader?Alert!bootstrap/js/dist/alert',
@@ -136,7 +137,7 @@ const config = merge(common, {
       Tooltip: 'exports-loader?Tooltip!bootstrap/js/dist/tooltip',
       Popover: 'exports-loader?Popover!bootstrap/js/dist/popover',
       Scrollspy: 'exports-loader?Scrollspy!bootstrap/js/dist/scrollspy',
-      Tab: 'exports-loader?Tab!bootstrap/js/dist/tab',
+      Tab: 'exports-loader?Tab!bootstrap/js/dist/tab',*/
     }),
     new webpack.DefinePlugin({
       UINAME: JSON.stringify(UIInfo.name),
@@ -145,6 +146,8 @@ const config = merge(common, {
       UIMetaNAME: JSON.stringify(UIMetaInfo.name),
       UIMetaVersion: JSON.stringify(UIMetaInfo.version),
       GRAPHQL_API_KEY: JSON.stringify(conf['GRAPHQL_API_KEY']),
+      SWVERSION: JSON.stringify(`sw-${new Date().getTime()}`),
+      BASE_HREF: JSON.stringify(`http://${IP}:${PORT}`),
     }),
     //new webpack.HotModuleReplacementPlugin(),
     new MiniCssExtractPlugin(),
@@ -166,6 +169,9 @@ const config = merge(common, {
     host: IP,
     port: PORT,
     historyApiFallback: false,
+    // disable it to test service worker
+    injectClient: false,
+
     //hot: true,
     /*clientLogLevel: 'info',
     disableHostCheck: true,

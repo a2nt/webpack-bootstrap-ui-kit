@@ -79,6 +79,7 @@ export default ((W) => {
   };
 
   // current browser online state
+
   if (typeof navigator.onLine !== 'undefined') {
     if (!navigator.onLine) {
       UPDATE_ONLINE_STATUS(false);
@@ -95,7 +96,7 @@ export default ((W) => {
     UPDATE_ONLINE_STATUS(true);
   });
 
-  W.addEventListener(`${Events.LOADED}`, () => {
+  /*W.addEventListener(`${Events.LOADED}`, () => {
     UPDATE_ONLINE_STATUS(true);
-  });
+  });*/
 })(window);

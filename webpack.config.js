@@ -34,10 +34,10 @@ console.log('GRAPHQL_API_KEY: ' + conf['GRAPHQL_API_KEY']);
 
 let plugins = [
 	new webpack.ProvidePlugin({
-		$: 'jquery',
-		jQuery: 'jquery',
 		react: 'React',
 		'react-dom': 'ReactDOM',
+		/*$: 'jquery',
+		jQuery: 'jquery',
 		Popper: ['popper.js', 'default'],
 		Util: 'exports-loader?Util!bootstrap/js/dist/util',
 		Alert: 'exports-loader?Alert!bootstrap/js/dist/alert',
@@ -49,7 +49,7 @@ let plugins = [
 		Tooltip: 'exports-loader?Tooltip!bootstrap/js/dist/tooltip',
 		Popover: 'exports-loader?Popover!bootstrap/js/dist/popover',
 		Scrollspy: 'exports-loader?Scrollspy!bootstrap/js/dist/scrollspy',
-		Tab: 'exports-loader?Tab!bootstrap/js/dist/tab',
+		Tab: 'exports-loader?Tab!bootstrap/js/dist/tab',*/
 	}),
 	new webpack.DefinePlugin({
 		'process.env': {
@@ -61,6 +61,8 @@ let plugins = [
 		UIMetaNAME: JSON.stringify(UIMetaInfo.name),
 		UIMetaVersion: JSON.stringify(UIMetaInfo.version),
 		GRAPHQL_API_KEY: JSON.stringify(conf['GRAPHQL_API_KEY']),
+		SWVERSION: JSON.stringify(`sw-${new Date().getTime()}`),
+		BASE_HREF: JSON.stringify(`http://${IP}:${PORT}`),
 	}),
 	new webpack.LoaderOptionsPlugin({
 		minimize: COMPRESS,

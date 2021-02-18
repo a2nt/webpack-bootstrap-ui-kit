@@ -23,7 +23,7 @@ class Page extends Component {
 		URLSegment: null,
 		ClassName: 'Page',
 		CSSClass: null,
-		Summary: null,
+		Summary: 'Loading ...',
 		Link: null,
 		URL: null,
 		Elements: [],
@@ -104,14 +104,25 @@ class Page extends Component {
 		`);
 
 			if (!ui.isOnline()) {
-				const resp = client.readQuery({ query });
+				const data = client.readQuery({ query });
 
-				if (ui.processResponse(resp)) {
+				if (data && ui.processResponse(data)) {
 					console.log(`${ui.name}: Offline cached response`);
-					resolve(resp);
+					resolve(data);
 				} else {
 					console.log(`${ui.name}: No offline response`);
-					reject();
+
+					ui.setState(
+						Object.assign(ui.empty_state, {
+							Title: 'Offline',
+							CSSClass: 'graphql__status-523',
+							Summary:
+								"You're Offline. The page is not available now.",
+							loading: false,
+						}),
+					);
+
+					reject({ status: 523 });
 				}
 			} else {
 				if (!ui.state.loading) {
@@ -125,13 +136,15 @@ class Page extends Component {
 					})
 					.then((resp) => {
 						// write to cache
-						client.writeQuery({ query, data: { resp } });
-						if (ui.processResponse(resp.data)) {
+						const data = resp.data;
+						client.writeQuery({ query, data: data });
+
+						if (ui.processResponse(data)) {
 							console.log(`${ui.name}: got the server response`);
-							resolve(resp.data);
+							resolve(data);
 						} else {
 							console.log(`${ui.name}: not found`);
-							reject();
+							reject({ status: 404 });
 						}
 					});
 			}
@@ -144,12 +157,14 @@ class Page extends Component {
 		if (!data.readPages.edges.length) {
 			console.log(`${ui.name}: not found`);
 
-			ui.setState({
-				Title: 'Not Found',
-				CSSClass: 'graphql__not-found',
-				Summary: 'Not Found',
-				loading: false,
-			});
+			ui.setState(
+				Object.assign(ui.empty_state, {
+					Title: 'Not Found',
+					CSSClass: 'graphql__status-404',
+					Summary: 'The page is not found.',
+					loading: false,
+				}),
+			);
 
 			return false;
 		}
@@ -182,7 +197,7 @@ class Page extends Component {
 	render() {
 		const ui = this;
 		const name = ui.name;
-		const className = `elemental-area page-${ui.state.CSSClass} url-${ui.state.URLSegment}`;
+		const className = `elemental-area graphql__page page-${ui.state.CSSClass} url-${ui.state.URLSegment}`;
 
 		const ElementItem = (props) => (
 			<div dangerouslySetInnerHTML={props.html}></div>
@@ -194,9 +209,9 @@ class Page extends Component {
 			ui.state.Elements.map((el) => {
 				html += el.node.Render;
 			});
-		} else {
-			console.log(`${ui.name}: loading`);
-			html += '<div class="loading">Loading ...</div>';
+		} else if (ui.state.Summary.length) {
+			console.log(`${ui.name}: summary only`);
+			html += `<div class="loading">${ui.state.Summary}</div>`;
 		}
 
 		return (

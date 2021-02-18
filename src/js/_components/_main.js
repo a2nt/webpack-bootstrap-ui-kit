@@ -7,6 +7,7 @@ import './_main.touch';
 import './_main.online';
 import './_main.css-screen-size';
 import './_main.links';
+import SpinnerUI from './_main.loading-spinner';
 
 const MainUI = ((W) => {
   const NAME = '_main';
@@ -68,8 +69,12 @@ const MainUI = ((W) => {
   W.addEventListener(`${Events.LOADED}`, () => {
     MainUI.init();
 
+    SpinnerUI.hide();
+
     console.groupEnd('init');
     console.timeEnd('init');
+
+    W.dispatchEvent(new Event(Events.LODEDANDREADY));
   });
 
   W.addEventListener(`${Events.AJAX}`, () => {

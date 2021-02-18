@@ -17,13 +17,28 @@
 @keyframes fade {
 	0% {
 		opacity: 1;
+		filter: grayscale(0);
 	}
 
 	50% {
 		opacity: 0.5;
+		filter: grayscale(1);
 	}
 
 	100% {
 		opacity: 1;
+		filter: grayscale(0);
+	}
+}
+
+@keyframes expand {
+	from {
+		max-height: 0;
+		overflow: hidden;
+	}
+	to {
+		max-height: 500rem;
+		max-height: 200vh;
+		overflow: visible;
 	}
 }
