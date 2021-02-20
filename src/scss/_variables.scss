@@ -1,6 +1,7 @@
 @import '_mixings';
 //@import '_colors';
 
+// bootstrap settings
 // screen size - 32px (ex. 1400 - 32 = 1368)
 $grid-breakpoints: (
 	xs: 0,
@@ -23,8 +24,6 @@ $container-max-widths: (
 	xxxxl: 1836px
 ) !default;
 
-$full-body-min-width: map-get($grid-breakpoints, 'lg') !default;
-
 $font-family-sans-serif: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
 	'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji',
 	'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji' !default;
@@ -33,6 +32,46 @@ $font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas,
 
 $font-family-base: 'Lato', $font-family-sans-serif !default;
 
+$spacer: 1rem !default;
+
+$enable-rounded: false !default;
+$enable-shadows: true !default;
+
+$enable-gradients: false !default;
+
+$enable-transitions: true !default;
+$enable-reduced-motion: true !default;
+
+$enable-caret: false !default;
+
+$enable-grid-classes: true !default;
+$enable-button-pointers: true !default;
+$enable-rfs: true !default;
+
+$enable-validation-icons: true !default;
+$enable-negative-margins: true !default;
+
+$enable-deprecation-messages: true !default;
+
+$enable-important-utilities: true !default;
+
+// ui framework settings
+$body-gutter-x: $spacer !default;
+$body-gutter-y: $spacer !default;
+
+$body-gutter-reduced-x: $spacer/2 !default;
+$body-gutter-reduced-y: $spacer/2 !default;
+
+$form-spacer-x: $spacer !default;
+$form-spacer-y: $spacer !default;
+
+$element-spacer-x: var(--body-gutter-x) !default;
+$element-spacer-y: var(--body-gutter-y) !default;
+
+$element-reduced-spacer-x: var(--body-gutter-reduced-x) !default;
+$element-reduced-spacer-y: var(--body-gutter-reduced-y) !default;
+
+/*
 $font-size-base: 1rem !default;
 
 // start font-sizing from h2
@@ -43,21 +82,13 @@ $h4-font-size: $font-size-base * 1.75 !default;
 $h5-font-size: $font-size-base * 1.5 !default;
 $h6-font-size: $font-size-base * 1.25 !default;
 
-$grid-gutter-width: 2rem !default;
-$grid-gutter-height: 2rem !default;
-$grid-gutter-xs-width: $grid-gutter-width / 2 !default;
-$grid-gutter-element-height: $grid-gutter-height !default;
+$grid-gutter-x: 2rem !default;
+$grid-gutter-y: 2rem !default;
+$grid-gutter-xs-x: $grid-gutter-x / 2 !default;
+$grid-gutter-element-y: $grid-gutter-y !default;
 
-$field-gutter-height: $grid-gutter-height / 2 !default;
-$col-block-gutter-height: $grid-gutter-height / 4 !default;
-
-$footer-size: 18.5rem !default;
-$footer-bar-size: 2.5rem !default;
-
-/*
- * bootstrap includes
- * keep it at the end
- */
+$field-gutter-y: $grid-gutter-y / 2 !default;
+$col-block-gutter-y: $grid-gutter-y / 4 !default;
 
 // bootstrap minify bugfix:
 $navbar-dark-toggler-icon-bg: none !default;
@@ -68,38 +99,39 @@ $enable-flex: true !default;
 
 $enable-responsive-font-sizes: true !default;
 
-@import '~bootstrap/scss/functions';
-@import '~bootstrap/scss/variables';
-@import '~bootstrap/scss/mixins';
-
 // Add your site-wide + content editor typography styling
 $nav-link-hover-bg: darken($body-bg, 10%);
 $nav-link-hover-color: lighten($body-color, 10%);
 
-$full-body-min-width: map-get($grid-breakpoints, 'lg');
+*/
 
-$header-bg: $dark;
-$header-color: darken($white, 5%);
-$header-link: $white;
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
 
-$main-nav-link-color: $white;
+// site specific variables
+$full-body-min-width: map-get($grid-breakpoints, 'lg') !default;
+$typography-breakpoint: map-get($grid-breakpoints, 'sm') - 1 !default;
+
+$header-bg: var(--bs-dark);
+$header-color: var(--bs-light);
+$header-link: var(--bs-white);
+
+$main-nav-link-color: var(--bs-white);
 $main-nav-link-bg: none;
 
 $main-nav-toggler-size: 2rem;
 
 $main-nav-link-hover-bg: none;
-$main-nav-link-hover-color: $primary;
+$main-nav-link-hover-color: var(--bs-cyan);
 
 $main-nav-dropdown-bg: $header-bg;
 $main-nav-dropdown-color: $header-link;
-$main-nav-dropdown-hover-bg: darken($header-bg, 10%);
-$main-nav-dropdown-hover-color: $primary;
+$main-nav-dropdown-hover-bg: var(--bs-black);
+$main-nav-dropdown-hover-color: $main-nav-link-hover-color;
 
-$footer-size: 7rem;
-$footer-bar-size: 2rem;
+$footer-bg: $header-bg;
+$footer-color: $header-color;
+$footer-link: $header-link;
 
-$footer-bg: $dark;
-$footer-color: darken($white, 5%);
-$footer-link: $white;
-
-$footer-footer-bg: darken($dark, 5%);
+$footer-footer-bg: $main-nav-dropdown-hover-bg;

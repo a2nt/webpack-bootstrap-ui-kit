@@ -1,18 +1,3 @@
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-.h1,
-.h2,
-.h3,
-.h4,
-.h5,
-.h6 {
-    color: $dark;
-}
-
 .bg-dark {
     h1,
     h2,
@@ -56,6 +41,10 @@ p {
     @include clearfix;
 
     @import './types/editor';
+
+    > *:first-child {
+        margin-top: 0;
+    }
 
     > *:last-child {
         margin-bottom: 0;

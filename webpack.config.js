@@ -148,6 +148,7 @@ if (filesystem.existsSync(indexPath)) {
 			templateParameters: {
 				NODE_ENV: NODE_ENV,
 				GRAPHQL_URL: conf['GRAPHQL_URL'],
+				STATIC_URL: conf['STATIC_URL'],
 				REACT_SCRIPTS:
 					NODE_ENV === 'production'
 						? '<script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script><script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>'

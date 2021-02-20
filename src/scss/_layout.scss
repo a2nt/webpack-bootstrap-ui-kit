@@ -2,61 +2,10 @@
  * Your custom style
  */
 
-// shrink elements on scroll
-body.shrink {
-	@media (max-width: map-get($grid-breakpoints, 'lg') - 1) {
-		padding-top: 100px;
-
-		#Header {
-			position: fixed;
-			top: 0;
-			left: 0;
-			right: 0;
-			z-index: 2;
-		}
-	}
-
-	@media (min-width: map-get($grid-breakpoints, 'lg')) and (max-width: map-get($grid-breakpoints, 'xl') - 1) {
-		padding-top: 146px;
-
-		#Header {
-			position: fixed;
-			top: 0;
-			left: 0;
-			right: 0;
-			z-index: 2;
-		}
-	}
-}
-
-// sticky footer
-body > .wrapper {
-	min-height: 100%;
-	min-height: 100vh;
-}
-@media (min-width: $full-body-min-width) {
-	/*body {
-        height: 100%;
-        min-height: 100%;
-    }*/
-
-	.wrapper {
-		padding-bottom: $footer-size + $footer-bar-size + $grid-gutter-height /
-			2;
-
-		//padding-top: $grid-gutter-height;
-	}
-
-	.footer {
-		height: $footer-size + $footer-bar-size + $grid-gutter-height / 2;
-		margin-top: -($footer-size + $footer-bar-size + $grid-gutter-height / 2);
-	}
-}
-
 .sidebar__col {
 	position: relative;
-	margin-top: $grid-gutter-element-height;
-	margin-bottom: $grid-gutter-element-height * 2;
+	margin-top: $element-reduced-spacer-y;
+	margin-bottom: $element-reduced-spacer-y;
 }
 .content-holder__sidebar {
 	> .container {
@@ -74,31 +23,6 @@ body > .wrapper {
 		}
 	}
 }
-
-// stick navbar to top using mobile layout
-/*#Header {
-    position: relative;
-    padding-top: $grid-gutter-height / 2;
-    padding-bottom: 1rem;
-
-    @media (min-width: map-get($grid-breakpoints, "lg")) {
-        padding-top: 1rem;
-        padding-bottom: 0;
-    }
-}
-
-#Navigation {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 10;
-
-    @media (min-width: map-get($grid-breakpoints, "lg")) {
-        position: relative;
-        margin-top: 1rem;
-    }
-}*/
 
 #Header {
 	background-color: $header-bg;
@@ -214,8 +138,8 @@ body > .wrapper {
 }
 
 /*#MainContent {
-	padding-top: 2 * $grid-gutter-element-height;
-	padding-bottom: 2 * $grid-gutter-element-height;
+	padding-top: 2 * $element-reduced-spacer-y;
+	padding-bottom: 2 * $element-reduced-spacer-y;
 }*/
 
 #PageBreadcumbs {
@@ -224,25 +148,24 @@ body > .wrapper {
 }
 
 #Footer {
+	display: flex;
+	flex-direction: column;
 	background-color: $footer-bg;
 	color: $footer-color;
+
 	> .wrapper {
-		padding-top: $grid-gutter-element-height;
+		padding-top: $element-reduced-spacer-y;
+		padding-bottom: $element-reduced-spacer-y;
 	}
 
-	a {
+	a,
+	.a {
 		color: $footer-link;
 	}
 
-	ul {
-		margin-bottom: 0;
-	}
-
-	.field:first-child {
-		margin-top: 0;
-	}
-
 	.footer {
+		padding-top: $element-reduced-spacer-y;
+		padding-bottom: $element-reduced-spacer-y;
 		background-color: $footer-footer-bg;
 
 		.copyright {
@@ -251,18 +174,6 @@ body > .wrapper {
 
 		li {
 			padding: 0 0.5rem;
-		}
-	}
-
-	@media (min-width: $full-body-min-width) {
-		.wrapper {
-			padding-bottom: $footer-bar-size;
-		}
-
-		.footer {
-			height: $footer-bar-size;
-			margin-top: -$footer-bar-size;
-			line-height: $footer-bar-size;
 		}
 	}
 }

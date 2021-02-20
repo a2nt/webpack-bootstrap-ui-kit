@@ -6,20 +6,30 @@
 
 		<meta name="ping" content="/Security/ping" />
 		<meta name="api_url" content="<%= GRAPHQL_URL %>" />
+		<meta name="api_static_domain" content="<%= STATIC_URL %>" />
 		<meta name="swversion" content="<%= SWVERSION %>" />
 		<base href="<%= BASE_HREF %>" />
 	</head>
 	<body data-default-lng="0" data-default-lat="0">
-		<%= require('html-loader!./html/_components/LoadingSpinner.html') %> <%=
-		require('html-loader!./html/_components/Alerts.html') %> <%=
-		require('html-loader!./html/First.html') %> <%=
-		require('html-loader!./html/_components/Flyout.html') %>
 		<div class="wrapper">
+			<%= require('html-loader!./html/_components/LoadingSpinner.html') %>
+			<%= require('html-loader!./html/_components/Alerts.html') %> <%=
+			require('html-loader!./html/First.html') %> <%=
+			require('html-loader!./html/_components/Flyout.html') %>
+
 			<header id="Header" class="stiky-top">
 				<%= require('html-loader!./html/Navigation.html') %>
 			</header>
 			<main id="MainContent" class="page-content">
 				<div class="elemental-area">
+					<div class="element page-header-element">
+						<div class="element-container container">
+							<h1 class="page-header">
+								Webpack Bootstrap 4 UI Demo
+							</h1>
+						</div>
+					</div>
+
 					<!-- Slider -->
 					<section
 						id="Slider"

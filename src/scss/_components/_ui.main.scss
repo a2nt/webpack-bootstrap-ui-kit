@@ -4,151 +4,28 @@
 
 @import '../_variables';
 @import '../_animations';
-@import './_ui.main.graphql';
+
+@import './_ui.main.base';
+@import './_ui.main.network';
 @import './_ui.main.alerts';
+@import './_ui.main.mobile';
+
+.meta-MetaWindow {
+	z-index: 1031;
+	.meta-nav {
+		text-decoration: none;
+	}
+}
 
 .pulse {
 	animation: pulse 0.8s linear infinite;
 }
 
-// don't let images be wider than the parent layer
-div,
-a,
-span,
-button,
-i {
-	background-repeat: no-repeat;
-	background-size: contain;
-}
-
-iframe,
-img {
-	max-width: 100%;
-}
-
-table,
-p {
-	&:first-child {
-		margin-top: 0;
-	}
-
-	&:last-child {
-		margin-bottom: 0;
-	}
-}
-
-.a {
-	cursor: pointer;
-	color: $link-color;
-	text-decoration: $link-decoration;
-	&:hover,
-	&:focus {
-		text-decoration: $link-hover-decoration;
-		color: $link-hover-color;
-	}
-}
-
-.a,
-a,
-[data-toggle],
-button,
-.btn {
-	&:hover,
-	&.active,
-	&[aria-expanded='true'] {
-		> .fa,
-		> .far,
-		> .fas,
-		> .fab,
-		&.fa,
-		&.far,
-		&.fas,
-		&.fab {
-			transform: rotate(-180deg);
-		}
-	}
-
-	&:hover,
-	&[aria-expanded='true'] {
-		opacity: 0.8;
-	}
-
-	&.disabled {
-		opacity: 0.5;
-		cursor: default;
-
-		&:hover,
-		&.active,
-		&[aria-expanded='true'] {
-			> .fa,
-			> .far,
-			> .fas,
-			> .fab,
-			&.fa,
-			&.far,
-			&.fas,
-			&.fab {
-				transform: rotate(0deg);
-			}
-		}
-	}
-}
-
-// exclude bootstrap-table
-[data-toggle='table'] {
-	&:hover,
-	&.active,
-	&:focus {
-		opacity: 1;
-	}
-}
-
-[data-toggle='collapse'] {
-	&[aria-expanded='true'] {
-		.accordion-icon {
-			&:before {
-				content: '\f068';
-			}
-		}
-	}
-}
-
-// transactions
-.transition,
-a,
-a *,
-.a,
-.a *,
-button,
-input,
-optgroup,
-select,
-textarea,
-.btn,
-.btn *,
-.dropdown,
-.row,
-.alert,
-.alert *,
-.message,
-[data-toggle],
-[data-toggle] * {
-	transition: all 0.4s ease;
-}
-
+// navs
 .navbar-toggler {
 	transition: transform ease 0.4s;
 }
 
-.btn-toolbar {
-	margin-top: $field-gutter-height;
-}
-
-/*
- * Extra class definition at _ui.form.basics.scss
- */
-
-// navs
 .navbar-toggler-icon {
 	width: auto;
 	height: auto;
@@ -166,108 +43,6 @@ button.nav-link {
 	letter-spacing: inherit;
 }
 
-// display dropdown on hover + focus
-@media (min-width: $full-body-min-width) {
-	.dropdown-hover {
-		&:hover,
-		&:focus {
-			.dropdown-menu {
-				display: block;
-			}
-		}
-	}
-}
-
-// custom toggler for mobile view
-.dropdown {
-	> .dropdown-toggle-sm {
-		@media (min-width: $full-body-min-width) {
-			display: none;
-		}
-	}
-	> .dropdown-toggle-fl {
-		display: none;
-		@media (min-width: $full-body-min-width) {
-			display: inherit;
-		}
-	}
-
-	@media not all and (hover: none) {
-		> .dropdown-toggle-touch {
-			display: inherit;
-		}
-		> .dropdown-toggle-notouch {
-			display: none;
-		}
-	}
-}
-
-.meta-MetaWindow {
-	z-index: 1031;
-	.meta-nav {
-		text-decoration: none;
-	}
-}
-
-.field {
-	position: relative;
-	display: flex;
-	flex-wrap: wrap;
-	margin: $field-gutter-height 0;
-}
-
-// element col paddings
-.col-block {
-	padding-top: $col-block-gutter-height;
-	padding-bottom: $col-block-gutter-height;
-}
-
-// rewrite btn opacity on hover
-.btn {
-	&:hover,
-	&.active,
-	&:focus {
-		opacity: 1;
-	}
-}
-
-// SS-messages
-
-.alert + .alert {
-	border-top: 0;
-}
-
-/*.message {
-	@extend .alert;
-
-	@extend .alert-info;
-
-	display: block;
-	margin: 0.5rem 0;
-}
-
-.message.validation,
-.message.required,
-.message.error {
-	@extend .alert;
-
-	@extend .alert-danger;
-}
-
-.message.required,
-.message.error {
-	@extend .alert;
-
-	@extend .alert-danger;
-}*/
-
-.list-group-item.active {
-	a,
-	.a {
-		color: $list-group-active-color;
-	}
-}
-// dropdown icon
 .navbar-toggler {
 	&[aria-expanded='true'] {
 		transform: rotate(90deg);
@@ -317,32 +92,70 @@ button.nav-link {
 	}
 }
 
-.row,
-.row-xs {
-	> [class^='col-'] > .card {
-		height: 100%;
+.dropdown-item {
+	white-space: normal;
+}
+
+.field {
+	position: relative;
+	display: flex;
+	flex-wrap: wrap;
+	margin: $form-spacer-y 0;
+	&:first-child {
+		margin-top: 0;
+	}
+	&:last-child {
+		margin-bottom: 0;
 	}
 }
 
-.row-xs {
-	margin-right: -($grid-gutter-xs-width / 2);
-	margin-left: -($grid-gutter-xs-width / 2);
+.btn-toolbar {
+	margin-top: $form-spacer-y;
+}
 
-	[class^='col-'] {
-		padding-left: $grid-gutter-xs-width / 2;
-		padding-right: $grid-gutter-xs-width / 2;
+// rewrite btn opacity on hover
+.btn {
+	&:hover,
+	&.active,
+	&:focus {
+		opacity: 1;
 	}
 }
 
-#ForgotPassword {
-	margin: 1rem 0;
-	width: 100%;
+// SS-messages
+
+.alert + .alert {
+	border-top: 0;
 }
 
-#BetterNavigator {
-	display: none;
-	@media (min-width: map-get($grid-breakpoints,'md')) {
-		display: block;
+/*.message {
+	@extend .alert;
+
+	@extend .alert-info;
+
+	display: block;
+	margin: 0.5rem 0;
+}
+
+.message.validation,
+.message.required,
+.message.error {
+	@extend .alert;
+
+	@extend .alert-danger;
+}
+
+.message.required,
+.message.error {
+	@extend .alert;
+
+	@extend .alert-danger;
+}*/
+
+.list-group-item.active {
+	a,
+	.a {
+		color: $list-group-active-color;
 	}
 }
 
@@ -364,12 +177,23 @@ button.nav-link {
 	will-change: position, top;
 }
 
+#ForgotPassword {
+	margin: 1rem 0;
+	width: 100%;
+}
+
 #BetterNavigator {
+	display: none;
+
 	a,
 	button,
 	div,
 	i,
 	span {
 		background-size: auto;
+	}
+
+	@media (min-width: map-get($grid-breakpoints,'md')) {
+		display: block;
 	}
 }

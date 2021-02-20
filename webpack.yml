@@ -15,3 +15,4 @@ Site\Templates\WebpackTemplateProvider:
   webp: false
   GRAPHQL_URL: 'http://127.0.0.1/graphql'
   GRAPHQL_API_KEY: 'ApKrRSjySO4JAmX3E2Z7HvrBD0m8xdDlAiXyh4IbH3w'
+  STATIC_URL: 'http://127.0.0.1'

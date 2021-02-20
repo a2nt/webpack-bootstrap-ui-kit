@@ -157,6 +157,7 @@ const config = merge(common, {
       templateParameters: {
         NODE_ENV: NODE_ENV,
         GRAPHQL_URL: conf['GRAPHQL_URL'],
+        STATIC_URL: conf['STATIC_URL'],
         REACT_SCRIPTS:
           NODE_ENV === 'production'
             ? '<script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script><script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>'
@@ -169,19 +170,10 @@ const config = merge(common, {
     host: IP,
     port: PORT,
     historyApiFallback: false,
-    // disable it to test service worker
-    injectClient: false,
 
-    //hot: true,
-    /*clientLogLevel: 'info',
-    disableHostCheck: true,
-    contentBase: [
-      path.resolve(__dirname, 'public'),
-      path.resolve(__dirname, 'public', 'resources'),
-      path.resolve(__dirname, 'public', 'resources', conf.APPDIR, conf.DIST),
-      'node_modules',
-    ],*/
-    //watchContentBase: true,
+    // uncomment it to test caching service worker
+    //injectClient: false,
+
     overlay: {
       warnings: true,
       errors: true,
