@@ -23,7 +23,7 @@ class Page extends Component {
 		URLSegment: null,
 		ClassName: 'Page',
 		CSSClass: null,
-		Summary: 'Loading ...',
+		Summary: null,
 		Link: null,
 		URL: null,
 		Elements: [],
@@ -209,9 +209,12 @@ class Page extends Component {
 			ui.state.Elements.map((el) => {
 				html += el.node.Render;
 			});
-		} else if (ui.state.Summary.length) {
+		} else if (ui.state.Summary && ui.state.Summary.length) {
 			console.log(`${ui.name}: summary only`);
-			html += `<div class="loading">${ui.state.Summary}</div>`;
+			html = `<div class="summary">${ui.state.Summary}</div>`;
+		} else {
+			const spinner = D.getElementById('PageLoading');
+			html = `<div class="loading">Loading ...</div>`;
 		}
 
 		return (

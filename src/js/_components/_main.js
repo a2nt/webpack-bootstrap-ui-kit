@@ -70,6 +70,7 @@ const MainUI = ((W) => {
   W.addEventListener(`${Events.LOADED}`, () => {
     MainUI.init();
 
+    BODY.classList.add('loaded');
     SpinnerUI.hide();
 
     console.groupEnd('init');

@@ -4,6 +4,10 @@ import Events from '../_events';
 import Consts from '../_consts';
 import Page from './_page.jsx';
 
+import { getParents } from './_main.funcs';
+import { Collapse } from 'bootstrap';
+import SpinnerUI from './_main.loading-spinner';
+
 const MainUILinks = ((W) => {
   const NAME = '_main.links';
   const D = document;
@@ -49,6 +53,8 @@ const MainUILinks = ((W) => {
     static popState(e) {
       const ui = this;
 
+      SpinnerUI.show();
+
       if (e.state && e.state.page) {
         console.log(`${NAME}: [popstate] load`);
         const state = JSON.parse(e.state.page);
@@ -75,22 +81,44 @@ const MainUILinks = ((W) => {
         }
 
         ui.GraphPage.setState(state);
+        SpinnerUI.hide();
       } else if (e.state && e.state.landing) {
         console.log(`${NAME}: [popstate] go to landing`);
         W.location.href = e.state.landing;
       } else {
         console.warn(`${NAME}: [popstate] state is missing`);
         console.log(e);
+        SpinnerUI.hide();
       }
     }
 
-    // link specific event {this} = current link, not MainUILinks
+    // link specific event {this} = current event, not MainUILinks
     static loadClick(e) {
       console.groupCollapsed(`${NAME}: load on click`);
       const ui = MainUILinks;
       ui.reset();
 
       e.preventDefault();
+
+      const el = e.currentTarget;
+
+      // hide parent mobile nav
+      const navs = getParents(el, '.collapse');
+      if (navs.length) {
+        navs.forEach((nav) => {
+          const collapseInst = Collapse.getInstance(nav);
+          if (collapseInst) {
+            collapseInst.hide();
+          }
+        });
+      }
+
+      // hide parent dropdown
+      /*const dropdowns = getParents(el, '.dropdown-menu');
+      if (dropdowns.length) {
+        const DropdownInst = Dropdown.getInstance(dropdowns[0]);
+        DropdownInst.hide();
+      }*/
 
       if (!ui.GraphPage) {
         ui.GraphPage = ReactDOM.render(
@@ -99,12 +127,15 @@ const MainUILinks = ((W) => {
         );
       }
 
-      const el = e.currentTarget;
       const link = el.getAttribute('href') || el.getAttribute('data-href');
 
       ui.GraphPage.state.current = el;
 
       el.classList.add('loading');
+
+      SpinnerUI.show();
+      BODY.classList.add('ajax-loading');
+
       ui.GraphPage.load(link)
         .then((response) => {
           el.classList.remove('loading');
@@ -121,6 +152,8 @@ const MainUILinks = ((W) => {
             );
           }
 
+          BODY.classList.remove('ajax-loading');
+          SpinnerUI.hide();
           console.groupEnd(`${NAME}: load on click`);
         })
         .catch((e) => {
@@ -137,6 +170,8 @@ const MainUILinks = ((W) => {
               break;
           }*/
 
+          BODY.classList.remove('ajax-loading');
+          SpinnerUI.hide();
           console.groupEnd(`${NAME}: load on click`);
         });
     }

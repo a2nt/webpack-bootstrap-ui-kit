@@ -1,0 +1,155 @@
+/*
+ * some basic styles
+ */
+
+@import '../_variables';
+@import '../_animations';
+
+html,
+body {
+	min-height: 100%;
+	min-height: 100vh;
+}
+
+// sticky footer
+body {
+	display: flex;
+	flex-direction: column;
+	--body-gutter-x: #{inspect($body-gutter-x)};
+	--body-gutter-y: #{inspect($body-gutter-y)};
+	--body-gutter-reduced-x: #{inspect($body-gutter-reduced-x)};
+	--body-gutter-reduced-y: #{inspect($body-gutter-reduced-y)};
+
+	.wrapper {
+		flex: 1 0 auto;
+	}
+	.footer {
+		flex-shrink: 0;
+	}
+}
+
+// don't let images be wider than the parent layer
+div,
+a,
+span,
+button,
+i {
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+
+iframe,
+img {
+	max-width: 100%;
+}
+
+ul,
+table,
+p {
+	&:first-child {
+		margin-top: 0;
+	}
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+}
+
+.a {
+	cursor: pointer;
+	color: $link-color;
+	text-decoration: $link-decoration;
+	&:hover,
+	&:focus {
+		text-decoration: $link-hover-decoration;
+		color: $link-hover-color;
+	}
+}
+
+// exclude bootstrap-table
+[data-toggle='table'] {
+	&:hover,
+	&.active,
+	&:focus {
+		opacity: 1;
+	}
+}
+
+[data-toggle='collapse'] {
+	&[aria-expanded='true'] {
+		.accordion-icon {
+			&:before {
+				content: '\f068';
+			}
+		}
+	}
+}
+
+// transactions
+.transition,
+a,
+a *,
+.a,
+.a *,
+button,
+input,
+optgroup,
+select,
+textarea,
+.btn,
+.btn *,
+.dropdown,
+.row,
+.alert,
+.alert *,
+.message,
+[data-toggle],
+[data-toggle] * {
+	transition: all 0.4s ease;
+}
+
+.a,
+a,
+[data-toggle],
+button,
+.btn {
+	&:hover,
+	&.active,
+	&[aria-expanded='true'] {
+		> .fa,
+		> .far,
+		> .fas,
+		> .fab,
+		&.fa,
+		&.far,
+		&.fas,
+		&.fab {
+			transform: rotate(-180deg);
+		}
+	}
+
+	&:hover,
+	&[aria-expanded='true'] {
+		opacity: 0.8;
+	}
+
+	&.disabled {
+		opacity: 0.5;
+		cursor: default;
+
+		&:hover,
+		&.active,
+		&[aria-expanded='true'] {
+			> .fa,
+			> .far,
+			> .fas,
+			> .fab,
+			&.fa,
+			&.far,
+			&.fas,
+			&.fab {
+				transform: rotate(0deg);
+			}
+		}
+	}
+}

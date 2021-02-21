@@ -1,40 +1,7 @@
-'use strict';
-
-if (process.env.NODE_ENV === 'development') {
-  // mocking service worker
-  const regeneratorRuntime = require('regenerator-runtime');
-  const { worker } = require('../mocks/browser');
-  worker.start({
-    serviceWorker: {
-      url: 'src/_graphql/mockServiceWorker.js',
-      options: {
-        scope: '/',
-      },
-    },
-  });
-
-  // caching service worker (set injectClient: false at webpack.config.serve.js)
-  /*if ('serviceWorker' in navigator) {
-    const baseHref = (document.getElementsByTagName('base')[0] || {}).href;
-    const version = (document.querySelector('meta[name="swversion"]') || {})
-      .content;
-    if (baseHref) {
-      navigator.serviceWorker
-        .register(`${baseHref}app_sw.js?v=${version}`)
-        .then(() => {
-          console.log('SW: Registered');
-        });
-    }
-  }*/
-}
-
 //import $ from 'jquery';
 import '../scss/app.scss';
 
-import { Dropdown } from 'bootstrap';
-
 import Events from './_events';
-
 import MainUI from './_components/_main';
 
 //import 'hammerjs/hammer';
@@ -96,6 +63,36 @@ import 'bootstrap/js/dist/tab';*/
 
 // Meta Lightbox
 import '@a2nt/meta-lightbox-react/src/js/app';
+
+'use strict';
+
+if (process.env.NODE_ENV === 'development') {
+  // mocking service worker
+  const regeneratorRuntime = require('regenerator-runtime');
+  const { worker } = require('../mocks/browser');
+  worker.start({
+    serviceWorker: {
+      url: 'src/_graphql/mockServiceWorker.js',
+      options: {
+        scope: '/',
+      },
+    },
+  });
+
+  // caching service worker (set injectClient: false at webpack.config.serve.js)
+  /*if ('serviceWorker' in navigator) {
+    const baseHref = (document.getElementsByTagName('base')[0] || {}).href;
+    const version = (document.querySelector('meta[name="swversion"]') || {})
+      .content;
+    if (baseHref) {
+      navigator.serviceWorker
+        .register(`${baseHref}app_sw.js?v=${version}`)
+        .then(() => {
+          console.log('SW: Registered');
+        });
+    }
+  }*/
+}
 
 //import Confirmation from 'bootstrap-confirmation2/dist/bootstrap-confirmation';
 //import Table from 'bootstrap-table/dist/bootstrap-table';

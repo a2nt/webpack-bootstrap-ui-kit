@@ -1,4 +1,28 @@
 <style>
+	@keyframes lds-ellipsis1 {
+		0% {
+			transform: scale(0);
+		}
+		100% {
+			transform: scale(1);
+		}
+	}
+	@keyframes lds-ellipsis3 {
+		0% {
+			transform: scale(1);
+		}
+		100% {
+			transform: scale(0);
+		}
+	}
+	@keyframes lds-ellipsis2 {
+		0% {
+			transform: translate(0, 0);
+		}
+		100% {
+			transform: translate(19px, 0);
+		}
+	}
 	body,
 	html {
 		font-size: 14px;
@@ -21,10 +45,10 @@
 		align-items: center;
 		-ms-flex-pack: center;
 		justify-content: center;
-		z-index: 9999;
+		z-index: 2000;
 		will-change: opacity;
 		background: #212529;
-		color: #fff;
+		color: #212529;
 	}
 	#PageLoading .logo {
 		filter: invert(1);
@@ -53,6 +77,7 @@
 		position: relative;
 		width: 64px;
 		height: 64px;
+		color: #fff;
 	}
 	.lds-ellipsis div {
 		position: absolute;
@@ -79,29 +104,57 @@
 		left: 45px;
 		animation: lds-ellipsis3 0.6s infinite;
 	}
-	@keyframes lds-ellipsis1 {
-		0% {
-			transform: scale(0);
+	@keyframes lds-text {
+		from {
+			font-size: 1em;
 		}
-		100% {
-			transform: scale(1);
-		}
-	}
-	@keyframes lds-ellipsis3 {
-		0% {
-			transform: scale(1);
-		}
-		100% {
-			transform: scale(0);
+		to {
+			font-size: 1.5em;
 		}
 	}
-	@keyframes lds-ellipsis2 {
-		0% {
-			transform: translate(0, 0);
-		}
-		100% {
-			transform: translate(19px, 0);
-		}
+	.lds-text {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		margin-left: -5rem;
+		margin-top: 8rem;
+		font-size: 0.8rem;
+		letter-spacing: 0.25em;
+		color: #fff;
+	}
+	.lds-text b {
+		font-weight: 300;
+		animation: lds-text 5s ease infinite alternate;
+	}
+	.lds-text b:nth-child(1) {
+		animation-delay: 0.5s;
+	}
+	.lds-text b:nth-child(2) {
+		animation-delay: 1s;
+	}
+	.lds-text b:nth-child(3) {
+		animation-delay: 1.5s;
+	}
+	.lds-text b:nth-child(4) {
+		animation-delay: 2s;
+	}
+	.lds-text b:nth-child(5) {
+		animation-delay: 2.5s;
+	}
+	.lds-text b:nth-child(6) {
+		animation-delay: 3s;
+	}
+	.lds-text b:nth-child(7) {
+		animation-delay: 3.5s;
+	}
+	.lds-text b:nth-child(8) {
+		animation-delay: 4s;
+	}
+	.lds-text b:nth-child(9) {
+		animation-delay: 4.5s;
+	}
+	.lds-text b:nth-child(10) {
+		animation-delay: 5s;
 	}
 </style>
 
@@ -120,6 +173,18 @@
 			<div></div>
 		</div>
 		<br />
-		LOADING ...
+		<div class="lds-placeholder">LOADING...</div>
+		<div class="lds-text">
+			<b>L</b>
+			<b>O</b>
+			<b>A</b>
+			<b>D</b>
+			<b>I</b>
+			<b>N</b>
+			<b>G</b>
+			<b>.</b>
+			<b>.</b>
+			<b>.</b>
+		</div>
 	</div>
 </div>

@@ -4,6 +4,14 @@
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
   */
 
+/*!
+ * Get all of an element's parent elements up the DOM tree
+ * (c) 2019 Chris Ferdinandi, MIT License, https://gomakethings.com
+ * @param  {Node}   elem     The element
+ * @param  {String} selector Selector to match against [optional]
+ * @return {Array}           The parent elements
+ */
+
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation.
 

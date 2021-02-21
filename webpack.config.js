@@ -27,6 +27,9 @@ const UIMetaInfo = require('./node_modules/@a2nt/meta-lightbox-react/package.jso
 const NODE_ENV = conf.NODE_ENV || process.env.NODE_ENV;
 const COMPRESS = NODE_ENV === 'production' ? true : false;
 
+const IP = process.env.IP || conf.HOSTNAME;
+const PORT = process.env.PORT || conf.PORT;
+
 console.log('NODE_ENV: ' + NODE_ENV);
 console.log('COMPRESS: ' + COMPRESS);
 console.log('WebP images: ' + conf['webp']);

@@ -74,6 +74,11 @@
 		padding-left: 0;
 		padding-right: 0;
 	}
+	.image-element__image {
+		img {
+			min-width: 100%;
+		}
+	}
 }
 
 // hide default page title cuz elemental object will be used to display titles
