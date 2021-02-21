@@ -2,13 +2,15 @@
  * Load webpack configuration from app/_config/webpack.yml
  */
 
+const YML_PATH = '/webpack.yml';
+
 const path = require('path');
 const filesystem = require('fs');
 const fs = require('fs');
 const yaml = require('js-yaml');
 
 const conf = yaml.safeLoad(
-  fs.readFileSync(path.join(__dirname, '/webpack.yml'), 'utf8'),
+  fs.readFileSync(path.join(__dirname, YML_PATH), 'utf8'),
 );
 
 let themes = [];

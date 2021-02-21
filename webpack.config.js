@@ -16,7 +16,6 @@ const TerserPlugin = require('terser-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-const ImageminPlugin = require('image-minimizer-webpack-plugin');
 const ImageSpritePlugin = require('@a2nt/image-sprite-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -103,29 +102,6 @@ if (COMPRESS) {
 		}),
 	);
 	plugins.push(require('autoprefixer'));
-	plugins.push(
-		new ImageminPlugin({
-			minimizerOptions: {
-				// Lossless optimization with custom option
-				// Feel free to experiment with options for better result for you
-				plugins: [
-					['gifsicle', { interlaced: true }],
-					['jpegtran', { progressive: true }],
-					['optipng', { optimizationLevel: 5 }],
-					[
-						'svgo',
-						{
-							plugins: [
-								{
-									removeViewBox: false,
-								},
-							],
-						},
-					],
-				],
-			},
-		}),
-	);
 
 	plugins.push(
 		new ImageSpritePlugin({
@@ -161,7 +137,7 @@ if (filesystem.existsSync(indexPath)) {
 	);
 }
 
-const faviconPath = path.join(__dirname, conf.APPDIR, conf.SRC, 'favicon.png');
+/*const faviconPath = path.join(__dirname, conf.APPDIR, conf.SRC, 'favicon.png');
 if (filesystem.existsSync(faviconPath)) {
 	plugins.push(
 		new FaviconsWebpackPlugin({
@@ -226,7 +202,7 @@ commonVariables.themes.forEach((theme) => {
 			}),
 		);
 	}
-});
+});*/
 
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
 	.BundleAnalyzerPlugin;
@@ -388,6 +364,25 @@ const cfg = merge(common, {
 								mode: 'low', // 'lossless', 'high', 'low'
 								disableOnDevelopment: true,
 								webp: conf['webp'],
+								// loseless compression for png
+								optipng: {
+									optimizationLevel: 4,
+								},
+								// lossy compression for png. This will generate smaller file than optipng.
+								pngquant: {
+									quality: [0.2, 0.8],
+								},
+								// Compression for svg.
+								svgo: true,
+								// Compression for gif.
+								gifsicle: {
+									optimizationLevel: 3,
+								},
+								// Compression for jpg.
+								mozjpeg: {
+									progressive: true,
+									quality: 60,
+								},
 							},
 							inline: {
 								limit: 1,
