@@ -137,7 +137,7 @@ if (filesystem.existsSync(indexPath)) {
 	);
 }
 
-/*const faviconPath = path.join(__dirname, conf.APPDIR, conf.SRC, 'favicon.png');
+const faviconPath = path.join(__dirname, conf.APPDIR, conf.SRC, 'favicon.png');
 if (filesystem.existsSync(faviconPath)) {
 	plugins.push(
 		new FaviconsWebpackPlugin({
@@ -202,7 +202,7 @@ commonVariables.themes.forEach((theme) => {
 			}),
 		);
 	}
-});*/
+});
 
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
 	.BundleAnalyzerPlugin;

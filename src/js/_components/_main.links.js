@@ -133,6 +133,10 @@ const MainUILinks = ((W) => {
 
       el.classList.add('loading');
 
+      el.classList.remove('response-404');
+      el.classList.remove('response-500');
+      el.classList.remove('response-523');
+
       SpinnerUI.show();
       BODY.classList.add('ajax-loading');
 

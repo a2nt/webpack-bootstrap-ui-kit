@@ -26,6 +26,7 @@ class Page extends Component {
 		Summary: null,
 		Link: null,
 		URL: null,
+		HTML: null,
 		Elements: [],
 		page: null,
 	};
@@ -57,9 +58,8 @@ class Page extends Component {
 		return BODY.classList.contains('is-online');
 	};
 
-	load = (link) => {
+	load = (url_segment) => {
 		const ui = this;
-		const url_segment = link.split('/').pop();
 
 		return new Promise((resolve, reject) => {
 			const query = gql(`
@@ -76,6 +76,7 @@ class Page extends Component {
 			        Summary
 			        Link
 			        URLSegment
+			        HTML
 			        Elements {
 			          edges {
 			            node {
@@ -178,6 +179,7 @@ class Page extends Component {
 			CSSClass: page.CSSClass,
 			Summary: page.Summary,
 			Link: page.Link,
+			HTML: page.HTML,
 			Elements: page.Elements.edges,
 			loading: false,
 		});
@@ -204,7 +206,10 @@ class Page extends Component {
 		);
 
 		let html = '';
-		if (ui.state.Elements.length) {
+		if(ui.state.HTML) {
+			console.log(`${ui.name}: HTML only`);
+			html = ui.state.HTML;
+		}else if (ui.state.Elements.length) {
 			console.log(`${ui.name}: render`);
 			ui.state.Elements.map((el) => {
 				html += el.node.Render;
@@ -212,7 +217,9 @@ class Page extends Component {
 		} else if (ui.state.Summary && ui.state.Summary.length) {
 			console.log(`${ui.name}: summary only`);
 			html = `<div class="summary">${ui.state.Summary}</div>`;
-		} else {
+		}
+
+		if(ui.state.loading){
 			const spinner = D.getElementById('PageLoading');
 			html = `<div class="loading">Loading ...</div>`;
 		}

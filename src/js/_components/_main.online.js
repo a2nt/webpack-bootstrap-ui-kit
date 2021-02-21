@@ -80,13 +80,16 @@ export default ((W) => {
 
   // current browser online state
 
-  if (typeof navigator.onLine !== 'undefined') {
-    if (!navigator.onLine) {
-      UPDATE_ONLINE_STATUS(false);
-    } else {
-      UPDATE_ONLINE_STATUS(true);
+
+  const navigatorStateUpdate = () => {
+    if (typeof navigator.onLine !== 'undefined') {
+      if (!navigator.onLine) {
+        UPDATE_ONLINE_STATUS(false);
+      } else {
+        UPDATE_ONLINE_STATUS(true);
+      }
     }
-  }
+  };
 
   W.addEventListener(`${Events.OFFLINE}`, () => {
     UPDATE_ONLINE_STATUS(false);
@@ -96,7 +99,11 @@ export default ((W) => {
     UPDATE_ONLINE_STATUS(true);
   });
 
-  /*W.addEventListener(`${Events.LOADED}`, () => {
-    UPDATE_ONLINE_STATUS(true);
-  });*/
+  W.addEventListener(`${Events.LOADED}`, () => {
+    navigatorStateUpdate();//UPDATE_ONLINE_STATUS(true);
+  });
+
+  W.addEventListener(`${Events.AJAX}`, () => {
+    navigatorStateUpdate();
+  });
 })(window);
