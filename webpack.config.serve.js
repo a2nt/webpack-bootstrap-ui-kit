@@ -3,6 +3,8 @@
  */
 
 const path = require('path');
+const filesystem = require('fs');
+
 //const autoprefixer = require('autoprefixer');
 const webpack = require('webpack');
 const { merge } = require('webpack-merge');
@@ -28,6 +30,49 @@ console.log('NODE_ENV: ' + NODE_ENV);
 console.log('COMPRESS: ' + COMPRESS);
 console.log('WebP images: ' + conf['webp']);
 console.log('GRAPHQL_API_KEY: ' + conf['GRAPHQL_API_KEY']);
+console.log('HTTPS: ' + conf['HTTPS']);
+
+const plugins = [
+  new webpack.ProvidePlugin({
+    react: 'React',
+    'react-dom': 'ReactDOM',
+    /*$: 'jquery',
+      jQuery: 'jquery',*/
+  }),
+  new webpack.DefinePlugin({
+    UINAME: JSON.stringify(UIInfo.name),
+    UIVERSION: UIVERSION,
+    UIAUTHOR: JSON.stringify(UIInfo.author),
+    UIMetaNAME: JSON.stringify(UIMetaInfo.name),
+    UIMetaVersion: JSON.stringify(UIMetaInfo.version),
+    GRAPHQL_API_KEY: JSON.stringify(conf['GRAPHQL_API_KEY']),
+    SWVERSION: JSON.stringify(`sw-${new Date().getTime()}`),
+    BASE_HREF: JSON.stringify(
+      `http${conf['HTTPS'] ? 's' : ''}://${IP}:${PORT}`,
+    ),
+  }),
+  //new webpack.HotModuleReplacementPlugin(),
+  new MiniCssExtractPlugin(),
+];
+
+const indexPath = path.join(__dirname, conf.APPDIR, conf.SRC, 'index.html');
+if (filesystem.existsSync(indexPath)) {
+  plugins.push(
+    new HtmlWebpackPlugin({
+      publicPath: '',
+      template: path.join(conf.APPDIR, conf.SRC, 'index.html'),
+      templateParameters: {
+        NODE_ENV: NODE_ENV,
+        GRAPHQL_URL: conf['GRAPHQL_URL'],
+        STATIC_URL: conf['STATIC_URL'],
+        REACT_SCRIPTS:
+          NODE_ENV === 'production'
+            ? '<script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script><script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>'
+            : '<script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script><script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>',
+      },
+    }),
+  );
+}
 
 const config = merge(common, {
   mode: 'development',
@@ -44,7 +89,9 @@ const config = merge(common, {
     path: path.join(__dirname),
     filename: '[name].js',
     // necessary for HMR to know where to load the hot update chunks
-    publicPath: 'http://' + conf.HOSTNAME + ':' + conf.PORT + '/',
+    publicPath: `http${conf['HTTPS'] ? 's' : ''}://${conf['HOSTNAME']}:${
+      conf.PORT
+    }/`,
   },
 
   module: {
@@ -120,59 +167,16 @@ const config = merge(common, {
       },
     ],
   },
-  plugins: [
-    new webpack.ProvidePlugin({
-      react: 'React',
-      'react-dom': 'ReactDOM',
-      /*$: 'jquery',
-      jQuery: 'jquery',
-      Popper: ['popper.js', 'default'],
-      Util: 'exports-loader?Util!bootstrap/js/dist/util',
-      Alert: 'exports-loader?Alert!bootstrap/js/dist/alert',
-      Button: 'exports-loader?Button!bootstrap/js/dist/button',
-      Carousel: 'exports-loader?Carousel!bootstrap/js/dist/carousel',
-      Collapse: 'exports-loader?Collapse!bootstrap/js/dist/collapse',
-      Dropdown: 'exports-loader?Dropdown!bootstrap/js/dist/dropdown',
-      Modal: 'exports-loader?Modal!bootstrap/js/dist/modal',
-      Tooltip: 'exports-loader?Tooltip!bootstrap/js/dist/tooltip',
-      Popover: 'exports-loader?Popover!bootstrap/js/dist/popover',
-      Scrollspy: 'exports-loader?Scrollspy!bootstrap/js/dist/scrollspy',
-      Tab: 'exports-loader?Tab!bootstrap/js/dist/tab',*/
-    }),
-    new webpack.DefinePlugin({
-      UINAME: JSON.stringify(UIInfo.name),
-      UIVERSION: UIVERSION,
-      UIAUTHOR: JSON.stringify(UIInfo.author),
-      UIMetaNAME: JSON.stringify(UIMetaInfo.name),
-      UIMetaVersion: JSON.stringify(UIMetaInfo.version),
-      GRAPHQL_API_KEY: JSON.stringify(conf['GRAPHQL_API_KEY']),
-      SWVERSION: JSON.stringify(`sw-${new Date().getTime()}`),
-      BASE_HREF: JSON.stringify(`http://${IP}:${PORT}`),
-    }),
-    //new webpack.HotModuleReplacementPlugin(),
-    new MiniCssExtractPlugin(),
-    new HtmlWebpackPlugin({
-      publicPath: '',
-      template: path.join(conf.APPDIR, conf.SRC, 'index.html'),
-      templateParameters: {
-        NODE_ENV: NODE_ENV,
-        GRAPHQL_URL: conf['GRAPHQL_URL'],
-        STATIC_URL: conf['STATIC_URL'],
-        REACT_SCRIPTS:
-          NODE_ENV === 'production'
-            ? '<script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script><script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>'
-            : '<script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script><script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>',
-      },
-    }),
-  ],
+  plugins: plugins,
 
   devServer: {
     host: IP,
     port: PORT,
     historyApiFallback: false,
-
-    // uncomment it to test caching service worker
-    //injectClient: false,
+    static: path.resolve(__dirname, conf['APPDIR'], conf['SRC']),
+    https: conf['HTTPS'],
+    hot: false,
+    injectClient: conf['injectClient'],
 
     overlay: {
       warnings: true,

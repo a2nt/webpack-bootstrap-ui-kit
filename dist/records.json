@@ -70,6 +70,56 @@
       898
     ]
   },
+  "mini-css-extract-plugin /mnt/data/srv/dist/repositories/webpack-bootstrap-ui-kit/node_modules/.pnpm/css-loader@5.0.2_webpack@5.23.0/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/.pnpm/resolve-url-loader@3.1.2/node_modules/resolve-url-loader/index.js!./node_modules/.pnpm/sass-loader@11.0.1_node-sass@5.0.0+webpack@5.23.0/node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[3]!./node_modules/.pnpm/@a2nt/meta-lightbox-react@3.0.4/node_modules/@a2nt/meta-lightbox-react/src/scss/_window.scss": [
+    {
+      "chunks": {
+        "byName": {
+          "child": 396
+        },
+        "bySource": {
+          "0 child": 396
+        },
+        "usedIds": [
+          396
+        ]
+      },
+      "modules": {
+        "byIdentifier": {
+          "./node_modules/.pnpm/babel-loader@8.2.2_2c88fa80e813acf2bb735191f3f77062/node_modules/babel-loader/lib/index.js??ruleSet[1].rules[0].use!./node_modules/.pnpm/css-loader@5.0.2_webpack@5.23.0/node_modules/css-loader/dist/runtime/api.js": 588,
+          "./node_modules/.pnpm/css-loader@5.0.2_webpack@5.23.0/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/.pnpm/resolve-url-loader@3.1.2/node_modules/resolve-url-loader/index.js!./node_modules/.pnpm/sass-loader@11.0.1_node-sass@5.0.0+webpack@5.23.0/node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[3]!./node_modules/.pnpm/@a2nt/meta-lightbox-react@3.0.4/node_modules/@a2nt/meta-lightbox-react/src/scss/_window.scss": 330
+        },
+        "usedIds": [
+          330,
+          588
+        ]
+      }
+    }
+  ],
+  "mini-css-extract-plugin /mnt/data/srv/dist/repositories/webpack-bootstrap-ui-kit/node_modules/.pnpm/css-loader@5.0.2_webpack@5.23.0/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/.pnpm/resolve-url-loader@3.1.2/node_modules/resolve-url-loader/index.js!./node_modules/.pnpm/sass-loader@11.0.1_node-sass@5.0.0+webpack@5.23.0/node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[3]!./src/scss/app.scss": [
+    {
+      "chunks": {
+        "byName": {
+          "child": 396
+        },
+        "bySource": {
+          "0 child": 396
+        },
+        "usedIds": [
+          396
+        ]
+      },
+      "modules": {
+        "byIdentifier": {
+          "./node_modules/.pnpm/babel-loader@8.2.2_2c88fa80e813acf2bb735191f3f77062/node_modules/babel-loader/lib/index.js??ruleSet[1].rules[0].use!./node_modules/.pnpm/css-loader@5.0.2_webpack@5.23.0/node_modules/css-loader/dist/runtime/api.js": 588,
+          "./node_modules/.pnpm/css-loader@5.0.2_webpack@5.23.0/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/.pnpm/resolve-url-loader@3.1.2/node_modules/resolve-url-loader/index.js!./node_modules/.pnpm/sass-loader@11.0.1_node-sass@5.0.0+webpack@5.23.0/node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[3]!./src/scss/app.scss": 714
+        },
+        "usedIds": [
+          588,
+          714
+        ]
+      }
+    }
+  ],
   "modules": {
     "byIdentifier": {
       "./node_modules/.pnpm/babel-loader@8.2.2_2c88fa80e813acf2bb735191f3f77062/node_modules/babel-loader/lib/index.js??ruleSet[1].rules[0].use!./node_modules/.pnpm/@apollo/client@3.3.11_graphql@15.5.0+react@17.0.1/node_modules/@apollo/client/cache/index.js|98663193128bdee4f4bd78c722201262": 5864,
