@@ -184,6 +184,7 @@ const config = merge(common, {
     },
     headers: {
       'Access-Control-Allow-Origin': '*',
+      'Referrer-Policy': 'unsafe-url',
       'service-worker-allowed': '/',
     },
   },
