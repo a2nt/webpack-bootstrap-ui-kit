@@ -2,7 +2,6 @@
  * page #MainContent area
  */
 import { Component } from 'react';
-import Events from '../_events';
 
 import { useQuery, gql } from '@apollo/client';
 import { client } from './_apollo';
@@ -37,10 +36,6 @@ class Page extends Component {
 		if (ui.state.Title) {
 			document.title = ui.state.Title;
 		}
-
-		if (ui.state.Elements.length) {
-			window.dispatchEvent(new Event(Events.AJAX));
-		}
 	}
 
 	constructor(props) {
@@ -58,13 +53,12 @@ class Page extends Component {
 		return BODY.classList.contains('is-online');
 	};
 
-	load = (url_segment) => {
+	load = (link) => {
 		const ui = this;
 
 		return new Promise((resolve, reject) => {
-			const query = gql(`
-			query Pages {
-			  readPages(URLSegment: "${url_segment}", limit: 1, offset: 0) {
+			const query = gql(`query Pages {
+			  readPages(Link: "${link}") {
 			    edges {
 			      node {
 			        __typename
@@ -77,32 +71,10 @@ class Page extends Component {
 			        Link
 			        URLSegment
 			        HTML
-			        Elements {
-			          edges {
-			            node {
-			              __typename
-			        	 _id
-			              ID
-			              Title
-			              Render
-			            }
-			          }
-			          pageInfo {
-			            hasNextPage
-			            hasPreviousPage
-			            totalCount
-			          }
-			        }
 			      }
 			    }
-			    pageInfo {
-			      hasNextPage
-			      hasPreviousPage
-			      totalCount
-			    }
 			  }
-			}
-		`);
+			}`);
 
 			if (!ui.isOnline()) {
 				const data = client.readQuery({ query });
@@ -180,7 +152,7 @@ class Page extends Component {
 			Summary: page.Summary,
 			Link: page.Link,
 			HTML: page.HTML,
-			Elements: page.Elements.edges,
+			Elements: [],//page.Elements.edges,
 			loading: false,
 		});
 

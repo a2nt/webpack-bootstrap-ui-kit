@@ -54,6 +54,7 @@ $enable-negative-margins: true !default;
 $enable-deprecation-messages: true !default;
 
 $enable-important-utilities: true !default;
+$breadcrumb-divider: quote('/') !default;
 
 // ui framework settings
 $body-gutter-x: $spacer !default;
@@ -110,6 +111,8 @@ $nav-link-hover-color: lighten($body-color, 10%);
 @import '~bootstrap/scss/mixins';
 
 // site specific variables
+$extra-large-screen: 2000px;
+
 $full-body-min-width: map-get($grid-breakpoints, 'lg') !default;
 $typography-breakpoint: map-get($grid-breakpoints, 'sm') - 1 !default;
 
@@ -130,8 +133,15 @@ $main-nav-dropdown-color: $header-link;
 $main-nav-dropdown-hover-bg: var(--bs-black);
 $main-nav-dropdown-hover-color: $main-nav-link-hover-color;
 
+$sidebar-nav-link-hover-color: var(--bs-indigo);
+
 $footer-bg: $header-bg;
 $footer-color: $header-color;
 $footer-link: $header-link;
 
 $footer-footer-bg: $main-nav-dropdown-hover-bg;
+
+$sliderelement-carousel-slide-max-y: 70vh;
+$sliderelement-carousel-slide-bg: $header-bg;
+$sliderelement-carousel-slide-ratio-x: 16;
+$sliderelement-carousel-slide-ratio-y: 9;

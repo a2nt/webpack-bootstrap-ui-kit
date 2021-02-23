@@ -20,7 +20,7 @@
 			transform: translate(0, 0);
 		}
 		100% {
-			transform: translate(19px, 0);
+			transform: translate(1.35rem, 0);
 		}
 	}
 	body,
@@ -31,6 +31,12 @@
 		background: #fff;
 		color: #333;
 		overflow-x: hidden;
+	}
+	@media (min-width: 2000px) {
+		html,
+		body {
+			font-size: 0.9vw;
+		}
 	}
 	#PageLoading {
 		position: fixed;
@@ -53,6 +59,9 @@
 	#PageLoading .logo {
 		filter: invert(1);
 		margin-left: 20px;
+		margin-left: 2vw;
+		width: 100px;
+		width: 12.5vw;
 	}
 	.main-bn {
 		position: fixed;
@@ -75,33 +84,33 @@
 	.lds-ellipsis {
 		display: inline-block;
 		position: relative;
-		width: 64px;
-		height: 64px;
+		width: 4.57rem;
+		height: 1rem;
 		color: #fff;
 	}
 	.lds-ellipsis div {
 		position: absolute;
-		top: 27px;
-		width: 11px;
-		height: 11px;
+		top: 0.15rem;
+		width: 0.78rem;
+		height: 0.78rem;
 		border-radius: 50%;
 		background: #888;
 		animation-timing-function: cubic-bezier(0, 1, 1, 0);
 	}
 	.lds-ellipsis div:nth-child(1) {
-		left: 6px;
+		left: 0.42rem;
 		animation: lds-ellipsis1 0.6s infinite;
 	}
 	.lds-ellipsis div:nth-child(2) {
-		left: 6px;
+		left: 0.9rem;
 		animation: lds-ellipsis2 0.6s infinite;
 	}
 	.lds-ellipsis div:nth-child(3) {
-		left: 26px;
+		left: 1.85rem;
 		animation: lds-ellipsis2 0.6s infinite;
 	}
 	.lds-ellipsis div:nth-child(4) {
-		left: 45px;
+		left: 3.21rem;
 		animation: lds-ellipsis3 0.6s infinite;
 	}
 	@keyframes lds-text {
@@ -155,6 +164,11 @@
 	}
 	.lds-text b:nth-child(10) {
 		animation-delay: 5s;
+	}
+	@media (orientation: portrait) {
+		#PageLoading .logo {
+			width: 50vw;
+		}
 	}
 </style>
 

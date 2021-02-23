@@ -33,8 +33,7 @@
 body.ajax-loading {
 	overflow: hidden;
 	height: 100vh;
-	#Header,
-	#Footer {
+	#Header {
 		position: relative;
 		z-index: 2001;
 	}

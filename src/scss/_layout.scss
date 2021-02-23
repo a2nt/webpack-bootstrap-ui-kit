@@ -1,7 +1,3 @@
-/**
- * Your custom style
- */
-
 .sidebar__col {
 	position: relative;
 	margin-top: $element-reduced-spacer-y;
@@ -65,11 +61,11 @@
 	.nav-item,
 	.nav-link {
 		flex-direction: column;
-		@media (min-width: $full-body-min-width) {
+		/*@media (min-width: $full-body-min-width) {
 			align-items: center;
 			justify-content: center;
 			text-align: center;
-		}
+		}*/
 	}
 
 	.nav-link {
@@ -85,7 +81,7 @@
 	}
 
 	.active {
-		.nav-link {
+		> .nav-link {
 			background: $main-nav-link-hover-bg;
 			color: $main-nav-link-hover-color;
 		}
@@ -104,13 +100,15 @@
 		background: $main-nav-dropdown-bg;
 		margin-top: 0;
 		border-top: 0;
-		width: 100%;
+		min-width: 100%;
 		.nav-item-link {
 			color: $main-nav-dropdown-color;
 		}
 	}
 
 	.dropdown-item {
+		&.active,
+		&:active,
 		&:focus,
 		&:hover {
 			background: $main-nav-dropdown-hover-bg;
@@ -176,8 +174,4 @@
 			padding: 0 0.5rem;
 		}
 	}
-}
-
-.flyout-FlyoutUI {
-	display: none;
 }

@@ -99,11 +99,6 @@ export default ((W) => {
     UPDATE_ONLINE_STATUS(true);
   });
 
-  W.addEventListener(`${Events.LOADED}`, () => {
-    navigatorStateUpdate();//UPDATE_ONLINE_STATUS(true);
-  });
-
-  W.addEventListener(`${Events.AJAX}`, () => {
-    navigatorStateUpdate();
-  });
+  W.addEventListener(`${Events.LOADED}`, navigatorStateUpdate);
+  W.addEventListener(`${Events.AJAX}`, navigatorStateUpdate);
 })(window);

@@ -82,6 +82,8 @@ const MainUILinks = ((W) => {
 
         ui.GraphPage.setState(state);
         SpinnerUI.hide();
+
+        window.dispatchEvent(new Event(Events.AJAX));
       } else if (e.state && e.state.landing) {
         console.log(`${NAME}: [popstate] go to landing`);
         W.location.href = e.state.landing;
@@ -158,6 +160,8 @@ const MainUILinks = ((W) => {
 
           BODY.classList.remove('ajax-loading');
           SpinnerUI.hide();
+
+          window.dispatchEvent(new Event(Events.AJAX));
           console.groupEnd(`${NAME}: load on click`);
         })
         .catch((e) => {
@@ -176,6 +180,8 @@ const MainUILinks = ((W) => {
 
           BODY.classList.remove('ajax-loading');
           SpinnerUI.hide();
+
+          window.dispatchEvent(new Event(Events.AJAX));
           console.groupEnd(`${NAME}: load on click`);
         });
     }
