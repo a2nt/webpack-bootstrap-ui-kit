@@ -53,6 +53,7 @@
 		"@angular/common": "^11.2.1",
 		"@angular/core": "^11.2.1",
 		"@apollo/client": "^3.3.11",
+		"@jsanahuja/instagramfeed": "github:jsanahuja/instagramfeed",
 		"@popperjs/core": "^2.8.2",
 		"aos": "^2.3.4",
 		"apollo3-cache-persist": "^0.9.1",
