@@ -9,191 +9,192 @@ import { Collapse } from 'bootstrap';
 import SpinnerUI from './_main.loading-spinner';
 
 const MainUILinks = ((W) => {
-  const NAME = '_main.links';
-  const D = document;
-  const BODY = D.body;
+    const NAME = '_main.links';
+    const D = document;
+    const BODY = D.body;
 
-  class MainUILinks {
-    static init() {
-      const ui = this;
-      ui.GraphPage = null;
+    class MainUILinks {
+        static init() {
+            const ui = this;
+            ui.GraphPage = null;
 
-      console.log(`${NAME}: init`);
+            console.log(`${NAME}: init`);
 
-      ui.loaded();
+            ui.loaded();
 
-      // history state switch
-      W.addEventListener('popstate', (e) => {
-        ui.popState(e);
-      });
-    }
-
-    static loaded() {
-      const ui = this;
-
-      D.querySelectorAll('.graphql-page').forEach((el, i) => {
-        const el_id = el.getAttribute('href');
-        el.setAttribute(`data-${ui.name}-id`, el_id);
-
-        el.addEventListener('click', ui.loadClick);
-      });
-    }
-
-    static reset() {
-      // reset focus
-      D.activeElement.blur();
-
-      // remove active and loading classes
-      D.querySelectorAll('.graphql-page,.nav-item').forEach((el2) => {
-        el2.classList.remove('active');
-        el2.classList.remove('loading');
-      });
-    }
-
-    static popState(e) {
-      const ui = this;
-
-      SpinnerUI.show();
-
-      if (e.state && e.state.page) {
-        console.log(`${NAME}: [popstate] load`);
-        const state = JSON.parse(e.state.page);
-
-        state.current = null;
-        state.popstate = true;
-
-        ui.reset();
-        D.querySelectorAll(`[data-${ui.name}-id="${e.state.link}"]`).forEach(
-          (el) => {
-            el.classList.add('active');
-          },
-        );
-
-        if (!ui.GraphPage) {
-          console.log(
-            `${NAME}: [popstate] GraphPage is missing. Have to render it first`,
-          );
-
-          ui.GraphPage = ReactDOM.render(
-            <Page />,
-            document.getElementById('MainContent'),
-          );
+            // history state switch
+            W.addEventListener('popstate', (e) => {
+                ui.popState(e);
+            });
         }
 
-        ui.GraphPage.setState(state);
-        SpinnerUI.hide();
+        static loaded() {
+            const ui = this;
 
-        window.dispatchEvent(new Event(Events.AJAX));
-      } else if (e.state && e.state.landing) {
-        console.log(`${NAME}: [popstate] go to landing`);
-        W.location.href = e.state.landing;
-      } else {
-        console.warn(`${NAME}: [popstate] state is missing`);
-        console.log(e);
-        SpinnerUI.hide();
-      }
-    }
+            D.querySelectorAll('.graphql-page').forEach((el, i) => {
+                const el_id = el.getAttribute('href');
+                el.setAttribute(`data-${ui.name}-id`, el_id);
 
-    // link specific event {this} = current event, not MainUILinks
-    static loadClick(e) {
-      console.groupCollapsed(`${NAME}: load on click`);
-      const ui = MainUILinks;
-      ui.reset();
+                el.addEventListener('click', ui.loadClick);
+            });
+        }
 
-      e.preventDefault();
-
-      const el = e.currentTarget;
-
-      // hide parent mobile nav
-      const navs = getParents(el, '.collapse');
-      if (navs.length) {
-        navs.forEach((nav) => {
-          const collapseInst = Collapse.getInstance(nav);
-          if (collapseInst) {
-            collapseInst.hide();
-          }
-        });
-      }
-
-      // hide parent dropdown
-      /*const dropdowns = getParents(el, '.dropdown-menu');
-      if (dropdowns.length) {
-        const DropdownInst = Dropdown.getInstance(dropdowns[0]);
-        DropdownInst.hide();
-      }*/
-
-      if (!ui.GraphPage) {
-        ui.GraphPage = ReactDOM.render(
-          <Page />,
-          document.getElementById('MainContent'),
-        );
-      }
-
-      const link = el.getAttribute('href') || el.getAttribute('data-href');
-
-      ui.GraphPage.state.current = el;
-
-      el.classList.add('loading');
-
-      el.classList.remove('response-404');
-      el.classList.remove('response-500');
-      el.classList.remove('response-523');
-
-      SpinnerUI.show();
-      BODY.classList.add('ajax-loading');
-
-      ui.GraphPage.load(link)
-        .then((response) => {
-          el.classList.remove('loading');
-          el.classList.add('active');
-
-          if (ui.GraphPage.state.Link) {
-            window.history.pushState(
-              {
-                page: JSON.stringify(ui.GraphPage.state),
-                link: el.getAttribute(`data-${ui.name}-id`),
-              },
-              ui.GraphPage.state.Title,
-              ui.GraphPage.state.Link,
+        static setActiveLinks(link) {
+            const ui = this;
+            D.querySelectorAll(`[data-${ui.name}-id="${link}"]`).forEach(
+                (el) => {
+                    el.classList.add('active');
+                },
             );
-          }
+        }
 
-          BODY.classList.remove('ajax-loading');
-          SpinnerUI.hide();
+        static reset() {
+            // reset focus
+            D.activeElement.blur();
 
-          window.dispatchEvent(new Event(Events.AJAX));
-          console.groupEnd(`${NAME}: load on click`);
-        })
-        .catch((e) => {
-          console.log(e);
+            // remove active and loading classes
+            D.querySelectorAll('.graphql-page,.nav-item').forEach((el2) => {
+                el2.classList.remove('active', 'loading');
+            });
+        }
 
-          el.classList.remove('loading');
-          el.classList.add(`response-${e.status}`);
-          /*switch (e.status) {
-            case 404:
-              el.classList.add('not-found');
-              break;
-            case 523:
-              el.classList.add('unreachable');
-              break;
-          }*/
+        static popState(e) {
+            const ui = this;
 
-          BODY.classList.remove('ajax-loading');
-          SpinnerUI.hide();
+            SpinnerUI.show();
 
-          window.dispatchEvent(new Event(Events.AJAX));
-          console.groupEnd(`${NAME}: load on click`);
-        });
+            if (e.state && e.state.page) {
+                console.log(`${NAME}: [popstate] load`);
+                const state = JSON.parse(e.state.page);
+
+                state.current = null;
+                state.popstate = true;
+
+                ui.reset();
+                ui.setActiveLinks(e.state.link);
+
+                if (!ui.GraphPage) {
+                    console.log(
+                        `${NAME}: [popstate] GraphPage is missing. Have to render it first`,
+                    );
+
+                    ui.GraphPage = ReactDOM.render(
+                        <Page />,
+                        document.getElementById('MainContent'),
+                    );
+                }
+
+                ui.GraphPage.setState(state);
+                SpinnerUI.hide();
+
+                window.dispatchEvent(new Event(Events.AJAX));
+            } else if (e.state && e.state.landing) {
+                console.log(`${NAME}: [popstate] go to landing`);
+                W.location.href = e.state.landing;
+            } else {
+                console.warn(`${NAME}: [popstate] state is missing`);
+                console.log(e);
+                SpinnerUI.hide();
+            }
+        }
+
+        // link specific event {this} = current event, not MainUILinks
+        static loadClick(e) {
+            console.groupCollapsed(`${NAME}: load on click`);
+            e.preventDefault();
+
+            const ui = MainUILinks;
+            const el = e.currentTarget;
+
+            SpinnerUI.show();
+
+            ui.reset();
+            el.classList.add('loading');
+            el.classList.remove('response-404', 'response-500', 'response-523');
+            BODY.classList.add('ajax-loading');
+
+            // hide parent mobile nav
+            const navs = getParents(el, '.collapse');
+            if (navs.length) {
+                navs.forEach((nav) => {
+                    const collapseInst = Collapse.getInstance(nav);
+                    if (collapseInst) {
+                        collapseInst.hide();
+                    }
+                });
+            }
+
+            // hide parent dropdown
+            /*const dropdowns = getParents(el, '.dropdown-menu');
+            if (dropdowns.length) {
+              const DropdownInst = Dropdown.getInstance(dropdowns[0]);
+              DropdownInst.hide();
+            }*/
+
+            if (!ui.GraphPage) {
+                ui.GraphPage = ReactDOM.render(
+                    <Page />,
+                    document.getElementById('MainContent'),
+                );
+            }
+
+            const link = el.getAttribute('href') || el.getAttribute('data-href');
+
+            ui.GraphPage.state.current = el;
+
+            ui.GraphPage.load(link)
+                .then((response) => {
+                    BODY.classList.remove('ajax-loading');
+                    el.classList.remove('loading');
+                    el.classList.add('active');
+
+                    if (ui.GraphPage.state.Link) {
+                        window.history.pushState({
+                                page: JSON.stringify(ui.GraphPage.state),
+                                link: el.getAttribute(`data-${ui.name}-id`),
+                            },
+                            ui.GraphPage.state.Title,
+                            ui.GraphPage.state.Link,
+                        );
+
+                        ui.setActiveLinks(ui.GraphPage.state.Link)
+                    }
+
+                    SpinnerUI.hide();
+
+                    window.dispatchEvent(new Event(Events.AJAX));
+                    console.groupEnd(`${NAME}: load on click`);
+                })
+                .catch((e) => {
+                    console.log(e);
+
+                    BODY.classList.remove('ajax-loading');
+                    el.classList.remove('loading');
+                    el.classList.add('error', `response-${e.status}`);
+                    /*switch (e.status) {
+                      case 404:
+                        el.classList.add('not-found');
+                        break;
+                      case 523:
+                        el.classList.add('unreachable');
+                        break;
+                    }*/
+
+                    SpinnerUI.hide();
+
+                    window.dispatchEvent(new Event(Events.AJAX));
+                    console.groupEnd(`${NAME}: load on click`);
+                });
+        }
     }
-  }
 
-  W.addEventListener(`${Events.LOADED}`, () => {
-    MainUILinks.init();
-  });
+    W.addEventListener(`${Events.LOADED}`, () => {
+        MainUILinks.init();
+    });
 
-  W.addEventListener(`${Events.AJAX}`, () => {
-    MainUILinks.loaded();
-  });
+    W.addEventListener(`${Events.AJAX}`, () => {
+        MainUILinks.loaded();
+    });
 })(window);
 
 export default MainUILinks;
