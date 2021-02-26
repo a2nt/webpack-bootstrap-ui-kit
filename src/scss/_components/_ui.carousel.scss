@@ -24,6 +24,11 @@ $carousel-slide-img-loading-max-height: 25vh !default;
     display: flex;
     justify-content: center;
     align-items: flex-start;
+    flex-direction: column;
+
+    >.container {
+        position: relative;
+    }
 
     .video {
         width: 100%;
@@ -67,4 +72,11 @@ $carousel-slide-img-loading-max-height: 25vh !default;
 .carousel-title,
 .carousel-content {
     text-shadow: $carousel-text-shadow;
+}
+
+.carousel-caption {
+    right: 0;
+    left: auto;
+    width: 50%;
+    bottom: 0;
 }
