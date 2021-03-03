@@ -134,27 +134,27 @@ button.nav-link {
 }
 
 /*.message {
-	@extend .alert;
+    @extend .alert;
 
-	@extend .alert-info;
+    @extend .alert-info;
 
-	display: block;
-	margin: 0.5rem 0;
+    display: block;
+    margin: 0.5rem 0;
 }
 
 .message.validation,
 .message.required,
 .message.error {
-	@extend .alert;
+    @extend .alert;
 
-	@extend .alert-danger;
+    @extend .alert-danger;
 }
 
 .message.required,
 .message.error {
-	@extend .alert;
+    @extend .alert;
 
-	@extend .alert-danger;
+    @extend .alert-danger;
 }*/
 
 .list-group-item.active {
@@ -181,27 +181,4 @@ button.nav-link {
 .jsSidebarUI__inner {
     position: relative;
     will-change: position, top;
-}
-
-#ForgotPassword {
-    margin: 1rem 0;
-    width: 100%;
-}
-
-#BetterNavigator {
-    display: none;
-    top: 50% !important;
-    margin-top: -41px;
-
-    a,
-    button,
-    div,
-    i,
-    span {
-        background-size: auto;
-    }
-
-    @media (min-width: map-get($grid-breakpoints, 'md')) {
-        display: block;
-    }
 }

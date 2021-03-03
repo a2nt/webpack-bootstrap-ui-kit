@@ -1,0 +1,27 @@
+#ForgotPassword {
+    margin: 1rem 0;
+    width: 100%;
+}
+
+#BetterNavigator {
+    display: none;
+    top: 50% !important;
+    margin-top: -41px;
+
+    &.open {
+        top: 0;
+        margin-top: 0;
+    }
+
+    a,
+    button,
+    div,
+    i,
+    span {
+        background-size: auto;
+    }
+
+    @media (min-width: map-get($grid-breakpoints, 'md')) {
+        display: block;
+    }
+}
