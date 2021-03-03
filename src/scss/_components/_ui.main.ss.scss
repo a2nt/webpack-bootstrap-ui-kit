@@ -1,3 +1,15 @@
+.message {
+    @extend .alert;
+
+    &.warning {
+        @extend .alert-warning;
+    }
+
+    &.error {
+        @extend .alert-danger;
+    }
+}
+
 #ForgotPassword {
     margin: 1rem 0;
     width: 100%;

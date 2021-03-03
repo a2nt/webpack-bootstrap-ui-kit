@@ -6,8 +6,11 @@
 @import '../_animations';
 
 @import './_ui.main.base';
-@import './_ui.main.network';
+@import './_ui.form.basics';
 @import './_ui.main.alerts';
+
+// states
+@import './_ui.main.network';
 @import './_ui.main.mobile';
 
 .meta-MetaWindow {
