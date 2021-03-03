@@ -27,6 +27,7 @@ img,
         margin-right: auto;
         text-align: center;
     }
+
     &.w-100 {
         margin-left: 0;
         margin-right: 0;
@@ -38,6 +39,7 @@ img,
     &.leftAlone {
         float: left;
         clear: left;
+
         @media (min-width: $typography-breakpoint + 1) {
             margin: 0 $element-reduced-spacer-x $element-reduced-spacer-y 0;
         }
@@ -48,6 +50,7 @@ img,
     &.rightAlone {
         float: right;
         clear: right;
+
         @media (min-width: $typography-breakpoint + 1) {
             margin: $element-reduced-spacer-y 0 0 $element-reduced-spacer-x;
         }
@@ -63,20 +66,24 @@ img,
     img {
         margin-bottom: $element-reduced-spacer-y !important;
     }
+
     .caption {
         font-size: 0.8rem;
     }
 }
 
+.left,
 .text-left,
 .text-start {
     text-align: left;
 }
 
+.center,
 .text-center {
     text-align: center;
 }
 
+.right,
 .text-right,
 .text-end {
     text-align: right;
@@ -112,6 +119,7 @@ table {
 ul,
 ol {
     padding-left: $spacer;
+
     li {
         position: relative;
         padding-left: 0;
@@ -147,6 +155,7 @@ td,
 img,
 iframe {
     max-width: 100% !important;
+
     @media (max-width: $typography-breakpoint) {
         display: block;
         width: 100% !important;
@@ -183,16 +192,19 @@ img {
     thead {
         display: block;
         text-align: center;
-        > tr {
+
+        >tr {
             display: flex;
         }
     }
+
     tbody {
         display: block;
     }
 
     td {
         display: flex;
+
         &:before {
             content: attr(data-label);
             font-weight: bold;

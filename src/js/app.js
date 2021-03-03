@@ -1,8 +1,13 @@
+// Meta Lightbox
+import '@a2nt/meta-lightbox-react/src/js/app';
+
 //import $ from 'jquery';
 import '../scss/app.scss';
 
 import Events from './_events';
 import MainUI from './_components/_main';
+
+import './_layout';
 
 //import 'hammerjs/hammer';
 //import 'jquery-hammerjs/jquery.hammer';
@@ -61,10 +66,19 @@ import 'bootstrap/js/dist/tab';*/
 // youtube video preview image
 //import './_components/_ui.video.preview';
 
-// Meta Lightbox
-import '@a2nt/meta-lightbox-react/src/js/app';
+//import Confirmation from 'bootstrap-confirmation2/dist/bootstrap-confirmation';
+//import Table from 'bootstrap-table/dist/bootstrap-table';
 
-('use strict');
+// Map UI
+//import MapApi from './_components/_ui.map.api';
+
+//import FormSelect2 from './_components/_ui.form.select2';
+
+//import './_main';
+//import './_layout';
+
+// Google Analytics
+//import './_components/drivers/_google.track.external.links';
 
 if (process.env.NODE_ENV === 'development') {
   // mocking service worker
@@ -81,32 +95,18 @@ if (process.env.NODE_ENV === 'development') {
 
   // caching service worker (set injectClient: false at webpack.config.serve.js)
   /*if ('serviceWorker' in navigator) {
-    const baseHref = (document.getElementsByTagName('base')[0] || {}).href;
-    const version = (document.querySelector('meta[name="swversion"]') || {})
-      .content;
-    if (baseHref) {
-      navigator.serviceWorker
-        .register(`${baseHref}app_sw.js?v=${version}`)
-        .then(() => {
-          console.log('SW: Registered');
-        });
-    }
-  }*/
+        const baseHref = (document.getElementsByTagName('base')[0] || {}).href;
+        const version = (document.querySelector('meta[name="swversion"]') || {})
+          .content;
+        if (baseHref) {
+          navigator.serviceWorker
+            .register(`${baseHref}app_sw.js?v=${version}`)
+            .then(() => {
+              console.log('SW: Registered');
+            });
+        }
+      }*/
 }
-
-//import Confirmation from 'bootstrap-confirmation2/dist/bootstrap-confirmation';
-//import Table from 'bootstrap-table/dist/bootstrap-table';
-
-// Map UI
-//import MapApi from './_components/_ui.map.api';
-
-//import FormSelect2 from './_components/_ui.form.select2';
-
-//import './_main';
-//import './_layout';
-
-// Google Analytics
-//import './_components/drivers/_google.track.external.links';
 
 function importAll(r) {
   return r.keys().map(r);

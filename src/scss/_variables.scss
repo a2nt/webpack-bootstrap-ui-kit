@@ -40,7 +40,7 @@ Consolas,
 'Courier New',
 monospace !default;
 
-$font-family-base: 'Lato',
+$font-family-base: 'Roboto',
 $font-family-sans-serif !default;
 
 $spacer: 1rem !default;
@@ -165,4 +165,3 @@ $carousel-controls-zindex: 11 !default;
 $carousel-controls-shadow: 1px 1px $black !default;
 $carousel-controls-hover-bg: transparentize($black, 0.4) !default;
 $carousel-slide-img-loading-max-height: 70vh !default;
-
