@@ -1,3 +1,5 @@
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
 @import '_mixings';
 //@import '_colors';
 
@@ -117,12 +119,11 @@ $nav-link-hover-color: lighten($body-color, 10%);
 
 */
 
-@import '~bootstrap/scss/functions';
-@import '~bootstrap/scss/variables';
-@import '~bootstrap/scss/mixins';
+$body-bg: #fff !default;
+$body-color: #212529 !default;
 
 // site specific variables
-$extra-large-screen: 2000px;
+$extra-large-screen: 2000px !default;
 
 $full-body-min-width: map-get($grid-breakpoints, 'lg') !default;
 $typography-breakpoint: map-get($grid-breakpoints, 'sm') - 1 !default;
