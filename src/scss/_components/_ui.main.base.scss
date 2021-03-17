@@ -15,10 +15,10 @@ body {
 body {
     display: flex;
     flex-direction: column;
-    --body-bg: #{inspect($body-bg)};
-    --body-color: #{inspect($body-color)};
     --body-gutter-x: #{inspect($body-gutter-x)};
     --body-gutter-y: #{inspect($body-gutter-y)};
+    --body-double-gutter-x: #{inspect($body-double-gutter-x)};
+    --body-double-gutter-y: #{inspect($body-double-gutter-y)};
     --body-gutter-reduced-x: #{inspect($body-gutter-reduced-x)};
     --body-gutter-reduced-y: #{inspect($body-gutter-reduced-y)};
 

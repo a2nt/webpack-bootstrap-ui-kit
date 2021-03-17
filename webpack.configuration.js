@@ -1,8 +1,8 @@
 /*
- * Load webpack configuration from app/_config/webpack.yml
+ * Load webpack configuration from webpack.yml
  */
 
-const YML_PATH = '/app/_config/webpack.yml';
+const YML_PATH = './webpack.yml';
 const CONF_VAR = 'App\\Templates\\WebpackTemplateProvider';
 
 const path = require('path');

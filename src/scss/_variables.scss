@@ -73,8 +73,11 @@ $breadcrumb-divider: quote('/') !default;
 $body-gutter-x: $spacer !default;
 $body-gutter-y: $spacer !default;
 
-$body-gutter-reduced-x: $spacer/2 !default;
-$body-gutter-reduced-y: $spacer/2 !default;
+$body-double-gutter-x: $body-gutter-x*2 !default;
+$body-double-gutter-y: $body-gutter-y*2 !default;
+
+$body-gutter-reduced-x: $body-gutter-x/2 !default;
+$body-gutter-reduced-y: $body-gutter-y/2 !default;
 
 $form-spacer-x: $spacer !default;
 $form-spacer-y: $spacer !default;
