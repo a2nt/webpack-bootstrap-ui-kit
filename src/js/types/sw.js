@@ -4,7 +4,7 @@ var debug = process.env.NODE_ENV === 'development' ? true : false;
 var version = `${UIVERSION}-sw`;
 
 var log = require('../lib/log');
-var caches = require('../../thirdparty/serviceworker-caches');
+var caches = require('../../../thirdparty/serviceworker-caches');
 
 if (debug) {
   log('SW: debug is on');
@@ -28,15 +28,15 @@ self.addEventListener('fetch', (event) => {
 
   //Check for our own urls
   /*if (requestURL.origin !== location.origin) {
-    log('SW: skip external ' + event.request.url);
-    return;
-  }*/
+      log('SW: skip external ' + event.request.url);
+      return;
+    }*/
 
   //Skip admin url's
   if (
     requestURL.pathname.indexOf('admin') >= 0 ||
-    requestURL.pathname.indexOf('Security') >= 0 ||
-    requestURL.pathname.indexOf('/dev') >= 0
+        requestURL.pathname.indexOf('Security') >= 0 ||
+        requestURL.pathname.indexOf('/dev') >= 0
   ) {
     log(`SW: skip admin ${event.request.url}`);
     return;
@@ -44,10 +44,10 @@ self.addEventListener('fetch', (event) => {
 
   //Test for images
   /*if (/\.(jpg|jpeg|png|gif|webp)$/.test(requestURL.pathname)) {
-    log('SW: skip image ' + event.request.url);
-    //For now we skip images but change this later to maybe some caching and/or an offline fallback
-    return;
-  }*/
+      log('SW: skip image ' + event.request.url);
+      //For now we skip images but change this later to maybe some caching and/or an offline fallback
+      return;
+    }*/
 
   // Clone the request for fetch and cache
   // A request is a stream and can be consumed only once.
@@ -58,7 +58,7 @@ self.addEventListener('fetch', (event) => {
   event.respondWith(
     // Try fetch
     fetch(fetchRequest)
-      // when fetch is successful, we update the cache
+    // when fetch is successful, we update the cache
       .then((response) => {
         // A response is a stream and can be consumed only once.
         // Because we want the browser to consume the response,
@@ -78,7 +78,7 @@ self.addEventListener('fetch', (event) => {
         return response;
       })
 
-      // when fetch times out or fails
+    // when fetch times out or fails
       .catch((err) => {
         log('SW: fetch failed');
         // Return the promise which
