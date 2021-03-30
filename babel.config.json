@@ -3,7 +3,8 @@
         [
             "@babel/preset-env",
             {
-                "targets": {
+                "targets":
+                {
                     "node": "6.10",
                     "esmodules": true
                 }
@@ -23,6 +24,7 @@
     "plugins": [
         "@babel/plugin-syntax-top-level-await",
         "@babel/plugin-proposal-object-rest-spread",
-        "@babel/plugin-syntax-jsx"
+        "@babel/plugin-syntax-jsx",
+        "@babel/plugin-proposal-class-properties"
     ]
 }
