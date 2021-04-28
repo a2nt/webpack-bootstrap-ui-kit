@@ -1,4 +1,6 @@
 .field {
+    flex-direction: column;
+
     .field__label {
         padding-right: $form-spacer-x;
 

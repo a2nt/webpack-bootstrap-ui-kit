@@ -7,10 +7,9 @@ import Events from '../_events';
 import Consts from '../_consts';
 import InstagramFeed from '@jsanahuja/instagramfeed/src/InstagramFeed';
 
-export default ((W) => {
-  const NAME = '_ui.instagram.feed';
-  const D = document;
-  const BODY = D.body;
+export default ((window) => {
+  const NAME = 'js-instagramfeed';
+  const BODY = document.body;
 
   const ig_media_preview = (base64data) => {
     const jpegtpl =
@@ -34,7 +33,7 @@ export default ((W) => {
   const loadFeed = () => {
     console.log(`${NAME}: loading`);
 
-    D.querySelectorAll(`.jsInstagramFeed`).forEach((el, i) => {
+    document.querySelectorAll(`.${NAME}`).forEach((el, i) => {
       const ID = `InstagramFeed${i}`;
       const dataset = el.dataset;
 
@@ -55,7 +54,7 @@ export default ((W) => {
         callback: (data) => {
           console.log(`${NAME}: data response received`);
 
-          const list = D.createElement('div');
+          const list = document.createElement('div');
           list.classList.add(`${NAME}-list`, 'row');
           el.appendChild(list);
 
@@ -76,8 +75,8 @@ export default ((W) => {
           el.classList.remove(`${NAME}-loading`);
           el.classList.add(`${NAME}-loaded`);
 
-          W.dispatchEvent(new Event('MetaWindow.initLinks'));
-          W.dispatchEvent(new Event(`${NAME}.loaded`));
+          window.dispatchEvent(new Event('MetaWindowindow.initLinks'));
+          window.dispatchEvent(new Event(`${NAME}.loaded`));
         },
         on_error: (e) => {
           console.error(`${NAME}: ${e}`);
@@ -85,12 +84,12 @@ export default ((W) => {
           el.classList.remove(`${NAME}-loading`);
           el.classList.add(`${NAME}-error`);
 
-          W.dispatchEvent(new Event(`${NAME}.error`));
+          window.dispatchEvent(new Event(`${NAME}.error`));
         },
       });
     });
   };
 
-  W.addEventListener(`${Events.LODEDANDREADY}`, loadFeed);
-  W.addEventListener(`${Events.AJAX}`, loadFeed);
+  window.addEventListener(`${Events.LODEDANDREADY}`, loadFeed);
+  window.addEventListener(`${Events.AJAX}`, loadFeed);
 })(window);

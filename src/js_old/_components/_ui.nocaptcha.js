@@ -1,16 +1,15 @@
 'use strict';
 
 import $ from 'jquery';
-import Events from '../_events';
-import Spinner from './_ui.spinner';
+import Events from '../lib/_events';
 
 const NoCaptcha = (($) => {
   // Constants
-  const W = window;
+  const $window = $(window);
   const D = document;
   const $Body = $('body');
 
-  const NAME = 'NoCaptcha';
+  const NAME = 'jsNoCaptcha';
 
   class NoCaptcha {
     static init() {
@@ -19,7 +18,7 @@ const NoCaptcha = (($) => {
 
       console.log(`${NAME}: init`);
 
-      if ($('.g-recaptcha').length && typeof grecaptcha === 'undefined') {
+      if ($('.g-recaptcha').length && typeof $window[0].grecaptcha === 'undefined') {
         console.log(`${NAME}: Loading Captcha API`);
 
         $.getScript(
@@ -38,8 +37,12 @@ const NoCaptcha = (($) => {
     }
 
     static renderCaptcha() {
-      console.log(`${NAME}: Rendering Captcha`);
+      const grecaptcha = $window[0].grecaptcha;
+      if (typeof grecaptcha === 'undefined' || typeof grecaptcha.render === 'undefined') {
+        return;
+      }
 
+      console.log(`${NAME}: Rendering Captcha`);
       const $_noCaptchaFields = $('.g-recaptcha');
 
       if (!$('.g-recaptcha').length) {
@@ -59,9 +62,9 @@ const NoCaptcha = (($) => {
           return;
         }
 
-        const $form = $field.data('form')
-          ? $(`#${$field.data('form')}`)
-          : $field.parents('form');
+        const $form = $field.data('form') ?
+          $(`#${$field.data('form')}`) :
+          $field.parents('form');
 
         const widget_id = grecaptcha.render(field, $field.data());
         $field.data('widgetid', widget_id);
@@ -75,12 +78,12 @@ const NoCaptcha = (($) => {
     }
   }
 
-  $(W).on(`${NAME}.init ${Events.AJAX} ${Events.LOADED}`, () => {
+  $window.on(`${NAME}.init ${Events.AJAX} ${Events.LOADED}`, () => {
     NoCaptcha.init();
   });
 
-  W.NoCaptcha = NoCaptcha;
-  W.noCaptchaFieldRender = NoCaptcha.renderCaptcha;
+  $window.data(`${NAME}`, NoCaptcha);
+  $window[0].noCaptchaFieldRender = NoCaptcha.renderCaptcha;
 
   return NoCaptcha;
 })($);
