@@ -13,7 +13,7 @@ const path = require('path');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
 const TerserPlugin = require('terser-webpack-plugin');
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const ImageSpritePlugin = require('@a2nt/image-sprite-webpack-plugin');
@@ -77,30 +77,6 @@ let plugins = [
 ];
 
 if (COMPRESS) {
-    plugins.push(
-        new OptimizeCssAssetsPlugin({
-            //assetNameRegExp: /\.optimize\.css$/g,
-            cssProcessor: require('cssnano'),
-            cssProcessorPluginOptions: {
-                preset: ['default'],
-            },
-            cssProcessorOptions: {
-                zindex: true,
-                cssDeclarationSorter: true,
-                reduceIdents: false,
-                mergeIdents: true,
-                mergeRules: true,
-                mergeLonghand: true,
-                discardUnused: true,
-                discardOverridden: true,
-                discardDuplicates: true,
-                discardComments: {
-                    removeAll: true,
-                },
-            },
-            canPrint: true,
-        }),
-    );
     plugins.push(require('autoprefixer'));
 
     plugins.push(
@@ -266,6 +242,30 @@ const cfg = merge(common, {
                 // Use multi-process parallel running to improve the build speed
                 // Default number of concurrent runs: os.cpus().length - 1
                 parallel: true,
+            }),
+            new CssMinimizerPlugin({
+                parallel: true,
+                minimizerOptions: [{
+                    preset: [
+                        'default',
+                        {
+                            discardComments: { removeAll: true },
+                            zindex: true,
+                            cssDeclarationSorter: true,
+                            reduceIdents: false,
+                            mergeIdents: true,
+                            mergeRules: true,
+                            mergeLonghand: true,
+                            discardUnused: true,
+                            discardOverridden: true,
+                            discardDuplicates: true,
+                        },
+                    ],
+                }, ],
+                minify: [
+                    CssMinimizerPlugin.cssnanoMinify,
+                    //CssMinimizerPlugin.cleanCssMinify,
+                ]
             }),
         ],
     },
