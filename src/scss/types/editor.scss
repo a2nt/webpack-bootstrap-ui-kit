@@ -204,6 +204,7 @@ img {
 
     td {
         display: flex;
+        flex-direction: column;
 
         &:before {
             content: attr(data-label);
