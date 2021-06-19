@@ -28,9 +28,9 @@ self.addEventListener('fetch', (event) => {
 
   //Check for our own urls
   /*if (requestURL.origin !== location.origin) {
-      log('SW: skip external ' + event.request.url);
-      return;
-    }*/
+        log('SW: skip external ' + event.request.url);
+        return;
+      }*/
 
   //Skip admin url's
   if (
@@ -44,10 +44,10 @@ self.addEventListener('fetch', (event) => {
 
   //Test for images
   /*if (/\.(jpg|jpeg|png|gif|webp)$/.test(requestURL.pathname)) {
-      log('SW: skip image ' + event.request.url);
-      //For now we skip images but change this later to maybe some caching and/or an offline fallback
-      return;
-    }*/
+        log('SW: skip image ' + event.request.url);
+        //For now we skip images but change this later to maybe some caching and/or an offline fallback
+        return;
+      }*/
 
   // Clone the request for fetch and cache
   // A request is a stream and can be consumed only once.

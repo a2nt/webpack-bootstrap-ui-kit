@@ -11,9 +11,9 @@ export default ((W) => {
   const BODY = D.body;
 
   const API_STATIC = document.querySelector('meta[name="api_static_domain"]');
-  const API_STATIC_URL = API_STATIC
-    ? API_STATIC.getAttribute('content')
-    : `${window.location.protocol}//${window.location.host}`;
+  const API_STATIC_URL = API_STATIC ?
+    API_STATIC.getAttribute('content') :
+    `${window.location.protocol}//${window.location.host}`;
 
   console.log(`${NAME} [static url]: ${API_STATIC_URL}`);
 

@@ -43,9 +43,9 @@ export default ((W) => {
 
   SET_TOUCH_SCREEN(
     'ontouchstart' in W ||
-      navigator.MaxTouchPoints > 0 ||
-      navigator.msMaxTouchPoints > 0 ||
-      W.matchMedia('(hover: none)').matches,
+        navigator.MaxTouchPoints > 0 ||
+        navigator.msMaxTouchPoints > 0 ||
+        W.matchMedia('(hover: none)').matches,
     'init',
   );
 

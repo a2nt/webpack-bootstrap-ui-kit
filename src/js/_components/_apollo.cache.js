@@ -1,8 +1,13 @@
-import { InMemoryCache } from '@apollo/client';
+import {
+  InMemoryCache,
+} from '@apollo/client';
 
 //import { IonicStorageModule } from '@ionic/storage';
 //import { persistCache, IonicStorageWrapper } from 'apollo3-cache-persist';
-import { persistCacheSync, LocalStorageWrapper } from 'apollo3-cache-persist';
+import {
+  persistCacheSync,
+  LocalStorageWrapper,
+} from 'apollo3-cache-persist';
 
 const cache = new InMemoryCache();
 
@@ -16,4 +21,6 @@ persistCacheSync({
   //new IonicStorageWrapper(IonicStorageModule),
 });
 
-export { cache };
+export {
+  cache,
+};

@@ -1,11 +1,20 @@
 /*
  * page #MainContent area
  */
-import { Component } from 'react';
+import {
+    Component
+} from 'react';
 
-import { useQuery, gql } from '@apollo/client';
-import { client } from './_apollo';
-import { cache } from './_apollo.cache';
+import {
+    useQuery,
+    gql
+} from '@apollo/client';
+import {
+    client
+} from './_apollo';
+import {
+    cache
+} from './_apollo.cache';
 
 const D = document;
 const BODY = document.body;
@@ -58,26 +67,28 @@ class Page extends Component {
 
         return new Promise((resolve, reject) => {
             const query = gql(`query Pages {
-			  readPages(Link: "${link}") {
-			    edges {
-			      node {
-			        __typename
-			        _id
-			        ID
-			        Title
-			        ClassName
-			        CSSClass
-			        Summary
-			        Link
-			        URLSegment
-			        HTML
-			      }
-			    }
-			  }
-			}`);
+              readPages(Link: "${link}") {
+                edges {
+                  node {
+                    __typename
+                    _id
+                    ID
+                    Title
+                    ClassName
+                    CSSClass
+                    Summary
+                    Link
+                    URLSegment
+                    HTML
+                  }
+                }
+              }
+            }`);
 
             if (!ui.isOnline()) {
-                const data = client.readQuery({ query });
+                const data = client.readQuery({
+                    query
+                });
 
                 if (data && ui.processResponse(data)) {
                     console.log(`${ui.name}: Offline cached response`);
@@ -94,7 +105,9 @@ class Page extends Component {
                         }),
                     );
 
-                    reject({ status: 523 });
+                    reject({
+                        status: 523
+                    });
                 }
             } else {
                 if (!ui.state.loading) {
@@ -109,18 +122,26 @@ class Page extends Component {
                     .then((resp) => {
                         // write to cache
                         const data = resp.data;
-                        client.writeQuery({ query, data: data });
+                        client.writeQuery({
+                            query,
+                            data: data
+                        });
 
                         if (ui.processResponse(data)) {
                             console.log(`${ui.name}: got the server response`);
                             resolve(data);
                         } else {
                             console.log(`${ui.name}: not found`);
-                            reject({ status: 404 });
+                            reject({
+                                status: 404
+                            });
                         }
                     })
                     .catch((error) => {
-                        reject({ status: 500, error: error });
+                        reject({
+                            status: 500,
+                            error: error
+                        });
                     });
             }
         });
@@ -167,7 +188,9 @@ class Page extends Component {
             return doc.documentElement.textContent;
         };
 
-        return { __html: decodeHtmlEntity(html) };
+        return {
+            __html: decodeHtmlEntity(html)
+        };
     };
 
     render() {
@@ -200,9 +223,9 @@ class Page extends Component {
 
         return (
             <div
-				className={className}
-				dangerouslySetInnerHTML={ui.getHtml(html)}
-			></div>
+                className={className}
+                dangerouslySetInnerHTML={ui.getHtml(html)}
+            ></div>
         );
     }
 }

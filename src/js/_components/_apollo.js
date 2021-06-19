@@ -1,6 +1,8 @@
 import Events from '../_events';
 
-import { cache } from './_apollo.cache';
+import {
+  cache,
+} from './_apollo.cache';
 import {
   from,
   ApolloClient,
@@ -9,7 +11,9 @@ import {
   concat,
 } from '@apollo/client';
 
-import { onError } from '@apollo/client/link/error';
+import {
+  onError,
+} from '@apollo/client/link/error';
 const NAME = '_appolo';
 
 const API_META = document.querySelector('meta[name="api_url"]');
@@ -33,10 +37,18 @@ console.info(`%cAPI: ${API_URL}`, 'color:green;font-size:10px');
 const link = from([
   authMiddleware,
   new ApolloLink((operation, forward) => {
-    operation.setContext({ start: new Date() });
+    operation.setContext({
+      start: new Date(),
+    });
     return forward(operation);
   }),
-  onError(({ operation, response, graphQLErrors, networkError, forward }) => {
+  onError(({
+    operation,
+    response,
+    graphQLErrors,
+    networkError,
+    forward,
+  }) => {
     if (operation.operationName === 'IgnoreErrorsQuery') {
       console.error(`${NAME}: IgnoreErrorsQuery`);
       response.errors = null;
@@ -44,7 +56,11 @@ const link = from([
     }
 
     if (graphQLErrors) {
-      graphQLErrors.forEach(({ message, locations, path }) =>
+      graphQLErrors.forEach(({
+        message,
+        locations,
+        path,
+      }) =>
         console.error(
           `${NAME}: [GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
         ),
@@ -53,17 +69,17 @@ const link = from([
 
     if (networkError) {
       /*let msg = '';
-            switch (networkError.statusCode) {
-              case 404:
-                msg = 'Not Found.';
-                break;
-              case 500:
-                msg = 'Server issue, please try again latter.';
-                break;
-              default:
-                msg = 'Something went wrong.';
-                break;
-            }*/
+                  switch (networkError.statusCode) {
+                    case 404:
+                      msg = 'Not Found.';
+                      break;
+                    case 500:
+                      msg = 'Server issue, please try again latter.';
+                      break;
+                    default:
+                      msg = 'Something went wrong.';
+                      break;
+                  }*/
       console.error(`${NAME}: [Network error] ${networkError.statusCode}`);
     }
 
@@ -101,4 +117,6 @@ const client = new ApolloClient({
   link,
 });
 
-export { client };
+export {
+  client,
+};

@@ -51,7 +51,9 @@ const MainUI = ((W) => {
 
       // store landing page state
       W.history.replaceState(
-        { landing: W.location.href },
+        {
+          landing: W.location.href,
+        },
         D.title,
         W.location.href,
       );

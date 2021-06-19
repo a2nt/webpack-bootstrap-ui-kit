@@ -4,8 +4,12 @@ import Events from '../_events';
 import Consts from '../_consts';
 import Page from './_page.jsx';
 
-import { getParents } from './_main.funcs';
-import { Collapse } from 'bootstrap';
+import {
+  getParents,
+} from './_main.funcs';
+import {
+  Collapse,
+} from 'bootstrap';
 import SpinnerUI from './_main.loading-spinner';
 
 const MainUILinks = ((W) => {
@@ -127,10 +131,10 @@ const MainUILinks = ((W) => {
 
           // hide parent dropdown
           /*const dropdowns = getParents(el, '.dropdown-menu');
-                  if (dropdowns.length) {
-                    const DropdownInst = Dropdown.getInstance(dropdowns[0]);
-                    DropdownInst.hide();
-                  }*/
+                    if (dropdowns.length) {
+                      const DropdownInst = Dropdown.getInstance(dropdowns[0]);
+                      DropdownInst.hide();
+                    }*/
 
           if (!ui.GraphPage) {
             ui.GraphPage = ReactDOM.render(
@@ -174,18 +178,18 @@ const MainUILinks = ((W) => {
               console.log(e);
 
               /*BODY.classList.remove('ajax-loading');
-                    el.classList.remove('loading');*/
+                          el.classList.remove('loading');*/
               el.classList.add('error', `response-${e.status}`);
               /*switch (e.status) {
-                        case 500:
-                            break;
-                        case 404:
-                            el.classList.add('not-found');
-                            break;
-                        case 523:
-                            el.classList.add('unreachable');
-                            break;
-                    }*/
+                              case 500:
+                                  break;
+                              case 404:
+                                  el.classList.add('not-found');
+                                  break;
+                              case 523:
+                                  el.classList.add('unreachable');
+                                  break;
+                          }*/
 
               //SpinnerUI.hide();
 
@@ -210,12 +214,12 @@ const MainUILinks = ((W) => {
 
   // fallback
   /*W.addEventListener(`${Events.APOLLO_ERROR}`, (e) => {
-        console.error(`${NAME}: [APOLLO_ERROR] loading failure, reloading the page`);
-        //W.dispatchEvent(new Event(Events.OFFLINE));
-        if (D.loading_apollo_link) {
-            W.location.href = D.loading_apollo_link;
-        }
-    });*/
+          console.error(`${NAME}: [APOLLO_ERROR] loading failure, reloading the page`);
+          //W.dispatchEvent(new Event(Events.OFFLINE));
+          if (D.loading_apollo_link) {
+              W.location.href = D.loading_apollo_link;
+          }
+      });*/
 })(window);
 
 export default MainUILinks;
