@@ -70,31 +70,6 @@
       898
     ]
   },
-  "mini-css-extract-plugin /mnt/data/srv/dist/repositories/webpack-bootstrap-ui-kit/node_modules/.pnpm/css-loader@5.2.6_webpack@5.39.1/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/.pnpm/resolve-url-loader@4.0.0/node_modules/resolve-url-loader/index.js!./node_modules/.pnpm/sass-loader@12.1.0_node-sass@6.0.0+webpack@5.39.1/node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[3]!./src/scss/app.scss": [
-    {
-      "chunks": {
-        "byName": {
-          "child": 396
-        },
-        "bySource": {
-          "0 child": 396
-        },
-        "usedIds": [
-          396
-        ]
-      },
-      "modules": {
-        "byIdentifier": {
-          "./node_modules/.pnpm/babel-loader@8.2.2_45ce778302d7701309b6da7f1a1707f7/node_modules/babel-loader/lib/index.js??ruleSet[1].rules[0].use!./node_modules/.pnpm/css-loader@5.2.6_webpack@5.39.1/node_modules/css-loader/dist/runtime/api.js": 376,
-          "./node_modules/.pnpm/css-loader@5.2.6_webpack@5.39.1/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/.pnpm/resolve-url-loader@4.0.0/node_modules/resolve-url-loader/index.js!./node_modules/.pnpm/sass-loader@12.1.0_node-sass@6.0.0+webpack@5.39.1/node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[3]!./src/scss/app.scss": 345
-        },
-        "usedIds": [
-          345,
-          376
-        ]
-      }
-    }
-  ],
   "modules": {
     "byIdentifier": {
       "./node_modules/.pnpm/babel-loader@8.2.2_45ce778302d7701309b6da7f1a1707f7/node_modules/babel-loader/lib/index.js??ruleSet[1].rules[0].use!./node_modules/.pnpm/@apollo+client@3.3.20_graphql@15.5.0+react@17.0.2/node_modules/@apollo/client/cache/inmemory/types.js": 4570,
