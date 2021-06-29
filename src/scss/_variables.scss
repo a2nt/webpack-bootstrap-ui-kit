@@ -86,14 +86,14 @@ $body-gutter-reduced-d-y: $body-gutter-y/4 !default;
 $form-spacer-x: $spacer !default;
 $form-spacer-y: $spacer !default;
 
-$element-spacer-x: var(--body-gutter-x) !default;
-$element-spacer-y: var(--body-gutter-y) !default;
+$element-spacer-x: var(--bs-gutter-x) !default;
+$element-spacer-y: var(--bs-gutter-y) !default;
 
-$element-reduced-spacer-x: var(--body-gutter-reduced-x) !default;
-$element-reduced-spacer-y: var(--body-gutter-reduced-y) !default;
+$element-reduced-spacer-x: var(--bs-gutter-x)/2 !default;
+$element-reduced-spacer-y: var(--bs-gutter-y)/2 !default;
 
-$element-reduced-d-spacer-x: var(--body-gutter-reduced-d-x) !default;
-$element-reduced-d-spacer-y: var(--body-gutter-reduced-d-y) !default;
+$element-reduced-d-spacer-x: var(--bs-gutter-x)/4 !default;
+$element-reduced-d-spacer-y: var(--bs-gutter-y)/4 !default;
 
 /*
 $font-size-base: 1rem !default;
