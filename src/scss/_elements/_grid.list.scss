@@ -1,7 +1,7 @@
 // remove paddings for elemental list cuz inner elements will have paddings
 .dnadesign__elementallist__model__elementlist {
-    padding: 0;
     margin: 0;
+    padding-bottom: 0;
 
     .element__content {
         --bs-gutter-x: 2rem;
