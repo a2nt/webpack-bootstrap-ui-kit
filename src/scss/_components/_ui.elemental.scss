@@ -64,11 +64,14 @@
 
 // remove paddings for elemental list cuz inner elements will have paddings
 .dnadesign__elementallist__model__elementlist {
+    padding: 0;
+    margin: 0;
+
     .element {
         padding-top: $element-reduced-spacer-y;
         padding-bottom: $element-reduced-spacer-y;
-        margin-top: $element-reduced-spacer-y;
-        margin-bottom: $element-reduced-spacer-y;
+        margin-top: $element-reduced-d-spacer-y;
+        margin-bottom: $element-reduced-d-spacer-y;
     }
 }
 

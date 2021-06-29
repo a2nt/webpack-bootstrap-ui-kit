@@ -21,6 +21,8 @@ body {
     --body-double-gutter-y: #{inspect($body-double-gutter-y)};
     --body-gutter-reduced-x: #{inspect($body-gutter-reduced-x)};
     --body-gutter-reduced-y: #{inspect($body-gutter-reduced-y)};
+    --body-gutter-reduced-d-x: #{inspect($body-gutter-reduced-d-x)};
+    --body-gutter-reduced-d-y: #{inspect($body-gutter-reduced-d-y)};
 
     .wrapper {
         flex: 1 0 auto;

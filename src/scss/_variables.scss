@@ -46,6 +46,7 @@ $font-family-base: 'Roboto',
 $font-family-sans-serif !default;
 
 $spacer: 1rem !default;
+$headings-margin-bottom: $spacer !default;
 
 $enable-rounded: false !default;
 $enable-shadows: true !default;
@@ -79,6 +80,9 @@ $body-double-gutter-y: $body-gutter-y*2 !default;
 $body-gutter-reduced-x: $body-gutter-x/2 !default;
 $body-gutter-reduced-y: $body-gutter-y/2 !default;
 
+$body-gutter-reduced-d-x: $body-gutter-x/4 !default;
+$body-gutter-reduced-d-y: $body-gutter-y/4 !default;
+
 $form-spacer-x: $spacer !default;
 $form-spacer-y: $spacer !default;
 
@@ -87,6 +91,9 @@ $element-spacer-y: var(--body-gutter-y) !default;
 
 $element-reduced-spacer-x: var(--body-gutter-reduced-x) !default;
 $element-reduced-spacer-y: var(--body-gutter-reduced-y) !default;
+
+$element-reduced-d-spacer-x: var(--body-gutter-reduced-d-x) !default;
+$element-reduced-d-spacer-y: var(--body-gutter-reduced-d-y) !default;
 
 /*
 $font-size-base: 1rem !default;
