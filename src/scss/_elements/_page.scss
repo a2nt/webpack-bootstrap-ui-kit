@@ -23,6 +23,7 @@
 }
 
 .page-header-element {
+    --bs-gutter-y: .75rem;
     display: none;
     //margin-bottom: calc(-1 * #{inspect($element-spacer-y)});
 
