@@ -11,10 +11,10 @@ import {
 } from '@apollo/client';
 import {
     client
-} from './_apollo';
+} from '../_apollo';
 import {
     cache
-} from './_apollo.cache';
+} from '../_apollo.cache';
 
 const D = document;
 const BODY = document.body;

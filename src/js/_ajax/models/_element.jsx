@@ -4,11 +4,11 @@
 import {
     Component
 } from 'react';
-import Events from '../_events';
+import Events from '../../_events';
 
 import {
     client
-} from './_apollo';
+} from '../_apollo';
 import {
     gql
 } from '@apollo/client';

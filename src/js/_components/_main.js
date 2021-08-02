@@ -1,13 +1,10 @@
 import Events from '../_events';
 import Consts from '../_consts';
-import Page from './_page.jsx';
 
 import './_main.visibility';
 import './_main.touch';
-import './_main.online';
 import './_main.css-screen-size';
-import './_main.links';
-import './_main.lazy-images';
+
 import SpinnerUI from './_main.loading-spinner';
 
 const MainUI = ((W) => {

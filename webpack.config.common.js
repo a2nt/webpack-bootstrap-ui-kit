@@ -14,7 +14,7 @@ const webpack = require('webpack');
  * Load webpack configuration from webpack.yml
  */
 
-const yml = yaml.safeLoad(
+const yml = yaml.load(
     fs.readFileSync(path.join(__dirname, YML_PATH), 'utf8'),
 );
 const conf = yml[CONF_VAR]
@@ -152,7 +152,9 @@ module.exports = {
                 react: require.resolve('react'),
                 'react-dom': require.resolve('react-dom'),
             },
-            fallback: { path: false },
+            fallback: {
+                path: false
+            },
         },
         experiments: {
             topLevelAwait: true,
