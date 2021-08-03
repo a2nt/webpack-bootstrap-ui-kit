@@ -11,7 +11,7 @@ import MainUI from './_components/_main';
 /*
  * Extra functionality
  */
-import '@a2nt/meta-lightbox-js/src/js/app';
+import '@a2nt/meta-lightbox-js/src/js/test-build';
 import './_ui/_ui.carousel';
 //import './_ui/_ui.instagram.feed';
 
@@ -115,17 +115,17 @@ if (process.env.NODE_ENV === 'development') {
 
   // caching service worker (set injectClient: false at webpack.config.serve.js)
   /*if ('serviceWorker' in navigator) {
-                  const baseHref = (document.getElementsByTagName('base')[0] || {}).href;
-                  const version = (document.querySelector('meta[name="swversion"]') || {})
-                    .content;
-                  if (baseHref) {
-                    navigator.serviceWorker
-                      .register(`${baseHref}app_sw.js?v=${version}`)
-                      .then(() => {
-                        console.log('SW: Registered');
-                      });
-                  }
-                }*/
+                    const baseHref = (document.getElementsByTagName('base')[0] || {}).href;
+                    const version = (document.querySelector('meta[name="swversion"]') || {})
+                      .content;
+                    if (baseHref) {
+                      navigator.serviceWorker
+                        .register(`${baseHref}app_sw.js?v=${version}`)
+                        .then(() => {
+                          console.log('SW: Registered');
+                        });
+                    }
+                  }*/
 }
 
 function importAll(r) {
