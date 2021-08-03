@@ -9,7 +9,9 @@ const fs = require('fs');
 
 //const autoprefixer = require('autoprefixer');
 const webpack = require('webpack');
-const { merge } = require('webpack-merge');
+const {
+    merge
+} = require('webpack-merge');
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -19,7 +21,7 @@ const PORT = process.env.PORT || conf.PORT;
 
 const UIInfo = require('./package.json');
 const UIVERSION = JSON.stringify(UIInfo.version);
-const UIMetaInfo = require('./node_modules/@a2nt/meta-lightbox-react/package.json');
+const UIMetaInfo = require('./node_modules/@a2nt/meta-lightbox-js/package.json');
 
 const NODE_ENV = 'development'; //conf.NODE_ENV || process.env.NODE_ENV;
 const COMPRESS = NODE_ENV === 'production' ? true : false;
@@ -92,71 +94,69 @@ const config = merge(common.webpack, {
 
     module: {
         rules: [{
-                test: /\.jsx?$/,
-                //exclude: /node_modules/,
-                use: {
-                    loader: '@sucrase/webpack-loader', //'babel-loader',
-                    options: {
-                        transforms: ['jsx']
-                        /*presets: [
-                            '@babel/preset-env',
-                            '@babel/react',
-                            {
-                                plugins: [
-                                    '@babel/plugin-proposal-class-properties',
-                                    '@babel/plugin-syntax-top-level-await',
-                                ],
-                            },
-                        ], //Preset used for env setup
-                        plugins: [
-                            ['@babel/transform-react-jsx'],
-                            ['@babel/plugin-syntax-top-level-await'],
-                        ],
-                        cacheDirectory: true,
-                        cacheCompression: true,*/
-                    },
+            test: /\.jsx?$/,
+            //exclude: /node_modules/,
+            use: {
+                loader: '@sucrase/webpack-loader', //'babel-loader',
+                options: {
+                    transforms: ['jsx']
+                    /*presets: [
+                        '@babel/preset-env',
+                        '@babel/react',
+                        {
+                            plugins: [
+                                '@babel/plugin-proposal-class-properties',
+                                '@babel/plugin-syntax-top-level-await',
+                            ],
+                        },
+                    ], //Preset used for env setup
+                    plugins: [
+                        ['@babel/transform-react-jsx'],
+                        ['@babel/plugin-syntax-top-level-await'],
+                    ],
+                    cacheDirectory: true,
+                    cacheCompression: true,*/
+                },
+            },
+        },
+        {
+            test: /\.s?css$/,
+            use: [{
+                loader: MiniCssExtractPlugin.loader,
+            },
+            {
+                loader: 'css-loader',
+                options: {
+                    sourceMap: !COMPRESS,
                 },
             },
             {
-                test: /\.s?css$/,
-                use: [{
-                        loader: MiniCssExtractPlugin.loader,
-                    },
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            sourceMap: !COMPRESS,
-                        },
-                    },
-                    {
-                        loader: 'resolve-url-loader',
-                    },
-                    {
-                        loader: 'sass-loader',
-                        options: {
-                            sourceMap: false,
-                        },
-                    },
-                ],
+                loader: 'resolve-url-loader',
             },
             {
-                test: /fontawesome([^.]+).(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
-                use: [{
-                    loader: 'url-loader',
-                }, ],
-            },
-            {
-                test: /\.(gif|png|jpg|jpeg|ttf|otf|eot|svg|webp|woff(2)?)$/,
-                use: [{
-                    loader: 'file-loader',
-                    options: {
-                        name(file) {
-                            return 'public/[path][name].[ext]';
-                        },
+                loader: 'sass-loader',
+                options: {
+                    sourceMap: false,
+                },
+            }, ],
+        },
+        {
+            test: /fontawesome([^.]+).(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
+            use: [{
+                loader: 'url-loader',
+            }, ],
+        },
+        {
+            test: /\.(gif|png|jpg|jpeg|ttf|otf|eot|svg|webp|woff(2)?)$/,
+            use: [{
+                loader: 'file-loader',
+                options: {
+                    name(file) {
+                        return 'public/[path][name].[ext]';
                     },
-                }, ],
-            },
-        ],
+                },
+            }, ],
+        }, ],
     },
     plugins: plugins,
 
