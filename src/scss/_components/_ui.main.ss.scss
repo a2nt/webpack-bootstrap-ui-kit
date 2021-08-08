@@ -1,12 +1,12 @@
 .message {
-    @extend .alert;
+    @extend .alert !optional;
 
     &.warning {
-        @extend .alert-warning;
+        @extend .alert-warning !optional;
     }
 
     &.error {
-        @extend .alert-danger;
+        @extend .alert-danger !optional;
     }
 }
 
