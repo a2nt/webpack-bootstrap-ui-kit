@@ -142,20 +142,14 @@ const config = merge(common.webpack, {
         },
         {
             test: /fontawesome([^.]+).(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
-            use: [{
-                loader: 'url-loader',
-            }, ],
+            type: "asset/resource",
         },
         {
             test: /\.(gif|png|jpg|jpeg|ttf|otf|eot|svg|webp|woff(2)?)$/,
-            use: [{
-                loader: 'file-loader',
-                options: {
-                    name(file) {
-                        return 'public/[path][name].[ext]';
-                    },
-                },
-            }, ],
+            type: "asset/resource",
+        }, {
+            test: /\.(png|webp|jpg|jpeg|gif|svg)$/,
+            type: "asset/resource",
         }, ],
     },
     plugins: plugins,

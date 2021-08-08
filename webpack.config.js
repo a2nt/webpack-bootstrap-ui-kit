@@ -330,28 +330,15 @@ const cfg = merge(common.webpack, {
         },
         {
             test: /fontawesome([^.]+).(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
-            use: [{
-                loader: 'file-loader',
-                options: {
-                    name: '[name].[ext]',
-                    outputPath: 'fonts/',
-                    publicPath: '../fonts/',
-                },
-            }, ],
+            type: "asset/resource",
         },
         {
             test: /\.(ttf|otf|eot|woff(2)?)$/,
-            use: [{
-                loader: 'file-loader',
-                options: {
-                    name: '[name].[ext]',
-                    outputPath: 'fonts/',
-                    publicPath: '../fonts/',
-                },
-            }, ],
+            type: "asset/resource",
         },
         {
             test: /\.(png|webp|jpg|jpeg|gif|svg)$/,
+            type: "javascript/auto",
             use: [{
                 loader: 'img-optimize-loader',
                 options: {
