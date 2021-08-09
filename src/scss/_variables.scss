@@ -1,3 +1,5 @@
+@use 'sass:map';
+
 @import '~bootstrap/scss/functions';
 @import '~bootstrap/scss/variables';
 @import '_mixings';
@@ -77,23 +79,23 @@ $body-gutter-y: $spacer !default;
 $body-double-gutter-x: $body-gutter-x*2 !default;
 $body-double-gutter-y: $body-gutter-y*2 !default;
 
-$body-gutter-reduced-x: $body-gutter-x/2 !default;
-$body-gutter-reduced-y: $body-gutter-y/2 !default;
+$body-gutter-reduced-x: $body-gutter-x*0.5 !default;
+$body-gutter-reduced-y: $body-gutter-y*0.5 !default;
 
-$body-gutter-reduced-d-x: $body-gutter-x/4 !default;
-$body-gutter-reduced-d-y: $body-gutter-y/4 !default;
+$body-gutter-reduced-d-x: $body-gutter-x*0.25 !default;
+$body-gutter-reduced-d-y: $body-gutter-y*0.25 !default;
 
 $form-spacer-x: $spacer !default;
 $form-spacer-y: $spacer !default;
 
-$element-spacer-x: var(--bs-gutter-x) !default;
-$element-spacer-y: var(--bs-gutter-y) !default;
+$element-spacer-x: map.get($spacers, 3) !default;
+$element-spacer-y: map.get($spacers, 3) !default;
 
-$element-reduced-spacer-x: var(--bs-gutter-x)/2 !default;
-$element-reduced-spacer-y: var(--bs-gutter-y)/2 !default;
+$element-reduced-spacer-x: map.get($spacers, 2) !default;
+$element-reduced-spacer-y: map.get($spacers, 2) !default;
 
-$element-reduced-d-spacer-x: var(--bs-gutter-x)/4 !default;
-$element-reduced-d-spacer-y: var(--bs-gutter-y)/4 !default;
+$element-reduced-d-spacer-x: map.get($spacers, 1) !default;
+$element-reduced-d-spacer-y: map.get($spacers, 1) !default;
 
 /*
 $font-size-base: 1rem !default;

@@ -1,3 +1,5 @@
+@use "sass:math";
+
 @import '~bootstrap/scss/mixins';
 
 @mixin hover-disabled() {
@@ -19,7 +21,7 @@
 }
 
 @mixin responsive-ratio($x, $y, $pseudo: false) {
-    $padding: unquote(($y / $x) * 100 + '%');
+    $padding: unquote(math.div($y, $x) * 100 + '%');
 
     @if $pseudo {
         &:before {
