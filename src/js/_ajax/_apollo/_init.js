@@ -1,8 +1,8 @@
-import Events from '../_events';
+import Events from '../../_events';
 
 import {
   cache,
-} from './_apollo.cache';
+} from './_cache';
 import {
   from,
   ApolloClient,
@@ -69,17 +69,17 @@ const link = from([
 
     if (networkError) {
       /*let msg = '';
-                  switch (networkError.statusCode) {
-                    case 404:
-                      msg = 'Not Found.';
-                      break;
-                    case 500:
-                      msg = 'Server issue, please try again latter.';
-                      break;
-                    default:
-                      msg = 'Something went wrong.';
-                      break;
-                  }*/
+                        switch (networkError.statusCode) {
+                          case 404:
+                            msg = 'Not Found.';
+                            break;
+                          case 500:
+                            msg = 'Server issue, please try again latter.';
+                            break;
+                          default:
+                            msg = 'Something went wrong.';
+                            break;
+                        }*/
       console.error(`${NAME}: [Network error] ${networkError.statusCode}`);
     }
 

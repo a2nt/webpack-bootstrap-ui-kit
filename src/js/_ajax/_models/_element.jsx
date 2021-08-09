@@ -8,7 +8,7 @@ import Events from '../../_events';
 
 import {
     client
-} from '../_apollo';
+} from '../_apollo/_init';
 import {
     gql
 } from '@apollo/client';
