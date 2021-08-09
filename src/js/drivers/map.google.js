@@ -3,7 +3,7 @@
 import MarkerClusterer from '@googlemaps/markerclustererplus';
 
 import Events from '../_events';
-import MarkerUI from './_map.google.marker';
+import MarkerUI from './map.google.marker';
 
 const GoogleMapsDriver = ((window) => {
   class GoogleMapsDriver {

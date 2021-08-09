@@ -1,6 +1,6 @@
 'use strict';
 
-import $ from 'jquery';
+//import $ from 'jquery';
 import mapBoxGL from 'mapbox-gl';
 
 import Events from '../../_events';
@@ -20,9 +20,9 @@ const MapBoxDriver = (($) => {
         container: $el.find('.mapAPI-map')[0],
         center: config['center'] ? config['center'] : [0, 0],
         //hash: true,
-        style: config['style']
-          ? config['style']
-          : 'mapbox://styles/mapbox/streets-v9',
+        style: config['style'] ?
+          config['style'] :
+          'mapbox://styles/mapbox/streets-v9',
         localIdeographFontFamily: config['font-family'],
         zoom: config['mapZoom'] ? config['mapZoom'] : 10,
         attributionControl: false,
@@ -97,43 +97,43 @@ const MapBoxDriver = (($) => {
       const ui = this;
       // Insert the layer beneath any symbol layer.
       /*if (config['3d']) {
-        const layers = Map.getStyle().layers;
-        let labelLayerId;
-        for (let i = 0; i < layers.length; i++) {
-          if (layers[i].type === 'symbol' && layers[i].layout['text-field']) {
-            labelLayerId = layers[i].id;
-            break;
-          }
-        }
+              const layers = Map.getStyle().layers;
+              let labelLayerId;
+              for (let i = 0; i < layers.length; i++) {
+                if (layers[i].type === 'symbol' && layers[i].layout['text-field']) {
+                  labelLayerId = layers[i].id;
+                  break;
+                }
+              }
 
-        Map.addLayer({
-          'id': '3d-buildings',
-          'source': 'composite',
-          'source-layer': 'building',
-          'filter': ['==', 'extrude', 'true'],
-          'type': 'fill-extrusion',flyToBounds
-          'minzoom': 15,
-          'paint': {
-            'fill-extrusion-color': '#aaa',
+              Map.addLayer({
+                'id': '3d-buildings',
+                'source': 'composite',
+                'source-layer': 'building',
+                'filter': ['==', 'extrude', 'true'],
+                'type': 'fill-extrusion',flyToBounds
+                'minzoom': 15,
+                'paint': {
+                  'fill-extrusion-color': '#aaa',
 
-            // use an 'interpolate' expression to add a smooth transition effect to the
-            // buildings as the user zooms in
-            'fill-extrusion-height': [
-              "interpolate", ["linear"],
-              ["zoom"],
-              15, 0,
-              15.05, ["get", "height"],
-            ],
-            'fill-extrusion-base': [
-              "interpolate", ["linear"],
-              ["zoom"],
-              15, 0,
-              15.05, ["get", "min_height"],
-            ],
-            'fill-extrusion-opacity': .6,
-          },
-        }, labelLayerId);
-      }*/
+                  // use an 'interpolate' expression to add a smooth transition effect to the
+                  // buildings as the user zooms in
+                  'fill-extrusion-height': [
+                    "interpolate", ["linear"],
+                    ["zoom"],
+                    15, 0,
+                    15.05, ["get", "height"],
+                  ],
+                  'fill-extrusion-base': [
+                    "interpolate", ["linear"],
+                    ["zoom"],
+                    15, 0,
+                    15.05, ["get", "min_height"],
+                  ],
+                  'fill-extrusion-opacity': .6,
+                },
+              }, labelLayerId);
+            }*/
 
       const firstMarker = config['geojson'].features[0].geometry.coordinates;
       //Map.setCenter(firstMarker);
