@@ -82,7 +82,8 @@
     "redux": "^4.1.1",
     "rxjs": "^7.3.0",
     "select2": "^4.0.13",
-    "setimmediate": "^1.0.5"
+    "setimmediate": "^1.0.5",
+    "youtube-embed": "^1.0.0"
   },
   "devDependencies": {
     "@a2nt/image-sprite-webpack-plugin": "^0.2.5",
