@@ -315,7 +315,7 @@ const cfg = merge(common.webpack, {
             {
                 loader: 'css-loader',
                 options: {
-                    sourceMap: !COMPRESS,
+                    sourceMap: true,
                 },
             },
             {
@@ -324,7 +324,7 @@ const cfg = merge(common.webpack, {
             {
                 loader: 'sass-loader',
                 options: {
-                    sourceMap: !COMPRESS,
+                    sourceMap: true,
                 },
             }, ],
         },
