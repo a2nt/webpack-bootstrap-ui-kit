@@ -7,18 +7,17 @@
 @import '_variables';
 
 @import '~@a2nt/meta-lightbox-js/src/scss/app';
-@import '_components/_ui.bootstrap';
+@import '_libs/_bootstrap';
+@import '_libs/_silverstripe';
 
 // By default we prefer font awesome CDN
-//@import "_components/_ui.fontawesome";
+//@import "_libs/_fontawesome";
 
-//@import '_components/_ui.lightbox';
-//@import '_components/_ui.flyout';
+//@import '_ui/_lightbox';
+//@import '_ui/_flyout';
 
-@import '_components/_ui.main';
-//@import '_components/_ui.form.basics';
-@import '_elements';
 
 // Your custom styling
 @import '_typography';
 @import '_layout';
+@import '_elements';

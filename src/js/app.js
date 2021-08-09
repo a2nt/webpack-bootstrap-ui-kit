@@ -6,21 +6,21 @@
 import '../scss/app.scss';
 
 import Events from './_events';
-import MainUI from './_components/_main';
+import MainUI from './_main/_index';
 
 /*
  * Extra functionality
  */
-import '@a2nt/meta-lightbox-js/src/js/test-build';
-import './_ui/_ui.carousel';
+import '@a2nt/meta-lightbox-js/src/js/app';
+import './_ui/_carousel';
 //import './_ui/_ui.instagram.feed';
 
 /*
  * AJAX functionality
  */
-import './_ajax/_main.links';
-import './_ajax/_main.online';
-import './_ajax/_main.lazy-images';
+//import './_ajax/_links';
+import './_ajax/_online';
+import './_ajax/_lazy-images';
 
 /*
  * Site specific modules
@@ -97,36 +97,6 @@ import 'bootstrap/js/dist/tab';*/
 
 // Google Analytics
 //import './_components/drivers/_google.track.external.links';
-
-if (process.env.NODE_ENV === 'development') {
-  // mocking service worker
-  const regeneratorRuntime = require('regenerator-runtime');
-  const {
-    worker,
-  } = require('../mocks/browser');
-  worker.start({
-    serviceWorker: {
-      url: '_graphql/mockServiceWorker.js',
-      options: {
-        scope: '/',
-      },
-    },
-  });
-
-  // caching service worker (set injectClient: false at webpack.config.serve.js)
-  /*if ('serviceWorker' in navigator) {
-                    const baseHref = (document.getElementsByTagName('base')[0] || {}).href;
-                    const version = (document.querySelector('meta[name="swversion"]') || {})
-                      .content;
-                    if (baseHref) {
-                      navigator.serviceWorker
-                        .register(`${baseHref}app_sw.js?v=${version}`)
-                        .then(() => {
-                          console.log('SW: Registered');
-                        });
-                    }
-                  }*/
-}
 
 function importAll(r) {
   return r.keys().map(r);

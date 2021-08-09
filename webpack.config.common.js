@@ -57,10 +57,10 @@ const _addAppFiles = (theme) => {
         themeName = 'app';
     }
 
-    if (fs.existsSync(path.join(dirPath, conf.SRC, 'js', 'app.js'))) {
-        includes[`${themeName}`] = path.join(dirPath, conf.SRC, 'js', 'app.js');
+    if (fs.existsSync(path.join(dirPath, conf.SRC, 'js', 'test-build.js'))) {
+        includes[`${themeName}`] = path.join(dirPath, conf.SRC, 'js', 'test-build.js');
     } else if (
-        fs.existsSync(path.join(dirPath, conf.SRC, 'scss', 'app.scss'))
+        fs.existsSync(path.join(dirPath, conf.SRC, 'scss', 'test-build.scss'))
     ) {
         includes[`${themeName}`] = path.join(
             dirPath,
