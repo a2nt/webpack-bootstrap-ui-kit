@@ -1,6 +1,6 @@
 {
   "name": "@a2nt/ss-bootstrap-ui-webpack-boilerplate-react",
-  "version": "4.1.8",
+  "version": "4.1.9",
   "description": "This UI Kit allows you to build Bootstrap 5 webapp with some extra UI features. It's easy to extend and easy to convert HTML templates to CMS templates.",
   "author": "Tony Air <tony@twma.pro>",
   "license": "BSD-2-Clause",
@@ -49,10 +49,10 @@
     "ie>=11"
   ],
   "dependencies": {
-    "@a2nt/meta-lightbox-js": "^4.0.2",
+    "@a2nt/meta-lightbox-js": "^4.0.3",
     "@angular/common": "^12.2.0",
     "@angular/core": "^12.2.0",
-    "@apollo/client": "^3.4.6",
+    "@apollo/client": "^3.4.7",
     "@jsanahuja/instagramfeed": "github:jsanahuja/instagramfeed",
     "@popperjs/core": "^2.9.3",
     "aos": "^2.3.4",
@@ -79,6 +79,7 @@
     "react-dom": "^17.0.2",
     "react-easy-swipe": "^0.0.22",
     "react-tiny-oembed": "^1.1.0",
+    "redux": "^4.1.1",
     "rxjs": "^7.3.0",
     "select2": "^4.0.13",
     "setimmediate": "^1.0.5"
