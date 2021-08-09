@@ -7,8 +7,8 @@
 @import '_variables';
 
 @import '~@a2nt/meta-lightbox-js/src/scss/app';
-@import '_libs/_bootstrap';
-@import '_libs/_silverstripe';
+@import 'libs/bootstrap';
+@import 'libs/silverstripe';
 
 // By default we prefer font awesome CDN
 //@import "_libs/_fontawesome";
@@ -19,5 +19,5 @@
 
 // Your custom styling
 @import '_typography';
-@import '_layout';
-@import '_elements';
+@import 'layout';
+@import 'elements';

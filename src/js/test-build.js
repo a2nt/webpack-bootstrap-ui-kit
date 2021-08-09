@@ -4,18 +4,18 @@ import '../scss/test-build.scss';
 import '@a2nt/meta-lightbox-js/src/js/test-build';
 
 import Events from './_events';
-import MainUI from './_main';
+import MainUI from './main';
 
 /*
  * AJAX functionality
  */
-import './_ajax/_links';
-import './_ajax/_online';
-import './_ajax/_lazy-images';
+import './ajax/links';
+import './ajax/online';
+import './ajax/lazy-images';
 
-import './_layout';
+import './layout';
 
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODEENV === 'development') {
   // mocking service worker
   const regeneratorRuntime = require('regenerator-runtime');
   const {
@@ -23,7 +23,7 @@ if (process.env.NODE_ENV === 'development') {
   } = require('../mocks/browser');
   worker.start({
     serviceWorker: {
-      url: '_graphql/mockServiceWorker.js',
+      url: 'graphql/mockServiceWorker.js',
       options: {
         scope: '/',
       },
@@ -32,17 +32,17 @@ if (process.env.NODE_ENV === 'development') {
 
   // caching service worker (set injectClient: false at webpack.config.serve.js)
   /*if ('serviceWorker' in navigator) {
-                              const baseHref = (document.getElementsByTagName('base')[0] || {}).href;
-                              const version = (document.querySelector('meta[name="swversion"]') || {})
-                                .content;
-                              if (baseHref) {
-                                navigator.serviceWorker
-                                  .register(`${baseHref}app_sw.js?v=${version}`)
-                                  .then(() => {
-                                    console.log('SW: Registered');
-                                  });
-                              }
-                            }*/
+                                      const baseHref = (document.getElementsByTagName('base')[0] || {}).href;
+                                      const version = (document.querySelector('meta[name="swversion"]') || {})
+                                        .content;
+                                      if (baseHref) {
+                                        navigator.serviceWorker
+                                          .register(`${baseHref}appsw.js?v=${version}`)
+                                          .then(() => {
+                                            console.log('SW: Registered');
+                                          });
+                                      }
+                                    }*/
 }
 
 function importAll(r) {
