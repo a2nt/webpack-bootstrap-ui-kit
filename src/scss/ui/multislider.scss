@@ -1,55 +1,56 @@
-@import '../_variables';
 $grid-gutter-element-height: 2rem !default;
 
 .jsMultiSlider {
-	position: relative;
-	display: flex;
-	margin-bottom: $grid-gutter-element-height/2;
+    position: relative;
+    display: flex;
+    margin-bottom: $grid-gutter-element-height/2;
 
-	align-items: center;
-	justify-content: center;
-	min-width: 100%;
+    align-items: center;
+    justify-content: center;
+    min-width: 100%;
 
-	&-active {
-		margin-bottom: 0;
-	}
+    &-active {
+        margin-bottom: 0;
+    }
 
-	.slide {
-		position: relative;
-		padding: 0 0.5rem;
-	}
+    .slide {
+        position: relative;
+        padding: 0 0.5rem;
+    }
 }
 
 .jsMultiSlider-container {
-	position: relative;
-	margin-bottom: $grid-gutter-element-height/2;
+    position: relative;
+    margin-bottom: $grid-gutter-element-height/2;
 
-	.slider-actions {
-		font-size: 2rem;
-		.act {
-			position: absolute;
-			top: 0;
-			bottom: 0;
-			left: 0;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			text-decoration: none;
-			&-slider-prev {
-			}
-			&-slider-next {
-				left: auto;
-				right: 0;
-			}
-		}
-	}
+    .slider-actions {
+        font-size: 2rem;
+
+        .act {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+
+            &-slider-prev {}
+
+            &-slider-next {
+                left: auto;
+                right: 0;
+            }
+        }
+    }
 }
 
 .jsMultiSlider-slides-container {
-	overflow: hidden;
-	margin: 0 2rem;
+    overflow: hidden;
+    margin: 0 2rem;
 
-	> .slider-nav {
-		position: relative;
-	}
+    >.slider-nav {
+        position: relative;
+    }
 }
