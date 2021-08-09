@@ -2,6 +2,7 @@
  * Common Environment
  */
 
+const INDEX_NAME = 'test-build';
 const YML_PATH = './webpack.yml';
 const CONF_VAR = 'App\\Templates\\WebpackTemplateProvider';
 
@@ -57,16 +58,16 @@ const _addAppFiles = (theme) => {
         themeName = 'app';
     }
 
-    if (fs.existsSync(path.join(dirPath, conf.SRC, 'js', 'test-build.js'))) {
-        includes[`${themeName}`] = path.join(dirPath, conf.SRC, 'js', 'test-build.js');
+    if (fs.existsSync(path.join(dirPath, conf.SRC, 'js', INDEX_NAME + '.js'))) {
+        includes[`${themeName}`] = path.join(dirPath, conf.SRC, 'js', INDEX_NAME + '.js');
     } else if (
-        fs.existsSync(path.join(dirPath, conf.SRC, 'scss', 'test-build.scss'))
+        fs.existsSync(path.join(dirPath, conf.SRC, 'scss', INDEX_NAME + '.scss'))
     ) {
         includes[`${themeName}`] = path.join(
             dirPath,
             conf.SRC,
             'scss',
-            'app.scss',
+            INDEX_NAME + '.scss',
         );
     }
 
