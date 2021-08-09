@@ -2,7 +2,7 @@
 
 import Events from '../_events';
 
-import '../../scss/_ui/map.api.scss';
+import '../../scss/_ui/_map.api.scss';
 
 import CONSTS from 'js/_consts';
 
@@ -24,10 +24,10 @@ const MapAPI = ((window) => {
       ];
 
       /*config['style'] = config['style'] ?
-                jQuery.parseJSON(config['style']) :
-                null;
+                      jQuery.parseJSON(config['style']) :
+                      null;
 
-            config['font-family'] = $BODY.css('font-family');*/
+                  config['font-family'] = $BODY.css('font-family');*/
 
       if (!config['icon']) {
         config['icon'] = '<i class="fas fa-map-marker-alt"></i>';
