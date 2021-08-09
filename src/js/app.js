@@ -6,7 +6,7 @@
 import '../scss/app.scss';
 
 import Events from './_events';
-import MainUI from './_main/_index';
+import MainUI from './_main';
 
 /*
  * Extra functionality
@@ -97,14 +97,3 @@ import 'bootstrap/js/dist/tab';*/
 
 // Google Analytics
 //import './_components/drivers/_google.track.external.links';
-
-function importAll(r) {
-  return r.keys().map(r);
-}
-
-const images = importAll(
-  require.context('../img/', false, /\.(png|jpe?g|svg)$/),
-);
-const fontAwesome = importAll(
-  require.context('font-awesome', false, /\.(otf|eot|svg|ttf|woff|woff2)$/),
-);
