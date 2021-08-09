@@ -1,0 +1,43 @@
+/*
+ * Mobile/Desktop states
+ */
+
+// display dropdown on hover + focus
+@media (min-width: $full-body-min-width) {
+    .dropdown-hover {
+
+        &:hover,
+        &:focus {
+            .dropdown-menu {
+                display: block;
+            }
+        }
+    }
+}
+
+// custom toggler for mobile view
+.dropdown {
+    >.dropdown-toggle-sm {
+        @media (min-width: $full-body-min-width) {
+            display: none;
+        }
+    }
+
+    >.dropdown-toggle-fl {
+        display: none;
+
+        @media (min-width: $full-body-min-width) {
+            display: inherit;
+        }
+    }
+
+    @media not all and (hover: none) {
+        >.dropdown-toggle-touch {
+            display: inherit;
+        }
+
+        >.dropdown-toggle-notouch {
+            display: none;
+        }
+    }
+}

@@ -1,0 +1,30 @@
+.field {
+    flex-direction: row;
+
+    &__label {
+        padding-right: $form-spacer-x;
+        display: inline-flex;
+        align-items: center;
+
+        &+.field__content {
+            padding-left: $form-spacer-x;
+        }
+    }
+
+    .field__content {
+        flex: 1 1 auto;
+    }
+
+    &.CompositeField {
+        flex-direction: column;
+    }
+}
+
+.field.password {
+    .show-password {
+        position: absolute;
+        top: 0.5em;
+        right: 0.5em;
+        color: $input-color;
+    }
+}
