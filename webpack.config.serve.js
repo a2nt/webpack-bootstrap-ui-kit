@@ -19,41 +19,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const IP = process.env.IP || conf.HOSTNAME;
 const PORT = process.env.PORT || conf.PORT;
 
-const UIInfo = require('./package.json');
-const UIVERSION = JSON.stringify(UIInfo.version);
-const UIMetaInfo = require('./node_modules/@a2nt/meta-lightbox-js/package.json');
-
-const NODE_ENV = 'development'; //conf.NODE_ENV || process.env.NODE_ENV;
-const COMPRESS = NODE_ENV === 'production' ? true : false;
-
-console.log('NODE_ENV: ' + NODE_ENV);
-console.log('COMPRESS: ' + COMPRESS);
-console.log('WebP images: ' + conf['webp']);
-console.log('GRAPHQL_API_KEY: ' + conf['GRAPHQL_API_KEY']);
-console.log('HTTPS: ' + conf['HTTPS']);
-
-const plugins = [
-    new webpack.ProvidePlugin({
-        react: 'React',
-        'react-dom': 'ReactDOM',
-        /*$: 'jquery',
-          jQuery: 'jquery',*/
-    }),
-    new webpack.DefinePlugin({
-        UINAME: JSON.stringify(UIInfo.name),
-        UIVERSION: UIVERSION,
-        UIAUTHOR: JSON.stringify(UIInfo.author),
-        UIMetaNAME: JSON.stringify(UIMetaInfo.name),
-        UIMetaVersion: JSON.stringify(UIMetaInfo.version),
-        GRAPHQL_API_KEY: JSON.stringify(conf['GRAPHQL_API_KEY']),
-        SWVERSION: JSON.stringify(`sw-${new Date().getTime()}`),
-        BASE_HREF: JSON.stringify(
-            `http${conf['HTTPS'] ? 's' : ''}://${IP}:${PORT}`,
-        ),
-    }),
-    //new webpack.HotModuleReplacementPlugin(),
-    new MiniCssExtractPlugin(),
-];
+let plugins = common.plugins;
 
 const indexPath = path.join(__dirname, conf.APPDIR, conf.SRC, 'index.html');
 if (fs.existsSync(indexPath)) {
@@ -62,19 +28,16 @@ if (fs.existsSync(indexPath)) {
             publicPath: '',
             template: path.join(conf.APPDIR, conf.SRC, 'index.html'),
             templateParameters: {
-                NODE_ENV: NODE_ENV,
+                NODE_ENV: 'development',
                 GRAPHQL_URL: conf['GRAPHQL_URL'],
                 STATIC_URL: conf['STATIC_URL'],
-                REACT_SCRIPTS: NODE_ENV === 'production' ?
-                    '<script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script><script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>' : '<script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script><script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>',
+                REACT_SCRIPTS: '<script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script><script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>',
             },
         }),
     );
 }
 
 const config = merge(common.webpack, {
-    mode: 'development',
-
     entry: {
         /*hot: [
           'react-hot-loader/patch',
@@ -87,9 +50,7 @@ const config = merge(common.webpack, {
         path: path.join(__dirname),
         filename: '[name].js',
         // necessary for HMR to know where to load the hot update chunks
-        publicPath: `http${conf['HTTPS'] ? 's' : ''}://${conf['HOSTNAME']}:${
-      conf.PORT
-    }/`,
+        publicPath: `http${conf['HTTPS'] ? 's' : ''}://${conf['HOSTNAME']}:${conf.PORT}/`,
     },
 
     module: {
@@ -99,7 +60,7 @@ const config = merge(common.webpack, {
             use: {
                 loader: '@sucrase/webpack-loader', //'babel-loader',
                 options: {
-                    transforms: ['jsx']
+                    transforms: ['jsx'],
                     /*presets: [
                         '@babel/preset-env',
                         '@babel/react',
@@ -154,13 +115,15 @@ const config = merge(common.webpack, {
     },
     plugins: plugins,
 
+    mode: 'development',
+    devtool: 'inline-source-map',
     devServer: {
         host: IP,
         port: PORT,
         historyApiFallback: false,
         static: path.resolve(__dirname, conf['APPDIR'], conf['SRC']),
         https: conf['HTTPS'],
-        hot: false,
+        hot: false, //true,
         //injectClient: conf['injectClient'],
 
         headers: {

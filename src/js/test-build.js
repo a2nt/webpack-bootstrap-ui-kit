@@ -57,3 +57,12 @@ const images = importAll(
 const fontAwesome = importAll(
   require.context('font-awesome', false, /\.(otf|eot|svg|ttf|woff|woff2)$/),
 );
+
+if (module.hot) {
+  module.hot.accept('app.js', () => {
+    console.log('Accepting the updated printMe module!');
+  })
+  module.hot.accept('app.scss', () => {
+    console.log('Accepting the updated printMe module!');
+  })
+}

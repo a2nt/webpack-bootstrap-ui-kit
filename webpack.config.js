@@ -21,63 +21,13 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 //const ImageSpritePlugin = require('@a2nt/image-sprite-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-
-const UIInfo = require('./package.json');
-const UIVERSION = JSON.stringify(UIInfo.version);
-const UIMetaInfo = require('./node_modules/@a2nt/meta-lightbox-js/package.json');
-
 const NODE_ENV = conf.NODE_ENV || process.env.NODE_ENV;
 const COMPRESS = NODE_ENV === 'production' ? true : false;
 
 const IP = process.env.IP || conf.HOSTNAME;
 const PORT = process.env.PORT || conf.PORT;
 
-console.log('NODE_ENV: ' + NODE_ENV);
-console.log('COMPRESS: ' + COMPRESS);
-console.log('WebP images: ' + conf['webp']);
-console.log('GRAPHQL_API_KEY: ' + conf['GRAPHQL_API_KEY']);
-
-let plugins = [
-    new webpack.ProvidePlugin({
-        react: 'React',
-        'react-dom': 'ReactDOM',
-        /*$: 'jquery',
-        jQuery: 'jquery',
-        Popper: ['popper.js', 'default'],
-        Util: 'exports-loader?Util!bootstrap/js/dist/util',
-        Alert: 'exports-loader?Alert!bootstrap/js/dist/alert',
-        Button: 'exports-loader?Button!bootstrap/js/dist/button',
-        Carousel: 'exports-loader?Carousel!bootstrap/js/dist/carousel',
-        Collapse: 'exports-loader?Collapse!bootstrap/js/dist/collapse',
-        Dropdown: 'exports-loader?Dropdown!bootstrap/js/dist/dropdown',
-        Modal: 'exports-loader?Modal!bootstrap/js/dist/modal',
-        Tooltip: 'exports-loader?Tooltip!bootstrap/js/dist/tooltip',
-        Popover: 'exports-loader?Popover!bootstrap/js/dist/popover',
-        Scrollspy: 'exports-loader?Scrollspy!bootstrap/js/dist/scrollspy',
-        Tab: 'exports-loader?Tab!bootstrap/js/dist/tab',*/
-    }),
-    new webpack.DefinePlugin({
-        'process.env': {
-            NODE_ENV: JSON.stringify(NODE_ENV),
-        },
-        UINAME: JSON.stringify(UIInfo.name),
-        UIVERSION: UIVERSION,
-        UIAUTHOR: JSON.stringify(UIInfo.author),
-        UIMetaNAME: JSON.stringify(UIMetaInfo.name),
-        UIMetaVersion: JSON.stringify(UIMetaInfo.version),
-        GRAPHQL_API_KEY: JSON.stringify(conf['GRAPHQL_API_KEY']),
-        SWVERSION: JSON.stringify(`sw-${new Date().getTime()}`),
-        BASE_HREF: JSON.stringify(''),
-    }),
-    new webpack.LoaderOptionsPlugin({
-        minimize: COMPRESS,
-        debug: !COMPRESS,
-    }),
-    new MiniCssExtractPlugin({
-        filename: 'css/[name].css',
-        //allChunks: true,
-    }),
-];
+let plugins = common.plugins;
 
 if (COMPRESS) {
     plugins.push(require('autoprefixer'));
