@@ -16,7 +16,7 @@
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack-dev-server --config webpack.config.serve.js",
     "dash": "cross-env NODE_ENV=development webpack-dashboard -- webpack-dev-server --config webpack.config.serve.js",
-    "build": "cross-env NODE_ENV=production webpack --progress --stats-all",
+    "build": "eslint ./src --config eslint.config.json --fix && sass-lint ./src --config sass-lint.yml -v -q --fix && cross-env NODE_ENV=production webpack --progress --stats-all",
     "lint:check": "eslint ./src --config eslint.config.json && sass-lint ./src --config sass-lint.yml -v -q",
     "lint:fix": "eslint ./src --config eslint.config.json --fix && sass-lint ./src --config sass-lint.yml -v -q --fix",
     "lint:js": "eslint ./src --config eslint.config.json",
