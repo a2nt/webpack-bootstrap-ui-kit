@@ -35,7 +35,7 @@ const GoogleMapsDriver = ((window) => {
       const el = ui.el;
       const config = ui.config;
       const mapDiv = el.querySelector('.mapAPI-map');
-      const zoom = config['mapZoom'] && config['mapZoom'] !== '0' ? config['mapZoom'] : 10;
+      const zoom = config['mapZoom'] && config['mapZoom'] !== '0' ? parseInt(config['mapZoom']) : 10;
       const center = config['center'] && config['center'] !== ',' ?
         {
           lat: config['center'][1],
