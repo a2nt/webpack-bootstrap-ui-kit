@@ -1,11 +1,11 @@
-'use strict';
+"use strict";
 
-import $ from 'jquery';
-import Events from '../_events';
+import $ from "jquery";
+import Events from "../_events";
 
 const FormStorage = (($) => {
   // Constants
-  const NAME = 'jsFormStorage';
+  const NAME = "jsFormStorage";
   const DATA_KEY = NAME;
   const STORAGE = window.localStorage;
 
@@ -15,11 +15,11 @@ const FormStorage = (($) => {
 
       const ui = this;
       const $element = $(element);
-      const $elements = $element.find('input, textarea, select');
+      const $elements = $element.find("input, textarea, select");
 
       const setRangeValues = function (el) {
         const $el = $(el);
-        $el.siblings('.value').text($el.val());
+        $el.siblings(".value").text($el.val());
       };
 
       ui._element = element;
@@ -30,17 +30,17 @@ const FormStorage = (($) => {
       // restore form data from localStorage
       $elements.each((i, el) => {
         const $el = $(el);
-        const id = $el.attr('id');
-        const type = $el.attr('type');
+        const id = $el.attr("id");
+        const type = $el.attr("type");
         const val = STORAGE.getItem(NAME + id);
 
-        if (type === 'file') {
+        if (type === "file") {
           return true;
         }
 
         if (id && val && type) {
-          if (type && (type === 'checkbox' || type === 'radio')) {
-            $el.prop('checked', val);
+          if (type && (type === "checkbox" || type === "radio")) {
+            $el.prop("checked", val);
           } else {
             $el.val(val);
           }
@@ -56,40 +56,40 @@ const FormStorage = (($) => {
 
       $element.trigger(Events.RESTORE_FIELD);
 
-      $('input[type="range"]').on('change', (e) => {
+      $('input[type="range"]').on("change", (e) => {
         setRangeValues(e.currentTarget);
       });
 
       // store form data into localStorage
-      $elements.on('change', (e) => {
+      $elements.on("change", (e) => {
         const $el = $(e.currentTarget);
-        const id = $el.attr('id');
-        const type = $el.attr('type');
+        const id = $el.attr("id");
+        const type = $el.attr("type");
 
         // skip some elements
-        if ($el.hasClass('no-storage')) {
+        if ($el.hasClass("no-storage")) {
           return true;
         }
 
         let val = $el.val();
 
-        if (type && (type === 'checkbox' || type === 'radio')) {
-          val = !!$el.is(':checked');
+        if (type && (type === "checkbox" || type === "radio")) {
+          val = !!$el.is(":checked");
         }
 
-        if (id && type && type !== 'password') {
+        if (id && type && type !== "password") {
           STORAGE.setItem(NAME + id, val);
         }
       });
 
-      $element.on('submit', () => {
+      $element.on("submit", () => {
         $element.data(DATA_KEY).clear();
       });
 
       $element
-        .find('.btn-toolbar,.form-actions')
+        .find(".btn-toolbar,.form-actions")
         .children('button,[type="submit"],[type="clear"]')
-        .on('click', () => {
+        .on("click", () => {
           $element.data(DATA_KEY).clear();
         });
 
@@ -111,7 +111,7 @@ const FormStorage = (($) => {
     }
 
     static _jQueryInterface() {
-      if (typeof window.localStorage !== 'undefined') {
+      if (typeof window.localStorage !== "undefined") {
         return this.each(function () {
           // attach functionality to element
           const $element = $(this);
@@ -136,11 +136,11 @@ const FormStorage = (($) => {
 
   // auto-apply
   $(window).on(`${Events.AJAX} ${Events.LOADED}`, () => {
-    $('form').each((i, el) => {
+    $("form").each((i, el) => {
       const $el = $(el);
 
       // skip some forms
-      if ($el.hasClass('no-storage')) {
+      if ($el.hasClass("no-storage")) {
         return true;
       }
 

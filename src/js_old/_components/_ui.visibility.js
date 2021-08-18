@@ -1,5 +1,5 @@
-'use strict';
-import $ from 'jquery';
+"use strict";
+import $ from "jquery";
 
 const G = window;
 const D = document;

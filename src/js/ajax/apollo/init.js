@@ -1,25 +1,21 @@
-import Events from '../../_events';
+import Events from "../../_events";
 
-import {
-  cache,
-} from './cache';
+import { cache } from "./cache";
 import {
   from,
   ApolloClient,
   HttpLink,
   ApolloLink,
   concat,
-} from '@apollo/client';
+} from "@apollo/client";
 
-import {
-  onError,
-} from '@apollo/client/link/error';
-const NAME = 'appolo';
+import { onError } from "@apollo/client/link/error";
+const NAME = "appolo";
 
 const API_META = document.querySelector('meta[name="api_url"]');
-const API_URL = API_META ?
-  API_META.getAttribute('content') :
-  `${window.location.protocol  }//${  window.location.host  }/graphql`;
+const API_URL = API_META
+  ? API_META.getAttribute("content")
+  : `${window.location.protocol}//${window.location.host}/graphql`;
 
 const authMiddleware = new ApolloLink((operation, forward) => {
   // add the authorization to the headers
@@ -32,7 +28,7 @@ const authMiddleware = new ApolloLink((operation, forward) => {
   return forward(operation);
 });
 
-console.info(`%cAPI: ${API_URL}`, 'color:green;font-size:10px');
+console.info(`%cAPI: ${API_URL}`, "color:green;font-size:10px");
 
 const link = from([
   authMiddleware,
@@ -42,28 +38,18 @@ const link = from([
     });
     return forward(operation);
   }),
-  onError(({
-    operation,
-    response,
-    graphQLErrors,
-    networkError,
-    forward,
-  }) => {
-    if (operation.operationName === 'IgnoreErrorsQuery') {
+  onError(({ operation, response, graphQLErrors, networkError, forward }) => {
+    if (operation.operationName === "IgnoreErrorsQuery") {
       console.error(`${NAME}: IgnoreErrorsQuery`);
       response.errors = null;
       return;
     }
 
     if (graphQLErrors) {
-      graphQLErrors.forEach(({
-        message,
-        locations,
-        path,
-      }) =>
+      graphQLErrors.forEach(({ message, locations, path }) =>
         console.error(
-          `${NAME}: [GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
-        ),
+          `${NAME}: [GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+        )
       );
     }
 
@@ -91,7 +77,7 @@ const link = from([
       // data from a previous link
       const time = new Date() - operation.getContext().start;
       console.log(
-        `${NAME}: operation ${operation.operationName} took ${time} ms to complete`,
+        `${NAME}: operation ${operation.operationName} took ${time} ms to complete`
       );
 
       window.dispatchEvent(new Event(Events.ONLINE));
@@ -104,8 +90,8 @@ const link = from([
     // Use explicit `window.fetch` so tha outgoing requests
     // are captured and deferred until the Service Worker is ready.
     fetch: (...args) => fetch(...args),
-    credentials: 'same-origin', //'include',
-    connectToDevTools: process.env.NODE_ENV === 'development' ? true : false,
+    credentials: "same-origin", //'include',
+    connectToDevTools: process.env.NODE_ENV === "development" ? true : false,
   }),
 ]);
 
@@ -117,6 +103,4 @@ const client = new ApolloClient({
   link,
 });
 
-export {
-  client,
-};
+export { client };

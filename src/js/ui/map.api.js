@@ -1,23 +1,23 @@
-'use strict';
+"use strict";
 
-import Events from '../_events';
-import Consts from 'js/_consts';
+import Events from "../_events";
+import Consts from "js/_consts";
 
 const MapAPI = ((window) => {
   // Constants
-  const NAME = 'js-mapapi';
-  const MAP_DRIVER = Consts['MAP_DRIVER'];
+  const NAME = "js-mapapi";
+  const MAP_DRIVER = Consts["MAP_DRIVER"];
 
   class MapAPI {
     // Constructor
     constructor(el) {
       const ui = this;
       const Drv = new MAP_DRIVER();
-      const BODY = document.querySelector('body');
+      const BODY = document.querySelector("body");
       const config = el.dataset;
-      config['center'] = [
-        config['lng'] ? config['lng'] : BODY.dataset['default-lng'],
-        config['lat'] ? config['lat'] : BODY.dataset['default-lat'],
+      config["center"] = [
+        config["lng"] ? config["lng"] : BODY.dataset["default-lng"],
+        config["lat"] ? config["lat"] : BODY.dataset["default-lat"],
       ];
 
       /*config['style'] = config['style'] ?
@@ -26,8 +26,8 @@ const MapAPI = ((window) => {
 
                               config['font-family'] = $BODY.css('font-family');*/
 
-      if (!config['icon']) {
-        config['icon'] = '<i class="fas fa-map-marker-alt"></i>';
+      if (!config["icon"]) {
+        config["icon"] = '<i class="fas fa-map-marker-alt"></i>';
       }
 
       console.log(`${NAME}: init ${Drv.getName()}...`);
@@ -38,7 +38,7 @@ const MapAPI = ((window) => {
       Drv.init(el, config);
 
       el.addEventListener(Events.MAPAPILOADED, () => {
-        ui.addMarkers()
+        ui.addMarkers();
       });
     }
 
@@ -63,20 +63,20 @@ const MapAPI = ((window) => {
 
       ui.map = Drv.getMap();
 
-      if (config['geojson']) {
+      if (config["geojson"]) {
         console.log(`${NAME}: setting up geocode data`);
         Drv.addGeoJson(config);
-      } else if (config['address']) {
-        console.log(config['address']);
+      } else if (config["address"]) {
+        console.log(config["address"]);
         console.log(`${NAME}: setting up address marker`);
-        Drv.geocode(config['address'], (results) => {
+        Drv.geocode(config["address"], (results) => {
           console.log(results);
 
           const lat = results[0].geometry.location.lat();
           const lng = results[0].geometry.location.lng();
 
           console.log(
-            `${NAME}: setting up single lat/lng marker lat: ${lat} lng: ${lng}`,
+            `${NAME}: setting up single lat/lng marker lat: ${lat} lng: ${lng}`
           );
 
           Drv.addMarker([lng, lat], config);
@@ -85,12 +85,12 @@ const MapAPI = ((window) => {
             lng,
           });
         });
-      } else if (config['lat'] && config['lng']) {
-        const lat = config['lat'];
-        const lng = config['lng'];
+      } else if (config["lat"] && config["lng"]) {
+        const lat = config["lat"];
+        const lng = config["lng"];
 
         console.log(
-          `${NAME}: setting up single lat/lng marker lat: ${lat} lng: ${lng}`,
+          `${NAME}: setting up single lat/lng marker lat: ${lat} lng: ${lng}`
         );
 
         Drv.addMarker([lng, lat], config);
@@ -108,7 +108,7 @@ const MapAPI = ((window) => {
     document.querySelectorAll(`.${NAME}`).forEach((el, i) => {
       const map = new MapAPI(el);
     });
-  }
+  };
 
   // auto-apply
   window.addEventListener(`${Events.LODEDANDREADY}`, init);

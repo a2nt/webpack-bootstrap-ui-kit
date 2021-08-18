@@ -1,20 +1,20 @@
-'use strict';
+"use strict";
 
-import $ from 'jquery';
+import $ from "jquery";
 
-import Events from './_events';
-import Consts from './_consts';
+import Events from "./_events";
+import Consts from "./_consts";
 
-import EventsRouter from './_events.router';
-import Spinner from './_components/_ui.spinner';
+import EventsRouter from "./_events.router";
+import Spinner from "./_components/_ui.spinner";
 
 // AJAX functionality
-import AjaxUI from './_components/_ui.ajax';
+import AjaxUI from "./_components/_ui.ajax";
 
-import FormBasics from './_components/_ui.form.basics';
-import HeaderUI from './_components/_ui.header-footer';
+import FormBasics from "./_components/_ui.form.basics";
+import HeaderUI from "./_components/_ui.header-footer";
 
-import SmoothScroll from 'smooth-scroll';
+import SmoothScroll from "smooth-scroll";
 const smoothScroll = SmoothScroll();
 
 const MainUI = (($) => {
@@ -22,68 +22,68 @@ const MainUI = (($) => {
   const W = window;
   const $W = $(W);
   const D = document;
-  const $Body = $('body');
+  const $Body = $("body");
 
-  const NAME = 'MainUI';
+  const NAME = "MainUI";
 
   console.clear();
 
   console.info(
     `%cUI Kit ${UINAME} ${UIVERSION}`,
-    'color:yellow;font-size:14px',
+    "color:yellow;font-size:14px"
   );
   console.info(
     `%c${UIMetaNAME} ${UIMetaVersion}`,
-    'color:yellow;font-size:12px',
+    "color:yellow;font-size:12px"
   );
   console.info(
     `%chttps://github.com/a2nt/webpack-bootstrap-ui-kit by ${UIAUTHOR}`,
-    'color:yellow;font-size:10px',
+    "color:yellow;font-size:10px"
   );
 
-  console.groupCollapsed('Events');
+  console.groupCollapsed("Events");
   Object.keys(Events).forEach((k) => {
     console.info(`${k}: ${Events[k]}`);
   });
-  console.groupEnd('Events');
+  console.groupEnd("Events");
 
-  console.groupCollapsed('Consts');
+  console.groupCollapsed("Consts");
   Object.keys(Consts).forEach((k) => {
     console.info(`${k}: ${Consts[k]}`);
   });
-  console.groupEnd('Events');
+  console.groupEnd("Events");
 
-  console.groupCollapsed('Init');
-  console.time('init');
+  console.groupCollapsed("Init");
+  console.time("init");
   $W.on(`${Events.LODEDANDREADY}`, () => {
-    console.groupEnd('Init');
-    console.timeEnd('init');
+    console.groupEnd("Init");
+    console.timeEnd("init");
 
-    console.time('Post-init');
-    console.groupCollapsed('Post-init');
+    console.time("Post-init");
+    console.groupCollapsed("Post-init");
   });
 
   // get browser locale
   //const Locale = $('html').attr('lang').substring(0, 2);
 
-  const $AlertNotify = $('#AlertNotify');
-  const $SiteWideMessage = $('#SiteWideMessage');
+  const $AlertNotify = $("#AlertNotify");
+  const $SiteWideMessage = $("#SiteWideMessage");
 
   // get browser window visibility preferences
   // Opera 12.10, Firefox >=18, Chrome >=31, IE11
-  const HiddenName = 'hidden';
-  const VisibilityChangeEvent = 'visibilitychange';
+  const HiddenName = "hidden";
+  const VisibilityChangeEvent = "visibilitychange";
 
   // update visibility state
   D.addEventListener(VisibilityChangeEvent, () => {
     if (D.visibilityState === HiddenName) {
       console.log(`${NAME}: Tab: hidden`);
-      $Body.addClass('is-hidden');
+      $Body.addClass("is-hidden");
       $Body.trigger(Events.TABHIDDEN);
       $W.trigger(Events.TABHIDDEN);
     } else {
       console.log(`${NAME}: Tab: focused`);
-      $Body.removeClass('is-hidden');
+      $Body.removeClass("is-hidden");
       $Body.trigger(Events.TABFOCUSED);
       $W.trigger(Events.TABFOCUSED);
     }
@@ -93,7 +93,7 @@ const MainUI = (($) => {
   let pingInterval;
   let pingLock = false;
   const sessionPing = () => {
-    if (pingLock || $Body.hasClass('is-offline')) {
+    if (pingLock || $Body.hasClass("is-offline")) {
       return;
     }
 
@@ -103,12 +103,12 @@ const MainUI = (($) => {
       sync: false,
       async: true,
       cache: false,
-      url: '/Security/ping',
+      url: "/Security/ping",
       global: false,
-      type: 'POST',
+      type: "POST",
       complete: (data, datastatus) => {
         updateOnlineStatus();
-        if (datastatus !== 'success') {
+        if (datastatus !== "success") {
           console.warn(`${NAME}: ping failed`);
 
           clearInterval(pingInterval);
@@ -128,7 +128,7 @@ const MainUI = (($) => {
     }
     statusLock = true;
 
-    if (typeof navigator.onLine === 'undefined') {
+    if (typeof navigator.onLine === "undefined") {
       return false;
     }
 
@@ -138,8 +138,8 @@ const MainUI = (($) => {
       clearInterval(pingInterval);
       pingInterval = null;
 
-      $Body.addClass('is-offline');
-      $Body.removeClass('is-online');
+      $Body.addClass("is-offline");
+      $Body.removeClass("is-online");
 
       $Body.trigger(Events.OFFLINE);
       $W.trigger(Events.OFFLINE);
@@ -152,7 +152,7 @@ const MainUI = (($) => {
       pingInterval = setInterval(sessionPing, 300000); // 5 min in ms
     }
 
-    if ($Body.hasClass('is-offline')) {
+    if ($Body.hasClass("is-offline")) {
       sessionPing();
 
       console.log(`${NAME}: is back online`);
@@ -161,8 +161,8 @@ const MainUI = (($) => {
       console.log(`${NAME}: Online`);
     }
 
-    $Body.addClass('is-online');
-    $Body.removeClass('is-offline');
+    $Body.addClass("is-online");
+    $Body.removeClass("is-offline");
 
     $Body.trigger(Events.ONLINE);
     $W.trigger(Events.ONLINE);
@@ -176,7 +176,7 @@ const MainUI = (($) => {
     () => {
       updateOnlineStatus();
     },
-    false,
+    false
   );
 
   W.addEventListener(
@@ -184,7 +184,7 @@ const MainUI = (($) => {
     () => {
       updateOnlineStatus();
     },
-    false,
+    false
   );
 
   $W.on(`${Events.LOADED} ${Events.AJAX}`, () => {
@@ -204,9 +204,9 @@ const MainUI = (($) => {
   };
 
   W.URLDetails = {
-    base: $('base').attr('href'),
-    relative: '/',
-    hash: '',
+    base: $("base").attr("href"),
+    relative: "/",
+    hash: "",
   };
 
   let eventFired = false;
@@ -236,7 +236,7 @@ const MainUI = (($) => {
     }, 200);
   };
 
-  setTouchScreen('ontouchstart' in window || navigator.msMaxTouchPoints > 0);
+  setTouchScreen("ontouchstart" in window || navigator.msMaxTouchPoints > 0);
 
   // disable touch on mouse events
   /*D.addEventListener('mousemove', () => {
@@ -248,10 +248,10 @@ const MainUI = (($) => {
   });*/
 
   // enable touch screen on touch events
-  D.addEventListener('touchmove', () => {
+  D.addEventListener("touchmove", () => {
     setTouchScreen(true);
   });
-  D.addEventListener('touchstart', () => {
+  D.addEventListener("touchstart", () => {
     setTouchScreen(true);
   });
 
@@ -268,8 +268,8 @@ const MainUI = (($) => {
       ui.updateLocation();
 
       // mark available offline areas
-      if ('caches' in W) {
-        $('a.offline').addClass('offline-available');
+      if ("caches" in W) {
+        $("a.offline").addClass("offline-available");
       }
 
       ui.loadImages();
@@ -278,7 +278,7 @@ const MainUI = (($) => {
       ui.detectBootstrapScreenSize();
 
       // mark external links
-      $('a.external,a[rel="external"]').attr('target', '_blank');
+      $('a.external,a[rel="external"]').attr("target", "_blank");
 
       // show encoded emails
       /*$(D).find('.obm').each(() => {
@@ -304,26 +304,26 @@ const MainUI = (($) => {
       //
 
       // scroll links
-      $('.js-scrollTo').on('click', (e) => {
+      $(".js-scrollTo").on("click", (e) => {
         console.log(`${NAME}: .js-scrollTo`);
 
         e.preventDefault();
         const el = e.currentTarget;
         const $el = $(e.currentTarget);
 
-        ScrollTo(el, $el.attr('data-target'));
+        ScrollTo(el, $el.attr("data-target"));
       });
 
       // load external fonts
-      if ($('[data-extfont]').length) {
+      if ($("[data-extfont]").length) {
         console.log(`${NAME}: loading external fonts [data-extfont]`);
         $.getScript(
-          '//ajax.googleapis.com/ajax/libs/webfont/1/webfont.js',
+          "//ajax.googleapis.com/ajax/libs/webfont/1/webfont.js",
           () => {
             const fonts = [];
 
-            $('[data-extfont]').each((i, el) => {
-              fonts[i] = $(el).attr('data-extfont');
+            $("[data-extfont]").each((i, el) => {
+              fonts[i] = $(el).attr("data-extfont");
             });
 
             W.WebFont.load({
@@ -331,16 +331,16 @@ const MainUI = (($) => {
                 families: fonts,
               },
             });
-          },
+          }
         );
       }
 
       // data-set links
-      $('[data-set-target]').on('click', (e) => {
+      $("[data-set-target]").on("click", (e) => {
         console.log(`${NAME}: [data-set-target]`);
 
         const $el = $(e.currentTarget);
-        const $target = $($el.data('set-target'));
+        const $target = $($el.data("set-target"));
 
         if (!$target.length) {
           return;
@@ -348,25 +348,25 @@ const MainUI = (($) => {
 
         $target.each((i, targetEl) => {
           const $targetEl = $(targetEl);
-          const tag = $targetEl.prop('tagName').toLowerCase();
+          const tag = $targetEl.prop("tagName").toLowerCase();
 
-          if (tag === 'input' || tag === 'select') {
-            $targetEl.val($el.data('set-val'));
-          } else if (!$targetEl.hasClass('field')) {
-            $targetEl.text($el.data('set-val'));
+          if (tag === "input" || tag === "select") {
+            $targetEl.val($el.data("set-val"));
+          } else if (!$targetEl.hasClass("field")) {
+            $targetEl.text($el.data("set-val"));
           }
         });
 
         $el.trigger(Events.SET_TARGET_UPDATE);
-        $target.closest('form').trigger(Events.SET_TARGET_UPDATE);
+        $target.closest("form").trigger(Events.SET_TARGET_UPDATE);
       });
 
       // emulate links
-      $('.a[data-href]').on('click', (e) => {
+      $(".a[data-href]").on("click", (e) => {
         console.log(`${NAME}: js link processing .a[data-href]`);
 
         const $el = $(e.currentTarget);
-        const href = $el.data('href');
+        const href = $el.data("href");
         if (!href.length) {
           console.warn(`${NAME}: .a[data-href] | Missing data-href`);
           console.warn($el);
@@ -376,24 +376,24 @@ const MainUI = (($) => {
       });
 
       // set attributes for mobile friendly tables
-      $('.typography table').each((i, el) => {
+      $(".typography table").each((i, el) => {
         const $table = $(el);
-        let $header = $table.find('thead tr:first-child');
+        let $header = $table.find("thead tr:first-child");
         if (!$header.length) {
-          $header = $(el).find('tr:first-child');
+          $header = $(el).find("tr:first-child");
         }
 
-        $header.addClass('d-typography-breakpoint-none');
+        $header.addClass("d-typography-breakpoint-none");
 
-        $header.find('td').each((i, h) => {
+        $header.find("td").each((i, h) => {
           const $h = $(h);
           $table
-            .find('tr')
+            .find("tr")
             .find(`td:eq(${i})`)
             .each((i, el) => {
               const $el = $(el);
-              if (!$el.attr('data-label')) {
-                $el.attr('data-label', $h.text());
+              if (!$el.attr("data-label")) {
+                $el.attr("data-label", $h.text());
               }
             });
         });
@@ -402,16 +402,16 @@ const MainUI = (($) => {
 
       // hide spinner
       Spinner.hide(() => {
-        $Body.addClass('loaded');
+        $Body.addClass("loaded");
       });
 
       // fire page printing
-      if (W.URLDetails['hash'].indexOf('printpage') > -1) {
+      if (W.URLDetails["hash"].indexOf("printpage") > -1) {
         W.print();
       }
 
       $Body.data(NAME, ui);
-      $W.removeClass('lock-main-init');
+      $W.removeClass("lock-main-init");
     }
 
     static detectBootstrapScreenSize() {
@@ -425,7 +425,7 @@ const MainUI = (($) => {
       for (let i = 0; i < envs.length; ++i) {
         const env = envs[i];
         $el.addClass(`d-${env}-none`);
-        if ($el.is(':hidden')) {
+        if ($el.is(":hidden")) {
           curEnv = env;
           break;
         }
@@ -437,17 +437,17 @@ const MainUI = (($) => {
 
       let landscape = true;
       if ($W.width() > $W.height()) {
-        $Body.removeClass('portrait');
-        $Body.addClass('landscape');
+        $Body.removeClass("portrait");
+        $Body.addClass("landscape");
       } else {
         landscape = false;
 
-        $Body.removeClass('landscape');
-        $Body.addClass('portrait');
+        $Body.removeClass("landscape");
+        $Body.addClass("portrait");
       }
 
       console.log(
-        `${NAME}: screen size detected ${curEnv} | landscape ${landscape}`,
+        `${NAME}: screen size detected ${curEnv} | landscape ${landscape}`
       );
 
       return curEnv;
@@ -455,30 +455,30 @@ const MainUI = (($) => {
 
     static updateLocation(url) {
       let location = url || W.location.href;
-      location = location.replace(W.URLDetails['base'], '/');
-      const hash = location.indexOf('#');
+      location = location.replace(W.URLDetails["base"], "/");
+      const hash = location.indexOf("#");
 
-      W.URLDetails.relative = location.split('#')[0];
+      W.URLDetails.relative = location.split("#")[0];
       W.URLDetails.hash =
-        hash >= 0 ? location.substr(location.indexOf('#')) : '';
+        hash >= 0 ? location.substr(location.indexOf("#")) : "";
     }
 
     // show site-wide alert
     static alert(msg, cls) {
-      $SiteWideMessage.fadeOut('fast');
+      $SiteWideMessage.fadeOut("fast");
 
       $SiteWideMessage.html(
-        `<div class="page-alert"><div class="alert alert-${cls}"><i class="close" data-dismiss="alert">&times;</i>${msg}</div></div>`,
+        `<div class="page-alert"><div class="alert alert-${cls}"><i class="close" data-dismiss="alert">&times;</i>${msg}</div></div>`
       );
-      $SiteWideMessage.find('.page-alert').alert();
+      $SiteWideMessage.find(".page-alert").alert();
 
       $SiteWideMessage.find('.close[data-dismiss="alert"]').click(() => {
-        $SiteWideMessage.fadeOut('slow', () => {
-          $SiteWideMessage.find('.page-alert').alert('close');
+        $SiteWideMessage.fadeOut("slow", () => {
+          $SiteWideMessage.find(".page-alert").alert("close");
         });
       });
 
-      $SiteWideMessage.fadeIn('slow');
+      $SiteWideMessage.fadeIn("slow");
 
       if ($AlertNotify.length) {
         $AlertNotify[0].play();
@@ -490,12 +490,12 @@ const MainUI = (($) => {
     // hide site-wide alert
     static alertHide() {
       if ($SiteWideMessage.length !== 0) {
-        $SiteWideMessage.fadeOut('slow', () => {
-          $SiteWideMessage.find('.alert').alert('close');
+        $SiteWideMessage.fadeOut("slow", () => {
+          $SiteWideMessage.find(".alert").alert("close");
         });
       }
 
-      if ($AlertNotify.length && typeof $AlertNotify[0].stop !== 'undefined') {
+      if ($AlertNotify.length && typeof $AlertNotify[0].stop !== "undefined") {
         $AlertNotify[0].stop();
       }
 
@@ -504,17 +504,17 @@ const MainUI = (($) => {
 
     // load all images
     static loadImages() {
-      const $imgs = $Body.find('img').not('.loaded');
+      const $imgs = $Body.find("img").not(".loaded");
       const $imgUrls = [];
       const $imgLazyUrls = [];
 
       // collect image details
       $imgs.each((i, el) => {
         const $el = $(el);
-        const src = $el.attr('src');
-        const lazySrc = $el.data('lazy-src');
+        const src = $el.attr("src");
+        const lazySrc = $el.data("lazy-src");
 
-        if ($el.hasClass('loaded')) {
+        if ($el.hasClass("loaded")) {
           return;
         }
 
@@ -523,14 +523,14 @@ const MainUI = (($) => {
         }
         if (lazySrc && lazySrc.length) {
           $imgLazyUrls.push(lazySrc);
-          $el.addClass('loading');
+          $el.addClass("loading");
 
           AjaxUI.preload([lazySrc]).then(() => {
-            $el.attr('src', lazySrc);
+            $el.attr("src", lazySrc);
 
             $el.on(`${Events.LOADED}`, () => {
-              $el.addClass('loaded');
-              $el.removeClass('loading');
+              $el.addClass("loaded");
+              $el.removeClass("loading");
 
               $el.trigger(`${Events.LAZYIMAGEREADY}`);
             });
@@ -540,25 +540,25 @@ const MainUI = (($) => {
 
       // load lazy backgrounds
       $Body
-        .find('[data-lazy-bg]')
-        .not('.loaded')
+        .find("[data-lazy-bg]")
+        .not(".loaded")
         .each((i, el) => {
           const $el = $(el);
-          const lazySrc = $el.data('lazy-bg');
+          const lazySrc = $el.data("lazy-bg");
 
-          if ($el.hasClass('loaded')) {
+          if ($el.hasClass("loaded")) {
             return;
           }
 
           if (lazySrc && lazySrc.length) {
             $imgLazyUrls.push(lazySrc);
-            $el.addClass('loading');
+            $el.addClass("loading");
 
             AjaxUI.preload([lazySrc]).then(() => {
-              $el.css({ 'background-image': `url(${lazySrc})` });
+              $el.css({ "background-image": `url(${lazySrc})` });
 
-              $el.addClass('loaded');
-              $el.removeClass('loading');
+              $el.addClass("loaded");
+              $el.removeClass("loading");
 
               $el.trigger(`${Events.LAZYIMAGEREADY}`);
             });
@@ -567,25 +567,25 @@ const MainUI = (($) => {
 
       // replace img src
       $Body
-        .find('[data-src-replace]')
-        .not('.loaded')
+        .find("[data-src-replace]")
+        .not(".loaded")
         .each((i, el) => {
           const $el = $(el);
-          const lazySrc = $el.data('src-replace');
+          const lazySrc = $el.data("src-replace");
 
-          if ($el.hasClass('loaded')) {
+          if ($el.hasClass("loaded")) {
             return;
           }
 
           if (lazySrc && lazySrc.length) {
-            $el.addClass('loaded');
-            $el.attr('src', lazySrc);
+            $el.addClass("loaded");
+            $el.attr("src", lazySrc);
           }
         });
 
       // load defined images
       AjaxUI.preload($imgUrls).then(() => {
-        $W.trigger('images-loaded');
+        $W.trigger("images-loaded");
 
         // load lazy images
         AjaxUI.preload($imgLazyUrls).then(() => {
@@ -594,8 +594,8 @@ const MainUI = (($) => {
           setTimeout(() => {
             $W.trigger(`${Events.LAZYIMAGESREADY}`);
 
-            console.groupEnd('Post-init');
-            console.timeEnd('Post-init');
+            console.groupEnd("Post-init");
+            console.timeEnd("Post-init");
           }, 100);
         });
       });
@@ -609,35 +609,35 @@ const MainUI = (($) => {
   $W.on(
     `${Events.MAININIT} ${Events.AJAX} ${Events.AJAXMAIN} ${Events.LOADED}`,
     () => {
-      if ($W.hasClass('lock-main-init')) {
+      if ($W.hasClass("lock-main-init")) {
         console.warn(`${NAME}: locked`);
         return;
       }
 
-      $W.addClass('lock-main-init');
+      $W.addClass("lock-main-init");
       MainUI.init();
-    },
+    }
   );
 
   $W.on(`${Events.RESIZE}`, () => {
     MainUI.detectBootstrapScreenSize();
   });
 
-  $W.on('beforeunload unload', () => {
+  $W.on("beforeunload unload", () => {
     Spinner.show(() => {
-      $Body.removeClass('loaded');
+      $Body.removeClass("loaded");
     });
   });
 
   // hide spinner on target _blank
   $('[target="_blank"],.external')
     .not('[data-toggle="lightbox"],[data-lightbox-gallery]')
-    .on('click submit touch', (e) => {
+    .on("click submit touch", (e) => {
       console.log(`${NAME}: External link`);
 
       setTimeout(() => {
         Spinner.hide(() => {
-          $Body.addClass('loaded');
+          $Body.addClass("loaded");
         });
       }, 1000);
     });

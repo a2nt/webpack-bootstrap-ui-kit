@@ -1,21 +1,21 @@
 /*
  * Conflicts with 'bootstrap/js/dist/dropdown'
  */
-'use strict';
+"use strict";
 
-import $ from 'jquery';
-import Events from '../_events';
-import 'jquery-hoverintent/jquery.hoverIntent.js';
-import MainUI from '../_main';
+import $ from "jquery";
+import Events from "../_events";
+import "jquery-hoverintent/jquery.hoverIntent.js";
+import MainUI from "../_main";
 
 const HoverUI = (($) => {
   // Constants
   const W = window;
   const D = document;
-  const $Html = $('html');
-  const $Body = $('body');
+  const $Html = $("html");
+  const $Body = $("body");
 
-  const NAME = 'jsHoverUI';
+  const NAME = "jsHoverUI";
   const DATA_KEY = NAME;
 
   class HoverUI {
@@ -28,7 +28,7 @@ const HoverUI = (($) => {
 
       if (
         $el.is(
-          '[target="_blank"],.external,[data-toggle="lightbox"],[data-lightbox-gallery]',
+          '[target="_blank"],.external,[data-toggle="lightbox"],[data-lightbox-gallery]'
         )
       ) {
         return true;
@@ -37,18 +37,18 @@ const HoverUI = (($) => {
       ui.$el = $el;
 
       // find parent
-      let $parent = $el.parents('.nav-item, .dropdown');
+      let $parent = $el.parents(".nav-item, .dropdown");
       $parent = $parent && $parent.length ? $parent.first() : null;
       //$parent = $parent ? $parent : $el.parent();
       ui.$parent = $parent;
 
       // find target
-      let $target = $el.data('target');
+      let $target = $el.data("target");
       $target = $target && $target.length ? $target : null;
       $target = $target
         ? $target
         : $parent
-          ? $parent.find('.dropdown-menu').first()
+          ? $parent.find(".dropdown-menu").first()
           : null;
 
       if (!$target || !$target.length) {
@@ -63,7 +63,7 @@ const HoverUI = (($) => {
       ui.$triger = $triger;
 
       // integrate with dropdown-toggle
-      $('[data-toggle="dropdown"]').on('click touch', (e) => {
+      $('[data-toggle="dropdown"]').on("click touch", (e) => {
         console.log(`${NAME}: dropdown click-touch`);
         ui.hide();
       });
@@ -81,15 +81,15 @@ const HoverUI = (($) => {
         });
       }
 
-      $el.off('click touch');
-      $el.on('click touch', (e) => {
+      $el.off("click touch");
+      $el.on("click touch", (e) => {
         const size = MainUI.detectBootstrapScreenSize();
         console.log(`${NAME}: click-touch size: ${size}`);
 
         if (
-          size === 'xs' ||
-          !$el.data('allow-click') ||
-          (W.IsTouchScreen && !$el.data('allow-touch-click'))
+          size === "xs" ||
+          !$el.data("allow-click") ||
+          (W.IsTouchScreen && !$el.data("allow-touch-click"))
         ) {
           console.log(`${NAME}: click-touch prevent click`);
           e.stopPropagation();
@@ -108,29 +108,29 @@ const HoverUI = (($) => {
     }
 
     isShown() {
-      return this.$target.hasClass('show');
+      return this.$target.hasClass("show");
     }
 
     show() {
       const ui = this;
       ui.$el
-        .parents('.dropdown')
-        .not('.active')
+        .parents(".dropdown")
+        .not(".active")
         .each((i, el) => {
           const $el = $(el);
-          $el.find('.dropdown').removeClass('show');
-          $el.addClass('show');
+          $el.find(".dropdown").removeClass("show");
+          $el.addClass("show");
         });
 
-      ui.$target.addClass('show');
+      ui.$target.addClass("show");
     }
 
     hide() {
       const ui = this;
       const $el = ui.$target;
-      $el.removeClass('show');
-      $el.find('.dropdown-menu').removeClass('show');
-      $el.parent('.dropdown').removeClass('show');
+      $el.removeClass("show");
+      $el.find(".dropdown-menu").removeClass("show");
+      $el.parent(".dropdown").removeClass("show");
     }
 
     dispose() {
@@ -176,21 +176,21 @@ const HoverUI = (($) => {
   });
 
   // rewrite 'bootstrap/js/dist/dropdown'
-  $('[data-toggle="dropdown"]').on('click touch', (e) => {
+  $('[data-toggle="dropdown"]').on("click touch", (e) => {
     e.preventDefault();
 
     const $el = $(e.currentTarget);
-    const $parent = $el.parent('.dropdown');
+    const $parent = $el.parent(".dropdown");
 
     // hide siblings
-    $parent.parent().find('.dropdown, .dropdown-menu').removeClass('show');
+    $parent.parent().find(".dropdown, .dropdown-menu").removeClass("show");
 
-    if ($parent.hasClass('show')) {
-      $parent.removeClass('show');
-      $parent.find('.dropdown-menu').removeClass('show');
+    if ($parent.hasClass("show")) {
+      $parent.removeClass("show");
+      $parent.find(".dropdown-menu").removeClass("show");
     } else {
-      $parent.addClass('show');
-      $parent.find('.dropdown-menu').addClass('show');
+      $parent.addClass("show");
+      $parent.find(".dropdown-menu").addClass("show");
     }
   });
 

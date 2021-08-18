@@ -1,40 +1,40 @@
-import Events from '../_events';
-import Consts from '../_consts';
-import SpinnerUI from './loading-spinner';
+import Events from "../_events";
+import Consts from "../_consts";
+import SpinnerUI from "./loading-spinner";
 
 const MainUI = ((W) => {
-  const NAME = '_main';
+  const NAME = "_main";
   const D = document;
   const BODY = D.body;
 
   console.info(
     `%cUI Kit ${UINAME} ${UIVERSION}`,
-    'color:yellow;font-size:14px',
+    "color:yellow;font-size:14px"
   );
   console.info(
     `%c${UIMetaNAME} ${UIMetaVersion}`,
-    'color:yellow;font-size:12px',
+    "color:yellow;font-size:12px"
   );
   console.info(
     `%chttps://github.com/a2nt/webpack-bootstrap-ui-kit by ${UIAUTHOR}`,
-    'color:yellow;font-size:10px',
+    "color:yellow;font-size:10px"
   );
 
-  console.info(`%cENV: ${process.env.NODE_ENV}`, 'color:green;font-size:10px');
-  console.groupCollapsed('Events');
+  console.info(`%cENV: ${process.env.NODE_ENV}`, "color:green;font-size:10px");
+  console.groupCollapsed("Events");
   Object.keys(Events).forEach((k) => {
     console.info(`${k}: ${Events[k]}`);
   });
-  console.groupEnd('Events');
+  console.groupEnd("Events");
 
-  console.groupCollapsed('Consts');
+  console.groupCollapsed("Consts");
   Object.keys(Consts).forEach((k) => {
     console.info(`${k}: ${Consts[k]}`);
   });
-  console.groupEnd('Events');
+  console.groupEnd("Events");
 
-  console.groupCollapsed('Init');
-  console.time('init');
+  console.groupCollapsed("Init");
+  console.time("init");
 
   class MainUI {
     // first time the website initialization
@@ -47,7 +47,7 @@ const MainUI = ((W) => {
           landing: W.location.href,
         },
         D.title,
-        W.location.href,
+        W.location.href
       );
       //
 
@@ -64,11 +64,11 @@ const MainUI = ((W) => {
   W.addEventListener(`${Events.LOADED}`, () => {
     MainUI.init();
 
-    BODY.classList.add('loaded');
+    BODY.classList.add("loaded");
     SpinnerUI.hide();
 
-    console.groupEnd('init');
-    console.timeEnd('init');
+    console.groupEnd("init");
+    console.timeEnd("init");
 
     W.dispatchEvent(new Event(Events.LODEDANDREADY));
   });

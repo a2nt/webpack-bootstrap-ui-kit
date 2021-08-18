@@ -29,8 +29,7 @@ $grays: map-merge(
     "700": $gray-700,
     "800": $gray-800,
     "900": $gray-900,
-  ),
-    $grays
+  ), $grays
 ) !default;
 
 $blue: $clr-blue !default;
@@ -62,8 +61,7 @@ $colors: map-merge(
     "white": $white,
     "gray": $gray-600,
     "gray-dark": $gray-800,
-  ),
-    $colors
+  ), $colors
 ) !default;
 
 $primary: $blue !default;
@@ -88,8 +86,7 @@ $theme-colors: map-merge(
     "danger": $danger,
     "light": $light,
     "dark": $dark,
-  ),
-    $theme-colors
+  ), $theme-colors
 ) !default;
 
 // UI color variables

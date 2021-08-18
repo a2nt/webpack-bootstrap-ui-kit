@@ -1,17 +1,17 @@
-'use strict';
+"use strict";
 
-import $ from 'jquery';
+import $ from "jquery";
 
 $(() => {
   const $searchLat = $('[name="search-lat"]');
   const $searchLng = $('[name="search-lng"]');
-  const $nearbyLat = $('#nearby-lat');
-  const $nearbyLng = $('#nearby-lng');
-  const $radius = $('#distance-radius');
-  const $category = $('#distance-category');
+  const $nearbyLat = $("#nearby-lat");
+  const $nearbyLng = $("#nearby-lng");
+  const $radius = $("#distance-radius");
+  const $category = $("#distance-category");
   const $newLocation = $('[name="newlocation"]');
-  const $setnewlocation = $('#setnewlocation');
-  const $newlocationholder = $('.set-newlocation-holder');
+  const $setnewlocation = $("#setnewlocation");
+  const $newlocationholder = $(".set-newlocation-holder");
 
   const updatePosition = (lat, lng) => {
     $searchLat.val(lat);
@@ -29,14 +29,14 @@ $(() => {
       return;
     }
 
-    $('.search-location .current-val').text(newLocation);
+    $(".search-location .current-val").text(newLocation);
     const geoUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${newLocation}&key=AIzaSyC00L0023LPBhzj12uTCL-4EwJ_6zgwcTU&sensor=true`;
 
     $.getJSON(geoUrl).done((data) => {
-      if (data.status === 'OK') {
+      if (data.status === "OK") {
         updatePosition(
           data.results[0].geometry.location.lat,
-          data.results[0].geometry.location.lng,
+          data.results[0].geometry.location.lng
         );
         //getCategories();
       }
@@ -44,7 +44,7 @@ $(() => {
   };
 
   const getCurrentPosition = () => {
-    $('.search-location .current-val').text('Current Location');
+    $(".search-location .current-val").text("Current Location");
 
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -52,9 +52,9 @@ $(() => {
         //hideDistancesThatDontMatter();
       },
       () => {
-        $('.search-location .current-val').text('Unable to get your location');
-        updatePosition('', '');
-      },
+        $(".search-location .current-val").text("Unable to get your location");
+        updatePosition("", "");
+      }
     );
   };
 
@@ -64,7 +64,7 @@ $(() => {
     getCurrentPosition();
   }
 
-  $('#Form_SearchForm').on('keyup keypress', (e) => {
+  $("#Form_SearchForm").on("keyup keypress", (e) => {
     var keyCode = e.keyCode || e.which;
     if (keyCode === 13) {
       e.preventDefault();
@@ -72,15 +72,15 @@ $(() => {
     }
   });
 
-  $('.get-current-location').on('click', (e) => {
+  $(".get-current-location").on("click", (e) => {
     e.preventDefault();
 
     getCurrentPosition();
     $newlocationholder.toggle();
-    $newLocation.val('');
+    $newLocation.val("");
   });
 
-  $setnewlocation.on('click', (e) => {
+  $setnewlocation.on("click", (e) => {
     e.preventDefault();
 
     $newlocationholder.toggle();
@@ -90,14 +90,14 @@ $(() => {
     getGeoPosition();
   });
 
-  $('.new-search').on('click', (e) => {
+  $(".new-search").on("click", (e) => {
     e.preventDefault();
 
-    $('.section-search-secondary').animate(
+    $(".section-search-secondary").animate(
       {
-        'max-height': 300,
+        "max-height": 300,
       },
-      'slow',
+      "slow"
     );
   });
 
@@ -129,17 +129,17 @@ $(() => {
             });
     }*/
 
-  const $map = $('#Map');
-  if (typeof google !== 'undefined' && $map.length) {
-    const $directions = $('#DirectionsPanel'),
-      $fromAddress = $('#FromAddress'),
-      $getDirections = $('#GetDirections'),
-      $directionContainer = $('#DirectionContainer'),
+  const $map = $("#Map");
+  if (typeof google !== "undefined" && $map.length) {
+    const $directions = $("#DirectionsPanel"),
+      $fromAddress = $("#FromAddress"),
+      $getDirections = $("#GetDirections"),
+      $directionContainer = $("#DirectionContainer"),
       directionsDisplay = new google.maps.DirectionsRenderer(),
       directionsService = new google.maps.DirectionsService(),
       currentPosition = {
-        lat: $map.data('lat'),
-        lng: $map.data('lng'),
+        lat: $map.data("lat"),
+        lng: $map.data("lng"),
       },
       map = new google.maps.Map($map[0], {
         zoom: 15,
@@ -172,7 +172,7 @@ $(() => {
             if (status === google.maps.DirectionsStatus.OK) {
               directionsDisplay.setDirections(response);
             }
-          },
+          }
         );
 
         $directionContainer.slideDown();

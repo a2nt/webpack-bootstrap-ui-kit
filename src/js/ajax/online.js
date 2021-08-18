@@ -1,12 +1,12 @@
 // ping online/offline state switch and detection
 
-import Events from '../_events';
-import Consts from '../_consts';
+import Events from "../_events";
+import Consts from "../_consts";
 
-const axios = require('axios');
+const axios = require("axios");
 
 export default ((W) => {
-  const NAME = 'main.online';
+  const NAME = "main.online";
   const D = document;
   const BODY = D.body;
 
@@ -21,7 +21,7 @@ export default ((W) => {
 
     update_online_status_lock = true;
     if (online) {
-      if (BODY.classList.contains('is-offline')) {
+      if (BODY.classList.contains("is-offline")) {
         console.log(`${NAME}: back Online`);
         W.dispatchEvent(new Event(Events.BACKONLINE));
       } else {
@@ -29,8 +29,8 @@ export default ((W) => {
         W.dispatchEvent(new Event(Events.ONLINE));
       }
 
-      BODY.classList.add('is-online');
-      BODY.classList.remove('is-offline');
+      BODY.classList.add("is-online");
+      BODY.classList.remove("is-offline");
 
       if (PING_META && !pingInterval) {
         console.log(`${NAME}: SESSION_PING is active`);
@@ -39,8 +39,8 @@ export default ((W) => {
     } else {
       console.log(`${NAME}: Offline`);
 
-      BODY.classList.add('is-offline');
-      BODY.classList.remove('is-online');
+      BODY.classList.add("is-offline");
+      BODY.classList.remove("is-online");
 
       clearInterval(pingInterval);
       pingInterval = null;
@@ -54,11 +54,11 @@ export default ((W) => {
   // session ping
   let session_ping_lock = false;
   const SESSION_PING = () => {
-    if (session_ping_lock || BODY.classList.contains('is-offline')) {
+    if (session_ping_lock || BODY.classList.contains("is-offline")) {
       return;
     }
 
-    const PING_URL = PING_META.getAttribute('content');
+    const PING_URL = PING_META.getAttribute("content");
 
     console.log(`${NAME}: session ping`);
     session_ping_lock = true;
@@ -80,9 +80,8 @@ export default ((W) => {
 
   // current browser online state
 
-
   const navigatorStateUpdate = () => {
-    if (typeof navigator.onLine !== 'undefined') {
+    if (typeof navigator.onLine !== "undefined") {
       if (!navigator.onLine) {
         UPDATE_ONLINE_STATUS(false);
       } else {

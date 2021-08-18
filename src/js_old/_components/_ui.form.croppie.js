@@ -1,15 +1,15 @@
-'use strict';
+"use strict";
 
-import $ from 'jquery';
+import $ from "jquery";
 
-import Events from '../_events';
-import SpinnerUI from './_ui.spinner';
+import Events from "../_events";
+import SpinnerUI from "./_ui.spinner";
 
-import 'croppie/croppie.js';
-import 'exif-js/exif.js';
+import "croppie/croppie.js";
+import "exif-js/exif.js";
 
 const CroppieUI = (($) => {
-  const NAME = 'jsCroppieUI';
+  const NAME = "jsCroppieUI";
   const DATA_KEY = NAME;
 
   const G = window;
@@ -18,7 +18,7 @@ const CroppieUI = (($) => {
   const jqteOptions = {
     color: false,
     fsize: false,
-    funit: 'em',
+    funit: "em",
     format: false,
     rule: false,
     source: false,
@@ -39,17 +39,17 @@ const CroppieUI = (($) => {
       ui.input = $el.find('input[type="file"]');
       //ui.inputData = $('<input type="hidden" class="base64enc" name="' + ui.input.attr('name') + 'base64" />');
 
-      ui.width = ui.input.data('width');
-      ui.height = ui.input.data('height');
+      ui.width = ui.input.data("width");
+      ui.height = ui.input.data("height");
 
       $el.append(
         '<div class="cropper-wrap"><div class="cropper-container"></div>' +
-          '<a href="#" class="btn-remove" style="display:none"><i class="fas fa-times"></i> Remove</a></div>',
+          '<a href="#" class="btn-remove" style="display:none"><i class="fas fa-times"></i> Remove</a></div>'
       );
       //$el.append(ui.inputData);
 
-      ui.uploadCropWrap = $el.find('.cropper-wrap');
-      ui.uploadCrop = ui.uploadCropWrap.find('.cropper-container');
+      ui.uploadCropWrap = $el.find(".cropper-wrap");
+      ui.uploadCrop = ui.uploadCropWrap.find(".cropper-container");
 
       const ratio = ui.width / (ui.uploadCrop.width() - 32);
       ui.uploadCrop.croppie({
@@ -63,24 +63,24 @@ const CroppieUI = (($) => {
 
       ui.uploadCrop.hide();
 
-      ui.input.on('change', (e) => {
+      ui.input.on("change", (e) => {
         this.readFile(e.currentTarget);
       });
 
-      ui.$btnRemove = $el.find('.btn-remove');
-      ui.$btnRemove.on('click', (e) => {
+      ui.$btnRemove = $el.find(".btn-remove");
+      ui.$btnRemove.on("click", (e) => {
         e.preventDefault();
 
-        ui.uploadCrop.removeClass('ready');
-        $el.find('.croppie-image').remove();
+        ui.uploadCrop.removeClass("ready");
+        $el.find(".croppie-image").remove();
 
-        ui.$el.find('input[type="file"]').val('');
+        ui.$el.find('input[type="file"]').val("");
         ui.$el.find('input[type="file"]').change();
 
         ui.uploadCropWrap.hide();
       });
 
-      if (ui.$el.find('img.croppie-image').length) {
+      if (ui.$el.find("img.croppie-image").length) {
         ui.$btnRemove.show();
       }
     }
@@ -88,14 +88,14 @@ const CroppieUI = (($) => {
     readFile(input) {
       const ui = this;
       const $el = ui.$el;
-      const $form = $el.closest('form');
+      const $form = $el.closest("form");
 
       if (input.files && input.files[0]) {
         const reader = new FileReader();
 
         reader.onload = (e) => {
-          ui.uploadCrop.addClass('ready');
-          ui.uploadCrop.croppie('bind', {
+          ui.uploadCrop.addClass("ready");
+          ui.uploadCrop.croppie("bind", {
             url: e.target.result,
           });
 
@@ -106,56 +106,56 @@ const CroppieUI = (($) => {
 
         reader.readAsDataURL(input.files[0]);
 
-        $form.off('submit');
-        $form.on('submit', (e) => {
+        $form.off("submit");
+        $form.on("submit", (e) => {
           console.log(`${NAME}: Processing submission ...`);
 
           e.preventDefault();
 
-          if ($form.data('locked')) {
-            console.warn(`${NAME}: Form#${$form.attr('id')} is locked.`);
+          if ($form.data("locked")) {
+            console.warn(`${NAME}: Form#${$form.attr("id")} is locked.`);
             return false;
           }
 
-          $form.data('locked', true);
+          $form.data("locked", true);
 
           SpinnerUI.show();
 
-          if (!ui.uploadCrop.hasClass('ready')) {
+          if (!ui.uploadCrop.hasClass("ready")) {
             return true;
           }
 
           ui.uploadCrop
-            .croppie('result', {
-              type: 'blob',
+            .croppie("result", {
+              type: "blob",
               size: {
                 width: ui.width,
                 height: ui.height,
               },
-              format: 'png',
+              format: "png",
             })
             .then((blob) => {
               const form = e.currentTarget;
               const data = new FormData(form);
-              const name = $(input).attr('name');
+              const name = $(input).attr("name");
 
-              data.delete('BackURL');
+              data.delete("BackURL");
               data.delete(name);
               data.append(name, blob, `${name}-image.png`);
-              data.append('ajax', '1');
+              data.append("ajax", "1");
 
-              if (!$(form).data('jsFormValidate').validate()) {
+              if (!$(form).data("jsFormValidate").validate()) {
                 return false;
               }
 
               $.ajax({
-                url: $(form).attr('action'),
+                url: $(form).attr("action"),
                 data,
                 processData: false,
                 contentType: false,
-                type: $(form).attr('method'),
+                type: $(form).attr("method"),
                 success: function (data) {
-                  $form.data('locked', false);
+                  $form.data("locked", false);
 
                   let IS_JSON = false;
                   let json = {};
@@ -167,39 +167,39 @@ const CroppieUI = (($) => {
                   }
 
                   if (IS_JSON) {
-                    if (typeof json['status'] !== 'undefined') {
-                      if (json['status'] === 'success') {
-                        MainUI.alert(json['message'], json['status']);
+                    if (typeof json["status"] !== "undefined") {
+                      if (json["status"] === "success") {
+                        MainUI.alert(json["message"], json["status"]);
 
-                        if (typeof json['link'] !== 'undefined') {
+                        if (typeof json["link"] !== "undefined") {
                           console.log(
-                            `${NAME}: Finished submission > JSON ... Redirecting to ${json['link']}.`,
+                            `${NAME}: Finished submission > JSON ... Redirecting to ${json["link"]}.`
                           );
 
                           setTimeout(() => {
-                            G.location = json['link'];
+                            G.location = json["link"];
                           }, 2000);
                         } else {
                           console.warn(
-                            `${NAME}: Finished submission > JSON no redirect link.`,
+                            `${NAME}: Finished submission > JSON no redirect link.`
                           );
                         }
-                      } else if (json['status'] === 'error') {
-                        MainUI.alert(json['message'], json['status']);
+                      } else if (json["status"] === "error") {
+                        MainUI.alert(json["message"], json["status"]);
                       }
                     }
 
-                    if (typeof json['form'] !== 'undefined') {
+                    if (typeof json["form"] !== "undefined") {
                       console.log(
-                        `${NAME}: Finished submission > JSON. Got new form response.`,
+                        `${NAME}: Finished submission > JSON. Got new form response.`
                       );
 
-                      $(form).replaceWith(json['form']);
+                      $(form).replaceWith(json["form"]);
                       $(G).trigger(Events.AJAX);
                     }
                   } else {
                     console.log(
-                      `${NAME}: Finished submission > DATA response.`,
+                      `${NAME}: Finished submission > DATA response.`
                     );
 
                     $(form).replaceWith(data);
@@ -216,7 +216,7 @@ const CroppieUI = (($) => {
         });
       } else {
         console.log(
-          `${NAME}: Sorry - your browser doesn't support the FileReader API.`,
+          `${NAME}: Sorry - your browser doesn't support the FileReader API.`
         );
       }
     }
@@ -249,7 +249,7 @@ const CroppieUI = (($) => {
 
   // auto-apply
   $(window).on(`${NAME}.init ${Events.AJAX} ${Events.LOADED}`, () => {
-    $('.field.croppie').jsCroppieUI();
+    $(".field.croppie").jsCroppieUI();
   });
 
   return CroppieUI;

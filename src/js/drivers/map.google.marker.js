@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 const Obj = {
   init: () => {
@@ -10,9 +10,9 @@ const Obj = {
         ui.ownerMap = options.map;
         //ui.setMap(options.map);
         ui.position = options.position;
-        ui.html = options.html ?
-          options.html :
-          '<div class="mapboxgl-marker"><i class="marker-icon fas fa-map-marker-alt"></i></div>';
+        ui.html = options.html
+          ? options.html
+          : '<div class="mapboxgl-marker"><i class="marker-icon fas fa-map-marker-alt"></i></div>';
         ui.divClass = options.divClass;
         ui.align = options.align;
         ui.isDebugMode = options.debug;
@@ -20,7 +20,7 @@ const Obj = {
         ui.onMouseOver = options.onMouseOver;
 
         ui.isBoolean = (arg) => {
-          if (typeof arg === 'boolean') {
+          if (typeof arg === "boolean") {
             return true;
           } else {
             return false;
@@ -28,7 +28,7 @@ const Obj = {
         };
 
         ui.isNotUndefined = (arg) => {
-          if (typeof arg !== 'undefined') {
+          if (typeof arg !== "undefined") {
             return true;
           } else {
             return false;
@@ -44,7 +44,7 @@ const Obj = {
         };
 
         ui.isString = (arg) => {
-          if (typeof arg === 'string') {
+          if (typeof arg === "string") {
             return true;
           } else {
             return false;
@@ -52,7 +52,7 @@ const Obj = {
         };
 
         ui.isFunction = (arg) => {
-          if (typeof arg === 'function') {
+          if (typeof arg === "function") {
             return true;
           } else {
             return false;
@@ -63,8 +63,8 @@ const Obj = {
         const ui = this;
 
         // Create div element.
-        ui.div = document.createElement('div');
-        ui.div.style.position = 'absolute';
+        ui.div = document.createElement("div");
+        ui.div.style.position = "absolute";
 
         // Validate and set custom div class
         if (ui.isNotUndefined(ui.divClass) && ui.hasContent(ui.divClass))
@@ -73,26 +73,26 @@ const Obj = {
         // Validate and set custom HTML
         if (
           ui.isNotUndefined(ui.html) &&
-                    ui.hasContent(ui.html) &&
-                    ui.isString(ui.html)
+          ui.hasContent(ui.html) &&
+          ui.isString(ui.html)
         )
           ui.div.innerHTML = ui.html;
 
         // If debug mode is enabled custom content will be replaced with debug content
         if (ui.isBoolean(ui.isDebugMode) && ui.isDebugMode) {
-          ui.div.className = 'debug-mode';
+          ui.div.className = "debug-mode";
           ui.div.innerHTML =
-                        '<div style="height: 10px; width: 10px; background: red; border-radius: 100%;"></div>' +
-                        '<div style="position: absolute; top: 5px; padding: 5px; width: 130px; text-align: center; font-size: 18px; text-transform: uppercase; font-weight: bolder; background: red; color: white; font-family: Arial;">Debug mode</div>';
+            '<div style="height: 10px; width: 10px; background: red; border-radius: 100%;"></div>' +
+            '<div style="position: absolute; top: 5px; padding: 5px; width: 130px; text-align: center; font-size: 18px; text-transform: uppercase; font-weight: bolder; background: red; color: white; font-family: Arial;">Debug mode</div>';
           ui.div.setAttribute(
-            'style',
-            'position: absolute;' +
-                        'border: 5px dashed red;' +
-                        'height: 150px;' +
-                        'width: 150px;' +
-                        'display: flex;' +
-                        'justify-content: center;' +
-                        'align-items: center;',
+            "style",
+            "position: absolute;" +
+              "border: 5px dashed red;" +
+              "height: 150px;" +
+              "width: 150px;" +
+              "display: flex;" +
+              "justify-content: center;" +
+              "align-items: center;"
           );
         }
 
@@ -100,14 +100,14 @@ const Obj = {
         ui.getPanes().overlayMouseTarget.appendChild(ui.div);
 
         // Add listeners to the element.
-        google.maps.event.addDomListener(ui.div, 'click', (event) => {
-          google.maps.event.trigger(ui, 'click');
+        google.maps.event.addDomListener(ui.div, "click", (event) => {
+          google.maps.event.trigger(ui, "click");
           if (ui.isFunction(ui.onClick)) ui.onClick();
           event.stopPropagation();
         });
 
-        google.maps.event.addDomListener(ui.div, 'mouseover', (event) => {
-          google.maps.event.trigger(ui, 'mouseover');
+        google.maps.event.addDomListener(ui.div, "mouseover", (event) => {
+          google.maps.event.trigger(ui, "mouseover");
           if (ui.isFunction(ui.onMouseOver)) ui.onMouseOver();
           event.stopPropagation();
         });
@@ -116,7 +116,7 @@ const Obj = {
       draw() {
         const ui = this;
 
-        let div = document.querySelector('.popup');
+        let div = document.querySelector(".popup");
         if (!div.length) {
           div = ui.div;
         }
@@ -125,11 +125,13 @@ const Obj = {
         const projection = ui.getProjection();
 
         if (!projection) {
-          console.log('GoogleMapsHtmlOverlay: current map is missing');
+          console.log("GoogleMapsHtmlOverlay: current map is missing");
           return null;
         }
 
-        const positionInPixels = projection.fromLatLngToDivPixel(ui.getPosition());
+        const positionInPixels = projection.fromLatLngToDivPixel(
+          ui.getPosition()
+        );
 
         // Align HTML overlay relative to original position
         const offset = {
@@ -139,40 +141,40 @@ const Obj = {
         const divWidth = div.offsetWidth;
         const divHeight = div.offsetHeight;
 
-        switch (Array.isArray(ui.align) ? ui.align.join(' ') : '') {
-          case 'left top':
+        switch (Array.isArray(ui.align) ? ui.align.join(" ") : "") {
+          case "left top":
             offset.y = divHeight;
             offset.x = divWidth;
             break;
-          case 'left center':
+          case "left center":
             offset.y = divHeight / 2;
             offset.x = divWidth;
             break;
-          case 'left bottom':
+          case "left bottom":
             offset.y = 0;
             offset.x = divWidth;
             break;
-          case 'center top':
+          case "center top":
             offset.y = divHeight;
             offset.x = divWidth / 2;
             break;
-          case 'center center':
+          case "center center":
             offset.y = divHeight / 2;
             offset.x = divWidth / 2;
             break;
-          case 'center bottom':
+          case "center bottom":
             offset.y = 0;
             offset.x = divWidth / 2;
             break;
-          case 'right top':
+          case "right top":
             offset.y = divHeight;
             offset.x = 0;
             break;
-          case 'right center':
+          case "right center":
             offset.y = divHeight / 2;
             offset.x = 0;
             break;
-          case 'right bottom':
+          case "right bottom":
             offset.y = 0;
             offset.x = 0;
             break;

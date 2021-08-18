@@ -1,13 +1,13 @@
-'use strict';
+"use strict";
 
-import $ from 'jquery';
-import Events from '../_events';
+import $ from "jquery";
+import Events from "../_events";
 
 const HeaderUI = (($) => {
   const D = document;
   const W = window;
-  const $Body = $('html,body');
-  const NAME = 'HeaderUI';
+  const $Body = $("html,body");
+  const NAME = "HeaderUI";
   const CLASSNAME = `js${NAME}`;
 
   class HeaderUI {
@@ -22,9 +22,9 @@ const HeaderUI = (($) => {
         const h = $header.height();
         const s = $Body.scrollTop();
         if (s + 50 > h) {
-          $Body.addClass('shrink');
+          $Body.addClass("shrink");
         } else {
-          $Body.removeClass('shrink');
+          $Body.removeClass("shrink");
         }
       };
 
@@ -33,23 +33,23 @@ const HeaderUI = (($) => {
       const updateFooter = (i, el) => {
         const $el = $(el);
         const footerHeight = $el.height();
-        $el.css('height', footerHeight);
+        $el.css("height", footerHeight);
 
-        $el.css('margin-top', -footerHeight);
-        $el.siblings('.wrapper').css('padding-bottom', footerHeight);
+        $el.css("margin-top", -footerHeight);
+        $el.siblings(".wrapper").css("padding-bottom", footerHeight);
       };
 
-      $('.footer,.jsFooterUI').css('height', 'auto');
+      $(".footer,.jsFooterUI").css("height", "auto");
       setTimeout(() => {
-        $('.footer,.jsFooterUI').each(updateFooter);
+        $(".footer,.jsFooterUI").each(updateFooter);
       }, 500);
     }
 
     static dispose() {
       console.log(`${NAME}: dispose`);
 
-      $Body.removeClass('shrink');
-      $(`#Header,.js${NAME},.footer,.jsFooterUI,.wrapper`).attr('css', '');
+      $Body.removeClass("shrink");
+      $(`#Header,.js${NAME},.footer,.jsFooterUI,.wrapper`).attr("css", "");
     }
   }
 

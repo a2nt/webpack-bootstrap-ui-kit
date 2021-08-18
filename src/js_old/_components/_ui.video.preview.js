@@ -1,13 +1,13 @@
-'use strict';
+"use strict";
 
-import $ from 'jquery';
+import $ from "jquery";
 
-import MainUI from '../_main';
-import Events from '../_events';
-import SpinnerUI from './_ui.spinner';
+import MainUI from "../_main";
+import Events from "../_events";
+import SpinnerUI from "./_ui.spinner";
 
 const VideoPreviewUI = (($) => {
-  const NAME = 'jsVideoPreviewUI';
+  const NAME = "jsVideoPreviewUI";
   const DATA_KEY = NAME;
 
   const G = window;
@@ -15,16 +15,15 @@ const VideoPreviewUI = (($) => {
 
   class VideoPreviewUI {
     constructor(el) {
-
       const ui = this;
       ui.$_el = $(el);
       ui.innerHTML = ui.$_el[0].innerHTML;
 
       ui.$_el.data(DATA_KEY, this);
-      const href = ui.$_el.attr('href') || ui.$_el.data('href');
+      const href = ui.$_el.attr("href") || ui.$_el.data("href");
       const YouTubeGetID = (url) => {
         const parsedURL = url.split(
-          /(vi\/|v%3D|v=|\/v\/|youtu\.be\/|\/embed\/)/,
+          /(vi\/|v%3D|v=|\/v\/|youtu\.be\/|\/embed\/)/
         );
         console.log(`${NAME}: ${parsedURL}`);
         return undefined !== parsedURL[2]
@@ -36,31 +35,31 @@ const VideoPreviewUI = (($) => {
 
       if (
         (video = href.match(
-          /(youtube|youtube-nocookie|youtu|vimeo)\.(com|be)\/(watch\?v=([\w-]+)|([\w-]+))/,
+          /(youtube|youtube-nocookie|youtu|vimeo)\.(com|be)\/(watch\?v=([\w-]+)|([\w-]+))/
         ))
       ) {
         let video_id;
 
         if (
-          video[1] === 'youtube' ||
-          video[1] === 'youtube-nocookie' ||
-          video[1] === 'youtu'
+          video[1] === "youtube" ||
+          video[1] === "youtube-nocookie" ||
+          video[1] === "youtu"
         ) {
           video_id = YouTubeGetID(href);
         }
 
-        if (video[1] == 'vimeo') {
+        if (video[1] == "vimeo") {
           video_id = video[3];
-          ui.$_el.addClass('loading');
+          ui.$_el.addClass("loading");
           $.ajax({
-            type: 'GET',
+            type: "GET",
             url: `https://vimeo.com/api/v2/video/${video_id}.json`,
-            jsonp: 'callback',
-            dataType: 'jsonp',
+            jsonp: "callback",
+            dataType: "jsonp",
             success: function (data) {
               const thumbnail_src = data[0].thumbnail_large;
               ui.show(thumbnail_src);
-              ui.$_el.removeClass('loading');
+              ui.$_el.removeClass("loading");
             },
           });
 
@@ -75,7 +74,7 @@ const VideoPreviewUI = (($) => {
 
     show(src) {
       const ui = this;
-      ui.$_el[0].innerHTML = '';
+      ui.$_el[0].innerHTML = "";
       ui.$_el.append(`<img src="${src}" alt="Video" />`);
     }
 

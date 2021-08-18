@@ -1,16 +1,16 @@
-'use strict';
+"use strict";
 
-import $ from 'jquery';
+import $ from "jquery";
 
-import Events from '../_events';
-import SpinnerUI from './_ui.spinner';
-import FormFieldUI from './_ui.form.fields';
+import Events from "../_events";
+import SpinnerUI from "./_ui.spinner";
+import FormFieldUI from "./_ui.form.fields";
 
 const FormBasics = (($) => {
   // Constants
-  const NAME = 'jsFormBasics';
+  const NAME = "jsFormBasics";
   const DATA_KEY = NAME;
-  const $Html = $('html, body');
+  const $Html = $("html, body");
   const W = window;
   const D = document;
 
@@ -37,8 +37,8 @@ const FormBasics = (($) => {
       $fields.each((e, el) => {
         const $el = $(el);
 
-        if ($el.hasClass('required') || $el.attr('aria-required')) {
-          $el.closest('.field').addClass('required');
+        if ($el.hasClass("required") || $el.attr("aria-required")) {
+          $el.closest(".field").addClass("required");
         }
       });
 
@@ -46,50 +46,50 @@ const FormBasics = (($) => {
       $radioOptions.each((e, el) => {
         const $el = $(el);
 
-        if ($el.is(':checked')) {
-          $el.parents('.radio').addClass('checked');
+        if ($el.is(":checked")) {
+          $el.parents(".radio").addClass("checked");
         }
       });
 
-      $radioOptions.on('change', (e) => {
+      $radioOptions.on("change", (e) => {
         const $el = $(e.currentTarget);
-        const $parent = $el.parents('.radio');
+        const $parent = $el.parents(".radio");
 
-        $parent.siblings('.radio').each((i, el) => {
+        $parent.siblings(".radio").each((i, el) => {
           const $el = $(el);
 
-          if (!$el.find('input').is(':checked')) {
-            $el.removeClass('checked');
+          if (!$el.find("input").is(":checked")) {
+            $el.removeClass("checked");
           }
         });
 
-        if ($el.is(':checked')) {
-          $parent.addClass('checked');
+        if ($el.is(":checked")) {
+          $parent.addClass("checked");
         }
       });
 
-      $el.on('submit', (e) => {
+      $el.on("submit", (e) => {
         setTimeout(() => {
-          if (!$el.find('.error').length) {
+          if (!$el.find(".error").length) {
             SpinnerUI.show();
           }
         }, 100);
       });
 
-      $('.field.password .show-password').on('click', (e) => {
+      $(".field.password .show-password").on("click", (e) => {
         console.log(`${NAME}: .field.password .show-password (click)`);
 
         const $el = $(e.currentTarget);
-        const $field = $el.siblings('input');
-        const $icon = $el.find('.fas');
-        const attr = $field.attr('type');
+        const $field = $el.siblings("input");
+        const $icon = $el.find(".fas");
+        const attr = $field.attr("type");
 
-        if (attr === 'password') {
-          $field.attr('type', 'text');
-          $icon.removeClass('fa-eye').addClass('fa-eye-slash');
+        if (attr === "password") {
+          $field.attr("type", "text");
+          $icon.removeClass("fa-eye").addClass("fa-eye-slash");
         } else {
-          $field.attr('type', 'password');
-          $icon.removeClass('fa-eye-slash').addClass('fa-eye');
+          $field.attr("type", "password");
+          $icon.removeClass("fa-eye-slash").addClass("fa-eye");
         }
       });
 
@@ -131,7 +131,7 @@ const FormBasics = (($) => {
   };
 
   const init = () => {
-    $('form').jsFormBasics();
+    $("form").jsFormBasics();
   };
 
   // auto-apply

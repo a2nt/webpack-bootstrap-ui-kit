@@ -1,16 +1,16 @@
-'use strict';
+"use strict";
 
-import $ from 'jquery';
+import $ from "jquery";
 
-import Events from '../_events';
-import CookieUI from './_ui.cookie';
+import Events from "../_events";
+import CookieUI from "./_ui.cookie";
 
 const FlyoutUI = (($) => {
   const W = window;
   const D = document;
-  const $Body = $('body');
+  const $Body = $("body");
 
-  const NAME = 'FlyoutUI';
+  const NAME = "FlyoutUI";
   const COOKIE = `${NAME}-hide`;
   const TIMEOUT = 2000;
 
@@ -29,14 +29,14 @@ const FlyoutUI = (($) => {
       ui.$modal.data(NAME, ui);
 
       if ($close.length) {
-        $close.on('click', () => {
+        $close.on("click", () => {
           ui.hide();
         });
       }
 
       const hide = CookieUI.get(COOKIE);
 
-      if (!$close.length || !hide || hide !== 'true') {
+      if (!$close.length || !hide || hide !== "true") {
         setTimeout(() => {
           ui.show();
         }, TIMEOUT);
@@ -52,7 +52,7 @@ const FlyoutUI = (($) => {
     static hide(callback) {
       const ui = this;
 
-      CookieUI.set(COOKIE, 'true', 1);
+      CookieUI.set(COOKIE, "true", 1);
       ui.$modal.removeClass(`flyout-${NAME}__active`);
     }
   }

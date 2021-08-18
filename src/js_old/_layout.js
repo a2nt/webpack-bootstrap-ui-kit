@@ -1,16 +1,16 @@
-'use strict';
+"use strict";
 
-import $ from 'jquery';
+import $ from "jquery";
 
-import Events from './_events';
+import Events from "./_events";
 
 const LayoutUI = (($) => {
   // Constants
   const W = window;
   const D = document;
-  const $Body = $('body');
+  const $Body = $("body");
 
-  const NAME = 'LayoutUI';
+  const NAME = "LayoutUI";
 
   const datepickerOptions = {
     autoclose: true,
@@ -30,7 +30,7 @@ const LayoutUI = (($) => {
 
       // Custom fonts
       $Body.append(
-        '<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,700,700i&display=swap" rel="stylesheet">',
+        '<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,700,700i&display=swap" rel="stylesheet">'
       );
 
       /*google analytics */
@@ -39,7 +39,6 @@ const LayoutUI = (($) => {
         ga('create', 'UA-********-*', 'auto');
         ga('send', 'pageview');
       });*/
-
 
       // Fire further js when layout is ready
       $(W).trigger(Events.LODEDANDREADY);

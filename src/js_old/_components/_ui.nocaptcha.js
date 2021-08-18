@@ -1,15 +1,15 @@
-'use strict';
+"use strict";
 
-import $ from 'jquery';
-import Events from '../lib/_events';
+import $ from "jquery";
+import Events from "../lib/_events";
 
 const NoCaptcha = (($) => {
   // Constants
   const $window = $(window);
   const D = document;
-  const $Body = $('body');
+  const $Body = $("body");
 
-  const NAME = 'jsNoCaptcha';
+  const NAME = "jsNoCaptcha";
 
   class NoCaptcha {
     static init() {
@@ -18,14 +18,17 @@ const NoCaptcha = (($) => {
 
       console.log(`${NAME}: init`);
 
-      if ($('.g-recaptcha').length && typeof $window[0].grecaptcha === 'undefined') {
+      if (
+        $(".g-recaptcha").length &&
+        typeof $window[0].grecaptcha === "undefined"
+      ) {
         console.log(`${NAME}: Loading Captcha API`);
 
         $.getScript(
-          'https://www.google.com/recaptcha/api.js?render=explicit&hl=en&onload=noCaptchaFieldRender',
+          "https://www.google.com/recaptcha/api.js?render=explicit&hl=en&onload=noCaptchaFieldRender",
           () => {
             this.renderCaptcha();
-          },
+          }
         );
       } else {
         this.renderCaptcha();
@@ -38,41 +41,44 @@ const NoCaptcha = (($) => {
 
     static renderCaptcha() {
       const grecaptcha = $window[0].grecaptcha;
-      if (typeof grecaptcha === 'undefined' || typeof grecaptcha.render === 'undefined') {
+      if (
+        typeof grecaptcha === "undefined" ||
+        typeof grecaptcha.render === "undefined"
+      ) {
         return;
       }
 
       console.log(`${NAME}: Rendering Captcha`);
-      const $_noCaptchaFields = $('.g-recaptcha');
+      const $_noCaptchaFields = $(".g-recaptcha");
 
-      if (!$('.g-recaptcha').length) {
+      if (!$(".g-recaptcha").length) {
         console.log(`${NAME}: No Captcha fields`);
         return;
       }
 
       const submitListener = (e) => {
-        const $field = $(e.currentTarget).find('.g-recaptcha');
-        grecaptcha.execute($field.data('widgetid'));
+        const $field = $(e.currentTarget).find(".g-recaptcha");
+        grecaptcha.execute($field.data("widgetid"));
       };
 
       $_noCaptchaFields.each((i, field) => {
         const $field = $(field);
 
-        if ($field.data('widgetid') || $field.html().length) {
+        if ($field.data("widgetid") || $field.html().length) {
           return;
         }
 
-        const $form = $field.data('form') ?
-          $(`#${$field.data('form')}`) :
-          $field.parents('form');
+        const $form = $field.data("form")
+          ? $(`#${$field.data("form")}`)
+          : $field.parents("form");
 
         const widget_id = grecaptcha.render(field, $field.data());
-        $field.data('widgetid', widget_id);
+        $field.data("widgetid", widget_id);
 
         // For the invisible captcha we need to setup some callback listeners
-        if ($field.data('size') === 'invisible' && !$field.data('callback')) {
+        if ($field.data("size") === "invisible" && !$field.data("callback")) {
           grecaptcha.execute(widget_id);
-          $form.on('submit', submitListener);
+          $form.on("submit", submitListener);
         }
       });
     }

@@ -1,15 +1,15 @@
-'use strict';
+"use strict";
 
-import $ from 'jquery';
+import $ from "jquery";
 
-import select2 from 'select2/dist/js/select2.js';
-import Events from '../_events';
+import select2 from "select2/dist/js/select2.js";
+import Events from "../_events";
 
 const FormSelect2 = (($) => {
   // Constants
-  const NAME = 'jsFormSelect2';
+  const NAME = "jsFormSelect2";
   const DATA_KEY = NAME;
-  const $Html = $('html, body');
+  const $Html = $("html, body");
   const W = window;
   const D = document;
 
@@ -27,8 +27,8 @@ const FormSelect2 = (($) => {
       const $fields = $el.find(Events.FORM_FIELDS);
 
       const $selectFields = $el
-        .find('select:not([readonly])')
-        .not('.no-select2');
+        .find("select:not([readonly])")
+        .not(".no-select2");
 
       $selectFields.each((i, el) => {
         $(el).select2();
@@ -46,12 +46,12 @@ const FormSelect2 = (($) => {
       const $el = $(ui._el);
 
       const $selectFields = $el
-        .find('select:not([readonly])')
-        .not('.no-select2');
+        .find("select:not([readonly])")
+        .not(".no-select2");
       $selectFields.each((i, el) => {
         const $el = $(el);
-        if ($el.hasClass('select2-hidden-accessible')) {
-          $el.select2('destroy');
+        if ($el.hasClass("select2-hidden-accessible")) {
+          $el.select2("destroy");
         }
       });
 
@@ -83,7 +83,7 @@ const FormSelect2 = (($) => {
   };
 
   const init = () => {
-    $('form').jsFormSelect2();
+    $("form").jsFormSelect2();
   };
 
   // auto-apply

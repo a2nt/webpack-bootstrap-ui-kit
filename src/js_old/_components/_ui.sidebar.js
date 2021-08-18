@@ -1,16 +1,16 @@
-'use strict';
+"use strict";
 
 //import StickySidebar from 'sticky-sidebar/src/sticky-sidebar';
-import $ from 'jquery';
-import Events from '../_events';
+import $ from "jquery";
+import Events from "../_events";
 
 const SidebarUI = (($) => {
   const D = document;
   const W = window;
-  const $Body = $('body');
-  const NAME = 'SidebarUI';
+  const $Body = $("body");
+  const NAME = "SidebarUI";
   const CLASSNAME = `js${NAME}`;
-  const CONTENTHOLDER = 'content-holder';
+  const CONTENTHOLDER = "content-holder";
   const INNERWRAPPER = `${CLASSNAME}__inner`;
 
   class SidebarUI {
@@ -50,18 +50,18 @@ const SidebarUI = (($) => {
 
         // normal pos
         if (contentOffset >= scrollPos) {
-          $innerWrapper.attr('style', '');
+          $innerWrapper.attr("style", "");
         } else if (
           scrollPos >=
           contentOffset + contentOffsetHeight - $innerWrapper[0].offsetHeight
         ) {
           // bottom pos
-          $innerWrapper.attr('style', `position:absolute;bottom:${fontSize}px`);
+          $innerWrapper.attr("style", `position:absolute;bottom:${fontSize}px`);
         } else {
           // scrolled pos
           $innerWrapper.attr(
-            'style',
-            `position:fixed;top:${fontSize}px;width:${sidebarWidth}px`,
+            "style",
+            `position:fixed;top:${fontSize}px;width:${sidebarWidth}px`
           );
         }
       });

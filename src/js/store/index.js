@@ -1,4 +1,4 @@
-import configure from './configure'
+import configure from "./configure";
 const store = configure();
 
 /*import {
@@ -9,11 +9,11 @@ const store = configure();
 
 store.subscribe(() => console.log(store.getState()));
 store.dispatch({
-  type: 'counter/incremented',
-})
+  type: "counter/incremented",
+});
 store.dispatch({
-  type: 'counter/incremented',
-})
+  type: "counter/incremented",
+});
 store.dispatch({
-  type: 'counter/decremented',
-})
+  type: "counter/decremented",
+});

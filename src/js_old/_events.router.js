@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-import $ from 'jquery';
+import $ from "jquery";
 
 /**
  * Route side-wide events
@@ -14,19 +14,19 @@ const EventsUI = (($) => {
   const W = window;
   const $W = $(W);
   const D = document;
-  const $Body = $('body');
+  const $Body = $("body");
 
-  const NAME = 'EventsUI';
+  const NAME = "EventsUI";
 
   class EventsUI {
     static process(el, args) {
       let modEl = el;
       const eventName = args[0];
-      const tagName = typeof el !== undefined ? $(el).prop('tagName') : null;
+      const tagName = typeof el !== undefined ? $(el).prop("tagName") : null;
 
       switch (tagName) {
-        case 'HTML':
-        case 'BODY':
+        case "HTML":
+        case "BODY":
           modEl = $W;
           break;
       }
@@ -52,11 +52,11 @@ const EventsUI = (($) => {
     let el = this;
     const args = arguments;
 
-    const tagName = typeof el !== undefined ? $(el).prop('tagName') : null;
+    const tagName = typeof el !== undefined ? $(el).prop("tagName") : null;
 
     switch (tagName) {
-      case 'HTML':
-      case 'BODY':
+      case "HTML":
+      case "BODY":
         el = $W;
         break;
     }

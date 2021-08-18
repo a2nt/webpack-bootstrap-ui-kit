@@ -1,40 +1,40 @@
-import $ from 'jquery';
-import Events from '../_events';
+import $ from "jquery";
+import Events from "../_events";
 
-import FormBasics from './_ui.form.basics';
-import FormValidateField from './_ui.form.validate.field';
-import SpinnerUI from './_ui.spinner';
+import FormBasics from "./_ui.form.basics";
+import FormValidateField from "./_ui.form.validate.field";
+import SpinnerUI from "./_ui.spinner";
 
 const FormValidate = (($) => {
   // Constants
-  const NAME = 'jsFormValidate';
+  const NAME = "jsFormValidate";
   const DATA_KEY = NAME;
-  const $Html = $('html, body');
+  const $Html = $("html, body");
 
   class FormValidate {
     constructor(element) {
       const ui = this;
       const $element = $(element);
-      const $fields = $element.find('input,textarea,select');
+      const $fields = $element.find("input,textarea,select");
 
       ui._element = element;
       ui.$element = $element;
       $element.data(DATA_KEY, this);
 
       ui._fields = $fields;
-      ui._stepped_form = $element.data('jsSteppedForm');
+      ui._stepped_form = $element.data("jsSteppedForm");
 
       // prevent browsers checks (will do it using JS)
-      $element.attr('novalidate', 'novalidate');
+      $element.attr("novalidate", "novalidate");
 
       $element.on(Events.FORM_INIT_STEPPED, () => {
-        ui._stepped_form = $element.data('jsSteppedForm');
+        ui._stepped_form = $element.data("jsSteppedForm");
       });
 
       // init fields validation
       $fields.each((i, el) => {
         // skip some fields here
-        if ($(el).attr('role') === 'combobox') {
+        if ($(el).attr("role") === "combobox") {
           return;
         }
 
@@ -42,16 +42,16 @@ const FormValidate = (($) => {
       });
 
       // check form
-      $element.on('submit', (e) => {
+      $element.on("submit", (e) => {
         ui.validate(true, () => {
           e.preventDefault();
 
           // switch to step
           if (ui._stepped_form) {
-            const $el = $element.find('.error').first();
+            const $el = $element.find(".error").first();
 
             if ($el.length) {
-              ui._stepped_form.step($el.parents('.step'));
+              ui._stepped_form.step($el.parents(".step"));
             }
           }
 
@@ -78,14 +78,14 @@ const FormValidate = (($) => {
       const ui = this;
       let valid = true;
 
-      ui._fields.filter(':visible').each((i, el) => {
+      ui._fields.filter(":visible").each((i, el) => {
         const $el = $(el);
-        const fieldUI = $el.data('jsFormValidateField');
+        const fieldUI = $el.data("jsFormValidateField");
 
         if (fieldUI && !fieldUI.validate()) {
           SpinnerUI.hide();
 
-          ui.$element.addClass('error');
+          ui.$element.addClass("error");
 
           if (badCallback) {
             badCallback();
@@ -123,11 +123,11 @@ const FormValidate = (($) => {
 
   // auto-apply
   $(window).on(`${NAME}.init ${Events.AJAX} ${Events.LOADED}`, () => {
-    $('form').each((i, el) => {
+    $("form").each((i, el) => {
       const $el = $(el);
 
       // skip some forms
-      if ($el.hasClass('no-validation')) {
+      if ($el.hasClass("no-validation")) {
         return true;
       }
 

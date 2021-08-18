@@ -1,10 +1,10 @@
-'use strict';
+"use strict";
 
 //import $ from 'jquery';
-import '../scss/app.scss';
+import "../scss/app.scss";
 
-import { Dropdown } from 'bootstrap';
-import Page from './_components/_page.jsx';
+import { Dropdown } from "bootstrap";
+import Page from "./_components/_page.jsx";
 
 //import 'hammerjs/hammer';
 //import 'jquery-hammerjs/jquery.hammer';
@@ -64,11 +64,11 @@ import 'bootstrap/js/dist/tab';*/
 //import './_components/_ui.video.preview';
 
 // Meta Lightbox
-import '@a2nt/meta-lightbox-react/src/js/app';
+import "@a2nt/meta-lightbox-react/src/js/app";
 
 const GraphPage = ReactDOM.render(
   <Page />,
-  document.getElementById('MainContent'),
+  document.getElementById("MainContent")
 );
 
 //import Confirmation from 'bootstrap-confirmation2/dist/bootstrap-confirmation';
@@ -90,8 +90,8 @@ function importAll(r) {
 }
 
 const images = importAll(
-  require.context('../img/', false, /\.(png|jpe?g|svg)$/),
+  require.context("../img/", false, /\.(png|jpe?g|svg)$/)
 );
 const fontAwesome = importAll(
-  require.context('font-awesome', false, /\.(otf|eot|svg|ttf|woff|woff2)$/),
+  require.context("font-awesome", false, /\.(otf|eot|svg|ttf|woff|woff2)$/)
 );

@@ -1,40 +1,40 @@
-'use strict';
+"use strict";
 
-import $ from 'jquery';
-import mapBoxGL from 'mapbox-gl';
+import $ from "jquery";
+import mapBoxGL from "mapbox-gl";
 
-import Events from '../../_events';
+import Events from "../../_events";
 
 const MapBoxDriver = (($) => {
   class MapBoxDriver {
     getName() {
-      return 'MapBoxDriver';
+      return "MapBoxDriver";
     }
 
     init($el, config = []) {
       const ui = this;
 
-      mapBoxGL.accessToken = config['key'];
+      mapBoxGL.accessToken = config["key"];
 
       ui.map = new mapBoxGL.Map({
-        container: $el.find('.mapAPI-map')[0],
-        center: config['center'] ? config['center'] : [0, 0],
+        container: $el.find(".mapAPI-map")[0],
+        center: config["center"] ? config["center"] : [0, 0],
         //hash: true,
-        style: config['style']
-          ? config['style']
-          : 'mapbox://styles/mapbox/streets-v9',
-        localIdeographFontFamily: config['font-family'],
-        zoom: config['mapZoom'] ? config['mapZoom'] : 10,
+        style: config["style"]
+          ? config["style"]
+          : "mapbox://styles/mapbox/streets-v9",
+        localIdeographFontFamily: config["font-family"],
+        zoom: config["mapZoom"] ? config["mapZoom"] : 10,
         attributionControl: false,
         antialias: true,
-        accessToken: config['key'],
+        accessToken: config["key"],
       })
         .addControl(
           new mapBoxGL.AttributionControl({
             compact: true,
-          }),
+          })
         )
-        .addControl(new mapBoxGL.NavigationControl(), 'top-right')
+        .addControl(new mapBoxGL.NavigationControl(), "top-right")
         .addControl(
           new mapBoxGL.GeolocateControl({
             positionOptions: {
@@ -42,24 +42,24 @@ const MapBoxDriver = (($) => {
             },
             trackUserLocation: true,
           }),
-          'bottom-right',
+          "bottom-right"
         )
         .addControl(
           new mapBoxGL.ScaleControl({
             maxWidth: 80,
-            unit: 'metric',
+            unit: "metric",
           }),
-          'top-left',
+          "top-left"
         )
         .addControl(new mapBoxGL.FullscreenControl());
 
-      ui.map.on('load', (e) => {
+      ui.map.on("load", (e) => {
         $el.trigger(Events.MAPAPILOADED);
       });
 
       ui.popup = new mapBoxGL.Popup({
         closeOnClick: false,
-        className: 'popup',
+        className: "popup",
       });
     }
 
@@ -68,16 +68,13 @@ const MapBoxDriver = (($) => {
 
       // create a DOM el for the marker
       const $el = $(
-        `<div id="Marker${config['id']}" data-id="${config['id']}" class="marker">${config['icon']}</div>`,
+        `<div id="Marker${config["id"]}" data-id="${config["id"]}" class="marker">${config["icon"]}</div>`
       );
 
-      $el.on('click', (e) => {
-        ui.popup
-          .setLngLat(crds)
-          .setHTML(config['content'])
-          .addTo(ui.map);
+      $el.on("click", (e) => {
+        ui.popup.setLngLat(crds).setHTML(config["content"]).addTo(ui.map);
 
-        if (config['flyToMarker']) {
+        if (config["flyToMarker"]) {
           ui.map.flyTo({
             center: crds,
             zoom: 17,
@@ -135,12 +132,12 @@ const MapBoxDriver = (($) => {
         }, labelLayerId);
       }*/
 
-      const firstMarker = config['geojson'].features[0].geometry.coordinates;
+      const firstMarker = config["geojson"].features[0].geometry.coordinates;
       //Map.setCenter(firstMarker);
       const bounds = new mapBoxGL.LngLatBounds(firstMarker, firstMarker);
 
       // add markers to map
-      config['geojson'].features.forEach((marker) => {
+      config["geojson"].features.forEach((marker) => {
         const id = marker.id;
         const crds = marker.geometry.coordinates;
         const content = marker.properties.content;
@@ -149,7 +146,7 @@ const MapBoxDriver = (($) => {
           id,
           content,
           icon: marker.icon,
-          flyToMarker: config['flyToMarker'],
+          flyToMarker: config["flyToMarker"],
         });
 
         bounds.extend(crds);
@@ -159,8 +156,8 @@ const MapBoxDriver = (($) => {
         padding: 30,
       });
 
-      ui.popup.on('close', (e) => {
-        if (config['flyToBounds']) {
+      ui.popup.on("close", (e) => {
+        if (config["flyToBounds"]) {
           ui.map.fitBounds(bounds, {
             padding: 30,
           });

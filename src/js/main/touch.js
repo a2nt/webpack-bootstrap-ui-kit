@@ -1,10 +1,10 @@
 // touch/mouse detection
 
-import Events from '../_events';
-import Consts from '../_consts';
+import Events from "../_events";
+import Consts from "../_consts";
 
 export default ((W) => {
-  const NAME = '_main.touch';
+  const NAME = "_main.touch";
   const D = document;
   const BODY = D.body;
 
@@ -18,15 +18,15 @@ export default ((W) => {
     if (bool) {
       console.log(`${NAME}: Touch screen enabled`);
 
-      BODY.classList.add('is-touch');
-      BODY.classList.remove('is-mouse');
+      BODY.classList.add("is-touch");
+      BODY.classList.remove("is-mouse");
 
       W.dispatchEvent(new Event(Events.TOUCHENABLE));
     } else {
       console.log(`${NAME}: Touch screen disabled`);
 
-      BODY.classList.add('is-mouse');
-      BODY.classList.remove('is-touch');
+      BODY.classList.add("is-mouse");
+      BODY.classList.remove("is-touch");
 
       W.dispatchEvent(new Event(Events.TOUCHDISABLED));
     }
@@ -42,29 +42,29 @@ export default ((W) => {
   };
 
   SET_TOUCH_SCREEN(
-    'ontouchstart' in W ||
-        navigator.MaxTouchPoints > 0 ||
-        navigator.msMaxTouchPoints > 0 ||
-        W.matchMedia('(hover: none)').matches,
-    'init',
+    "ontouchstart" in W ||
+      navigator.MaxTouchPoints > 0 ||
+      navigator.msMaxTouchPoints > 0 ||
+      W.matchMedia("(hover: none)").matches,
+    "init"
   );
 
-  D.addEventListener('touchend', (e) => {
+  D.addEventListener("touchend", (e) => {
     let touch = false;
-    if (e.type !== 'click') {
+    if (e.type !== "click") {
       touch = true;
     }
 
-    SET_TOUCH_SCREEN(touch, 'click-touchend');
+    SET_TOUCH_SCREEN(touch, "click-touchend");
   });
 
   // disable touch on mouse events
-  D.addEventListener('click', (e) => {
+  D.addEventListener("click", (e) => {
     let touch = false;
-    if (e.type !== 'click') {
+    if (e.type !== "click") {
       touch = true;
     }
 
-    SET_TOUCH_SCREEN(touch, 'click-touchend');
+    SET_TOUCH_SCREEN(touch, "click-touchend");
   });
 })(window);

@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <title>Webpack Bootstrap 4 UI Demo</title>
     <%= require('html-loader!./html/Head.html').default %>
     <meta name="ping" content="/Security/ping" />
@@ -9,93 +8,90 @@
     <meta name="api_static_domain" content="<%= STATIC_URL %>" />
     <meta name="swversion" content="<%= SWVERSION %>" />
     <base href="<%= BASE_HREF %>" />
-</head>
+  </head>
 
-<body data-default-lng="0" data-default-lat="0">
+  <body data-default-lng="0" data-default-lat="0">
     <div class="wrapper">
-        <%= require('html-loader!./html/_components/LoadingSpinner.html').default %>
-        <%= require('html-loader!./html/_components/Alerts.html').default %>
-        <%=
-			require('html-loader!./html/First.html').default %>
-        <%=
-			require('html-loader!./html/_components/Flyout.html').default %>
-        <header id="Header" class="stiky-top">
-            <%= require('html-loader!./html/Navigation.html').default %>
-        </header>
-        <main id="MainContent" class="page-content">
-            <div class="elemental-area">
-                <div class="element page-header-element">
-                    <div class="element-container container">
-                        <h1 class="page-header">
-                            Webpack Bootstrap 4 UI Demo
-                        </h1>
-                    </div>
-                </div>
-                <!-- Slider -->
-                <section id="Slider" class="element site__elements__sliderelement">
-                    <div class="element-container container-fluid">
-                        <%= require('html-loader!./html/Slider.html').default %>
-                    </div>
-                </section>
-                <!-- /Slider -->
-                <!-- Lightbox -->
-                <section id="Lightbox" class="element dnadesign__elemental__models__elementcontent">
-                    <div class="element-container container">
-                        <div class="content-element__content">
-                            <h2 class="content-element__title">
-                                Lightbox Demo
-                            </h2>
-                            <%=
-								require('html-loader!../node_modules/@a2nt/meta-lightbox-js/src/html/meta-lightbox.html').default
-								%>
-                        </div>
-                    </div>
-                </section>
-                <!-- /Lightbox -->
-                <!-- Content -->
-                <section id="Content" class="element dnadesign__elemental__models__elementcontent">
-                    <div class="element-container container">
-                        <%=
-							require('html-loader!./html/Elements/Content.html').default
-							%>
-                    </div>
-                </section>
-                <!-- /Content -->
-                <!-- List -->
-                <section id="List" class="element dnadesign__elementallist__model__elementlist bg-dark">
-                    <div class="element-container container">
-                        <%=
-							require('html-loader!./html/Elements/ElementsList.html').default
-							%>
-                    </div>
-                </section>
-                <!-- /List -->
-                <!-- Accordion List -->
-                <section id="AccordionList" class="element site__elements__accordion">
-                    <div class="element-container container">
-                        <%=
-							require('html-loader!./html/Elements/Accordion.html').default
-							%>
-                    </div>
-                </section>
-                <!-- /Accordion List -->
-                <!-- Map Element -->
-                <section id="MapElement" class="element site__elements__mapelement">
-                    <div class="element-container container">
-                        <%= require('html-loader!./html/Elements/Map.html').default
-							%>
-                    </div>
-                </section>
-                <!-- /Map Element -->
+      <%= require('html-loader!./html/_components/LoadingSpinner.html').default
+      %> <%= require('html-loader!./html/_components/Alerts.html').default %>
+      <%= require('html-loader!./html/First.html').default %> <%=
+      require('html-loader!./html/_components/Flyout.html').default %>
+      <header id="Header" class="stiky-top">
+        <%= require('html-loader!./html/Navigation.html').default %>
+      </header>
+      <main id="MainContent" class="page-content">
+        <div class="elemental-area">
+          <div class="element page-header-element">
+            <div class="element-container container">
+              <h1 class="page-header">Webpack Bootstrap 4 UI Demo</h1>
             </div>
-        </main>
+          </div>
+          <!-- Slider -->
+          <section id="Slider" class="element site__elements__sliderelement">
+            <div class="element-container container-fluid">
+              <%= require('html-loader!./html/Slider.html').default %>
+            </div>
+          </section>
+          <!-- /Slider -->
+          <!-- Lightbox -->
+          <section
+            id="Lightbox"
+            class="element dnadesign__elemental__models__elementcontent"
+          >
+            <div class="element-container container">
+              <div class="content-element__content">
+                <h2 class="content-element__title">Lightbox Demo</h2>
+                <%=
+                require('html-loader!../node_modules/@a2nt/meta-lightbox-js/src/html/meta-lightbox.html').default
+                %>
+              </div>
+            </div>
+          </section>
+          <!-- /Lightbox -->
+          <!-- Content -->
+          <section
+            id="Content"
+            class="element dnadesign__elemental__models__elementcontent"
+          >
+            <div class="element-container container">
+              <%= require('html-loader!./html/Elements/Content.html').default %>
+            </div>
+          </section>
+          <!-- /Content -->
+          <!-- List -->
+          <section
+            id="List"
+            class="element dnadesign__elementallist__model__elementlist bg-dark"
+          >
+            <div class="element-container container">
+              <%=
+              require('html-loader!./html/Elements/ElementsList.html').default
+              %>
+            </div>
+          </section>
+          <!-- /List -->
+          <!-- Accordion List -->
+          <section id="AccordionList" class="element site__elements__accordion">
+            <div class="element-container container">
+              <%= require('html-loader!./html/Elements/Accordion.html').default
+              %>
+            </div>
+          </section>
+          <!-- /Accordion List -->
+          <!-- Map Element -->
+          <section id="MapElement" class="element site__elements__mapelement">
+            <div class="element-container container">
+              <%= require('html-loader!./html/Elements/Map.html').default %>
+            </div>
+          </section>
+          <!-- /Map Element -->
+        </div>
+      </main>
     </div>
     <footer id="Footer" class="footer site-footer">
-        <%= require('html-loader!./html/Footer.html').default %>
+      <%= require('html-loader!./html/Footer.html').default %>
     </footer>
     <!-- React is required -->
-    <%= REACT_SCRIPTS %>
-    <%= require('html-loader!./html/Last.html').default %>
-</body>
-
+    <%= REACT_SCRIPTS %> <%= require('html-loader!./html/Last.html').default %>
+  </body>
 </html>

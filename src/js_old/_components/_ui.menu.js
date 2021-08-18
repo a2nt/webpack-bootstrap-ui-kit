@@ -1,10 +1,10 @@
-'use strict';
+"use strict";
 
-import $ from 'jquery';
+import $ from "jquery";
 
 const SlidingMenu = (($) => {
   // Constants
-  const NAME = 'jsSlidingMenu';
+  const NAME = "jsSlidingMenu";
   const DATA_KEY = NAME;
 
   class SlidingMenu {
@@ -16,7 +16,7 @@ const SlidingMenu = (($) => {
       $element.addClass(`${NAME}-active`);
 
       // esc button
-      $(window).on('keyup', (e) => {
+      $(window).on("keyup", (e) => {
         if (e.which === 27) {
           $element.find('.is-open[data-toggle="offcanvas"]').click();
         }

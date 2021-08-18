@@ -1,18 +1,18 @@
-'use strict';
+"use strict";
 
-import $ from 'jquery';
+import $ from "jquery";
 
-import Events from '../_events';
+import Events from "../_events";
 
 const OpeningHoursUI = (($) => {
   // Constants
-  const NAME = 'OpeningHoursUI';
+  const NAME = "OpeningHoursUI";
 
   class OpeningHoursUI {
     // Static methods
 
     static each(callback) {
-      $('.js-opening-hours').each((i, e) => {
+      $(".js-opening-hours").each((i, e) => {
         callback(i, $(e));
       });
     }
@@ -22,50 +22,50 @@ const OpeningHoursUI = (($) => {
 
       console.log(`${NAME}: init ...`);
 
-      const hours = $.parseJSON($('.oppening-hours-json').html());
+      const hours = $.parseJSON($(".oppening-hours-json").html());
       const date = new Date();
       const dateYMD = this.Date_toYMD(date);
       const weekday = [
-        'Sunday',
-        'Monday',
-        'Tuesday',
-        'Wednesday',
-        'Thursday',
-        'Friday',
-        'Saturday',
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
       ];
       const today = weekday[date.getDay()];
       let html =
         '<b class="opening-hours-status opening-hours-status-closed">Closed today</b>';
 
       if (
-        typeof hours['days'] !== 'undefined' &&
-        typeof hours['days'][today] !== 'undefined' &&
-        hours['days'][today].length
+        typeof hours["days"] !== "undefined" &&
+        typeof hours["days"][today] !== "undefined" &&
+        hours["days"][today].length
       ) {
-        html = 'Open today ';
-        $.each(hours['days'][today], (i, v) => {
-          if (v['DisplayStart'] || v['DisplayEnd']) {
+        html = "Open today ";
+        $.each(hours["days"][today], (i, v) => {
+          if (v["DisplayStart"] || v["DisplayEnd"]) {
             if (
-              (v['DisplayStart'] &&
-                v['DisplayStart'] <= dateYMD &&
-                v['DisplayEnd'] &&
-                v['DisplayEnd'] >= dateYMD) ||
-              (v['DisplayStart'] &&
-                v['DisplayStart'] <= dateYMD &&
-                !v['DisplayEnd']) ||
-              (v['DisplayEnd'] &&
-                v['DisplayEnd'] >= dateYMD &&
-                !v['DisplayStart'])
+              (v["DisplayStart"] &&
+                v["DisplayStart"] <= dateYMD &&
+                v["DisplayEnd"] &&
+                v["DisplayEnd"] >= dateYMD) ||
+              (v["DisplayStart"] &&
+                v["DisplayStart"] <= dateYMD &&
+                !v["DisplayEnd"]) ||
+              (v["DisplayEnd"] &&
+                v["DisplayEnd"] >= dateYMD &&
+                !v["DisplayStart"])
             ) {
-              html = `Open today from ${v['From']} to ${v['Till']}`;
+              html = `Open today from ${v["From"]} to ${v["Till"]}`;
               return false;
             }
           } else {
             if (i > 0) {
-              html += ', <br/>';
+              html += ", <br/>";
             }
-            html += `from ${v['From']} to ${v['Till']}`;
+            html += `from ${v["From"]} to ${v["Till"]}`;
           }
         });
 
@@ -73,11 +73,11 @@ const OpeningHoursUI = (($) => {
       }
 
       if (
-        typeof hours['holidays'] !== 'undefined' &&
-        typeof hours['holidays'][dateYMD] !== 'undefined'
+        typeof hours["holidays"] !== "undefined" &&
+        typeof hours["holidays"][dateYMD] !== "undefined"
       ) {
         html = `<b class="opening-hours-status opening-hours-status-closed">Closed today${
-          hours['holidays'][dateYMD] ? ` for ${hours['holidays'][dateYMD]}` : ''
+          hours["holidays"][dateYMD] ? ` for ${hours["holidays"][dateYMD]}` : ""
         }</b>`;
       }
 
@@ -104,7 +104,7 @@ const OpeningHoursUI = (($) => {
     static dispose() {
       console.log(`${NAME}: dispose`);
       this.each((i, e) => {
-        $(e).html('');
+        $(e).html("");
       });
     }
   }

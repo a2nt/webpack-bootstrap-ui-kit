@@ -1,21 +1,21 @@
-'use strict';
+"use strict";
 
-import $ from 'jquery';
-import Events from '../_events';
-import MainUI from '../_main';
+import $ from "jquery";
+import Events from "../_events";
+import MainUI from "../_main";
 
-import 'hammerjs/hammer';
-import 'jquery-hammerjs/jquery.hammer';
+import "hammerjs/hammer";
+import "jquery-hammerjs/jquery.hammer";
 
-import '../../scss/_components/_ui.multislider.scss';
+import "../../scss/_components/_ui.multislider.scss";
 
 const W = window;
 
 const MultiSlider = (($) => {
   // Constants
-  const NAME = 'jsMultiSlider';
+  const NAME = "jsMultiSlider";
   const DATA_KEY = NAME;
-  const $BODY = $('body');
+  const $BODY = $("body");
 
   class MultiSlider {
     // Constructor
@@ -38,10 +38,10 @@ const MultiSlider = (($) => {
       ui.addControls();
       ui.calculate();
 
-      $(W).on('resize', () => {
+      $(W).on("resize", () => {
         ui.$elContainer
-          .find('.act-slider-prev,.act-slider-next')
-          .removeClass('disabled');
+          .find(".act-slider-prev,.act-slider-next")
+          .removeClass("disabled");
         ui.calculate();
       });
 
@@ -52,15 +52,15 @@ const MultiSlider = (($) => {
     calculate() {
       const ui = this;
 
-      ui.$slides = ui.$el.find('.slide');
+      ui.$slides = ui.$el.find(".slide");
       ui.numberOfSlides = ui.$slides.length;
 
       ui.containerWidth = ui.$el.parent().width();
       ui.maxPos = ui.numberOfSlides - ui.numToDisplay();
       ui.slideWidth = ui.containerWidth / ui.numToDisplay();
 
-      ui.$slides.css('width', `${ui.slideWidth}px`);
-      ui.$el.css('width', ui.slideWidth * ui.numberOfSlides);
+      ui.$slides.css("width", `${ui.slideWidth}px`);
+      ui.$el.css("width", ui.slideWidth * ui.numberOfSlides);
 
       ui.currPos = 0;
       ui.slide(0);
@@ -72,7 +72,7 @@ const MultiSlider = (($) => {
       const size = MainUI.detectBootstrapScreenSize();
 
       let num = ui.$el.data(`length-${size}`);
-      num = num ? num : ui.$el.data('length');
+      num = num ? num : ui.$el.data("length");
 
       console.log(`${NAME}: size ${size} | num ${num}`);
 
@@ -88,26 +88,26 @@ const MultiSlider = (($) => {
         '<div class="slider-actions">' +
           '<a href="#" class="act act-slider-prev"><i class="fas fa-chevron-left"></i><b class="sr-only">Prev</b></a>' +
           '<a href="#" class="act act-slider-next"><i class="fas fa-chevron-right"></i><b class="sr-only">Next</b></a>' +
-          '</div>',
+          "</div>"
       );
 
-      ui.$prevBtn = ui.$elContainer.find('.act-slider-prev');
-      ui.$nextBtn = ui.$elContainer.find('.act-slider-next');
+      ui.$prevBtn = ui.$elContainer.find(".act-slider-prev");
+      ui.$nextBtn = ui.$elContainer.find(".act-slider-next");
 
-      ui.$prevBtn.on('click', (e) => {
+      ui.$prevBtn.on("click", (e) => {
         e.preventDefault();
 
-        if ($(e.currentTarget).hasClass('disabled')) {
+        if ($(e.currentTarget).hasClass("disabled")) {
           return false;
         }
 
         ui.prev();
       });
 
-      ui.$nextBtn.on('click', (e) => {
+      ui.$nextBtn.on("click", (e) => {
         e.preventDefault();
 
-        if ($(e.currentTarget).hasClass('disabled')) {
+        if ($(e.currentTarget).hasClass("disabled")) {
           return false;
         }
 
@@ -115,11 +115,11 @@ const MultiSlider = (($) => {
       });
 
       // init touch swipes
-      $e.hammer().bind('swipeleft panleft', (e) => {
+      $e.hammer().bind("swipeleft panleft", (e) => {
         ui.next();
       });
 
-      $e.hammer().bind('swiperight panright', (e) => {
+      $e.hammer().bind("swiperight panright", (e) => {
         ui.prev();
       });
     }
@@ -152,17 +152,17 @@ const MultiSlider = (($) => {
       ui.sliding = true;
       if (ui.$nextBtn.length) {
         if (pos >= ui.maxPos) {
-          ui.$nextBtn.addClass('disabled');
+          ui.$nextBtn.addClass("disabled");
         } else {
-          ui.$nextBtn.removeClass('disabled');
+          ui.$nextBtn.removeClass("disabled");
         }
       }
 
       if (ui.$prevBtn.length) {
         if (pos <= 0) {
-          ui.$prevBtn.addClass('disabled');
+          ui.$prevBtn.addClass("disabled");
         } else {
-          ui.$prevBtn.removeClass('disabled');
+          ui.$prevBtn.removeClass("disabled");
         }
       }
 
@@ -170,11 +170,11 @@ const MultiSlider = (($) => {
         {
           left: `${-(pos * ui.slideWidth)}px`,
         },
-        'slow',
-        'swing',
+        "slow",
+        "swing",
         () => {
           ui.sliding = false;
-        },
+        }
       );
     }
 
@@ -182,11 +182,11 @@ const MultiSlider = (($) => {
       const ui = this;
 
       if (ui.$elContainer) {
-        ui.$el.parent().find('.slider-actions').remove();
+        ui.$el.parent().find(".slider-actions").remove();
       }
 
       if (ui.$el) {
-        ui.$el.hammer().unbind('swipeleft panleft swiperight panright');
+        ui.$el.hammer().unbind("swipeleft panleft swiperight panright");
       }
 
       console.log(`Disposing: ${NAME}`);

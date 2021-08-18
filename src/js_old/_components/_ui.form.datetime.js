@@ -1,19 +1,19 @@
-'use strict';
+"use strict";
 
-import $ from 'jquery';
+import $ from "jquery";
 
-import Events from '../_events';
+import Events from "../_events";
 
-import 'bootstrap-datepicker/dist/js/bootstrap-datepicker.js';
-import 'bootstrap-timepicker/js/bootstrap-timepicker.js';
+import "bootstrap-datepicker/dist/js/bootstrap-datepicker.js";
+import "bootstrap-timepicker/js/bootstrap-timepicker.js";
 
 const DatetimeUI = (($) => {
   // Constants
   const W = window;
   const D = document;
-  const $Body = $('body');
+  const $Body = $("body");
 
-  const NAME = 'jsDatetimeUI';
+  const NAME = "jsDatetimeUI";
   const DATA_KEY = NAME;
 
   const datepickerOptions = {
@@ -34,56 +34,56 @@ const DatetimeUI = (($) => {
       ui._el = el;
 
       // datepicker
-      if ($el.hasClass('date') || $el.attr('type') === 'date') {
+      if ($el.hasClass("date") || $el.attr("type") === "date") {
         const defaultDate =
-          $el.attr('name').toLowerCase().indexOf('end') !== -1 ? '+4d' : '+3d';
+          $el.attr("name").toLowerCase().indexOf("end") !== -1 ? "+4d" : "+3d";
 
-        $el.attr('readonly', 'true');
+        $el.attr("readonly", "true");
         $el.datepicker(
           $.extend(
             datepickerOptions,
             {
               defaultViewDate: defaultDate,
-              multidate: $el.data('multidate'),
+              multidate: $el.data("multidate"),
             },
-            $el.data(),
-          ),
+            $el.data()
+          )
         );
       }
 
       // timepicker
-      else if ($el.hasClass('time') || $el.attr('type') === 'time') {
-        $el.attr('readonly', 'true');
+      else if ($el.hasClass("time") || $el.attr("type") === "time") {
+        $el.attr("readonly", "true");
         $el
           .timepicker(
             $.extend(
               {
                 snapToStep: true,
                 icons: {
-                  up: 'fas fa-chevron-up',
-                  down: 'fas fa-chevron-down',
+                  up: "fas fa-chevron-up",
+                  down: "fas fa-chevron-down",
                 },
               },
-              $el.data(),
-            ),
+              $el.data()
+            )
           )
-          .on('show.timepicker', (e) => {
+          .on("show.timepicker", (e) => {
             const $el = $(e.currentTarget);
-            const $dropdown = $Body.find('.bootstrap-timepicker-widget');
+            const $dropdown = $Body.find(".bootstrap-timepicker-widget");
 
             if (!$dropdown.find('[data-action="clear"]').length) {
               $dropdown
-                .find('tbody')
+                .find("tbody")
                 .append(
-                  '<tr><td colspan="5"><a href="#" data-action="clear">Clear</a></td></tr>',
+                  '<tr><td colspan="5"><a href="#" data-action="clear">Clear</a></td></tr>'
                 );
             }
 
             const $clearBtn = $dropdown.find('[data-action="clear"]');
-            $clearBtn.on('click', (e) => {
+            $clearBtn.on("click", (e) => {
               e.preventDefault();
-              $el.timepicker('clear');
-              $el.timepicker('hideWidget');
+              $el.timepicker("clear");
+              $el.timepicker("hideWidget");
             });
           });
       }
@@ -118,7 +118,7 @@ const DatetimeUI = (($) => {
   // auto-apply
   $(window).on(`${NAME}.init ${Events.AJAX} ${Events.LOADED}`, () => {
     $(
-      'input.date, input.time,input[type="date"], input[type="time"]',
+      'input.date, input.time,input[type="date"], input[type="time"]'
     ).jsDatetimeUI();
   });
 

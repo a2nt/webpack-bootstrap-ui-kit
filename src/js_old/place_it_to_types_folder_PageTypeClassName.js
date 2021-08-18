@@ -16,21 +16,21 @@
 "use strict";
 
 // your page specific css
-import '../scss/_types/PageTypeClassName.scss';
+import "../scss/_types/PageTypeClassName.scss";
 
-import $ from 'jquery';
-import Events from '../_events';
+import $ from "jquery";
+import Events from "../_events";
 
 // Mapbox API
-import '../_components/_ui.map.api';
+import "../_components/_ui.map.api";
 
 const PageTypeUI = (($) => {
   // Constants
   const W = window;
   const D = document;
-  const $Body = $('body');
+  const $Body = $("body");
 
-  const NAME = 'PageTypeUI';
+  const NAME = "PageTypeUI";
   class PageTypeUI {
     // Static methods
 
@@ -58,7 +58,6 @@ const PageTypeUI = (($) => {
   });
 
   return PageTypeUI;
-
 })($);
 
 export default PageTypeUI;

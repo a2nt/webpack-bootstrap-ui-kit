@@ -1,14 +1,14 @@
-'use strict';
+"use strict";
 
-import MarkerClusterer from '@googlemaps/markerclustererplus';
+import MarkerClusterer from "@googlemaps/markerclustererplus";
 
-import Events from '../_events';
-import MarkerUI from './map.google.marker';
+import Events from "../_events";
+import MarkerUI from "./map.google.marker";
 
 const GoogleMapsDriver = ((window) => {
   class GoogleMapsDriver {
     getName() {
-      return 'GoogleMapsDriver';
+      return "GoogleMapsDriver";
     }
 
     init(el, config = []) {
@@ -22,8 +22,10 @@ const GoogleMapsDriver = ((window) => {
         ui.googleApiLoaded();
       };
 
-      const script = document.createElement('script');
-      script.src = `https://maps.googleapis.com/maps/api/js?key=${config['key']}&callback=init${ui.getName()}`;
+      const script = document.createElement("script");
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${
+        config["key"]
+      }&callback=init${ui.getName()}`;
       script.async = true;
       script.defer = true;
       document.head.appendChild(script);
@@ -34,18 +36,22 @@ const GoogleMapsDriver = ((window) => {
 
       const el = ui.el;
       const config = ui.config;
-      const mapDiv = el.querySelector('.mapAPI-map');
-      const zoom = config['mapZoom'] && config['mapZoom'] !== '0' ? parseInt(config['mapZoom']) : 10;
-      const center = config['center'] && config['center'] !== ',' ?
-        {
-          lat: config['center'][1],
-          lng: config['center'][0],
-        } :
-        {
-          lat: 0,
-          lng: 0,
-        };
-      const style = config['style'] ? config['style'] : null;
+      const mapDiv = el.querySelector(".mapAPI-map");
+      const zoom =
+        config["mapZoom"] && config["mapZoom"] !== "0"
+          ? parseInt(config["mapZoom"])
+          : 10;
+      const center =
+        config["center"] && config["center"] !== ","
+          ? {
+            lat: config["center"][1],
+            lng: config["center"][0],
+          }
+          : {
+            lat: 0,
+            lng: 0,
+          };
+      const style = config["style"] ? config["style"] : null;
 
       console.log(`${ui.getName()}: API is loaded`);
       // init fontawesome icons
@@ -60,27 +66,30 @@ const GoogleMapsDriver = ((window) => {
 
       ui.default_zoom = zoom;
 
-      mapDiv.classList.add('mapboxgl-map');
+      mapDiv.classList.add("mapboxgl-map");
 
       ui.popup = new ui.MarkerUI({
         map: ui.map,
-        align: ['center', 'top'],
-        divClass: 'mapboxgl-popup popup mapboxgl-popup-anchor-bottom d-none',
-        html: '<div class="mapboxgl-popup-tip"></div><div class="mapboxgl-popup-content">' +
-                    '<div class="mapboxgl-popup-close-button" type="button" aria-label="Close popup">×</div>' +
-                    '<div class="html"></div>' +
-                    '</div>',
+        align: ["center", "top"],
+        divClass: "mapboxgl-popup popup mapboxgl-popup-anchor-bottom d-none",
+        html:
+          '<div class="mapboxgl-popup-tip"></div><div class="mapboxgl-popup-content">' +
+          '<div class="mapboxgl-popup-close-button" type="button" aria-label="Close popup">×</div>' +
+          '<div class="html"></div>' +
+          "</div>",
       });
       ui.popup.setMap(ui.map);
 
       ui.geocoder = new google.maps.Geocoder();
 
       ui.cluster = new MarkerClusterer(ui.map, null, {
-        styles: [{
-          width: 30,
-          height: 30,
-          className: 'mapboxgl-cluster',
-        }],
+        styles: [
+          {
+            width: 30,
+            height: 30,
+            className: "mapboxgl-cluster",
+          },
+        ],
       });
 
       el.dispatchEvent(new Event(Events.MAPAPILOADED));
@@ -97,11 +106,11 @@ const GoogleMapsDriver = ((window) => {
       const marker = new ui.MarkerUI({
         position: pos,
         map: ui.map,
-        align: ['center', 'top'],
-        html: `<div class="mapboxgl-marker"><div id="Marker${config['id']}" data-id="${config['id']}" class="marker">${config['icon']}</div></div>`,
+        align: ["center", "top"],
+        html: `<div class="mapboxgl-marker"><div id="Marker${config["id"]}" data-id="${config["id"]}" class="marker">${config["icon"]}</div></div>`,
         onClick: () => {
-          const el = document.querySelector(`#Marker${config['id']}`);
-          ui.showPopup(pos, config['content']);
+          const el = document.querySelector(`#Marker${config["id"]}`);
+          ui.showPopup(pos, config["content"]);
 
           el.dispatchEvent(new Event(Events.MAPMARKERCLICK));
         },
@@ -118,38 +127,40 @@ const GoogleMapsDriver = ((window) => {
       const ui = this;
       const popup = ui.popup.getDiv();
 
-      if (ui.config['flyToMarker']) {
+      if (ui.config["flyToMarker"]) {
         ui.map.setCenter(pos); // panTo
-        if (!ui.config['noZoom']) {
+        if (!ui.config["noZoom"]) {
           ui.map.setZoom(18);
         }
       }
 
       // keep it hidden to render content
-      popup.style.opacity = '0';
-      popup.classList.remove('d-none');
+      popup.style.opacity = "0";
+      popup.classList.remove("d-none");
 
-      popup.querySelector('.mapboxgl-popup-content .html').innerHTML = content;
+      popup.querySelector(".mapboxgl-popup-content .html").innerHTML = content;
 
-      popup.querySelector('.mapboxgl-popup-close-button').addEventListener('click', (e) => {
-        e.preventDefault();
-        ui.hidePopup();
-      });
+      popup
+        .querySelector(".mapboxgl-popup-close-button")
+        .addEventListener("click", (e) => {
+          e.preventDefault();
+          ui.hidePopup();
+        });
 
       // set position when content was rendered
-      ui.popup.setPosition(pos, ['center', 'top']);
+      ui.popup.setPosition(pos, ["center", "top"]);
 
       // display popup
-      popup.style.opacity = '1';
-      popup.style['margin-top'] = '-1rem';
+      popup.style.opacity = "1";
+      popup.style["margin-top"] = "-1rem";
     }
 
     hidePopup() {
       const ui = this;
       const popup = ui.popup.getDiv();
 
-      popup.classList.add('d-none');
-      if (!ui.config['noRestoreBounds'] || ui.config['flyToBounds']) {
+      popup.classList.add("d-none");
+      if (!ui.config["noRestoreBounds"] || ui.config["flyToBounds"]) {
         ui.restoreBounds();
       }
 
@@ -164,20 +175,20 @@ const GoogleMapsDriver = ((window) => {
           address: addr,
         },
         (results, status) => {
-          if (status === 'OK') {
+          if (status === "OK") {
             //results[0].geometry.location;
 
-            if (typeof callback === 'function') {
+            if (typeof callback === "function") {
               callback(results);
             }
 
             return results;
           } else {
             console.error(
-              `${ui.getName()}: Geocode was not successful for the following reason: ${status}`,
+              `${ui.getName()}: Geocode was not successful for the following reason: ${status}`
             );
           }
-        },
+        }
       );
     }
 
@@ -189,26 +200,26 @@ const GoogleMapsDriver = ((window) => {
           location: latlng,
         },
         (results, status) => {
-          if (status === 'OK') {
+          if (status === "OK") {
             //results[0].formatted_address;
 
-            if (typeof callback === 'function') {
+            if (typeof callback === "function") {
               callback(results);
             }
 
             return results;
           } else {
             console.error(
-              `${ui.getName()}: Reverse Geocoding was not successful for the following reason: ${status}`,
+              `${ui.getName()}: Reverse Geocoding was not successful for the following reason: ${status}`
             );
           }
-        },
+        }
       );
     }
 
     addGeoJson(config) {
       const ui = this;
-      const geojson = JSON.parse(config['geojson']);
+      const geojson = JSON.parse(config["geojson"]);
       const firstMarker = geojson.features[0].geometry.coordinates;
       //Map.setCenter(firstMarker);
       const bounds = new google.maps.LatLngBounds();
@@ -223,7 +234,7 @@ const GoogleMapsDriver = ((window) => {
           id,
           content,
           icon: marker.icon,
-          flyToMarker: config['flyToMarker'],
+          flyToMarker: config["flyToMarker"],
         });
 
         bounds.extend({

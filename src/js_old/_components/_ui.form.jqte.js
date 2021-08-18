@@ -1,22 +1,22 @@
-'use strict';
+"use strict";
 
-import $ from 'jquery';
+import $ from "jquery";
 
-import Events from '../_events';
-import Spinner from '../_components/_ui.spinner';
-import FormValidateField from './_ui.form.validate.field';
+import Events from "../_events";
+import Spinner from "../_components/_ui.spinner";
+import FormValidateField from "./_ui.form.validate.field";
 
-import '../../thirdparty/jQuery-TE_v.1.4.0/jquery-te-1.4.0.css';
-import '../../thirdparty/jQuery-TE_v.1.4.0/uncompressed/jquery-te-1.4.0.js';
+import "../../thirdparty/jQuery-TE_v.1.4.0/jquery-te-1.4.0.css";
+import "../../thirdparty/jQuery-TE_v.1.4.0/uncompressed/jquery-te-1.4.0.js";
 
 const JqteUI = (($) => {
-  const NAME = 'jsJqteUI';
+  const NAME = "jsJqteUI";
   const DATA_KEY = NAME;
 
   const jqteOptions = {
     color: false,
     fsize: false,
-    funit: 'em',
+    funit: "em",
     format: false,
     rule: false,
     source: false,
@@ -30,7 +30,7 @@ const JqteUI = (($) => {
 
       const ui = this;
       const $element = $(element);
-      const validationUI = $element.data('jsFormValidateField');
+      const validationUI = $element.data("jsFormValidateField");
 
       ui._element = element;
       $element.data(DATA_KEY, this);
@@ -39,9 +39,9 @@ const JqteUI = (($) => {
       // dynamic error control
       if (validationUI) {
         $element
-          .parents('.jqte')
-          .find('.jqte_editor')
-          .on('change', (e) => {
+          .parents(".jqte")
+          .find(".jqte_editor")
+          .on("change", (e) => {
             validationUI.validate();
           });
       }
@@ -75,7 +75,7 @@ const JqteUI = (($) => {
 
   // auto-apply
   $(window).on(`${Events.AJAX} ${Events.LOADED}`, () => {
-    $('textarea.jqte-field').jsJqteUI();
+    $("textarea.jqte-field").jsJqteUI();
   });
 
   return JqteUI;

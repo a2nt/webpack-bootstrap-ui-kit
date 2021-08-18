@@ -1,5 +1,5 @@
 function _gaLt(event) {
-  if (typeof ga !== 'function') {
+  if (typeof ga !== "function") {
     return;
   }
 
@@ -8,8 +8,8 @@ function _gaLt(event) {
   /* Loop up the DOM tree through parent elements if clicked element is not a link (eg: an image inside a link) */
   while (
     el &&
-    (typeof el.tagName == 'undefined' ||
-      el.tagName.toLowerCase() != 'a' ||
+    (typeof el.tagName == "undefined" ||
+      el.tagName.toLowerCase() != "a" ||
       !el.href)
   ) {
     el = el.parentNode;
@@ -21,7 +21,7 @@ function _gaLt(event) {
     if (link.indexOf(location.host) == -1 && !link.match(/^javascript:/i)) {
       /* external link */
       /* HitCallback function to either open link in either same or new window */
-      var hitBack = function(link, target) {
+      var hitBack = function (link, target) {
         target ? window.open(link, target) : (window.location.href = link);
       };
       /* Is target set and not _(self|parent|top)? */
@@ -31,12 +31,12 @@ function _gaLt(event) {
           : false;
       /* send event with callback */
       ga(
-        'send',
-        'event',
-        'Outgoing Links',
+        "send",
+        "event",
+        "Outgoing Links",
         link,
         document.location.pathname + document.location.search,
-        { hitCallback: hitBack(link, target) },
+        { hitCallback: hitBack(link, target) }
       );
 
       /* Prevent standard click */
@@ -49,13 +49,13 @@ function _gaLt(event) {
 var w = window;
 w.addEventListener
   ? w.addEventListener(
-    'load',
+    "load",
     () => {
-      document.body.addEventListener('click', _gaLt, !1);
+      document.body.addEventListener("click", _gaLt, !1);
     },
-    !1,
+    !1
   )
   : w.attachEvent &&
-    w.attachEvent('onload', () => {
-      document.body.attachEvent('onclick', _gaLt);
+    w.attachEvent("onload", () => {
+      document.body.attachEvent("onclick", _gaLt);
     });

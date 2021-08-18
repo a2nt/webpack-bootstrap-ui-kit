@@ -1,13 +1,13 @@
-'use strict';
+"use strict";
 
-import $ from 'jquery';
-import Events from '../_events';
+import $ from "jquery";
+import Events from "../_events";
 
 const FormFieldUI = (($) => {
   // Constants
-  const NAME = 'jsFormFieldUI';
+  const NAME = "jsFormFieldUI";
   const DATA_KEY = NAME;
-  const $Html = $('html, body');
+  const $Html = $("html, body");
 
   class FormFieldUI {
     constructor(el) {
@@ -21,23 +21,23 @@ const FormFieldUI = (($) => {
 
       ui.vals = {
         val: ui.$el.val(),
-        checked: ui.$el.is(':checked'),
+        checked: ui.$el.is(":checked"),
       };
 
       // bootstrap collapse integration
-      ui.$el.parents('.optionset').not('.field').removeClass('collapse');
+      ui.$el.parents(".optionset").not(".field").removeClass("collapse");
       ui.$collapse = ui.$el
-        .parents('.field.collapse')
-        .not('.composite')
+        .parents(".field.collapse")
+        .not(".composite")
         .first();
       if (ui.$collapse.length) {
-        ui.$el.removeClass('collapse');
+        ui.$el.removeClass("collapse");
 
-        ui.$collapse.on('show.bs.collapse', (e) => {
+        ui.$collapse.on("show.bs.collapse", (e) => {
           ui.show();
         });
 
-        ui.$collapse.on('hidden.bs.collapse', (e) => {
+        ui.$collapse.on("hidden.bs.collapse", (e) => {
           ui.hide();
         });
       }
@@ -98,29 +98,29 @@ const FormFieldUI = (($) => {
       const $el = ui.$el;
 
       ui.vals = {
-        name: $el.attr('name'),
+        name: $el.attr("name"),
         val: $el.val(),
-        checked: $el.is(':checked'),
+        checked: $el.is(":checked"),
       };
 
-      $el.val('');
-      $el.prop('checked', false);
+      $el.val("");
+      $el.prop("checked", false);
     }
 
     restore() {
       const ui = this;
       const $el = ui.$el;
-      const checked = ui.vals['checked'];
+      const checked = ui.vals["checked"];
 
-      $el.val(ui.vals['val']);
-      $el.prop('checked', checked);
+      $el.val(ui.vals["val"]);
+      $el.prop("checked", checked);
     }
 
     addMessage(msg, type = null, scrollTo = true) {
       const ui = this;
-      const $field = ui.$el.closest('.field');
+      const $field = ui.$el.closest(".field");
 
-      $field.addClass('has-message');
+      $field.addClass("has-message");
       if (msg) {
         $field.append(`<div class="message alert ${type}">${msg}</div>`);
       }
@@ -134,10 +134,10 @@ const FormFieldUI = (($) => {
 
     removeMessages() {
       const ui = this;
-      const $field = ui.$el.closest('.field');
+      const $field = ui.$el.closest(".field");
 
-      $field.removeClass('has-message');
-      $field.find('.message').remove();
+      $field.removeClass("has-message");
+      $field.find(".message").remove();
     }
 
     static _jQueryInterface() {

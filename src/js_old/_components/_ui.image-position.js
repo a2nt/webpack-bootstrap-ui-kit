@@ -1,14 +1,14 @@
-'use strict';
+"use strict";
 
-import $ from 'jquery';
+import $ from "jquery";
 
-import Events from '../_events';
+import Events from "../_events";
 
 const ImagePositionUI = (($) => {
   const D = document;
   const W = window;
-  const $Body = $('html,body');
-  const NAME = 'ImagePositionUI';
+  const $Body = $("html,body");
+  const NAME = "ImagePositionUI";
   const CLASSNAME = `js${NAME}`;
 
   class ImagePositionUI {
@@ -21,7 +21,7 @@ const ImagePositionUI = (($) => {
       }
 
       console.log(`${NAME}: init`);
-      $(`.${CLASSNAME}`).on('click', (e) => {
+      $(`.${CLASSNAME}`).on("click", (e) => {
         e.preventDefault();
         console.log(e);
       });

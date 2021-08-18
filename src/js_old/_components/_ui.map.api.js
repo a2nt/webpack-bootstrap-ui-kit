@@ -1,19 +1,19 @@
-'use strict';
+"use strict";
 
-import $ from 'jquery';
-import Events from '../_events';
+import $ from "jquery";
+import Events from "../_events";
 
-import '../../scss/_components/_ui.map.scss';
+import "../../scss/_components/_ui.map.scss";
 
-import CONSTS from 'js/_consts';
+import CONSTS from "js/_consts";
 
 const MapAPI = (($) => {
   // Constants
-  const NAME = 'jsMapAPI';
+  const NAME = "jsMapAPI";
   const DATA_KEY = NAME;
-  const $BODY = $('body');
+  const $BODY = $("body");
 
-  const MAP_DRIVER = CONSTS['MAP_DRIVER'];
+  const MAP_DRIVER = CONSTS["MAP_DRIVER"];
   const W = window;
 
   class MapAPI {
@@ -27,19 +27,19 @@ const MapAPI = (($) => {
       const $el = ui.$el;
       const config = $el.data();
 
-      config['center'] = [
-        config['lng'] ? config['lng'] : $BODY.data('default-lng'),
-        config['lat'] ? config['lat'] : $BODY.data('default-lat'),
+      config["center"] = [
+        config["lng"] ? config["lng"] : $BODY.data("default-lng"),
+        config["lat"] ? config["lat"] : $BODY.data("default-lat"),
       ];
 
-      config['style'] = config['style']
-        ? jQuery.parseJSON(config['style'])
+      config["style"] = config["style"]
+        ? jQuery.parseJSON(config["style"])
         : null;
 
-      config['font-family'] = $BODY.css('font-family');
+      config["font-family"] = $BODY.css("font-family");
 
-      if (!config['icon']) {
-        config['icon'] = '<i class="fas fa-map-marker-alt"></i>';
+      if (!config["icon"]) {
+        config["icon"] = '<i class="fas fa-map-marker-alt"></i>';
       }
 
       console.log(`${NAME}: init ${Drv.getName()}...`);
@@ -49,31 +49,31 @@ const MapAPI = (($) => {
       $el.on(Events.MAPAPILOADED, (e) => {
         ui.map = Drv.getMap();
 
-        if (config['geojson']) {
+        if (config["geojson"]) {
           console.log(`${NAME}: setting up geocode data`);
           Drv.addGeoJson(config);
-        } else if (config['address']) {
-          console.log(config['address']);
+        } else if (config["address"]) {
+          console.log(config["address"]);
           console.log(`${NAME}: setting up address marker`);
-          Drv.geocode(config['address'], (results) => {
+          Drv.geocode(config["address"], (results) => {
             console.log(results);
 
             const lat = results[0].geometry.location.lat();
             const lng = results[0].geometry.location.lng();
 
             console.log(
-              `${NAME}: setting up single lat/lng marker lat: ${lat} lng: ${lng}`,
+              `${NAME}: setting up single lat/lng marker lat: ${lat} lng: ${lng}`
             );
 
             Drv.addMarker([lng, lat], config);
             ui.map.setCenter({ lat, lng });
           });
-        } else if (config['lat'] && config['lng']) {
-          const lat = config['lat'];
-          const lng = config['lng'];
+        } else if (config["lat"] && config["lng"]) {
+          const lat = config["lat"];
+          const lng = config["lng"];
 
           console.log(
-            `${NAME}: setting up single lat/lng marker lat: ${lat} lng: ${lng}`,
+            `${NAME}: setting up single lat/lng marker lat: ${lat} lng: ${lng}`
           );
 
           Drv.addMarker([lng, lat], config);
@@ -102,7 +102,7 @@ const MapAPI = (($) => {
     }
 
     static _jQueryInterface() {
-      if (typeof W.localStorage !== 'undefined') {
+      if (typeof W.localStorage !== "undefined") {
         return this.each(() => {
           // attach functionality to el
           const $el = $(this);
@@ -127,7 +127,7 @@ const MapAPI = (($) => {
 
   // auto-apply
   $(W).on(`${Events.AJAX} ${Events.LOADED}`, () => {
-    $('.mapAPI-map-container').jsMapAPI();
+    $(".mapAPI-map-container").jsMapAPI();
   });
 
   return MapAPI;
