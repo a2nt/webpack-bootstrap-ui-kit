@@ -1,20 +1,20 @@
 .bg-dark {
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6,
-    .h1,
-    .h2,
-    .h3,
-    .h4,
-    .h5,
-    .h6,
-    .typography,
-    a {
-        color: $white;
-    }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  .h1,
+  .h2,
+  .h3,
+  .h4,
+  .h5,
+  .h6,
+  .typography,
+  a {
+    color: $white;
+  }
 }
 
 h1,
@@ -32,21 +32,21 @@ h6,
 ul,
 ol,
 p {
-    &:last-child {
-        margin-bottom: 0;
-    }
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
 .typography {
-    @include clearfix;
+  @include clearfix;
 
-    @import './types/editor';
+  @import "./types/editor";
 
-    > *:first-child {
-        margin-top: 0;
-    }
+  > *:first-child {
+    margin-top: 0;
+  }
 
-    > *:last-child {
-        margin-bottom: 0;
-    }
+  > *:last-child {
+    margin-bottom: 0;
+  }
 }

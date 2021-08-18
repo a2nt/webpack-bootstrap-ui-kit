@@ -2,34 +2,43 @@
 
 .dynamic__elements__image__elements__elementimage,
 .site__elements__sliderelement {
-    .element-container {
+  .element-container {
+    max-width: none;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .element__image {
+    min-width: 100%;
+  }
+
+  .carousel-slide {
+    align-items: center;
+    background: $sliderelement-carousel-slide-bg;
+    max-height: $sliderelement-carousel-slide-max-y;
+
+    .video {
+      height: 100%;
+      position: relative;
+      @include responsive-ratio(
+        $sliderelement-carousel-slide-ratio-x,
+        $sliderelement-carousel-slide-ratio-y,
+        true
+      );
+
+      iframe {
+        height: 100% !important;
+        height: unquote(
+          math.div(
+              $sliderelement-carousel-slide-ratio-y,
+              $sliderelement-carousel-slide-ratio-x
+            ) * 100 + "vw"
+        ) !important;
         max-width: none;
-        padding-left: 0;
-        padding-right: 0;
+        position: absolute;
+        top: 0;
+        width: 100vw !important;
+      }
     }
-
-    .element__image {
-        min-width: 100%;
-    }
-
-    .carousel-slide {
-        background: $sliderelement-carousel-slide-bg;
-        max-height: $sliderelement-carousel-slide-max-y;
-        align-items: center;
-
-        .video {
-            position: relative;
-            height: 100%;
-            @include responsive-ratio($sliderelement-carousel-slide-ratio-x, $sliderelement-carousel-slide-ratio-y, true);
-
-            iframe {
-                position: absolute;
-                top: 0;
-                height: 100% !important;
-                width: 100vw !important;
-                max-width: none;
-                height: unquote(math.div($sliderelement-carousel-slide-ratio-y, $sliderelement-carousel-slide-ratio-x) * 100 + 'vw') !important;
-            }
-        }
-    }
+  }
 }

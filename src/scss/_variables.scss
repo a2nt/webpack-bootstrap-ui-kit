@@ -1,51 +1,37 @@
-@use 'sass:map';
+@use "sass:map";
 
-@import '~bootstrap/scss/functions';
-@import '~bootstrap/scss/variables';
-@import '_mixings';
-//@import '_colors';
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "mixings";
+//@import "_colors";
 
 // bootstrap settings
 // screen size - 32px (ex. 1400 - 32 = 1368)
-$grid-breakpoints: (xs: 0,
-sm: 576px,
-md: 768px,
-lg: 992px,
-xl: 1168px,
-xxl: 1368px,
-xxxl: 1568px,
-xxxxl: 1868px) !default;
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1168px,
+  xxl: 1368px,
+  xxxl: 1568px,
+  xxxxl: 1868px,
+) !default;
 // screen size - (32px * 2) (ex. 1400 - 64 = 1336)
-$container-max-widths: (sm: 540px,
-md: 720px,
-lg: 960px,
-xl: 1136px,
-xxl: 1336px,
-xxxl: 1536px,
-xxxxl: 1836px) !default;
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1136px,
+  xxl: 1336px,
+  xxxl: 1536px,
+  xxxxl: 1836px,
+) !default;
 
-$font-family-sans-serif: -apple-system,
-BlinkMacSystemFont,
-'Segoe UI',
-Roboto,
-'Helvetica Neue',
-Arial,
-'Noto Sans',
-sans-serif,
-'Apple Color Emoji',
-'Segoe UI Emoji',
-'Segoe UI Symbol',
-'Noto Color Emoji' !default;
-$font-family-monospace: SFMono-Regular,
-Menlo,
-Monaco,
-Consolas,
-'Liberation Mono',
-'Courier New',
-monospace !default;
+$font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
+$font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
 
-$font-family-base: 'Roboto',
-$font-family-sans-serif !default;
+$font-family-base: "Roboto", $font-family-sans-serif !default;
 
 $spacer: 1rem !default;
 $headings-margin-bottom: $spacer !default;
@@ -70,20 +56,20 @@ $enable-negative-margins: true !default;
 $enable-deprecation-messages: true !default;
 
 $enable-important-utilities: true !default;
-$breadcrumb-divider: quote('/') !default;
+$breadcrumb-divider: quote("/") !default;
 
 // ui framework settings
 $body-gutter-x: $spacer !default;
 $body-gutter-y: $spacer !default;
 
-$body-double-gutter-x: $body-gutter-x*2 !default;
-$body-double-gutter-y: $body-gutter-y*2 !default;
+$body-double-gutter-x: $body-gutter-x * 2 !default;
+$body-double-gutter-y: $body-gutter-y * 2 !default;
 
-$body-gutter-reduced-x: $body-gutter-x*0.5 !default;
-$body-gutter-reduced-y: $body-gutter-y*0.5 !default;
+$body-gutter-reduced-x: $body-gutter-x * 0.5 !default;
+$body-gutter-reduced-y: $body-gutter-y * 0.5 !default;
 
-$body-gutter-reduced-d-x: $body-gutter-x*0.25 !default;
-$body-gutter-reduced-d-y: $body-gutter-y*0.25 !default;
+$body-gutter-reduced-d-x: $body-gutter-x * 0.25 !default;
+$body-gutter-reduced-d-y: $body-gutter-y * 0.25 !default;
 
 $form-spacer-x: $spacer !default;
 $form-spacer-y: $spacer !default;
@@ -97,48 +83,14 @@ $element-reduced-spacer-y: map.get($spacers, 2) !default;
 $element-reduced-d-spacer-x: map.get($spacers, 1) !default;
 $element-reduced-d-spacer-y: map.get($spacers, 1) !default;
 
-/*
-$font-size-base: 1rem !default;
-
-// start font-sizing from h2
-$h1-font-size: $font-size-base * 2.5 !default;
-$h2-font-size: $h1-font-size !default;
-$h3-font-size: $font-size-base * 2 !default;
-$h4-font-size: $font-size-base * 1.75 !default;
-$h5-font-size: $font-size-base * 1.5 !default;
-$h6-font-size: $font-size-base * 1.25 !default;
-
-$grid-gutter-x: 2rem !default;
-$grid-gutter-y: 2rem !default;
-$grid-gutter-xs-x: $grid-gutter-x / 2 !default;
-$grid-gutter-element-y: $grid-gutter-y !default;
-
-$field-gutter-y: $grid-gutter-y / 2 !default;
-$col-block-gutter-y: $grid-gutter-y / 4 !default;
-
-// bootstrap minify bugfix:
-$navbar-dark-toggler-icon-bg: none !default;
-$navbar-light-toggler-icon-bg: none !default;
-
-// IE > 9
-$enable-flex: true !default;
-
-$enable-responsive-font-sizes: true !default;
-
-// Add your site-wide + content editor typography styling
-$nav-link-hover-bg: darken($body-bg, 10%);
-$nav-link-hover-color: lighten($body-color, 10%);
-
-*/
-
 $body-bg: #fff !default;
 $body-color: #212529 !default;
 
 // site specific variables
 $extra-large-screen: 2000px !default;
 
-$full-body-min-width: map-get($grid-breakpoints, 'lg') !default;
-$typography-breakpoint: map-get($grid-breakpoints, 'sm') - 1 !default;
+$full-body-min-width: map-get($grid-breakpoints, "lg") !default;
+$typography-breakpoint: map-get($grid-breakpoints, "sm") - 1 !default;
 
 $header-bg: var(--bs-dark) !default;
 $header-color: var(--bs-light) !default;

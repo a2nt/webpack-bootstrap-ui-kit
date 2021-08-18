@@ -3,37 +3,37 @@
  */
 
 .loading {
-    animation: fade 0.5s linear infinite;
+  animation: fade 0.5s linear infinite;
 }
 
 .graphql-page {
-    &.response-404 {
-        filter: grayscale(1);
-        opacity: 0.5;
-        cursor: not-allowed;
-    }
+  &.response-404 {
+    cursor: not-allowed;
+    filter: grayscale(1);
+    opacity: 0.5;
+  }
 }
 
 .is-offline {
-    iframe {
-        display: none;
-    }
+  iframe {
+    display: none;
+  }
 
-    .graphql-page {
-        &.response-523 {
-            filter: grayscale(1);
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
+  .graphql-page {
+    &.response-523 {
+      cursor: not-allowed;
+      filter: grayscale(1);
+      opacity: 0.5;
     }
+  }
 }
 
 body.ajax-loading {
-    overflow: hidden;
-    height: 100vh;
+  height: 100vh;
+  overflow: hidden;
 
-    #Header {
-        position: relative;
-        z-index: 2001;
-    }
+  #Header {
+    position: relative;
+    z-index: 2001;
+  }
 }

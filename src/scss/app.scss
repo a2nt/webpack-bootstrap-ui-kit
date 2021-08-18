@@ -4,12 +4,12 @@
 //@import "~bootstrap-timepicker/css/bootstrap-timepicker.css";
 
 // Your custom variables
-@import '_variables';
-@import '_animations';
+@import "variables";
+@import "animations";
 
-@import '~@a2nt/meta-lightbox-js/src/scss/app';
-@import 'libs/bootstrap';
-@import 'libs/silverstripe';
+@import "~@a2nt/meta-lightbox-js/src/scss/app";
+@import "libs/bootstrap";
+@import "libs/silverstripe";
 
 // By default we prefer font awesome CDN
 //@import "_libs/_fontawesome";
@@ -17,8 +17,7 @@
 //@import '_ui/_lightbox';
 //@import '_ui/_flyout';
 
-
 // Your custom styling
-@import '_typography';
-@import 'layout';
-@import 'elements';
+@import "typography";
+@import "layout";
+@import "elements";

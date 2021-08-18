@@ -1,38 +1,39 @@
 // hide default page title cuz elemental object will be used to display titles
 .element__breadcrumbs {
-    //margin-bottom: calc(-2 * #{inspect($element-spacer-y)});
+  //margin-bottom: calc(-2 * #{inspect($element-spacer-y)});
 
-    .container {}
+  .container {
+  }
 
+  .breadcrumb-link {
+    text-decoration: none;
+
+    &:hover,
+    &:focus,
+    &:active,
+    &.active {
+      color: $sidebar-nav-link-hover-color;
+    }
+  }
+
+  .active {
     .breadcrumb-link {
-        text-decoration: none;
-
-        &:hover,
-        &:focus,
-        &:active,
-        &.active {
-            color: $sidebar-nav-link-hover-color;
-        }
+      color: $sidebar-nav-link-hover-color;
     }
-
-    .active {
-        .breadcrumb-link {
-            color: $sidebar-nav-link-hover-color;
-        }
-    }
+  }
 }
 
 .page-header-element {
-    --bs-gutter-y: .75rem;
-    display: none;
-    //margin-bottom: calc(-1 * #{inspect($element-spacer-y)});
+  --bs-gutter-y: 0.75rem;
+  display: none;
+  //margin-bottom: calc(-1 * #{inspect($element-spacer-y)});
 
-    .page-header {
-        line-height: 1em;
-        margin-bottom: 0;
-    }
+  .page-header {
+    line-height: 1em;
+    margin-bottom: 0;
+  }
 }
 
-.page-header-element:not(.d-block)+.element {
-    margin-top: 0;
+.page-header-element:not(.d-block) + .element {
+  margin-top: 0;
 }

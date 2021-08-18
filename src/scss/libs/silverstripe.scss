@@ -1,57 +1,57 @@
 .message {
-    @extend .alert !optional;
+  @extend .alert !optional;
 
-    &.warning {
-        @extend .alert-warning !optional;
-    }
+  &.warning {
+    @extend .alert-warning !optional;
+  }
 
-    &.error {
-        @extend .alert-danger !optional;
-    }
+  &.error {
+    @extend .alert-danger !optional;
+  }
 }
 
 .embed-responsive-4by3,
 .embed-responsive-16by9 {
-    position: relative;
-    padding-top: 56.25%;
+  padding-top: 56.25%;
+  position: relative;
 
-    iframe {
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 100%;
-    }
+  iframe {
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
 }
 
 .embed-responsive-4by3 {
-    padding-top: 75%;
+  padding-top: 75%;
 }
 
 #ForgotPassword {
-    margin: 1rem 0;
-    width: 100%;
+  margin: 1rem 0;
+  width: 100%;
 }
 
 #BetterNavigator {
-    display: none;
-    top: 50% !important;
-    margin-top: -41px;
+  display: none;
+  margin-top: -41px;
+  top: 50% !important;
 
-    &.open {
-        top: 0 !important;
-        margin-top: 0;
-    }
+  &.open {
+    margin-top: 0;
+    top: 0 !important;
+  }
 
-    a,
-    button,
-    div,
-    i,
-    span {
-        background-size: auto;
-    }
+  a,
+  button,
+  div,
+  i,
+  span {
+    background-size: auto;
+  }
 
-    @media (min-width: map-get($grid-breakpoints, 'md')) {
-        display: block;
-    }
+  @media (min-width: map-get($grid-breakpoints, "md")) {
+    display: block;
+  }
 }

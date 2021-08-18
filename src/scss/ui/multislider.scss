@@ -1,56 +1,57 @@
 $grid-gutter-element-height: 2rem !default;
 
 .jsMultiSlider {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+
+  margin-bottom: $grid-gutter-element-height * 0.5;
+  min-width: 100%;
+  position: relative;
+
+  &-active {
+    margin-bottom: 0;
+  }
+
+  .slide {
+    padding: 0 0.5rem;
     position: relative;
-    display: flex;
-    margin-bottom: $grid-gutter-element-height*0.5;
-
-    align-items: center;
-    justify-content: center;
-    min-width: 100%;
-
-    &-active {
-        margin-bottom: 0;
-    }
-
-    .slide {
-        position: relative;
-        padding: 0 0.5rem;
-    }
+  }
 }
 
 .jsMultiSlider-container {
-    position: relative;
-    margin-bottom: $grid-gutter-element-height*0.5;
+  margin-bottom: $grid-gutter-element-height * 0.5;
+  position: relative;
 
-    .slider-actions {
-        font-size: 2rem;
+  .slider-actions {
+    font-size: 2rem;
 
-        .act {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
+    .act {
+      align-items: center;
+      bottom: 0;
+      display: flex;
+      justify-content: center;
+      left: 0;
+      position: absolute;
+      text-decoration: none;
+      top: 0;
 
-            &-slider-prev {}
+      &-slider-prev {
+      }
 
-            &-slider-next {
-                left: auto;
-                right: 0;
-            }
-        }
+      &-slider-next {
+        left: auto;
+        right: 0;
+      }
     }
+  }
 }
 
 .jsMultiSlider-slides-container {
-    overflow: hidden;
-    margin: 0 2rem;
+  margin: 0 2rem;
+  overflow: hidden;
 
-    >.slider-nav {
-        position: relative;
-    }
+  > .slider-nav {
+    position: relative;
+  }
 }

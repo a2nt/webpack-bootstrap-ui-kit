@@ -1,43 +1,42 @@
 html,
 body {
-    min-height: 100%;
-    min-height: 100vh;
+  min-height: 100%;
+  min-height: 100vh;
 }
 
 // sticky footer
 body {
-    display: flex;
-    flex-direction: column;
-    --body-gutter-x: #{inspect($body-gutter-x)};
-    --body-gutter-y: #{inspect($body-gutter-y)};
-    --body-double-gutter-x: #{inspect($body-double-gutter-x)};
-    --body-double-gutter-y: #{inspect($body-double-gutter-y)};
-    --body-gutter-reduced-x: #{inspect($body-gutter-reduced-x)};
-    --body-gutter-reduced-y: #{inspect($body-gutter-reduced-y)};
-    --body-gutter-reduced-d-x: #{inspect($body-gutter-reduced-d-x)};
-    --body-gutter-reduced-d-y: #{inspect($body-gutter-reduced-d-y)};
+  display: flex;
+  flex-direction: column;
+  --body-gutter-x: #{inspect($body-gutter-x)};
+  --body-gutter-y: #{inspect($body-gutter-y)};
+  --body-double-gutter-x: #{inspect($body-double-gutter-x)};
+  --body-double-gutter-y: #{inspect($body-double-gutter-y)};
+  --body-gutter-reduced-x: #{inspect($body-gutter-reduced-x)};
+  --body-gutter-reduced-y: #{inspect($body-gutter-reduced-y)};
+  --body-gutter-reduced-d-x: #{inspect($body-gutter-reduced-d-x)};
+  --body-gutter-reduced-d-y: #{inspect($body-gutter-reduced-d-y)};
 
-    .wrapper {
-        flex: 1 0 auto;
-        margin-bottom: $element-spacer-y;
-    }
+  .wrapper {
+    flex: 1 0 auto;
+    margin-bottom: $element-spacer-y;
+  }
 
-    .footer {
-        flex-shrink: 0;
-        margin-top: $element-spacer-y;
-    }
+  .footer {
+    flex-shrink: 0;
+    margin-top: $element-spacer-y;
+  }
 }
 
 @media (min-width: $extra-large-screen) {
+  html,
+  body {
+    font-size: 0.9vw !important;
+  }
 
-    html,
-    body {
-        font-size: .9vw !important;
-    }
-
-    .container {
-        max-width: 80vw;
-    }
+  .container {
+    max-width: 80vw;
+  }
 }
 
 // don't let images be wider than the parent layer
@@ -46,57 +45,56 @@ a,
 span,
 button,
 i {
-    background-repeat: no-repeat;
-    background-size: contain;
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 iframe,
 img {
-    max-width: 100%;
+  max-width: 100%;
 }
 
 ul,
 table,
 p {
-    &:first-child {
-        margin-top: 0;
-    }
+  &:first-child {
+    margin-top: 0;
+  }
 
-    &:last-child {
-        margin-bottom: 0;
-    }
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
 .a {
-    cursor: pointer;
-    color: $link-color;
-    text-decoration: $link-decoration;
+  cursor: pointer;
+  color: $link-color;
+  text-decoration: $link-decoration;
 
-    &:hover,
-    &:focus {
-        text-decoration: $link-hover-decoration;
-        color: $link-hover-color;
-    }
+  &:hover,
+  &:focus {
+    text-decoration: $link-hover-decoration;
+    color: $link-hover-color;
+  }
 }
 
 // exclude bootstrap-table
-[data-toggle='table'] {
-
-    &:hover,
-    &.active,
-    &:focus {
-        opacity: 1;
-    }
+[data-toggle="table"] {
+  &:hover,
+  &.active,
+  &:focus {
+    opacity: 1;
+  }
 }
 
-[data-toggle='collapse'] {
-    &[aria-expanded='true'] {
-        .accordion-icon {
-            &:before {
-                content: '\f068';
-            }
-        }
+[data-toggle="collapse"] {
+  &[aria-expanded="true"] {
+    .accordion-icon {
+      &:before {
+        content: "\f068";
+      }
     }
+  }
 }
 
 // transactions
@@ -119,7 +117,7 @@ textarea,
 .message,
 [data-toggle],
 [data-toggle] * {
-    transition: all 0.4s ease;
+  transition: all 0.4s ease;
 }
 
 .a,
@@ -127,46 +125,43 @@ a,
 [data-toggle],
 button,
 .btn {
+  &:hover,
+  &.active,
+  &[aria-expanded="true"] {
+    > .fa,
+    > .far,
+    > .fas,
+    > .fab,
+    &.fa,
+    &.far,
+    &.fas,
+    &.fab {
+      transform: scale(1.5);
+    }
+  }
+
+  &:hover,
+  &[aria-expanded="true"] {
+    opacity: 0.8;
+  }
+
+  &.disabled {
+    opacity: 0.5;
+    cursor: default;
 
     &:hover,
     &.active,
-    &[aria-expanded='true'] {
-
-        >.fa,
-        >.far,
-        >.fas,
-        >.fab,
-        &.fa,
-        &.far,
-        &.fas,
-        &.fab {
-            transform: scale(1.5);
-        }
+    &[aria-expanded="true"] {
+      > .fa,
+      > .far,
+      > .fas,
+      > .fab,
+      &.fa,
+      &.far,
+      &.fas,
+      &.fab {
+        transform: rotate(0deg);
+      }
     }
-
-    &:hover,
-    &[aria-expanded='true'] {
-        opacity: 0.8;
-    }
-
-    &.disabled {
-        opacity: 0.5;
-        cursor: default;
-
-        &:hover,
-        &.active,
-        &[aria-expanded='true'] {
-
-            >.fa,
-            >.far,
-            >.fas,
-            >.fab,
-            &.fa,
-            &.far,
-            &.fas,
-            &.fab {
-                transform: rotate(0deg);
-            }
-        }
-    }
+  }
 }

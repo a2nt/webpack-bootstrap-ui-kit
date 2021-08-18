@@ -7,28 +7,28 @@ $flyout-title-color: #fff !default;
 $flyout-transition: right 2s;
 
 .flyout-FlyoutUI {
+  background: $flyout-bg;
+  color: $flyout-color;
+  padding: $flyout-padding;
+  position: absolute;
+  right: -100%;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: $flyout-transition;
+  z-index: 99;
+
+  &__active {
+    display: block;
+    right: 0;
+  }
+
+  &__title {
+    color: $flyout-title-color;
+  }
+
+  &__close {
     position: absolute;
-    z-index: 99;
-    transform: translateY(-50%);
-    transition: $flyout-transition;
-    right: -100%;
-    top: 50%;
-    background: $flyout-bg;
-    color: $flyout-color;
-    padding: $flyout-padding;
-
-    &__active {
-        display: block;
-        right: 0;
-    }
-
-    &__title {
-        color: $flyout-title-color;
-    }
-
-    &__close {
-        position: absolute;
-        top: $flyout-height-padding;
-        right: $flyout-width-padding;
-    }
+    right: $flyout-width-padding;
+    top: $flyout-height-padding;
+  }
 }
