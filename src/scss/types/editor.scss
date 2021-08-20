@@ -242,3 +242,15 @@ img {
 img {
   border: 1px dashed;
 }
+
+.ss-htmleditorfield-file.embed {
+  @include responsive-ratio(4,3,true);
+      position: relative;
+      iframe {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top:0;
+        bottom: 0;
+      }
+}

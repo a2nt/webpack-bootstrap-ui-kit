@@ -9,6 +9,8 @@ const CarouselUI = ((window) => {
 
     document.querySelectorAll(`.${NAME}`).forEach((el, i) => {
       const carousel = new Carousel(el);
+      el.ui = carousel;
+      
       // create next/prev arrows
       if (el.dataset.bsArrows) {
         const next = document.createElement("button");
