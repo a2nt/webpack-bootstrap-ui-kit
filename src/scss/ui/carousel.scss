@@ -91,3 +91,12 @@ $carousel-slide-img-loading-max-height: 25vh !default;
   right: 0;
   top: 0;
 }
+
+.carousel-multislide {
+  overflow: hidden;
+  .carousel-item {
+    display: block;
+    margin: 0;
+    width: 50%;
+  }
+}

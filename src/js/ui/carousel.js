@@ -8,9 +8,11 @@ const CarouselUI = ((window) => {
     console.log(`${NAME}: init`);
 
     document.querySelectorAll(`.${NAME}`).forEach((el, i) => {
-      const carousel = new Carousel(el);
+      const carousel = new Carousel(el, {
+        interval: el.dataset.bsInterval ? parseInt(el.dataset.bsInterval) : false,
+      });
       el.ui = carousel;
-      
+
       // create next/prev arrows
       if (el.dataset.bsArrows) {
         const next = document.createElement("button");
@@ -82,6 +84,47 @@ const CarouselUI = ((window) => {
           });
         });
       }
+
+      if(el.classList.contains('carousel-multislide')){
+        const calculate = new ResizeObserver((entries) => {
+          const entry = entries[0];
+          const el = entry.target;
+          const rect = entry.contentRect;
+
+          const width = rect.width;
+          const height = rect.height;
+          const numToDisplay = el.dataset['length'];
+          const itemWidth = width / numToDisplay;
+
+          el.dataset['itemWidth'] = itemWidth;
+          el.dataset['numToDisplay'] = numToDisplay;
+
+          const items = el.querySelectorAll('.carousel-item');
+
+          el.querySelector('.carousel-inner').style.width = `${items.length * itemWidth  }px`;
+          items.forEach((el,i) => {
+            el.style.width = `${itemWidth  }px`;
+          });
+        });
+
+        calculate.observe(el);
+
+        el.addEventListener('slide.bs.carousel', (e) => {
+          const inner = el.querySelector('.carousel-inner');
+
+          switch (e.direction) {
+            case 'left':
+              inner.style.left = `${-(e.to * el.dataset['itemWidth'])  }px`;
+              break;
+            case 'right':
+              inner.style.left = `${-(e.to * el.dataset['itemWidth'])  }px`;
+              break;
+          }
+        });
+
+        el.classList.add(`${NAME}-multislide-active`);
+      }
+
       el.classList.add(`${NAME}-active`);
     });
   };
