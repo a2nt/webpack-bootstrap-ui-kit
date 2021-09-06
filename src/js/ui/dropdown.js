@@ -1,5 +1,12 @@
 import Events from "../_events";
 
+/*
+ * Bootstrap compatible dropdowns without popover library
+ *
+ * [data-bs-toggle="hover"] - shows/hides dropdown on mouseover/mouseout
+ * [data-bs-toggle="dropdown"], .js-dropdown - shows/hides dropdown on click
+ *
+ */
 const DropdownHoverUI = ((window) => {
   const NAME = "js-dropdown";
 
@@ -30,7 +37,7 @@ const DropdownHoverUI = ((window) => {
     const attachClickEvents = (el) => {
       el.addEventListener("click", (e) => {
         e.preventDefault();
-        console.log('AAAA');
+
         const el = e.currentTarget;
         const parent = el.closest('.dropdown');
         Toggle(parent);
