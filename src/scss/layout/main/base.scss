@@ -132,10 +132,12 @@ button,
     > .far,
     > .fas,
     > .fab,
+    > .svg-inline--fa,
     &.fa,
     &.far,
     &.fas,
-    &.fab {
+    &.fab,
+    &.svg-inline--fa {
       transform: scale(1.5);
     }
   }
@@ -156,10 +158,12 @@ button,
       > .far,
       > .fas,
       > .fab,
+      > .svg-inline--fa,
       &.fa,
       &.far,
       &.fas,
-      &.fab {
+      &.fab,
+      &.svg-inline--fa {
         transform: rotate(0deg);
       }
     }
