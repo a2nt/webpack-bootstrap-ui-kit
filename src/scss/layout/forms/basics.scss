@@ -11,7 +11,7 @@
     }
   }
 
-  .field__content {
+  &__content {
     flex: 1 1 auto;
   }
 
@@ -27,4 +27,8 @@
     right: 0.5em;
     top: 0.5em;
   }
+}
+
+.form__fieldset {
+    margin-bottom: -1rem;
 }
