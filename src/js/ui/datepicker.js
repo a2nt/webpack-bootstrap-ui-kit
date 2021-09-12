@@ -4,6 +4,7 @@ import Datepicker from 'vanillajs-datepicker/Datepicker';
 const init = () => {
   document.querySelectorAll('.js-calendar').forEach((el, i) => {
     const picker = new Datepicker(el);
+    el.ui = picker;
   });
 };
 
