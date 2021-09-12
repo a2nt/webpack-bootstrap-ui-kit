@@ -216,7 +216,7 @@ const cfg = merge(common.webpack, {
                             discardDuplicates: true,
                           },
                     ],
-                  },],
+                  }, ],
                 minify: [
                     CssMinimizerPlugin.cssnanoMinify,
                     //CssMinimizerPlugin.cleanCssMinify,
@@ -232,8 +232,8 @@ const cfg = merge(common.webpack, {
       },
 
     module: {
-        rules: [{ test: /\.tsx?$/, loader: 'ts-loader' }, {
-            test: /\.jsx?$/,
+        rules: [{
+            test: /\.(js|ts)x?$/,
             //exclude: /node_modules/,
             use: {
                 loader: 'babel-loader', //'@sucrase/webpack-loader',
@@ -247,9 +247,10 @@ const cfg = merge(common.webpack, {
                                 '@babel/plugin-proposal-class-properties',
                             ],
                           },
-                    ], //Preset used for env setup
+                    ],
                     plugins: [
-                        ['@babel/transform-react-jsx'],
+                        '@babel/plugin-transform-typescript',
+                        '@babel/transform-react-jsx',
                     ],
                     cacheDirectory: true,
                     cacheCompression: true,
@@ -275,7 +276,7 @@ const cfg = merge(common.webpack, {
                 options: {
                     sourceMap: true,
                   },
-              },],
+              }, ],
           },
         {
             test: /fontawesome([^.]+).(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
@@ -323,8 +324,8 @@ const cfg = merge(common.webpack, {
                         limit: 1,
                       },
                   },
-              },],
-          },],
+              }, ],
+          }, ],
       },
 
     plugins: plugins,
