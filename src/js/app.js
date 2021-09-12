@@ -14,6 +14,7 @@ import './main';
 import '@a2nt/meta-lightbox-js/src/js/app';
 import './ui/carousel';
 import './ui/dropdown';
+import './ui/datepicker';
 //import './ui/ui.instagram.feed';
 
 /*

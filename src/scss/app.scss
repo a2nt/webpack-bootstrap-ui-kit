@@ -1,8 +1,5 @@
 //@import "~bootstrap-select/sass/bootstrap-select.scss";
 
-//@import "~bootstrap-datepicker/dist/css/bootstrap-datepicker.css";
-//@import "~bootstrap-timepicker/css/bootstrap-timepicker.css";
-
 // Your custom variables
 @import "variables";
 @import "animations";
@@ -10,6 +7,7 @@
 @import "~@a2nt/meta-lightbox-js/src/scss/app";
 @import "libs/bootstrap";
 @import "libs/silverstripe";
+@import "ui/datepicker";
 
 // By default we prefer font awesome CDN
 //@import "_libs/_fontawesome";
