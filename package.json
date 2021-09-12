@@ -1,6 +1,6 @@
 {
   "name": "@a2nt/ss-bootstrap-ui-webpack-boilerplate-react",
-  "version": "4.3.1",
+  "version": "4.3.2",
   "description": "This UI Kit allows you to build Bootstrap 5 webapp with some extra UI features. It's easy to extend and easy to convert HTML templates to CMS templates.",
   "author": "Tony Air <tony@twma.pro>",
   "license": "BSD-2-Clause",
