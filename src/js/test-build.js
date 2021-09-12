@@ -1,21 +1,21 @@
-"use strict";
+'use strict';
 
-import "../scss/test-build.scss";
-import "@a2nt/meta-lightbox-js/src/js/test-build";
+import '../scss/test-build.scss';
+import '@a2nt/meta-lightbox-js/src/js/test-build';
 
-import Events from "./_events";
-import MainUI from "./main";
+import Events from './_events';
+import MainUI from './main';
 
 /*
  * AJAX functionality
  */
-import "./ajax/links";
-import "./ajax/online";
-import "./ajax/lazy-images";
+//import "./ajax/links";
+import './ajax/online';
+import './ajax/lazy-images';
 
-import "./layout";
+import './layout';
 
-import "./store";
+import './store';
 
 /*if (process.env.NODEENV === 'development') {
     // mocking service worker
@@ -51,17 +51,17 @@ function importAll(r) {
 }
 
 const images = importAll(
-  require.context("../img/", false, /\.(png|jpe?g|svg)$/)
+  require.context('../img/', false, /\.(png|jpe?g|svg)$/)
 );
 const fontAwesome = importAll(
-  require.context("font-awesome", false, /\.(otf|eot|svg|ttf|woff|woff2)$/)
+  require.context('font-awesome', false, /\.(otf|eot|svg|ttf|woff|woff2)$/)
 );
 
 if (module.hot) {
-  module.hot.accept("app.js", () => {
-    console.log("Accepting the updated printMe module!");
+  module.hot.accept('app.js', () => {
+    console.log('Accepting the updated printMe module!');
   });
-  module.hot.accept("app.scss", () => {
-    console.log("Accepting the updated printMe module!");
+  module.hot.accept('app.scss', () => {
+    console.log('Accepting the updated printMe module!');
   });
 }

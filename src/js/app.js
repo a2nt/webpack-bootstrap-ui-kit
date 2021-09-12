@@ -1,32 +1,32 @@
-"use strict";
+'use strict';
 /*
  * UI Basics
  */
 //import $ from 'jquery';
-import "../scss/app.scss";
+import '../scss/app.scss';
 
-import Events from "./_events";
-import MainUI from "./main";
+import Events from './_events';
+import './main';
 
 /*
  * Extra functionality
  */
-import "@a2nt/meta-lightbox-js/src/js/app";
-import "./ui/carousel";
-import "./ui/dropdown";
+import '@a2nt/meta-lightbox-js/src/js/app';
+import './ui/carousel';
+import './ui/dropdown';
 //import './ui/ui.instagram.feed';
 
 /*
  * AJAX functionality
  */
 //import './ajax/links';
-import "./ajax/online";
-import "./ajax/lazy-images";
+import './ajax/online';
+import './ajax/lazy-images';
 
 /*
  * Site specific modules
  */
-import "./layout";
+import './layout';
 
 //import 'hammerjs/hammer';
 //import 'jquery-hammerjs/jquery.hammer';
