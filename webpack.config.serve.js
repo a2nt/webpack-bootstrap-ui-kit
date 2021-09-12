@@ -10,7 +10,7 @@ const fs = require('fs');
 //const autoprefixer = require('autoprefixer');
 const webpack = require('webpack');
 const {
-    merge
+    merge,
 } = require('webpack-merge');
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -23,27 +23,27 @@ let plugins = common.plugins;
 
 const indexPath = path.join(__dirname, conf.APPDIR, conf.SRC, 'index.html');
 if (fs.existsSync(indexPath)) {
-    plugins.push(
-        new HtmlWebpackPlugin({
-            publicPath: '',
-            template: path.join(conf.APPDIR, conf.SRC, 'index.html'),
-            templateParameters: {
-                NODE_ENV: 'development',
-                GRAPHQL_URL: conf['GRAPHQL_URL'],
-                STATIC_URL: conf['STATIC_URL'],
-                REACT_SCRIPTS: '<script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script><script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>',
+  plugins.push(
+      new HtmlWebpackPlugin({
+          publicPath: '',
+          template: path.join(conf.APPDIR, conf.SRC, 'index.html'),
+          templateParameters: {
+              NODE_ENV: 'development',
+              GRAPHQL_URL: conf['GRAPHQL_URL'],
+              STATIC_URL: conf['STATIC_URL'],
+              REACT_SCRIPTS: '<script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script><script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>',
             },
         }),
-    );
+  );
 }
 
 const config = merge(common.webpack, {
     entry: {
-        /*hot: [
-          'react-hot-loader/patch',
-          'webpack-dev-server/?https://' + conf.HOSTNAME + ':' + conf.PORT,
-          'webpack/hot/only-dev-server',
-        ],*/
+      /*hot: [
+        'react-hot-loader/patch',
+        'webpack-dev-server/?https://' + conf.HOSTNAME + ':' + conf.PORT,
+        'webpack/hot/only-dev-server',
+      ],*/
     },
 
     output: {
@@ -51,10 +51,10 @@ const config = merge(common.webpack, {
         filename: '[name].js',
         // necessary for HMR to know where to load the hot update chunks
         publicPath: `http${conf['HTTPS'] ? 's' : ''}://${conf['HOSTNAME']}:${conf.PORT}/`,
-    },
+      },
 
     module: {
-        rules: [{
+        rules: [{ test: /\.tsx?$/, loader: 'ts-loader' }, {
             test: /\.jsx?$/,
             //exclude: /node_modules/,
             use: {
@@ -77,42 +77,42 @@ const config = merge(common.webpack, {
                     ],
                     cacheDirectory: true,
                     cacheCompression: true,*/
-                },
-            },
-        },
+                  },
+              },
+          },
         {
             test: /\.s?css$/,
             use: [{
                 loader: MiniCssExtractPlugin.loader,
-            },
+              },
             {
                 loader: 'css-loader',
                 options: {
                     sourceMap: true,
-                },
-            },
+                  },
+              },
             {
                 loader: 'resolve-url-loader',
-            },
+              },
             {
                 loader: 'sass-loader',
                 options: {
                     sourceMap: true,
-                },
-            }, ],
-        },
+                  },
+              },],
+          },
         {
             test: /fontawesome([^.]+).(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
-            type: "asset/resource",
-        },
+            type: 'asset/resource',
+          },
         {
             test: /\.(gif|png|jpg|jpeg|ttf|otf|eot|svg|webp|woff(2)?)$/,
-            type: "asset/resource",
-        }, {
+            type: 'asset/resource',
+          }, {
             test: /\.(png|webp|jpg|jpeg|gif|svg)$/,
-            type: "asset/resource",
-        }, ],
-    },
+            type: 'asset/resource',
+          },],
+      },
     plugins: plugins,
 
     mode: 'development',
@@ -130,8 +130,8 @@ const config = merge(common.webpack, {
             'Access-Control-Allow-Origin': '*',
             'Referrer-Policy': 'unsafe-url',
             'service-worker-allowed': '/',
-        },
-    },
-});
+          },
+      },
+  });
 
 module.exports = config;
