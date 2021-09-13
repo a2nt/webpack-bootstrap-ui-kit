@@ -1,0 +1,32 @@
+@import "node_modules/vanillajs-datepicker/sass/mixins";
+
+@mixin dp-button {
+  .button {
+    @extend .btn;
+    @extend .btn-secondary;
+
+    .datepicker-header & {
+      @include dp-header-button-common;
+
+      // Place style adjustment specific to the header buttons here, if needed
+    }
+
+    .datepicker-footer & {
+      @include dp-footer-button-common;
+
+      // Place style adjustment specific to the footer buttons here, if needed
+    }
+  }
+}
+
+$dp-background-color: $body-bg !default;
+$dp-border-radius: .5rem !default;
+$dp-cell-selected-color: $white !default;
+$dp-cell-focus-background-color: invert($body-bg) !default;
+$dp-cell-focus-color: invert($body-color) !default;
+
+.datepicker-cell.focused:not(.selected) {
+  color: $dp-cell-focus-color;
+}
+
+@import "node_modules/vanillajs-datepicker/sass/datepicker";

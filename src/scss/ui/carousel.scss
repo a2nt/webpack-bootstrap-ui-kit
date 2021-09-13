@@ -1,0 +1,102 @@
+@import "~bootstrap/scss/carousel";
+
+/*
+ * Bootstrap carousel improvement
+ */
+
+/*.carousel-item {
+    &.active {
+        display: flex !important;
+        justify-content: center;
+        align-items: flex-start;
+    }
+}*/
+
+$carousel-title-color: $white !default;
+$carousel-slide-min-height: 4rem !default;
+$carousel-text-shadow: 1px 1px $black !default;
+$carousel-controls-font-size: 3rem;
+$carousel-controls-zindex: 11 !default;
+$carousel-controls-shadow: 1px 1px $black !default;
+$carousel-controls-hover-bg: transparentize($black, 0.4) !default;
+$carousel-slide-img-loading-max-height: 25vh !default;
+
+.carousel-slide {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: $carousel-slide-min-height;
+
+  > .container {
+    position: relative;
+  }
+
+  .video {
+    width: 100%;
+
+    iframe {
+      height: auto !important;
+      width: 100% !important;
+    }
+  }
+
+  .img {
+    display: block;
+    width: 100%;
+  }
+
+  img.loading {
+    max-height: $carousel-slide-img-loading-max-height;
+  }
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  font-size: $carousel-controls-font-size;
+  text-shadow: $carousel-controls-shadow;
+  z-index: $carousel-controls-zindex;
+
+  &:hover,
+  &:focus {
+    background: $carousel-controls-hover-bg;
+  }
+}
+
+.carousel-indicators li {
+  box-shadow: none;
+}
+
+.carousel-title {
+  color: $carousel-title-color;
+}
+
+.carousel-title,
+.carousel-content {
+  text-shadow: $carousel-text-shadow;
+}
+
+.carousel-caption {
+  bottom: 0;
+  left: auto;
+  right: 0;
+  width: 50%;
+}
+
+.slide-link__media {
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.carousel-multislide {
+  overflow: hidden;
+  .carousel-item {
+    display: block;
+    margin: 0;
+    width: 50%;
+  }
+}

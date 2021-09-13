@@ -1,35 +1,53 @@
 'use strict';
-
-import $ from 'jquery';
+/*
+ * UI Basics
+ */
+//import $ from 'jquery';
 import '../scss/app.scss';
 
-// import Bootstrap
-import 'popper.js';
-import 'bootstrap/js/dist/util';
-import 'bootstrap/js/dist/alert';
-import 'bootstrap/js/dist/button';
-import 'bootstrap/js/dist/carousel';
-import 'bootstrap/js/dist/collapse';
+import Events from './_events';
+import './main';
 
-import 'hammerjs/hammer';
-import 'jquery-hammerjs/jquery.hammer';
+/*
+ * Extra functionality
+ */
+import '@a2nt/meta-lightbox-js/src/js/app';
+import './ui/carousel';
+import './ui/dropdown';
+import './ui/datepicker';
+//import './ui/ui.instagram.feed';
+
+/*
+ * AJAX functionality
+ */
+//import './ajax/links';
+import './ajax/online';
+import './ajax/lazy-images';
+
+/*
+ * Site specific modules
+ */
+import './layout';
+
+//import 'hammerjs/hammer';
+//import 'jquery-hammerjs/jquery.hammer';
 
 // Routie
 //import 'pouchdb/dist/pouchdb';
-//import './_components/routes/index';
+//import './components/routes/index';
 
-// conflicts with _components/_ui.hover.js (shows dropdown on hover)
+// conflicts with components/ui.hover.js (shows dropdown on hover)
 //import 'bootstrap/js/dist/dropdown';
-import './_components/_ui.hover';
+/*import './components/ui.hover';
 
-import './_components/_ui.carousel';
-import './_components/_ui.menu';
+import './components/ui.carousel';
+import './components/ui.menu';
 
 import 'bootstrap/js/dist/modal';
 import 'bootstrap/js/dist/tooltip';
 import 'bootstrap/js/dist/popover';
 import 'bootstrap/js/dist/scrollspy';
-import 'bootstrap/js/dist/tab';
+import 'bootstrap/js/dist/tab';*/
 //
 
 // Offcanvas menu
@@ -39,59 +57,45 @@ import 'bootstrap/js/dist/tab';
 //import 'jquery-zoom/jquery.zoom';
 
 // FlyoutUI
-import FlyoutUI from './_components/_ui.flyout';
+//import FlyoutUI from './components/ui.flyout';
 
 // Sticky sidebar
-import SidebarUI from './_components/_ui.sidebar';
+//import SidebarUI from './components/ui.sidebar';
 
 // Toggle bootstrap form fields
-//import FormToggleUI from './_components/_ui.form.fields.toggle';
+//import FormToggleUI from './components/ui.form.fields.toggle';
 
 // Bootstrap Date & Time fields
-//import FormDatetime from './_components/_ui.form.datetime';
+//import FormDatetime from './components/ui.form.datetime';
 
 // Stepped forms functionality
-//import FormStepped from './_components/_ui.form.stepped';
+//import FormStepped from './components/ui.form.stepped';
 
 // Forms validation functionality
-//import FormValidate from './_components/_ui.form.validate';
+//import FormValidate from './components/ui.form.validate';
 
 // Store forms data into localStorage
-//import FormStorage from './_components/_ui.form.storage';
+//import FormStorage from './components/ui.form.storage';
 
 // client-side images cropping
-//import FormCroppie from './_components/_ui.form.croppie';
+//import FormCroppie from './components/ui.form.croppie';
 
 // Google NoCaptcha fields
-//import NoCaptcha from './_components/_ui.nocaptcha';
+//import NoCaptcha from './components/ui.nocaptcha';
 
 // youtube video preview image
-import './_components/_ui.video.preview';
-
-// Meta Lightbox
-import '@a2nt/meta-lightbox/src/js/app';
+//import './components/ui.video.preview';
 
 //import Confirmation from 'bootstrap-confirmation2/dist/bootstrap-confirmation';
 //import Table from 'bootstrap-table/dist/bootstrap-table';
 
 // Map UI
-//import MapApi from './_components/_ui.map.api';
+//import MapApi from './components/ui.map.api';
 
-//import FormSelect2 from './_components/_ui.form.select2';
+//import FormSelect2 from './components/ui.form.select2';
 
-import './_main';
-import './_layout';
+//import './main';
+//import './layout';
 
 // Google Analytics
-import './_components/drivers/_google.track.external.links';
-
-function importAll(r) {
-  return r.keys().map(r);
-}
-
-const images = importAll(
-  require.context('../img/', false, /\.(png|jpe?g|svg)$/),
-);
-const fontAwesome = importAll(
-  require.context('font-awesome', false, /\.(otf|eot|svg|ttf|woff|woff2)$/),
-);
+//import './drivers/google.track.external.links';

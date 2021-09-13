@@ -1,0 +1,56 @@
+// remove containers for child elements
+.sidebar__col {
+  margin-bottom: $element-reduced-spacer-y;
+  margin-top: $element-reduced-spacer-y;
+  position: relative;
+}
+
+.content-holder__sidebar {
+  .row {
+    .container,
+    .container-fluid {
+      padding: 0;
+      width: auto;
+    }
+  }
+}
+
+.page-content-sidebar {
+  // Sidebar elements
+  .element {
+    padding-bottom: ($element-reduced-spacer-y);
+    padding-top: ($element-reduced-spacer-y);
+
+    &:first-child {
+      padding-top: 0;
+    }
+
+    &:last-child {
+      padding-bottom: 0;
+    }
+  }
+}
+
+.element__widget {
+}
+
+.widget__Site_Widgets_SubmenuWidget {
+  .nav-link {
+    width: 100%;
+
+    &:hover,
+    &:focus,
+    &:active,
+    &.active {
+      color: $sidebar-nav-link-hover-color;
+      font-weight: bold;
+    }
+  }
+
+  .active {
+    .nav-link {
+      color: $sidebar-nav-link-hover-color;
+      font-weight: bold;
+    }
+  }
+}

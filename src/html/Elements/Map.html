@@ -1,59 +1,75 @@
 <h2 class="content-element__title">Find Location</h2>
 <div class="typography">
-	<p>Use _consts.js to change Google Maps to Mapbox.</p>
+  <p>Use _consts.js to change Google Maps to Mapbox.</p>
 </div>
 <div
-	class="mapAPI-map-container"
-	data-map-zoom="12"
-	data-key=""
-	data-map-style="mapbox://styles/mapbox/streets-v9"
-	data-geojson="{&quot;type&quot;:&quot;MarkerCollection&quot;,&quot;features&quot;:[{&quot;id&quot;:4,&quot;type&quot;:&quot;Feature&quot;,&quot;icon&quot;:&quot;&lt;i class=\&quot;fas fa-map-marker-alt\&quot;&gt;&lt;\/i&gt;&quot;,&quot;properties&quot;:{&quot;content&quot;:&quot;&lt;div id=\&quot;MapPin4\&quot; data-id=\&quot;4\&quot; class=\&quot;location\&quot;&gt;\n    &lt;div class=\&quot;fn\&quot;&gt;Office #1&lt;\/div&gt;\n    &lt;div class=\&quot;addr\&quot;&gt;17 Lakeside Drive&lt;\/div&gt;\n    \n    \n    \n        &lt;div class=\&quot;d-none\&quot;&gt; U&lt;\/div&gt;\n    \n    \n    \n    &lt;div class=\&quot;dir-link\&quot;&gt;\n        &lt;a href=\&quot;https:\/\/www.google.com\/maps\/dir\/Current+Location\/40.8827743,-74.4276612\&quot; target=\&quot;_blank\&quot;&gt;Get Directions &amp;raquo;&lt;\/a&gt;\n    &lt;\/div&gt;\n&lt;\/div&gt;\n&quot;},&quot;geometry&quot;:{&quot;type&quot;:&quot;Point&quot;,&quot;coordinates&quot;:[-74.4276612,40.8827743]}},{&quot;id&quot;:3,&quot;type&quot;:&quot;Feature&quot;,&quot;icon&quot;:&quot;&lt;i class=\&quot;fas fa-map-marker-alt\&quot;&gt;&lt;\/i&gt;&quot;,&quot;properties&quot;:{&quot;content&quot;:&quot;&lt;div id=\&quot;MapPin3\&quot; data-id=\&quot;3\&quot; class=\&quot;location\&quot;&gt;\n    &lt;div class=\&quot;fn\&quot;&gt;Office #2&lt;\/div&gt;\n    &lt;div class=\&quot;addr\&quot;&gt;Flower Hill Cemetery&lt;\/div&gt;\n    \n    \n    \n        &lt;div class=\&quot;d-none\&quot;&gt; N&lt;\/div&gt;\n    \n    \n    \n    &lt;div class=\&quot;dir-link\&quot;&gt;\n        &lt;a href=\&quot;https:\/\/www.google.com\/maps\/dir\/Current+Location\/40.7884708,-74.0249253\&quot; target=\&quot;_blank\&quot;&gt;Get Directions &amp;raquo;&lt;\/a&gt;\n    &lt;\/div&gt;\n&lt;\/div&gt;\n&quot;},&quot;geometry&quot;:{&quot;type&quot;:&quot;Point&quot;,&quot;coordinates&quot;:[-74.0249253,40.7884708]}},{&quot;id&quot;:2,&quot;type&quot;:&quot;Feature&quot;,&quot;icon&quot;:&quot;&lt;i class=\&quot;fas fa-map-marker-alt\&quot;&gt;&lt;\/i&gt;&quot;,&quot;properties&quot;:{&quot;content&quot;:&quot;&lt;div id=\&quot;MapPin2\&quot; data-id=\&quot;2\&quot; class=\&quot;location\&quot;&gt;\n    &lt;div class=\&quot;fn\&quot;&gt;Office #3&lt;\/div&gt;\n    &lt;div class=\&quot;addr\&quot;&gt;555 Phoenix Road&lt;\/div&gt;\n    \n    \n    \n        &lt;div class=\&quot;d-none\&quot;&gt; U&lt;\/div&gt;\n    \n    \n    \n    &lt;div class=\&quot;dir-link\&quot;&gt;\n        &lt;a href=\&quot;https:\/\/www.google.com\/maps\/dir\/Current+Location\/40.8527479,-78.2475576\&quot; target=\&quot;_blank\&quot;&gt;Get Directions &amp;raquo;&lt;\/a&gt;\n    &lt;\/div&gt;\n&lt;\/div&gt;\n&quot;},&quot;geometry&quot;:{&quot;type&quot;:&quot;Point&quot;,&quot;coordinates&quot;:[-78.2475576,40.8527479]}},{&quot;id&quot;:1,&quot;type&quot;:&quot;Feature&quot;,&quot;icon&quot;:&quot;&lt;i class=\&quot;fas fa-map-marker-alt\&quot;&gt;&lt;\/i&gt;&quot;,&quot;properties&quot;:{&quot;content&quot;:&quot;&lt;div id=\&quot;MapPin1\&quot; data-id=\&quot;1\&quot; class=\&quot;location\&quot;&gt;\n    &lt;div class=\&quot;fn\&quot;&gt;Office #4&lt;\/div&gt;\n    &lt;div class=\&quot;addr\&quot;&gt;15 East Hadley Road&lt;\/div&gt;\n    \n    \n    \n        &lt;div class=\&quot;d-none\&quot;&gt; U&lt;\/div&gt;\n    \n    \n    \n    &lt;div class=\&quot;dir-link\&quot;&gt;\n        &lt;a href=\&quot;https:\/\/www.google.com\/maps\/dir\/Current+Location\/42.3297023,-72.5552186\&quot; target=\&quot;_blank\&quot;&gt;Get Directions &amp;raquo;&lt;\/a&gt;\n    &lt;\/div&gt;\n&lt;\/div&gt;\n&quot;},&quot;geometry&quot;:{&quot;type&quot;:&quot;Point&quot;,&quot;coordinates&quot;:[-72.5552186,42.3297023]}}]}"
-	data-fly-to-marker="true"
-	data-fly-to-bounds="false"
-	>
-	<div class="mapAPI-map"></div>
+  class="mapAPI-map-container"
+  data-map-zoom="12"
+  data-key=""
+  data-map-style="mapbox://styles/mapbox/streets-v9"
+  data-geojson='{"type":"MarkerCollection","features":[{"id":4,"type":"Feature","icon":"&lt;i class=\"fas fa-map-marker-alt\"&gt;&lt;\/i&gt;","properties":{"content":"&lt;div id=\"MapPin4\" data-id=\"4\" class=\"location\"&gt;\n    &lt;div class=\"fn\"&gt;Office #1&lt;\/div&gt;\n    &lt;div class=\"addr\"&gt;17 Lakeside Drive&lt;\/div&gt;\n    \n    \n    \n        &lt;div class=\"d-none\"&gt; U&lt;\/div&gt;\n    \n    \n    \n    &lt;div class=\"dir-link\"&gt;\n        &lt;a href=\"https:\/\/www.google.com\/maps\/dir\/Current+Location\/40.8827743,-74.4276612\" target=\"_blank\"&gt;Get Directions &amp;raquo;&lt;\/a&gt;\n    &lt;\/div&gt;\n&lt;\/div&gt;\n"},"geometry":{"type":"Point","coordinates":[-74.4276612,40.8827743]}},{"id":3,"type":"Feature","icon":"&lt;i class=\"fas fa-map-marker-alt\"&gt;&lt;\/i&gt;","properties":{"content":"&lt;div id=\"MapPin3\" data-id=\"3\" class=\"location\"&gt;\n    &lt;div class=\"fn\"&gt;Office #2&lt;\/div&gt;\n    &lt;div class=\"addr\"&gt;Flower Hill Cemetery&lt;\/div&gt;\n    \n    \n    \n        &lt;div class=\"d-none\"&gt; N&lt;\/div&gt;\n    \n    \n    \n    &lt;div class=\"dir-link\"&gt;\n        &lt;a href=\"https:\/\/www.google.com\/maps\/dir\/Current+Location\/40.7884708,-74.0249253\" target=\"_blank\"&gt;Get Directions &amp;raquo;&lt;\/a&gt;\n    &lt;\/div&gt;\n&lt;\/div&gt;\n"},"geometry":{"type":"Point","coordinates":[-74.0249253,40.7884708]}},{"id":2,"type":"Feature","icon":"&lt;i class=\"fas fa-map-marker-alt\"&gt;&lt;\/i&gt;","properties":{"content":"&lt;div id=\"MapPin2\" data-id=\"2\" class=\"location\"&gt;\n    &lt;div class=\"fn\"&gt;Office #3&lt;\/div&gt;\n    &lt;div class=\"addr\"&gt;555 Phoenix Road&lt;\/div&gt;\n    \n    \n    \n        &lt;div class=\"d-none\"&gt; U&lt;\/div&gt;\n    \n    \n    \n    &lt;div class=\"dir-link\"&gt;\n        &lt;a href=\"https:\/\/www.google.com\/maps\/dir\/Current+Location\/40.8527479,-78.2475576\" target=\"_blank\"&gt;Get Directions &amp;raquo;&lt;\/a&gt;\n    &lt;\/div&gt;\n&lt;\/div&gt;\n"},"geometry":{"type":"Point","coordinates":[-78.2475576,40.8527479]}},{"id":1,"type":"Feature","icon":"&lt;i class=\"fas fa-map-marker-alt\"&gt;&lt;\/i&gt;","properties":{"content":"&lt;div id=\"MapPin1\" data-id=\"1\" class=\"location\"&gt;\n    &lt;div class=\"fn\"&gt;Office #4&lt;\/div&gt;\n    &lt;div class=\"addr\"&gt;15 East Hadley Road&lt;\/div&gt;\n    \n    \n    \n        &lt;div class=\"d-none\"&gt; U&lt;\/div&gt;\n    \n    \n    \n    &lt;div class=\"dir-link\"&gt;\n        &lt;a href=\"https:\/\/www.google.com\/maps\/dir\/Current+Location\/42.3297023,-72.5552186\" target=\"_blank\"&gt;Get Directions &amp;raquo;&lt;\/a&gt;\n    &lt;\/div&gt;\n&lt;\/div&gt;\n"},"geometry":{"type":"Point","coordinates":[-72.5552186,42.3297023]}}]}'
+  data-fly-to-marker="true"
+  data-fly-to-bounds="false"
+>
+  <div class="mapAPI-map"></div>
 </div>
 <div class="locations">
-	<div class="row">
-		<div class="col-sm-3">
-			<div id="MapPin4" data-id="4" class="location">
-				<div class="fn">Office #1</div>
-				<div class="addr">17 Lakeside Drive</div>
-				<div class="d-none"> U</div>
-				<div class="dir-link">
-					<a href="https://www.google.com/maps/dir/Current+Location/40.8827743,-74.4276612" target="_blank">Get Directions &raquo;</a>
-				</div>
-			</div>
-		</div>
-		<div class="col-sm-3">
-			<div id="MapPin3" data-id="3" class="location">
-				<div class="fn">Office #2</div>
-				<div class="addr">Flower Hill Cemetery</div>
-				<div class="d-none"> N</div>
-				<div class="dir-link">
-					<a href="https://www.google.com/maps/dir/Current+Location/40.7884708,-74.0249253" target="_blank">Get Directions &raquo;</a>
-				</div>
-			</div>
-		</div>
-		<div class="col-sm-3">
-			<div id="MapPin2" data-id="2" class="location">
-				<div class="fn">Office #3</div>
-				<div class="addr">555 Phoenix Road</div>
-				<div class="d-none"> U</div>
-				<div class="dir-link">
-					<a href="https://www.google.com/maps/dir/Current+Location/40.8527479,-78.2475576" target="_blank">Get Directions &raquo;</a>
-				</div>
-			</div>
-		</div>
-		<div class="col-sm-3">
-			<div id="MapPin1" data-id="1" class="location">
-				<div class="fn">Office #4</div>
-				<div class="addr">15 East Hadley Road</div>
-				<div class="d-none"> U</div>
-				<div class="dir-link">
-					<a href="https://www.google.com/maps/dir/Current+Location/42.3297023,-72.5552186" target="_blank">Get Directions &raquo;</a>
-				</div>
-			</div>
-		</div>
-	</div>
+  <div class="row">
+    <div class="col-sm-3">
+      <div id="MapPin4" data-id="4" class="location">
+        <div class="fn">Office #1</div>
+        <div class="addr">17 Lakeside Drive</div>
+        <div class="d-none">U</div>
+        <div class="dir-link">
+          <a
+            href="https://www.google.com/maps/dir/Current+Location/40.8827743,-74.4276612"
+            target="_blank"
+            >Get Directions &raquo;</a
+          >
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <div id="MapPin3" data-id="3" class="location">
+        <div class="fn">Office #2</div>
+        <div class="addr">Flower Hill Cemetery</div>
+        <div class="d-none">N</div>
+        <div class="dir-link">
+          <a
+            href="https://www.google.com/maps/dir/Current+Location/40.7884708,-74.0249253"
+            target="_blank"
+            >Get Directions &raquo;</a
+          >
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <div id="MapPin2" data-id="2" class="location">
+        <div class="fn">Office #3</div>
+        <div class="addr">555 Phoenix Road</div>
+        <div class="d-none">U</div>
+        <div class="dir-link">
+          <a
+            href="https://www.google.com/maps/dir/Current+Location/40.8527479,-78.2475576"
+            target="_blank"
+            >Get Directions &raquo;</a
+          >
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <div id="MapPin1" data-id="1" class="location">
+        <div class="fn">Office #4</div>
+        <div class="addr">15 East Hadley Road</div>
+        <div class="d-none">U</div>
+        <div class="dir-link">
+          <a
+            href="https://www.google.com/maps/dir/Current+Location/42.3297023,-72.5552186"
+            target="_blank"
+            >Get Directions &raquo;</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

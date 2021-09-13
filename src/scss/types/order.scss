@@ -1,163 +1,164 @@
 @import "../_variables";
 
 h1.title {
-    display: block;
-    text-align: right;
-    border-bottom: 1px solid $border-color;
-    text-transform: uppercase;
-    line-height: 1.5em;
+  border-bottom: 1px solid $border-color;
+  display: block;
+  line-height: 1.5em;
+  text-align: right;
+  text-transform: uppercase;
 }
 
 .warningMessage {
-    position: relative;
-    padding: $alert-padding-y $alert-padding-x;
-    margin-bottom: $alert-margin-bottom;
-    border: $alert-border-width solid transparent;
+  background-color: #fff3cd;
+  border: $alert-border-width solid transparent;
+  border-color: #ffeeba;
+  color: #856404;
 
-    @include border-radius($alert-border-radius);
+  @include border-radius($alert-border-radius);
 
-    color: #856404;
-    background-color: #fff3cd;
-    border-color: #ffeeba;
+  margin-bottom: $alert-margin-bottom;
+  padding: $alert-padding-y $alert-padding-x;
+  position: relative;
 }
 
 #Content {
-    text-align: left;
-    margin: auto;
-    padding-left: 20px;
+  margin: auto;
+  padding-left: 20px;
+  text-align: left;
 }
 
-#Content td {}
+#Content td {
+}
 
 #Content .emailTitle {
-    font-family: $font-family-base;
-    font-weight: normal;
-    font-size: $h1-font-size;
+  font-family: $font-family-base;
+  font-size: $h1-font-size;
+  font-weight: normal;
 }
 
 #Content .PageTitle {
-    padding: 5px;
-    color: $body-color;
-    font-size: 14px;
-    font-family: $font-family-base;
+  color: $body-color;
+  font-family: $font-family-base;
+  font-size: 14px;
+  padding: 5px;
 }
 
 #Content .footer td {
-    padding: 10px;
+  padding: 10px;
 }
 
 #Content .footer td.right {
-    text-align: right;
+  text-align: right;
 }
 
 #Content .typography {
-    padding: 0px 10px;
+  padding: 0 10px;
 }
 
 #Content .typography a {
-    font-size: 1em;
-    text-decoration: underline;
+  font-size: 1em;
+  text-decoration: underline;
 }
 
 #Content .typography a:hover {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 #Content .typography ul {
-    padding: 2px 15px;
+  padding: 2px 15px;
 }
 
 #Content .typography ul li {
-    padding: 2px 5px;
+  padding: 2px 5px;
 }
 
 #Content .typography p {
-    margin: 0.75em 0em;
-    color: $body-color;
+  color: $body-color;
+  margin: 0.75em 0;
 }
 
 table#SenderTable .sender,
 table#SenderTable .meta {
-    width: 50%;
+  width: 50%;
 }
 
 table#MetaTable {
-    margin-left: auto;
+  margin-left: auto;
 }
 
 table#MetaTable .label {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 #ShippingTable td,
 #ShippingTable th {
-    width: 50%;
+  width: 50%;
 }
 
 table.infotable {
-    border: 1px solid $border-color;
-    border-collapse: collapse;
-    width: 100%;
-    border-top: 1px solid $border-color;
-    border-bottom: 1px solid $border-color;
-    background: $body-bg;
-    margin-top: 10px;
+  background: $body-bg;
+  border: 1px solid $border-color;
+  border-bottom: 1px solid $border-color;
+  border-collapse: collapse;
+  border-top: 1px solid $border-color;
+  margin-top: 10px;
+  width: 100%;
 }
 
 table.infotable td.product.title {
-    color: $link-color;
-    font-size: $h3-font-size;
-    font-weight: normal;
-    font-family: $font-family-base;
+  color: $link-color;
+  font-family: $font-family-base;
+  font-size: $h3-font-size;
+  font-weight: normal;
 }
 
 table.infotable tr td,
 table.infotable tr th {
-    padding: 5px;
-    color: $body-color;
-    border: 1px solid $border-color;
+  border: 1px solid $border-color;
+  color: $body-color;
+  padding: 5px;
 }
 
 table.infotable td {
-    vertical-align: middle;
+  vertical-align: middle;
 }
 
 table.infotable tr.summary {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 table.infotable td.ordersummary {
-    font-size: 1em;
-    border-bottom: 1px solid $border-color;
+  border-bottom: 1px solid $border-color;
+  font-size: 1em;
 }
 
 table.infotable tr th {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 table.infotable tr td a {
-    color: $link-color;
-    text-decoration: underline;
+  color: $link-color;
+  text-decoration: underline;
 }
 
 table.infotable tr td a:hover {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 table.infotable .modifierRow,
 table.infotable .threeColHeader {
-    text-align: right;
+  text-align: right;
 }
 
 table.infotable .right {
-    text-align: right;
+  text-align: right;
 }
 
 table.infotable .center {
-    text-align: center;
+  text-align: center;
 }
 
 table.infotable .left,
 table.infotable th {
-    text-align: left;
+  text-align: left;
 }

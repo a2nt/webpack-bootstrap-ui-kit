@@ -1,0 +1,39 @@
+/*
+ * Network States
+ */
+
+.loading {
+  animation: fade 0.5s linear infinite;
+}
+
+.graphql-page {
+  &.response-404 {
+    cursor: not-allowed;
+    filter: grayscale(1);
+    opacity: 0.5;
+  }
+}
+
+.is-offline {
+  iframe {
+    display: none;
+  }
+
+  .graphql-page {
+    &.response-523 {
+      cursor: not-allowed;
+      filter: grayscale(1);
+      opacity: 0.5;
+    }
+  }
+}
+
+body.ajax-loading {
+  height: 100vh;
+  overflow: hidden;
+
+  #Header {
+    position: relative;
+    z-index: 2001;
+  }
+}

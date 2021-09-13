@@ -1,0 +1,41 @@
+@import "~bootstrap-table/src/bootstrap-table.scss";
+
+.bootstrap-table {
+  .fixed-table-container {
+    .table {
+      thead th {
+        .both,
+        .asc,
+        .desc {
+          background-image: none;
+
+          &:after {
+            content: "";
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            margin-left: 0.5em;
+          }
+        }
+
+        .asc:after {
+          content: "\f0de";
+        }
+
+        .desc:after {
+          content: "\f0dd";
+        }
+
+        .both:after {
+          content: "\f0dc";
+        }
+
+        .th-inner.sortable {
+          &:hover,
+          &:focus {
+            opacity: 0.8;
+          }
+        }
+      }
+    }
+  }
+}

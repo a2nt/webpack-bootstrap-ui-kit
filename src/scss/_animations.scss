@@ -1,29 +1,45 @@
 // pulse
 
 @keyframes pulse {
-	0% {
-		transform: scale(1);
-	}
+  0% {
+    transform: scale(1);
+  }
 
-	50% {
-		transform: scale(0.8);
-	}
+  50% {
+    transform: scale(0.8);
+  }
 
-	100% {
-		transform: scale(1);
-	}
+  100% {
+    transform: scale(1);
+  }
 }
 
 @keyframes fade {
-	0% {
-		opacity: 1;
-	}
+  0% {
+    filter: grayscale(0);
+    opacity: 1;
+  }
 
-	50% {
-		opacity: 0.5;
-	}
+  50% {
+    filter: grayscale(1);
+    opacity: 0.5;
+  }
 
-	100% {
-		opacity: 1;
-	}
+  100% {
+    filter: grayscale(0);
+    opacity: 1;
+  }
+}
+
+@keyframes expand {
+  from {
+    max-height: 0;
+    overflow: hidden;
+  }
+
+  to {
+    max-height: 500rem;
+    max-height: 200vh;
+    overflow: visible;
+  }
 }

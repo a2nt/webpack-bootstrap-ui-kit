@@ -1,0 +1,44 @@
+.elemental-area {
+  display: flex;
+  flex-direction: column;
+  --bs-gutter-x: 0.75rem;
+  --bs-gutter-y: 0.5rem;
+
+  > .element {
+    &:first-child {
+      margin-top: 0;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.element {
+  position: relative;
+
+  margin-top: $element-spacer-y;
+  margin-bottom: $element-spacer-y;
+  padding-top: $element-spacer-y;
+  padding-bottom: $element-spacer-y;
+
+  // Sidebar-like elements
+  &.secondary {
+    padding-top: ($element-reduced-spacer-y);
+    padding-bottom: ($element-reduced-spacer-y);
+  }
+}
+
+// sub-elements
+.element {
+  .elemental-area {
+    .element {
+      .container,
+      .container-fluid {
+        padding: 0;
+        width: auto;
+      }
+    }
+  }
+}

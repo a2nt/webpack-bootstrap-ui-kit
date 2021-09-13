@@ -1,9 +1,12 @@
 # webpack-bootstrap-ui-kit
 
-Webpack Bootstrap 4 UI Demo
+Webpack Bootstrap 5 UI Kit
 
-This UI Kit allows you to build Bootstrap 4 webapp with some extra UI features.
+This UI Kit allows you to build Bootstrap 5 webapp with some extra UI features.
 It's easy to extend and easy to convert HTML templates to CMS templates.
+
+Note: I prefer using vanilla JS with minimal external dependencies to reach higher loading speed.
+There's no jQuery and no React, but it can be connected optionally.
 
 # Demo
 
@@ -13,7 +16,6 @@ https://rawcdn.githack.com/a2nt/webpack-bootstrap-ui-kit/master/dist/index.html
 
 ## Requirements:
 
--   composer
 -   node
 -   yarn
 -   pnpm package manager
@@ -32,9 +34,11 @@ pnpm install
 
 ## Edit files at ./src
 
-## Start development server at https://127.0.0.1:8001:
+## Start development server at http://127.0.0.1:3001
 
 yarn start
+
+Define your GraphQL mocks at src/mocks/handlers.js
 
 ## Build your files to ./dist:
 

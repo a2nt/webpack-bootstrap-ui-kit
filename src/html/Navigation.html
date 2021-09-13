@@ -1,56 +1,103 @@
-<nav id="Navigation" class="fixed-top navbar-dark bg-dark navbar navbar-expand-lg dropdown-hover">
-	<a class="navbar-brand" href="#">UI Kit</a>
-	<button
-	data-target="#NavbarResponsive" aria-controls="NavbarResponsive"
-	class="navbar-toggler navbar-toggler-right"
-	type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation"
-	>
-	<span class="navbar-toggler-icon"></span>
-	</button>
-	<div id="NavbarResponsive" class="collapse navbar-collapse">
-		<ul class="navbar-nav mr-auto nav-fill w-100">
-			<li class="nav-item active">
-				<a class="nav-link js-scrollTo" href="#PageTopAnchor">Home <span class="sr-only">(current)</span></a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link js-scrollTo" href="#Slider">Slider</a>
-			</li>
-			<li class="nav-item dropdown">
-				<a
-					id="NavbarDropdown"
-					class="nav-link dropdown-toggle"
-					href="#"
-					role="button"
-					data-toggle="dropdown"
-					aria-haspopup="true" aria-expanded="false"
-					>
-					Dropdown
-				</a>
-				<div class="dropdown-menu bg-dark" aria-labelledby="NavbarDropdown">
-					<a class="dropdown-item" href="#">Action</a>
-					<a class="dropdown-item js-scrollTo" href="#AccordionList">Scroll to AccordionList</a>
-					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="https://google.com" target="_blank" rel="nofollow">Go to Google.com</a>
-				</div>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link js-scrollTo" href="#Content">Content</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link js-scrollTo" href="#List">List</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link js-scrollTo" href="#AccordionList">Accordion List</a>
-			</li>
-			<li>
-				<form class="form-inline my-2 my-lg-0">
-					<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-					<i class="fas fa-search"></i>
-					<span class="sr-only">Search</span>
-					</button>
-				</form>
-			</li>
-		</ul>
-	</div>
+<nav id="Navigation" class="navbar navbar-expand-lg">
+  <div class="container">
+    <a class="navbar-brand" href="#">UI Kit</a>
+
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#NavbarResponsive"
+      aria-controls="NavbarResponsive"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <i class="navbar-toggler-icon fa fas fa-bars"></i>
+    </button>
+
+    <div id="NavbarResponsive" class="collapse navbar-collapse">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link js-scrollTo" href="#PageTopAnchor" data-text="Home"
+            >Home <span class="sr-only">(current)</span></a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link js-scrollTo" href="#Slider" data-text="Slider"
+            >Slider</a
+          >
+        </li>
+        <li class="nav-item dropdown dropdown-hover">
+          <a
+            id="NavbarDropdown"
+            class="nav-link dropdown-toggle-fl dropdown-toggle-notouch"
+            href="#"
+            data-text="Dropdown"
+          >
+            Dropdown
+          </a>
+
+          <button
+            class="
+              nav-link
+              dropdown-toggle dropdown-toggle-sm dropdown-toggle-touch
+            "
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            type="button"
+          >
+            Dropdown
+          </button>
+
+          <div class="dropdown-menu" aria-labelledby="NavbarDropdown">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item js-scrollTo" href="#AccordionList"
+              >Scroll to AccordionList</a
+            >
+            <div class="dropdown-divider"></div>
+            <a
+              class="dropdown-item"
+              href="https://google.com"
+              target="_blank"
+              rel="nofollow"
+              >Go to Google.com</a
+            >
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item graphql-page" href="/home"
+              >Test dropdown hide on GraphQL</a
+            >
+          </div>
+        </li>
+        <li class="nav-item">
+          <a id="LoadGraphQL" class="nav-link graphql-page" href="/home"
+            >Load GraphQL</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link graphql-page" href="/en/aquascaping"
+            >Load GraphQL #2</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link js-scrollTo" href="#AccordionList"
+            >Accordion List</a
+          >
+        </li>
+        <li>
+          <form class="form-inline my-2 my-lg-0">
+            <input
+              class="form-control mr-sm-2"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+            />
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+              <i class="fas fa-search"></i>
+              <span class="sr-only">Search</span>
+            </button>
+          </form>
+        </li>
+      </ul>
+    </div>
+  </div>
 </nav>

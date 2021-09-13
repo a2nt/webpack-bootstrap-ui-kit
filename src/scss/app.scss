@@ -1,22 +1,21 @@
 //@import "~bootstrap-select/sass/bootstrap-select.scss";
 
-//@import "~bootstrap-datepicker/dist/css/bootstrap-datepicker.css";
-//@import "~bootstrap-timepicker/css/bootstrap-timepicker.css";
-
 // Your custom variables
-@import '_variables';
+@import "variables";
+@import "animations";
 
-@import '_components/_ui.bootstrap';
+@import "~@a2nt/meta-lightbox-js/src/scss/app";
+@import "libs/bootstrap";
+@import "libs/silverstripe";
+@import "ui/datepicker";
 
 // By default we prefer font awesome CDN
-//@import "_components/_ui.fontawesome";
-@import '_components/_ui.lightbox';
-@import '_components/_ui.flyout';
+//@import "_libs/_fontawesome";
 
-@import '_components/_ui.main';
-@import '_components/_ui.form.basics';
-@import '_components/_ui.elemental';
+//@import '_ui/_lightbox';
+//@import '_ui/_flyout';
 
 // Your custom styling
-@import '_typography';
-@import '_layout';
+@import "typography";
+@import "layout";
+@import "elements";

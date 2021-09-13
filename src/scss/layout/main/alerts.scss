@@ -1,0 +1,30 @@
+#SiteWideAlerts {
+  bottom: 0;
+  position: fixed;
+  right: 0;
+  z-index: 99999;
+
+  .btn-close {
+    background: none;
+  }
+
+  .alert {
+    margin-bottom: 0;
+  }
+}
+
+.alert-offline {
+  display: none;
+}
+
+.is-online {
+  .alert-offline {
+    display: none;
+  }
+}
+
+.is-offline {
+  .alert-offline {
+    display: flex;
+  }
+}
