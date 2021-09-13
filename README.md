@@ -1,9 +1,12 @@
 # webpack-bootstrap-ui-kit
 
-Webpack Bootstrap 4 UI Demo
+Webpack Bootstrap 5 UI Kit
 
-This UI Kit allows you to build Bootstrap 4 webapp with some extra UI features.
+This UI Kit allows you to build Bootstrap 5 webapp with some extra UI features.
 It's easy to extend and easy to convert HTML templates to CMS templates.
+
+Note: I prefer using vanilla JS with minimal external dependecies to reach highter loading speed.
+There's no jQuery and no React, but it can be connected optionaly.
 
 # Demo
 
