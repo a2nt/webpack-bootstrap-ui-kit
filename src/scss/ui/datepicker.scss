@@ -30,3 +30,12 @@ $dp-cell-focus-color: invert($body-color) !default;
 }
 
 @import "node_modules/vanillajs-datepicker/sass/datepicker";
+
+.datepicker {
+  .days {
+    width: 100%;
+  }
+  &-grid {
+    width: 100%;
+  }
+}
