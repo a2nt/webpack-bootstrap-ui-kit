@@ -1,14 +1,10 @@
 #SiteWideAlerts {
-  bottom: 0;
-  position: fixed;
-  right: 0;
-  z-index: 99999;
-
   .btn-close {
     background: none;
   }
 
   .alert {
+    display: flex;
     margin-bottom: 0;
   }
 }
@@ -17,13 +13,13 @@
   display: none;
 }
 
-.is-online {
+body.is-online {
   .alert-offline {
     display: none;
   }
 }
 
-.is-offline {
+body.is-offline {
   .alert-offline {
     display: flex;
   }
