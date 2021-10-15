@@ -6,6 +6,10 @@
   .alert {
     display: flex;
     margin-bottom: 0;
+    .container,
+    .container-fluid {
+      display: flex;
+    }
   }
 }
 
