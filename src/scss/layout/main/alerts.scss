@@ -13,14 +13,14 @@
   display: none;
 }
 
-body.is-online {
+.is-online {
   .alert-offline {
-    display: none;
+    display: none !important;
   }
 }
 
-body.is-offline {
+.is-offline {
   .alert-offline {
-    display: flex;
+    display: flex !important;
   }
 }
