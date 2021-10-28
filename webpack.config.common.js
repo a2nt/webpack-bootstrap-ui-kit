@@ -2,15 +2,14 @@
  * Common Environment
  */
 
-const INDEX_NAME = 'test-build';
+const INDEX_NAME = 'app';
 const YML_PATH = './webpack.yml';
-const CONF_VAR = 'App\\Templates\\WebpackTemplateProvider';
+const CONF_VAR = 'A2nt\\CMSNiceties\\Templates\\WebpackTemplateProvider';
 
 const path = require('path');
 const fs = require('fs');
 const yaml = require('js-yaml');
 const webpack = require('webpack');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 /*
  * Load webpack configuration from webpack.yml
@@ -20,18 +19,6 @@ const yml = yaml.load(
     fs.readFileSync(path.join(__dirname, YML_PATH), 'utf8'),
 );
 const conf = yml[CONF_VAR];
-
-const UIInfo = require('./package.json');
-const UIVERSION = JSON.stringify(UIInfo.version);
-const UIMetaInfo = require('./node_modules/@a2nt/meta-lightbox-js/package.json');
-const NODE_ENV = process.env.NODE_ENV;
-const COMPRESS = NODE_ENV === 'production' ? true : false;
-
-console.log('NODE_ENV: ' + NODE_ENV);
-console.log('COMPRESS: ' + COMPRESS);
-console.log('WebP images: ' + conf['webp']);
-console.log('GRAPHQL_API_KEY: ' + conf['GRAPHQL_API_KEY']);
-console.log('HTTPS: ' + conf['HTTPS']);
 
 let themes = [];
 // add themes
@@ -134,11 +121,6 @@ const _addAppFiles = (theme) => {
 
 _addAppFiles(conf.APPDIR);
 
-// remove some backend includes
-delete includes['app_editor'];
-delete includes['app_cms'];
-delete includes['app_order'];
-
 // add themes
 themes.forEach((theme) => {
     _addAppFiles(theme);
@@ -163,9 +145,9 @@ module.exports = {
               /*'window.jQuery': require.resolve('jquery'),
               $: require.resolve('jquery'),
               jquery: require.resolve('jquery'),
-              jQuery: require.resolve('jquery'),*/
+              jQuery: require.resolve('jquery'),
               react: require.resolve('react'),
-              'react-dom': require.resolve('react-dom'),
+              'react-dom': require.resolve('react-dom'),*/
             },
             fallback: {
                 path: false,
@@ -175,46 +157,4 @@ module.exports = {
             topLevelAwait: true,
           },
       },
-    plugins: [
-        new webpack.ProvidePlugin({
-            react: 'React',
-            'react-dom': 'ReactDOM',
-            /*$: 'jquery',
-            jQuery: 'jquery',
-            Popper: ['popper.js', 'default'],
-            Util: 'exports-loader?Util!bootstrap/js/dist/util',
-            Alert: 'exports-loader?Alert!bootstrap/js/dist/alert',
-            Button: 'exports-loader?Button!bootstrap/js/dist/button',
-            Carousel: 'exports-loader?Carousel!bootstrap/js/dist/carousel',
-            Collapse: 'exports-loader?Collapse!bootstrap/js/dist/collapse',
-            Dropdown: 'exports-loader?Dropdown!bootstrap/js/dist/dropdown',
-            Modal: 'exports-loader?Modal!bootstrap/js/dist/modal',
-            Tooltip: 'exports-loader?Tooltip!bootstrap/js/dist/tooltip',
-            Popover: 'exports-loader?Popover!bootstrap/js/dist/popover',
-            Scrollspy: 'exports-loader?Scrollspy!bootstrap/js/dist/scrollspy',
-            Tab: 'exports-loader?Tab!bootstrap/js/dist/tab',*/
-          }),
-        new webpack.DefinePlugin({
-            'process.env': {
-                NODE_ENV: JSON.stringify(NODE_ENV),
-              },
-            UINAME: JSON.stringify(UIInfo.name),
-            UIVERSION: UIVERSION,
-            UIAUTHOR: JSON.stringify(UIInfo.author),
-            UIMetaNAME: JSON.stringify(UIMetaInfo.name),
-            UIMetaVersion: JSON.stringify(UIMetaInfo.version),
-            GRAPHQL_API_KEY: JSON.stringify(conf['GRAPHQL_API_KEY']),
-            SWVERSION: JSON.stringify(`sw-${new Date().getTime()}`),
-            BASE_HREF: JSON.stringify(''),
-          }),
-        new webpack.LoaderOptionsPlugin({
-            minimize: COMPRESS,
-            debug: !COMPRESS,
-          }),
-        new MiniCssExtractPlugin({
-            filename: 'css/[name].css',
-            //allChunks: true,
-            experimentalUseImportModule: false,
-          }),
-    ],
   };

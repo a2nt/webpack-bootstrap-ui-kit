@@ -20,13 +20,52 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 //const ImageSpritePlugin = require('@a2nt/image-sprite-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+const UIInfo = require('./package.json');
+const UIVERSION = JSON.stringify(UIInfo.version);
+const UIMetaInfo = require('./node_modules/@a2nt/meta-lightbox-js/package.json');
+
 const NODE_ENV = conf.NODE_ENV || process.env.NODE_ENV;
 const COMPRESS = NODE_ENV === 'production' ? true : false;
 
 const IP = process.env.IP || conf.HOSTNAME;
 const PORT = process.env.PORT || conf.PORT;
 
-let plugins = common.plugins;
+console.log('NODE_ENV: ' + NODE_ENV);
+console.log('COMPRESS: ' + COMPRESS);
+console.log('WebP images: ' + conf['webp']);
+console.log('GRAPHQL_API_KEY: ' + conf['GRAPHQL_API_KEY']);
+
+let plugins = [
+    new webpack.ProvidePlugin({
+        react: 'React',
+        'react-dom': 'ReactDOM',
+        /*$: 'jquery',
+        jQuery: 'jquery',*/
+      }),
+    new webpack.DefinePlugin({
+        'process.env': {
+            NODE_ENV: JSON.stringify(NODE_ENV),
+          },
+        UINAME: JSON.stringify(UIInfo.name),
+        UIVERSION: UIVERSION,
+        UIAUTHOR: JSON.stringify(UIInfo.author),
+        UIMetaNAME: JSON.stringify(UIMetaInfo.name),
+        UIMetaVersion: JSON.stringify(UIMetaInfo.version),
+        GRAPHQL_API_KEY: JSON.stringify(conf['GRAPHQL_API_KEY']),
+        SWVERSION: JSON.stringify(`sw-${new Date().getTime()}`),
+        BASE_HREF: JSON.stringify(''),
+      }),
+    new webpack.LoaderOptionsPlugin({
+        minimize: COMPRESS,
+        debug: !COMPRESS,
+      }),
+    new MiniCssExtractPlugin({
+      experimentalUseImportModule: false,
+      filename: 'css/[name].css',
+      //allChunks: true,
+    }),
+];
 
 if (COMPRESS) {
   plugins.push(require('autoprefixer'));
@@ -167,7 +206,7 @@ const cfg = merge(common.webpack, {
                         ecma: 8,
                       },
                     compress: {
-                        ecma: 5,
+                        ecma: 6,
                         warnings: false,
                         // Disabled because of an issue with Uglify breaking seemingly valid code:
                         // https://github.com/facebook/create-react-app/issues/2376
@@ -216,7 +255,7 @@ const cfg = merge(common.webpack, {
                             discardDuplicates: true,
                           },
                     ],
-                  }, ],
+                  },],
                 minify: [
                     CssMinimizerPlugin.cssnanoMinify,
                     //CssMinimizerPlugin.cleanCssMinify,
@@ -226,8 +265,8 @@ const cfg = merge(common.webpack, {
       },
 
     output: {
-        publicPath: path.join(conf.APPDIR, conf.DIST),
-        path: path.join(__dirname, conf.APPDIR, conf.DIST),
+        publicPath: path.join(conf.APPDIR, conf.DIST) + '/',
+        path: path.join(__dirname, conf.APPDIR, conf.DIST) + '/',
         filename: path.join('js', '[name].js'),
       },
 
@@ -247,7 +286,7 @@ const cfg = merge(common.webpack, {
                                 '@babel/plugin-proposal-class-properties',
                             ],
                           },
-                    ],
+                    ], //Preset used for env setup
                     plugins: [
                         '@babel/plugin-transform-typescript',
                         '@babel/transform-react-jsx',
@@ -260,36 +299,37 @@ const cfg = merge(common.webpack, {
         {
             test: /\.s?css$/,
             use: [{
-                loader: MiniCssExtractPlugin.loader,
-              },
-            {
-                loader: 'css-loader',
-                options: {
-                    sourceMap: true,
+                    loader: MiniCssExtractPlugin.loader,
+                    options: {
+                        publicPath: '../',
+                      },
                   },
-              },
-            {
-                loader: 'resolve-url-loader',
-              },
-            {
-                loader: 'sass-loader',
-                options: {
-                    sourceMap: true,
+                {
+                  loader: 'css-loader',
+                  options: {
+                      sourceMap: true,
+                    },
+                },
+                {
+                    loader: 'sass-loader',
+                    options: {
+                        sourceMap: true,
+                      },
                   },
-              }, ],
+            ],
           },
         {
-            test: /fontawesome([^.]+).(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
+            test: /fontawesome([^.]+).(ttf|otf|eot|woff(2)?)(\?[a-z0-9]+)?$/,
             type: 'asset/resource',
           },
         {
             test: /\.(ttf|otf|eot|woff(2)?)$/,
             type: 'asset/resource',
-          },
-        {
+          }, {
             test: /\.(png|webp|jpg|jpeg|gif|svg)$/,
             type: 'javascript/auto',
-            use: [{
+            use: [
+            {
                 loader: 'img-optimize-loader',
                 options: {
                     name: '[name].[ext]',
@@ -324,8 +364,8 @@ const cfg = merge(common.webpack, {
                         limit: 1,
                       },
                   },
-              }, ],
-          }, ],
+              },],
+          },],
       },
 
     plugins: plugins,
