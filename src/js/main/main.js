@@ -1,40 +1,39 @@
-import Events from "../_events";
-import Consts from "../_consts";
-import SpinnerUI from "./loading-spinner";
+import Events from '../_events';
+import Consts from '../_consts';
+import SpinnerUI from './loading-spinner';
 
-const MainUI = ((W) => {
-  const NAME = "_main";
-  const D = document;
-  const BODY = D.body;
+const MainUI = ((window) => {
+  const NAME = '_main';
+  const BODY = document.body;
 
   console.info(
     `%cUI Kit ${UINAME} ${UIVERSION}`,
-    "color:yellow;font-size:14px"
+    'color:yellow;font-size:14px'
   );
   console.info(
     `%c${UIMetaNAME} ${UIMetaVersion}`,
-    "color:yellow;font-size:12px"
+    'color:yellow;font-size:12px'
   );
   console.info(
     `%chttps://github.com/a2nt/webpack-bootstrap-ui-kit by ${UIAUTHOR}`,
-    "color:yellow;font-size:10px"
+    'color:yellow;font-size:10px'
   );
 
-  console.info(`%cENV: ${process.env.NODE_ENV}`, "color:green;font-size:10px");
-  console.groupCollapsed("Events");
+  console.info(`%cENV: ${process.env.NODE_ENV}`, 'color:green;font-size:10px');
+  console.groupCollapsed('Events');
   Object.keys(Events).forEach((k) => {
     console.info(`${k}: ${Events[k]}`);
   });
-  console.groupEnd("Events");
+  console.groupEnd('Events');
 
-  console.groupCollapsed("Consts");
+  console.groupCollapsed('Consts');
   Object.keys(Consts).forEach((k) => {
     console.info(`${k}: ${Consts[k]}`);
   });
-  console.groupEnd("Events");
+  console.groupEnd('Events');
 
-  console.groupCollapsed("Init");
-  console.time("init");
+  console.groupCollapsed('Init');
+  console.time('init');
 
   class MainUI {
     // first time the website initialization
@@ -42,12 +41,12 @@ const MainUI = ((W) => {
       const ui = this;
 
       // store landing page state
-      W.history.replaceState(
+      window.history.replaceState(
         {
-          landing: W.location.href,
+          landing: window.location.href,
         },
-        D.title,
-        W.location.href
+        document.title,
+        window.location.href
       );
       //
 
@@ -61,23 +60,29 @@ const MainUI = ((W) => {
     }
   }
 
-  W.addEventListener(`${Events.LOADED}`, () => {
+  const documentInit = () => {
     MainUI.init();
 
-    BODY.classList.add("loaded");
+    BODY.classList.add('loaded');
     SpinnerUI.hide();
 
-    console.groupEnd("init");
-    console.timeEnd("init");
+    console.groupEnd('init');
+    console.timeEnd('init');
 
-    W.dispatchEvent(new Event(Events.LODEDANDREADY));
-  });
+    window.dispatchEvent(new Event(Events.LODEDANDREADY));
+  };
 
-  W.addEventListener(`${Events.AJAX}`, () => {
+  if (document.readyState === 'loading') {  // Loading hasn't finished yet
+    document.addEventListener(`${Events.DOMLOADED}`, documentInit);
+  }else {
+    documentInit();
+  }
+
+  window.addEventListener(`${Events.AJAX}`, () => {
     MainUI.loaded();
   });
 
-  W.MainUI = MainUI;
+  window.MainUI = MainUI;
 
   return MainUI;
 })(window);
