@@ -69,7 +69,9 @@ const MainUI = ((window) => {
     console.groupEnd('init');
     console.timeEnd('init');
 
-    window.dispatchEvent(new Event(Events.LODEDANDREADY));
+    window.addEventListener(`${Events.LOADED}`, (event) => {
+      window.dispatchEvent(new Event(Events.LODEDANDREADY));
+    });
   };
 
   if (document.readyState === 'loading') {  // Loading hasn't finished yet
