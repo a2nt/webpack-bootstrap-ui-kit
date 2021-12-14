@@ -1,0 +1,14 @@
+{
+  "version": "4.4.2",
+  "name": "@a2nt/ss-bootstrap-ui-webpack-boilerplate-react",
+  "description": "This UI Kit allows you to build Bootstrap 5 webapp with some extra UI features. It's easy to extend and easy to convert HTML templates to CMS templates.",
+  "icons": {
+    "60": "firefox_app_60x60.png",
+    "128": "firefox_app_128x128.png",
+    "512": "firefox_app_512x512.png"
+  },
+  "developer": {
+    "name": "Tony Air",
+    "url": null
+  }
+}
