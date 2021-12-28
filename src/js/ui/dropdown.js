@@ -1,4 +1,4 @@
-import Events from "../_events";
+import Events from '../_events';
 
 /*
  * Bootstrap compatible dropdowns without popover library
@@ -8,9 +8,14 @@ import Events from "../_events";
  *
  */
 const DropdownHoverUI = ((window) => {
-  const NAME = "js-dropdown";
+  const NAME = 'js-dropdown';
 
   const Toggle = (el) => {
+    // hide others
+    document.querySelectorAll('.dropdown-menu').forEach((el, i) => {
+      el.classList.remove('show');
+    });
+
     el.querySelector('.dropdown-menu').classList.toggle('show');
   };
 
@@ -28,14 +33,14 @@ const DropdownHoverUI = ((window) => {
     console.log(`${NAME}: init`);
 
     const attachHoverEvents = (el) => {
-      el.addEventListener("mouseover", Show, false);
-      el.addEventListener("mouseout", Hide, false);
+      el.addEventListener('mouseover', Show, false);
+      el.addEventListener('mouseout', Hide, false);
 
       el.classList.add(`${NAME}-active`);
     };
 
     const attachClickEvents = (el) => {
-      el.addEventListener("click", (e) => {
+      el.addEventListener('click', (e) => {
         e.preventDefault();
 
         const el = e.currentTarget;
