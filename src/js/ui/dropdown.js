@@ -10,11 +10,15 @@ import Events from '../_events';
 const DropdownHoverUI = ((window) => {
   const NAME = 'js-dropdown';
 
-  const Toggle = (el) => {
+  const HideAll = () => {
     // hide others
     document.querySelectorAll('.dropdown-menu').forEach((el, i) => {
       el.classList.remove('show');
     });
+  };
+
+  const Toggle = (el) => {
+    HideAll();
 
     el.querySelector('.dropdown-menu').classList.toggle('show');
   };
@@ -50,6 +54,25 @@ const DropdownHoverUI = ((window) => {
 
       el.classList.add(`${NAME}-active`);
     };
+
+    // Hide all for not dropdown-menu clicks
+    document.addEventListener('click', (event) => {
+      let breakPath = false;
+      event.path.forEach((el, i) => {
+        if (breakPath) {
+          return;
+        }
+
+        if (el === document) {
+          HideAll();
+        }
+
+        if (el.classList && el.classList.contains('dropdown-toggle')) {
+          breakPath = true;
+          return;
+        }
+      });
+    });
 
     document.querySelectorAll(`[data-bs-toggle="hover"]`).forEach((el, i) => {
       const parent = el.closest('.dropdown');
