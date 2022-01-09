@@ -52,7 +52,7 @@
     "ie>=11"
   ],
   "dependencies": {
-    "@a2nt/meta-lightbox-js": "^4.1.6",
+    "@a2nt/meta-lightbox-js": "^4.1.7",
     "@angular/common": "^13.1.1",
     "@angular/core": "^13.1.1",
     "@apollo/client": "^3.5.6",
