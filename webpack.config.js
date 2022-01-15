@@ -16,7 +16,7 @@ const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
 const TerserPlugin = require('terser-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { default: MiniCssExtractPlugin } = require('mini-css-extract-plugin');
 
 //const ImageSpritePlugin = require('@a2nt/image-sprite-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -44,18 +44,16 @@ let plugins = [
         jQuery: 'jquery',*/
       }),
     new webpack.DefinePlugin({
-        'process.env': {
             NODE_ENV: JSON.stringify(NODE_ENV),
-          },
-        UINAME: JSON.stringify(UIInfo.name),
-        UIVERSION: UIVERSION,
-        UIAUTHOR: JSON.stringify(UIInfo.author),
-        UIMetaNAME: JSON.stringify(UIMetaInfo.name),
-        UIMetaVersion: JSON.stringify(UIMetaInfo.version),
-        GRAPHQL_API_KEY: JSON.stringify(conf['GRAPHQL_API_KEY']),
-        SWVERSION: JSON.stringify(`sw-${new Date().getTime()}`),
-        BASE_HREF: JSON.stringify(''),
-      }),
+            UINAME: JSON.stringify(UIInfo.name),
+            UIVERSION: UIVERSION,
+            UIAUTHOR: JSON.stringify(UIInfo.author),
+            UIMetaNAME: JSON.stringify(UIMetaInfo.name),
+            UIMetaVersion: JSON.stringify(UIMetaInfo.version),
+            GRAPHQL_API_KEY: JSON.stringify(conf['GRAPHQL_API_KEY']),
+            SWVERSION: JSON.stringify(`sw-${new Date().getTime()}`),
+            BASE_HREF: JSON.stringify(''),
+          }),
     new webpack.LoaderOptionsPlugin({
         minimize: COMPRESS,
         debug: !COMPRESS,

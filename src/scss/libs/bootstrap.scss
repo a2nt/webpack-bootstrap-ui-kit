@@ -14,7 +14,6 @@
 @import "~bootstrap/scss/tables";
 @import "~bootstrap/scss/forms";
 @import "~bootstrap/scss/buttons";
-@import "~bootstrap/scss/transitions";
 
 // Optional
 //@import '~bootstrap/scss/images';
@@ -43,6 +42,7 @@
 
 // Utilities
 @import "~bootstrap/scss/utilities/api";
+@import "~bootstrap/scss/transitions";
 
 @import "../ui/carousel";
 

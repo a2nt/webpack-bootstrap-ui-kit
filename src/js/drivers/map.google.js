@@ -1,6 +1,6 @@
 'use strict';
 
-import MarkerClusterer from '@googlemaps/markerclusterer';
+import { MarkerClusterer } from '@googlemaps/markerclusterer';
 
 import Events from '../_events';
 import MarkerUI from './map.google.marker';
