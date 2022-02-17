@@ -16,7 +16,7 @@ const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
 const TerserPlugin = require('terser-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-const { default: MiniCssExtractPlugin } = require('mini-css-extract-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 //const ImageSpritePlugin = require('@a2nt/image-sprite-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -253,7 +253,7 @@ const cfg = merge(common.webpack, {
                             discardDuplicates: true,
                           },
                     ],
-                  },],
+                  }, ],
                 minify: [
                     CssMinimizerPlugin.cssnanoMinify,
                     //CssMinimizerPlugin.cleanCssMinify,
@@ -362,8 +362,8 @@ const cfg = merge(common.webpack, {
                         limit: 1,
                       },
                   },
-              },],
-          },],
+              }, ],
+          }, ],
       },
 
     plugins: plugins,

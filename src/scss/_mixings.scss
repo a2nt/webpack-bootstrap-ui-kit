@@ -145,7 +145,7 @@
       &:hover,
       &.active,
       &:focus {
-        .dropdown-menu {
+        > .dropdown-menu {
           display: block;
         }
       }
