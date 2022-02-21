@@ -53,8 +53,8 @@
   ],
   "dependencies": {
     "@a2nt/meta-lightbox-js": "^4.1.7",
-    "@angular/common": "^13.2.2",
-    "@angular/core": "^13.2.2",
+    "@angular/common": "^13.2.3",
+    "@angular/core": "^13.2.3",
     "@apollo/client": "^3.5.9",
     "@jsanahuja/instagramfeed": "github:jsanahuja/instagramfeed",
     "@popperjs/core": "^2.11.2",
@@ -103,7 +103,7 @@
   },
   "devDependencies": {
     "@a2nt/image-sprite-webpack-plugin": "^0.2.5",
-    "@babel/core": "^7.17.4",
+    "@babel/core": "^7.17.5",
     "@babel/eslint-parser": "^7.17.0",
     "@babel/plugin-proposal-class-properties": "^7.16.7",
     "@babel/plugin-proposal-object-rest-spread": "^7.17.3",
@@ -191,7 +191,7 @@
     "tslib": "^2.3.1",
     "url": "^0.11.0",
     "url-loader": "^4.1.1",
-    "webpack": "^5.69.0",
+    "webpack": "^5.69.1",
     "webpack-bundle-analyzer": "^4.5.0",
     "webpack-cli": "^4.9.2",
     "webpack-dev-server": "^4.7.4",
