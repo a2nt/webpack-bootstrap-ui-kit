@@ -6,33 +6,16 @@
   display: none;
 }
 
-// Fix form actions
-#Form_ItemEditForm_MajorActions_Holder {
-  border: 0;
-  margin-bottom: 0;
-  min-width: 30%;
-  padding-bottom: 0;
-}
-
-#Form_EditForm_MajorActions_Holder {
-  border: 0;
-  margin-bottom: 0;
-  min-width: 70%;
-  padding-bottom: 0;
-}
-
-#Form_ItemEditForm_RightGroup_Holder {
-  border: 0;
-  margin-bottom: 0;
-  min-width: 20%;
-  padding-bottom: 0;
-}
-
 // make edit icon always shown
 .grid-field__icon-action {
   &.edit-link {
     opacity: 1;
   }
+}
+
+// better items aligment
+.grid-field__col-compact {
+  vertical-align: bottom;
 }
 
 // correct primary buttons coloring
