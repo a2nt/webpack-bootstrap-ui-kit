@@ -7,7 +7,9 @@
 }
 
 // Fix form actions
+#Form_EditForm_MajorActions_Holder,
 #Form_ItemEditForm_MajorActions_Holder {
+    flex: 1 1;
     margin-bottom: 0;
     padding-bottom: 0;
     border: 0;
