@@ -36,6 +36,9 @@ const DropdownHoverUI = ((window) => {
   const init = () => {
     console.log(`${NAME}: init`);
 
+    const clickableEls = document.querySelectorAll(`.${NAME},[data-bs-toggle="dropdown"]`);
+    const hoverableEls = document.querySelectorAll(`[data-bs-toggle="hover"]`);
+
     const attachHoverEvents = (el) => {
       el.addEventListener('mouseover', Show, false);
       el.addEventListener('mouseout', Hide, false);
@@ -55,10 +58,24 @@ const DropdownHoverUI = ((window) => {
       el.classList.add(`${NAME}-active`);
     };
 
-    // Hide all for not dropdown-menu clicks
+    // Hide all for outside clicks
+    /*document.addEventListener('click', function (event) {
+      const isClickInside = clickableEls.contains(event.target);
+
+      if (!isClickInside) {
+        HideAll();
+      }
+    });*/
+
     document.addEventListener('click', (event) => {
       let breakPath = false;
-      event.path.forEach((el, i) => {
+      const path = event.path || (event.composedPath && event.composedPath());
+
+      if (!path) {
+        console.warn('Browser does not provide event path to hide dropdowns on outside click');
+      }
+
+      path.forEach((el, i) => {
         if (breakPath) {
           return;
         }
@@ -74,12 +91,12 @@ const DropdownHoverUI = ((window) => {
       });
     });
 
-    document.querySelectorAll(`[data-bs-toggle="hover"]`).forEach((el, i) => {
+    hoverableEls.forEach((el, i) => {
       const parent = el.closest('.dropdown');
       attachHoverEvents(parent);
     });
 
-    document.querySelectorAll(`.${NAME},[data-bs-toggle="dropdown"]`).forEach((el, i) => {
+    clickableEls.forEach((el, i) => {
       attachClickEvents(el);
     });
   };
