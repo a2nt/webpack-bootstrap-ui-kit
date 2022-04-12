@@ -1,9 +1,8 @@
 // ping online/offline state switch and detection
+import axios from "redaxios";
 
 import Events from "../_events";
 import Consts from "../_consts";
-
-const axios = require("axios");
 
 export default ((W) => {
   const NAME = "main.online";

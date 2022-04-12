@@ -34,7 +34,7 @@ export default ((W) => {
         .then((result) => {
           el.style.backgroundImage = `url(${result})`;
         })
-        .catch(() => {
+        .catch((e) => {
           el.classList.add("empty");
         });
     });

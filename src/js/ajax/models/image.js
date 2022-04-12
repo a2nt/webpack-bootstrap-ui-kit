@@ -1,4 +1,4 @@
-const axios = require("axios");
+import axios from "redaxios";
 
 const NAME = "ajax.models.image";
 
@@ -42,7 +42,7 @@ class ImageObject {
           };
         })
         .catch((e) => {
-          //el.setAttribute('src', imageUrl);
+          console.warn(e);
 
           if (e.response) {
             switch (e.response.status) {
@@ -71,7 +71,7 @@ class ImageObject {
             el.classList.add("empty");
           }
 
-          reject();
+          reject(e);
         });
     });
 
