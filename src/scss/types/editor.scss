@@ -1,13 +1,12 @@
 @import "../_variables";
 
 @import "~bootstrap/scss/tables";
-
 $typography-breakpoint: map-get($grid-breakpoints, "sm") - 1 !default;
 
 html,
 body {
-  background: $body-bg;
-  color: $body-color;
+    color: $body-color;
+    background: $body-bg;
 }
 
 h1,
@@ -22,151 +21,150 @@ h6,
 .h4,
 .h5,
 .h6 {
-  color: $headings-color;
+    color: $headings-color;
 }
 
 a {
-  color: $link-color;
+    color: $link-color;
 }
 
 img,
 .captionImage,
 .image,
 .ss-htmleditorfield-file {
-  display: block;
-  margin-bottom: $element-reduced-spacer-y;
-  margin-top: $element-reduced-spacer-y;
-  max-width: 100%;
-
-  @media (min-width: $typography-breakpoint + 1) {
-    margin-left: $element-reduced-spacer-x;
-    margin-right: $element-reduced-spacer-x;
-  }
-
-  &.center {
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-  }
-
-  &.w-100 {
-    margin-left: 0;
-    margin-right: 0;
-    text-align: center;
-  }
-
-  &.start,
-  &.left,
-  &.leftAlone {
-    clear: left;
-    float: left;
+    display: block;
+    max-width: 100%;
+    margin-top: $element-reduced-spacer-y;
+    margin-bottom: $element-reduced-spacer-y;
 
     @media (min-width: $typography-breakpoint + 1) {
-      margin: 0 $element-reduced-spacer-x $element-reduced-spacer-y 0;
+        margin-right: $element-reduced-spacer-x;
+        margin-left: $element-reduced-spacer-x;
     }
-  }
 
-  &.end,
-  &.right,
-  &.rightAlone {
-    clear: right;
-    float: right;
-
-    @media (min-width: $typography-breakpoint + 1) {
-      margin: $element-reduced-spacer-y 0 0 $element-reduced-spacer-x;
+    &.center {
+        margin-right: auto;
+        margin-left: auto;
+        text-align: center;
     }
-  }
 
-  iframe {
-    height: 100% !important;
-    width: 100% !important;
-  }
+    &.w-100 {
+        margin-right: 0;
+        margin-left: 0;
+        text-align: center;
+    }
+
+    &.start,
+    &.left,
+    &.leftAlone {
+        float: left;
+        clear: left;
+
+        @media (min-width: $typography-breakpoint + 1) {
+            margin: 0 $element-reduced-spacer-x $element-reduced-spacer-y 0;
+        }
+    }
+
+    &.end,
+    &.right,
+    &.rightAlone {
+        float: right;
+        clear: right;
+
+        @media (min-width: $typography-breakpoint + 1) {
+            margin: $element-reduced-spacer-y 0 0 $element-reduced-spacer-x;
+        }
+    }
+
+    iframe {
+        width: 100% !important;
+        height: 100% !important;
+    }
 }
 
 .captionImage {
-  img {
-    margin-bottom: $element-reduced-spacer-y !important;
-  }
+    img {
+        margin-bottom: $element-reduced-spacer-y !important;
+    }
 
-  .caption {
-    font-size: 0.8rem;
-  }
+    .caption {
+        font-size: .8rem;
+    }
 }
 
 .left,
 .text-left,
 .text-start {
-  text-align: left;
+    text-align: left;
 }
 
 .center,
 .text-center {
-  text-align: center;
+    text-align: center;
 }
 
 .right,
 .text-right,
 .text-end {
-  text-align: right;
+    text-align: right;
 }
 
 .text-justify {
-  text-align: justify;
+    text-align: justify;
 }
 
 table {
-  border-collapse: collapse;
-  max-width: 100%;
-  width: 100%;
+    width: 100%;
+    max-width: 100%;
+    border-collapse: collapse;
 
-  @extend .table;
-  @extend .table-striped;
-  @extend .table-bordered;
+    @extend .table;
+    @extend .table-striped;
+    @extend .table-bordered;
 
-  &.table-none {
-    @extend .table-borderless;
-    border: 0;
+    &.table-none {
+        border: 0;
 
-    tr,
-    td,
-    th {
-      background: none !important;
-      border: 0;
-      box-shadow: none !important;
+        @extend .table-borderless;
+
+        tr,
+        td,
+        th {
+            border: 0;
+            background: none !important;
+            box-shadow: none !important;
+        }
     }
-  }
 }
 
 ul,
 ol {
-  padding-left: $spacer;
+    padding-left: $spacer;
 
-  li {
-    margin: 0.5em 0;
-    padding-left: 0.5em;
-    position: relative;
-  }
+    li {
+        position: relative;
+        margin: .5em 0;
+        padding-left: .5em;
+    }
 }
 
 ul {
-  list-style: none;
-
-  li {
     list-style: none;
-    padding-left: 0;
 
-    &:before {
-      content: "\2022";
-      display: inline-block;
-      font-size: 1em;
+    li {
+        margin-left: -.25em;
+        padding-left: 0;
+        list-style: none;
 
-      left: -0.75em;
-      margin-right: 0.5em;
-      opacity: 0.5;
-      position: absolute;
-      top: -0.1em;
+        &:before {
+            position: static;
+            width: .5em;
+            height: .5em;
+            content: "";
+            border-radius: .5em;
+            background: currentColor;
+        }
     }
-  }
 }
 
 table,
@@ -176,15 +174,15 @@ th,
 td,
 img,
 iframe {
-  max-width: 100% !important;
+    max-width: 100% !important;
 
-  @media (max-width: $typography-breakpoint) {
-    border: 0 !important;
-    display: block;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-    width: 100% !important;
-  }
+    @media (max-width: $typography-breakpoint) {
+        display: block;
+        width: 100% !important;
+        padding-right: 0 !important;
+        padding-left: 0 !important;
+        border: 0 !important;
+    }
 }
 
 table,
@@ -193,64 +191,65 @@ tr,
 th,
 td,
 img {
-  @media (max-width: $typography-breakpoint) {
-    height: auto !important;
-  }
+    @media (max-width: $typography-breakpoint) {
+        height: auto !important;
+    }
 }
 
 @media (max-width: $typography-breakpoint) {
-  .d-typography-breakpoint-none {
-    border: 0;
-    clip: rect(0, 0, 0, 0);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    white-space: nowrap;
-    width: 1px;
-  }
-
-  thead {
-    display: block;
-    text-align: center;
-
-    > tr {
-      display: flex;
+    .d-typography-breakpoint-none {
+        position: absolute;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        padding: 0;
+        white-space: nowrap;
+        border: 0;
     }
-  }
 
-  tbody {
-    display: block;
-  }
+    thead {
+        display: block;
+        text-align: center;
 
-  td {
-    display: flex;
-    flex-direction: column;
-
-    &:before {
-      content: attr(data-label);
-      display: block;
-      font-weight: bold;
-      min-width: 50%;
-      padding: 0 $spacer * 0.5;
-      width: 50%;
+         > tr {
+            display: flex;
+        }
     }
-  }
+
+    tbody {
+        display: block;
+    }
+
+    td {
+        display: flex;
+        flex-direction: column;
+
+        &:before {
+            font-weight: bold;
+            display: block;
+            width: 50%;
+            min-width: 50%;
+            padding: 0 $spacer * .5;
+            content: attr(data-label);
+        }
+    }
 }
 
 img {
-  border: 1px dashed;
+    border: 1px dashed;
 }
 
 .ss-htmleditorfield-file.embed {
-  @include responsive-ratio(4,3,true);
-      position: relative;
-      iframe {
+    position: relative;
+
+    @include responsive-ratio(4,3,true);
+    iframe {
+        position: absolute;
+        top: 0;
+        right: 0;
         bottom: 0;
         left: 0;
-        position: absolute;
-        right: 0;
-        top: 0;
-      }
+    }
 }
