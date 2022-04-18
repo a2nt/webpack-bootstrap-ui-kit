@@ -149,10 +149,11 @@ ol {
 }
 
 ul {
+    padding-left: 0;
     list-style: none;
 
     li {
-        margin-left: -.25em;
+        margin-left: -.1em;
         padding-left: 0;
         list-style: none;
 
@@ -163,6 +164,8 @@ ul {
             content: "";
             border-radius: .5em;
             background: currentColor;
+            display: inline-block;
+            margin-right: 1em;
         }
     }
 }
