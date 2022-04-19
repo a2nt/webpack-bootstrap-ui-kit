@@ -12,6 +12,7 @@ const CarouselUI = ((window) => {
         interval: el.dataset.bsInterval ? parseInt(el.dataset.bsInterval) : false,
       });
       el.ui = carousel;
+      const items = el.querySelectorAll(".carousel-item");
 
       // create next/prev arrows
       if (el.dataset.bsArrows) {
@@ -45,7 +46,6 @@ const CarouselUI = ((window) => {
       if (el.dataset.bsIndicators) {
         const indicators = document.createElement("div");
         indicators.classList.add("carousel-indicators");
-        const items = el.querySelectorAll(".carousel-item");
         let i = 0;
         while (i < items.length) {
           const ind = document.createElement("button");
@@ -105,6 +105,11 @@ const CarouselUI = ((window) => {
           items.forEach((el,i) => {
             el.style.width = `${itemWidth  }px`;
           });
+
+          if(items.length < numToDisplay) {
+            el.classList.add('js-carousel-no-slide');
+            carousel.pause();
+          }
         });
 
         calculate.observe(el);

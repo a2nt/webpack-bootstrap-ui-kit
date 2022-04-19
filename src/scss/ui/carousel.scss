@@ -18,85 +18,103 @@ $carousel-text-shadow: 1px 1px $black !default;
 $carousel-controls-font-size: 3rem;
 $carousel-controls-zindex: 11 !default;
 $carousel-controls-shadow: 1px 1px $black !default;
-$carousel-controls-hover-bg: transparentize($black, 0.4) !default;
+$carousel-controls-hover-bg: transparentize($black, .4) !default;
 $carousel-slide-img-loading-max-height: 25vh !default;
 
 .carousel-slide {
-  align-items: flex-start;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  min-height: $carousel-slide-min-height;
+    display: flex;
+    flex-direction: column;
+    min-height: $carousel-slide-min-height;
 
-  > .container {
-    position: relative;
-  }
+    align-items: flex-start;
+    justify-content: center;
 
-  .video {
-    width: 100%;
-
-    iframe {
-      height: auto !important;
-      width: 100% !important;
+     > .container {
+        position: relative;
     }
-  }
 
-  .img {
-    display: block;
-    width: 100%;
-  }
+    .video {
+        width: 100%;
 
-  img.loading {
-    max-height: $carousel-slide-img-loading-max-height;
-  }
+        iframe {
+            width: 100% !important;
+            height: auto !important;
+        }
+    }
+
+    .img {
+        display: block;
+        width: 100%;
+    }
+
+    img.loading {
+        max-height: $carousel-slide-img-loading-max-height;
+    }
 }
 
 .carousel-control-prev,
 .carousel-control-next {
-  font-size: $carousel-controls-font-size;
-  text-shadow: $carousel-controls-shadow;
-  z-index: $carousel-controls-zindex;
+    font-size: $carousel-controls-font-size;
+    z-index: $carousel-controls-zindex;
+    text-shadow: $carousel-controls-shadow;
 
-  &:hover,
-  &:focus {
-    background: $carousel-controls-hover-bg;
-  }
+    &:hover,
+    &:focus {
+        background: $carousel-controls-hover-bg;
+    }
 }
 
 .carousel-indicators li {
-  box-shadow: none;
+    box-shadow: none;
 }
 
 .carousel-title {
-  color: $carousel-title-color;
+    color: $carousel-title-color;
 }
 
 .carousel-title,
 .carousel-content {
-  text-shadow: $carousel-text-shadow;
+    text-shadow: $carousel-text-shadow;
 }
 
 .carousel-caption {
-  bottom: 0;
-  left: auto;
-  right: 0;
-  width: 50%;
+    right: 0;
+    bottom: 0;
+    left: auto;
+    width: 50%;
 }
 
 .slide-link__media {
-  bottom: 0;
-  left: 0;
-  opacity: 0;
-  position: absolute;
-  right: 0;
-  top: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 0;
 }
 
 .carousel-multislide {
-  overflow: hidden;
-  .carousel-item {
-    display: block;
-    margin: 0;
-    width: 50%;
-  }
+    overflow: hidden;
+
+    .carousel-item {
+        display: block;
+        width: 50%;
+        margin: 0;
+    }
+
+    .carousel-inner {
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+    }
+}
+
+.js-carousel-no-slide {
+    .carousel-control-next,
+    .carousel-control-prev,
+    .carousel-indicators {
+        display: none;
+    }
 }
