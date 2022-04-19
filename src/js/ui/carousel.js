@@ -93,7 +93,7 @@ const CarouselUI = ((window) => {
 
           const width = rect.width;
           const height = rect.height;
-          const numToDisplay = el.dataset['length'];
+          const numToDisplay = Math.min(el.dataset['length'], items.length);
           const itemWidth = width / numToDisplay;
 
           el.dataset['itemWidth'] = itemWidth;
@@ -106,7 +106,7 @@ const CarouselUI = ((window) => {
             el.style.width = `${itemWidth  }px`;
           });
 
-          if(items.length < numToDisplay) {
+          if(items.length === numToDisplay) {
             el.classList.add('js-carousel-no-slide');
             carousel.pause();
           }
@@ -128,6 +128,10 @@ const CarouselUI = ((window) => {
         });
 
         el.classList.add(`${NAME}-multislide-active`);
+      }else{
+        if(items.length === 1) {
+          el.classList.add('js-carousel-no-slide');
+        }
       }
 
       el.classList.add(`${NAME}-active`);
