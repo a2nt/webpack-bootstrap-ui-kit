@@ -13,6 +13,7 @@ const CarouselUI = ((window) => {
       });
       el.ui = carousel;
       const items = el.querySelectorAll(".carousel-item");
+      const numberOfItems = parseInt(items.length);
 
       // create next/prev arrows
       if (el.dataset.bsArrows) {
@@ -47,7 +48,7 @@ const CarouselUI = ((window) => {
         const indicators = document.createElement("div");
         indicators.classList.add("carousel-indicators");
         let i = 0;
-        while (i < items.length) {
+        while (i < numberOfItems) {
           const ind = document.createElement("button");
           ind.setAttribute("type", "button");
           ind.setAttribute("aria-label", `Slide to #${i + 1}`);
@@ -91,22 +92,21 @@ const CarouselUI = ((window) => {
           const el = entry.target;
           const rect = entry.contentRect;
 
+          const items = el.querySelectorAll('.carousel-item');
           const width = rect.width;
           const height = rect.height;
-          const numToDisplay = Math.min(el.dataset['length'], items.length);
+          const numToDisplay = Math.min(parseInt(el.dataset['length']), numberOfItems);
           const itemWidth = width / numToDisplay;
 
           el.dataset['itemWidth'] = itemWidth;
           el.dataset['numToDisplay'] = numToDisplay;
 
-          const items = el.querySelectorAll('.carousel-item');
-
-          el.querySelector('.carousel-inner').style.width = `${items.length * itemWidth  }px`;
+          el.querySelector('.carousel-inner').style.width = `${numberOfItems * itemWidth  }px`;
           items.forEach((el,i) => {
             el.style.width = `${itemWidth  }px`;
           });
 
-          if(items.length === numToDisplay) {
+          if(numberOfItems === numToDisplay) {
             el.classList.add('js-carousel-no-slide');
             carousel.pause();
           }

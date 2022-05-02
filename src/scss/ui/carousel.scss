@@ -95,9 +95,6 @@ $carousel-slide-img-loading-max-height: 25vh !default;
 
 .carousel-multislide {
     overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 
     .carousel-item {
         display: block;
