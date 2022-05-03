@@ -1,44 +1,44 @@
-"use strict";
+'use strict'
 
-import $ from "jquery";
+import $ from 'jquery'
 
-import Events from "../_events";
+import Events from '../_events'
 
 const ImagePositionUI = (($) => {
-  const D = document;
-  const W = window;
-  const $Body = $("html,body");
-  const NAME = "ImagePositionUI";
-  const CLASSNAME = `js${NAME}`;
+  const D = document
+  const W = window
+  const $Body = $('html,body')
+  const NAME = 'ImagePositionUI'
+  const CLASSNAME = `js${NAME}`
 
   class ImagePositionUI {
-    static init() {
-      const ui = this;
-      ui.dispose();
+    static init () {
+      const ui = this
+      ui.dispose()
 
       if (!$(`.${CLASSNAME}`).length) {
-        return;
+        return
       }
 
-      console.log(`${NAME}: init`);
-      $(`.${CLASSNAME}`).on("click", (e) => {
-        e.preventDefault();
-        console.log(e);
-      });
+      console.log(`${NAME}: init`)
+      $(`.${CLASSNAME}`).on('click', (e) => {
+        e.preventDefault()
+        console.log(e)
+      })
     }
 
-    static dispose() {
-      console.log(`${NAME}: dispose`);
+    static dispose () {
+      console.log(`${NAME}: dispose`)
     }
   }
 
   $(W).on(`${NAME}.init ${Events.AJAX} ${Events.LOADED}`, () => {
-    ImagePositionUI.init();
-  });
+    ImagePositionUI.init()
+  })
 
-  W.ImagePositionUI = new ImagePositionUI();
+  W.ImagePositionUI = new ImagePositionUI()
 
-  return ImagePositionUI;
-})($);
+  return ImagePositionUI
+})($)
 
-export default ImagePositionUI;
+export default ImagePositionUI

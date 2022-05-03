@@ -1,16 +1,16 @@
-"use strict";
-import $ from "jquery";
+'use strict'
+import $ from 'jquery'
 
-const G = window;
-const D = document;
+const G = window
+const D = document
 
 // remove browser default alerts
-/*alert = function () {
+/* alert = function () {
   console.log(arguments);
   console.log(new Error().stack);
-};*/
+}; */
 
-/*G.addEventListener(G.visibilityChangeEvent, () => {
+/* G.addEventListener(G.visibilityChangeEvent, () => {
   if (currentPage && typeof currentPage !== 'undefined') {
     if (
       landingPage !== G.location.href &&
@@ -23,4 +23,4 @@ const D = document;
       G.localStorage.removeItem('current-page');
     }
   }
-});*/
+}); */

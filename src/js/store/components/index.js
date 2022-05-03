@@ -1,3 +1,3 @@
-import PageControls from "./page-controls";
+import PageControls from './page-controls'
 
-export { PageControls };
+export { PageControls }

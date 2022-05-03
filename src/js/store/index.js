@@ -1,19 +1,19 @@
-import configure from "./configure";
-const store = configure();
+import configure from './configure'
+const store = configure()
 
-/*import {
+/* import {
     PageControls
-} from './components'*/
+} from './components' */
 
-//const pageControls = new PageControls(store)
+// const pageControls = new PageControls(store)
 
-store.subscribe(() => console.log(store.getState()));
+store.subscribe(() => console.log(store.getState()))
 store.dispatch({
-  type: "counter/incremented",
-});
+  type: 'counter/incremented',
+})
 store.dispatch({
-  type: "counter/incremented",
-});
+  type: 'counter/incremented',
+})
 store.dispatch({
-  type: "counter/decremented",
-});
+  type: 'counter/decremented',
+})

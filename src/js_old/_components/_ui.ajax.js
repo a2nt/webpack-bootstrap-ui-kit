@@ -1,59 +1,59 @@
-"use strict";
+'use strict'
 
-import $ from "jquery";
-import Events from "../_events";
-import Spinner from "./_ui.spinner";
+import $ from 'jquery'
+import Events from '../_events'
+import Spinner from './_ui.spinner'
 
 const AjaxUI = (($) => {
   // Constants
-  const G = window;
-  const D = document;
-  const $Html = $("html");
-  const $Body = $("body");
+  const G = window
+  const D = document
+  const $Html = $('html')
+  const $Body = $('body')
 
-  const NAME = "jsAjaxUI";
-  const DATA_KEY = NAME;
+  const NAME = 'jsAjaxUI'
+  const DATA_KEY = NAME
 
   class AjaxUI {
     // Constructor
-    constructor(element) {
-      this._element = element;
-      const $element = $(this._element);
-      $element.addClass(`${NAME}-active`);
+    constructor (element) {
+      this._element = element
+      const $element = $(this._element)
+      $element.addClass(`${NAME}-active`)
 
-      $element.bind("click", function (e) {
-        e.preventDefault();
+      $element.bind('click', function (e) {
+        e.preventDefault()
 
-        const $this = $(this);
+        const $this = $(this)
 
-        $(".ajax").each(function () {
-          const $this = $(this);
-          $this.removeClass("active");
-          $this.parents(".nav-item").removeClass("active");
-        });
+        $('.ajax').each(function () {
+          const $this = $(this)
+          $this.removeClass('active')
+          $this.parents('.nav-item').removeClass('active')
+        })
 
-        $this.addClass("loading");
+        $this.addClass('loading')
 
-        AjaxUI.load($this.attr("href"), () => {
-          $this.removeClass("loading");
-          $this.parents(".nav-item").addClass("active");
-          $this.addClass("active");
-        });
-      });
+        AjaxUI.load($this.attr('href'), () => {
+          $this.removeClass('loading')
+          $this.parents('.nav-item').addClass('active')
+          $this.addClass('active')
+        })
+      })
     }
 
     // Public methods
-    static load(url, callback) {
+    static load (url, callback) {
       // show spinner
       Spinner.show(() => {
-        $Body.removeClass("loaded");
-      });
+        $Body.removeClass('loaded')
+      })
 
       // update document location
-      G.MainUI.updateLocation(url);
+      G.MainUI.updateLocation(url)
 
       const absoluteLocation =
-        G.URLDetails["base"] + G.URLDetails["relative"].substring(1);
+        G.URLDetails.base + G.URLDetails.relative.substring(1)
       if (absoluteLocation !== G.location.href) {
         G.history.pushState(
           {
@@ -62,257 +62,257 @@ const AjaxUI = (($) => {
           },
           document.title,
           absoluteLocation
-        );
+        )
       }
 
       $.ajax({
         sync: false,
         async: true,
         url,
-        dataType: "json",
-        method: "GET",
+        dataType: 'json',
+        method: 'GET',
         cache: false,
-        error(jqXHR) {
-          console.warn(`${NAME}: AJAX request failure: ${jqXHR.statusText}`);
-          G.location.href = url;
+        error (jqXHR) {
+          console.warn(`${NAME}: AJAX request failure: ${jqXHR.statusText}`)
+          G.location.href = url
 
           // google analytics
-          if (typeof G.ga === "function") {
-            G.ga("send", "event", "error", "AJAX ERROR", jqXHR.statusText);
+          if (typeof G.ga === 'function') {
+            G.ga('send', 'event', 'error', 'AJAX ERROR', jqXHR.statusText)
           }
         },
-        success(data, status, jqXHR) {
-          AjaxUI.process(data, jqXHR, callback);
+        success (data, status, jqXHR) {
+          AjaxUI.process(data, jqXHR, callback)
 
           // google analytics
-          if (typeof G.ga === "function") {
-            G.ga("set", {
-              page: G.URLDetails["relative"] + G.URLDetails["hash"],
-              title: jqXHR.getResponseHeader("X-Title"),
-            });
-            G.ga("send", "pageview");
+          if (typeof G.ga === 'function') {
+            G.ga('set', {
+              page: G.URLDetails.relative + G.URLDetails.hash,
+              title: jqXHR.getResponseHeader('X-Title'),
+            })
+            G.ga('send', 'pageview')
           }
         },
-      });
+      })
     }
 
-    static process(data, jqXHR, callback) {
-      const css = jqXHR.getResponseHeader("X-Include-CSS").split(",") || [];
-      const js = jqXHR.getResponseHeader("X-Include-JS").split(",") || [];
+    static process (data, jqXHR, callback) {
+      const css = jqXHR.getResponseHeader('X-Include-CSS').split(',') || []
+      const js = jqXHR.getResponseHeader('X-Include-JS').split(',') || []
 
       // Replace HTML regions
-      if (typeof data.regions === "object") {
+      if (typeof data.regions === 'object') {
         for (const key in data.regions) {
-          if (typeof data.regions[key] === "string") {
-            AjaxUI.replaceRegion(data.regions[key], key);
+          if (typeof data.regions[key] === 'string') {
+            AjaxUI.replaceRegion(data.regions[key], key)
           }
         }
       }
 
       // remove already loaded scripts
       $('link[type="text/css"]').each(function () {
-        const i = css.indexOf($(this).attr("href"));
+        const i = css.indexOf($(this).attr('href'))
         if (i > -1) {
-          css.splice(i, 1);
-        } else if (!$Body.data("unload-blocked")) {
-          console.log(`${NAME}: Unloading | ${$(this).attr("href")}`);
-          $(this).remove();
+          css.splice(i, 1)
+        } else if (!$Body.data('unload-blocked')) {
+          console.log(`${NAME}: Unloading | ${$(this).attr('href')}`)
+          $(this).remove()
         }
-      });
+      })
 
       $('script[type="text/javascript"]').each(function () {
-        const i = js.indexOf($(this).attr("src"));
+        const i = js.indexOf($(this).attr('src'))
         if (i > -1) {
-          js.splice(i, 1);
-        } else if (!$Body.data("unload-blocked")) {
-          console.log(`${NAME}: Unloading | ${$(this).attr("src")}`);
-          $(this).remove();
+          js.splice(i, 1)
+        } else if (!$Body.data('unload-blocked')) {
+          console.log(`${NAME}: Unloading | ${$(this).attr('src')}`)
+          $(this).remove()
         }
-      });
+      })
 
       // preload CSS
       this.preload(css).then(() => {
-        const $head = $("head");
+        const $head = $('head')
         css.forEach((el) => {
           $head.append(
             `<link rel="stylesheet" type="text/css" href="${el}" />`
-          );
-        });
+          )
+        })
 
         // preload JS
-        this.preload(js, "script").then(() => {
+        this.preload(js, 'script').then(() => {
           js.forEach((el) => {
             $Body.append(
               `<script type="text/javascript" charset="UTF-8" src="${el}"></script>`
-            );
-          });
+            )
+          })
 
-          console.log(`${NAME}: New page is loaded!`);
+          console.log(`${NAME}: New page is loaded!`)
 
           // trigger events
-          if (typeof data.events === "object") {
+          if (typeof data.events === 'object') {
             for (const eventName in data.events) {
-              $(D).trigger(eventName, [data.events[eventName]]);
+              $(D).trigger(eventName, [data.events[eventName]])
             }
           }
 
-          if (typeof callback !== "undefined") {
-            callback();
+          if (typeof callback !== 'undefined') {
+            callback()
           }
 
-          $(G).trigger(Events.AJAX);
-        });
-      });
+          $(G).trigger(Events.AJAX)
+        })
+      })
     }
 
-    static preload(items, type = "text", cache = true, itemCallback = false) {
+    static preload (items, type = 'text', cache = true, itemCallback = false) {
       if (!items.length) {
-        return $.Deferred().resolve().promise();
+        return $.Deferred().resolve().promise()
       }
 
-      const dfds = [];
+      const dfds = []
       items.forEach((url, i) => {
-        const dfd = $.Deferred();
+        const dfd = $.Deferred()
 
         $.ajax({
           dataType: type,
           cache,
           url,
         }).always(() => {
-          dfd.resolve();
+          dfd.resolve()
           if (itemCallback) {
-            itemCallback(i, url);
+            itemCallback(i, url)
           }
-        });
+        })
 
-        dfds.push(dfd);
-      });
+        dfds.push(dfd)
+      })
 
       // return a master promise object which will resolve when all the deferred objects have resolved
-      return $.when(...dfds);
+      return $.when(...dfds)
     }
 
-    static replaceRegion(html, key) {
-      const $region = $(`[data-ajax-region="${key}"]`);
+    static replaceRegion (html, key) {
+      const $region = $(`[data-ajax-region="${key}"]`)
 
       if ($region.length) {
-        $region.empty().append(html);
+        $region.empty().append(html)
       } else {
-        console.warn(`${NAME}: Region returned without class or id!`);
+        console.warn(`${NAME}: Region returned without class or id!`)
       }
     }
 
-    dispose() {
-      const $element = $(this._element);
+    dispose () {
+      const $element = $(this._element)
 
-      $element.removeClass(`${NAME}-active`);
-      $.removeData(this._element, DATA_KEY);
-      this._element = null;
+      $element.removeClass(`${NAME}-active`)
+      $.removeData(this._element, DATA_KEY)
+      this._element = null
     }
 
-    static _jQueryInterface() {
+    static _jQueryInterface () {
       return this.each(function () {
         // attach functionality to element
-        const $element = $(this);
-        let data = $element.data(DATA_KEY);
+        const $element = $(this)
+        let data = $element.data(DATA_KEY)
 
         if (!data) {
-          data = new AjaxUI(this);
-          $element.data(DATA_KEY, data);
+          data = new AjaxUI(this)
+          $element.data(DATA_KEY, data)
         }
-      });
+      })
     }
   }
 
   // jQuery interface
-  $.fn[NAME] = AjaxUI._jQueryInterface;
-  $.fn[NAME].Constructor = AjaxUI;
+  $.fn[NAME] = AjaxUI._jQueryInterface
+  $.fn[NAME].Constructor = AjaxUI
   $.fn[NAME].noConflict = function () {
-    $.fn[NAME] = JQUERY_NO_CONFLICT;
-    return AjaxUI._jQueryInterface;
-  };
+    $.fn[NAME] = JQUERY_NO_CONFLICT
+    return AjaxUI._jQueryInterface
+  }
 
   // auto-apply
-  $(".ajax").ready(() => {
-    $(".ajax").jsAjaxUI();
-  });
+  $('.ajax').ready(() => {
+    $('.ajax').jsAjaxUI()
+  })
 
   // AJAX update browser title
-  $(D).on("layoutRefresh", (e, data) => {
-    D.title = data.Title;
+  $(D).on('layoutRefresh', (e, data) => {
+    D.title = data.Title
 
-    $Html.attr("class", "");
+    $Html.attr('class', '')
     if (data.ClassName) {
-      $Html.addClass(data.ClassName);
+      $Html.addClass(data.ClassName)
     }
-    //data.Link = (data.Link === '/home/') ? '/' : data.Link;
-  });
+    // data.Link = (data.Link === '/home/') ? '/' : data.Link;
+  })
 
   // Back/Forward functionality
   G.onpopstate = function (event) {
-    const $existingLink = $(`a[href^="${D.location}"]`);
+    const $existingLink = $(`a[href^="${D.location}"]`)
 
     if (event.state !== null && event.state.ajax) {
-      console.log(`${NAME}: GOBACK (AJAX state)`);
-      AjaxUI.load(event.state.page);
-    } else if ($existingLink.length && $existingLink.hasClass("ajax")) {
-      console.log(`${NAME}: GOBACK (AJAX link)`);
-      $existingLink.trigger("click");
+      console.log(`${NAME}: GOBACK (AJAX state)`)
+      AjaxUI.load(event.state.page)
+    } else if ($existingLink.length && $existingLink.hasClass('ajax')) {
+      console.log(`${NAME}: GOBACK (AJAX link)`)
+      $existingLink.trigger('click')
     } else if (D.location.href !== G.location.href) {
-      console.log(`${NAME}: GOBACK (HTTP)`);
-      G.location.href = D.location;
+      console.log(`${NAME}: GOBACK (HTTP)`)
+      G.location.href = D.location
     }
-  };
+  }
 
   // manage AJAX requests
   $.ajaxPrefilter((options, originalOptions, jqXHR) => {
-    jqXHR.opts = options;
-    $.xhrPool.requests[jqXHR.opts.url] = jqXHR;
-  });
+    jqXHR.opts = options
+    $.xhrPool.requests[jqXHR.opts.url] = jqXHR
+  })
 
   $.xhrPool = {
     requests: {},
     paused: false,
     pauseAll: () => {
-      $.xhrPool.paused = true;
+      $.xhrPool.paused = true
 
-      /*for (let url in $.xhrPool.requests) {
+      /* for (let url in $.xhrPool.requests) {
         const jqXHR = $.xhrPool.requests[url];
         jqXHR.abort();
         console.log(`${NAME}: AJAX request is paused (${jqXHR.opts.url})`);
-      }*/
+      } */
     },
     restoreAll: () => {
       for (const url in $.xhrPool.requests) {
-        const jqXHR = $.xhrPool.requests[url];
-        $.ajax(jqXHR.opts);
-        console.log(`${NAME}: AJAX request is restored (${jqXHR.opts.url})`);
+        const jqXHR = $.xhrPool.requests[url]
+        $.ajax(jqXHR.opts)
+        console.log(`${NAME}: AJAX request is restored (${jqXHR.opts.url})`)
       }
 
-      $.xhrPool.paused = false;
+      $.xhrPool.paused = false
     },
-  };
+  }
 
   $.ajaxSetup({
     beforeSend: (jqXHR) => {}, //  and connection to list
     complete: (jqXHR) => {
       if (!$.xhrPool.paused) {
-        //console.log(`${NAME}: AJAX request is done (${jqXHR.opts.url})`);
-        delete $.xhrPool.requests[jqXHR.opts.url];
+        // console.log(`${NAME}: AJAX request is done (${jqXHR.opts.url})`);
+        delete $.xhrPool.requests[jqXHR.opts.url]
       }
     },
-  });
+  })
 
   // attach events
   $Body.on(`${Events.OFFLINE}`, () => {
-    $.xhrPool.pauseAll();
-  });
+    $.xhrPool.pauseAll()
+  })
 
   $Body.on(`${Events.BACKONLINE}`, () => {
-    $.xhrPool.restoreAll();
-  });
+    $.xhrPool.restoreAll()
+  })
 
-  return AjaxUI;
-})($);
+  return AjaxUI
+})($)
 
-export default AjaxUI;
+export default AjaxUI

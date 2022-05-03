@@ -1,120 +1,120 @@
-"use strict";
+'use strict'
 
-import $ from "jquery";
+import $ from 'jquery'
 
-import MainUI from "../_main";
-import Events from "../_events";
-import SpinnerUI from "./_ui.spinner";
+import MainUI from '../_main'
+import Events from '../_events'
+import SpinnerUI from './_ui.spinner'
 
 const VideoPreviewUI = (($) => {
-  const NAME = "jsVideoPreviewUI";
-  const DATA_KEY = NAME;
+  const NAME = 'jsVideoPreviewUI'
+  const DATA_KEY = NAME
 
-  const G = window;
-  const D = document;
+  const G = window
+  const D = document
 
   class VideoPreviewUI {
-    constructor(el) {
-      const ui = this;
-      ui.$_el = $(el);
-      ui.innerHTML = ui.$_el[0].innerHTML;
+    constructor (el) {
+      const ui = this
+      ui.$_el = $(el)
+      ui.innerHTML = ui.$_el[0].innerHTML
 
-      ui.$_el.data(DATA_KEY, this);
-      const href = ui.$_el.attr("href") || ui.$_el.data("href");
+      ui.$_el.data(DATA_KEY, this)
+      const href = ui.$_el.attr('href') || ui.$_el.data('href')
       const YouTubeGetID = (url) => {
         const parsedURL = url.split(
           /(vi\/|v%3D|v=|\/v\/|youtu\.be\/|\/embed\/)/
-        );
-        console.log(`${NAME}: ${parsedURL}`);
+        )
+        console.log(`${NAME}: ${parsedURL}`)
         return undefined !== parsedURL[2]
           ? parsedURL[2].split(/[^0-9a-z_-]/i)[0]
-          : parsedURL[0];
-      };
+          : parsedURL[0]
+      }
 
-      let video;
+      let video
 
       if (
         (video = href.match(
           /(youtube|youtube-nocookie|youtu|vimeo)\.(com|be)\/(watch\?v=([\w-]+)|([\w-]+))/
         ))
       ) {
-        let video_id;
+        let video_id
 
         if (
-          video[1] === "youtube" ||
-          video[1] === "youtube-nocookie" ||
-          video[1] === "youtu"
+          video[1] === 'youtube' ||
+          video[1] === 'youtube-nocookie' ||
+          video[1] === 'youtu'
         ) {
-          video_id = YouTubeGetID(href);
+          video_id = YouTubeGetID(href)
         }
 
-        if (video[1] == "vimeo") {
-          video_id = video[3];
-          ui.$_el.addClass("loading");
+        if (video[1] == 'vimeo') {
+          video_id = video[3]
+          ui.$_el.addClass('loading')
           $.ajax({
-            type: "GET",
+            type: 'GET',
             url: `https://vimeo.com/api/v2/video/${video_id}.json`,
-            jsonp: "callback",
-            dataType: "jsonp",
+            jsonp: 'callback',
+            dataType: 'jsonp',
             success: function (data) {
-              const thumbnail_src = data[0].thumbnail_large;
-              ui.show(thumbnail_src);
-              ui.$_el.removeClass("loading");
+              const thumbnail_src = data[0].thumbnail_large
+              ui.show(thumbnail_src)
+              ui.$_el.removeClass('loading')
             },
-          });
+          })
 
-          return;
+          return
         }
 
         if (video_id) {
-          ui.show(`//i3.ytimg.com/vi/${video_id}/0.jpg`);
+          ui.show(`//i3.ytimg.com/vi/${video_id}/0.jpg`)
         }
       }
     }
 
-    show(src) {
-      const ui = this;
-      ui.$_el[0].innerHTML = "";
-      ui.$_el.append(`<img src="${src}" alt="Video" />`);
+    show (src) {
+      const ui = this
+      ui.$_el[0].innerHTML = ''
+      ui.$_el.append(`<img src="${src}" alt="Video" />`)
     }
 
-    static dispose() {
-      console.log(`${NAME}: dispose`);
-      ui.$_el[0].innerHTML = ui.innerHTML;
+    static dispose () {
+      console.log(`${NAME}: dispose`)
+      ui.$_el[0].innerHTML = ui.innerHTML
     }
 
-    static _jQueryInterface() {
+    static _jQueryInterface () {
       return this.each((i, el) => {
         // attach functionality to element
-        const $el = $(el);
-        let data = $el.data(DATA_KEY);
+        const $el = $(el)
+        let data = $el.data(DATA_KEY)
 
         if (!data) {
-          data = new VideoPreviewUI(el);
-          $el.data(DATA_KEY, data);
+          data = new VideoPreviewUI(el)
+          $el.data(DATA_KEY, data)
         }
-      });
+      })
     }
   }
 
   // jQuery interface
-  $.fn[NAME] = VideoPreviewUI._jQueryInterface;
-  $.fn[NAME].Constructor = VideoPreviewUI;
+  $.fn[NAME] = VideoPreviewUI._jQueryInterface
+  $.fn[NAME].Constructor = VideoPreviewUI
   $.fn[NAME].noConflict = () => {
-    $.fn[NAME] = JQUERY_NO_CONFLICT;
-    return VideoPreviewUI._jQueryInterface;
-  };
+    $.fn[NAME] = JQUERY_NO_CONFLICT
+    return VideoPreviewUI._jQueryInterface
+  }
 
   // auto-apply
   $(window).on(`${Events.LODEDANDREADY}`, () => {
-    console.log(`${NAME}: init`);
+    console.log(`${NAME}: init`)
 
     $('[data-video-preview="true"]').each((i, el) => {
-      $(el).jsVideoPreviewUI();
-    });
-  });
+      $(el).jsVideoPreviewUI()
+    })
+  })
 
-  return VideoPreviewUI;
-})($);
+  return VideoPreviewUI
+})($)
 
-export default VideoPreviewUI;
+export default VideoPreviewUI

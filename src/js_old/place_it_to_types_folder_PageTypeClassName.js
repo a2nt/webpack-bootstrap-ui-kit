@@ -13,51 +13,51 @@
  * Take a look to app/templates/Objects/Map.ss for HTML
  * Take a look to https://github.com/a2nt/silverstripe-mapboxfield/blob/master/README.md for Data Structure
  */
-"use strict";
+'use strict'
 
 // your page specific css
-import "../scss/_types/PageTypeClassName.scss";
+import '../scss/_types/PageTypeClassName.scss'
 
-import $ from "jquery";
-import Events from "../_events";
+import $ from 'jquery'
+import Events from '../_events'
 
 // Mapbox API
-import "../_components/_ui.map.api";
+import '../_components/_ui.map.api'
 
 const PageTypeUI = (($) => {
   // Constants
-  const W = window;
-  const D = document;
-  const $Body = $("body");
+  const W = window
+  const D = document
+  const $Body = $('body')
 
-  const NAME = "PageTypeUI";
+  const NAME = 'PageTypeUI'
   class PageTypeUI {
     // Static methods
 
-    static init() {
-      this.dispose();
-      console.log(`Initializing: ${NAME}`);
+    static init () {
+      this.dispose()
+      console.log(`Initializing: ${NAME}`)
       // custom page specific functionality
     }
 
-    static initMap() {
+    static initMap () {
       // custom map functionality
     }
 
-    static dispose() {
-      console.log(`Destroying: ${NAME}`);
+    static dispose () {
+      console.log(`Destroying: ${NAME}`)
     }
   }
 
   $(W).on(`${Events.AJAX} ${Events.LOADED}`, () => {
-    PageTypeUI.init();
-  });
+    PageTypeUI.init()
+  })
 
   $(W).on(Events.MAPLOADED, () => {
-    PageTypeUI.initMap();
-  });
+    PageTypeUI.initMap()
+  })
 
-  return PageTypeUI;
-})($);
+  return PageTypeUI
+})($)
 
-export default PageTypeUI;
+export default PageTypeUI

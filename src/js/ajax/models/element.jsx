@@ -1,11 +1,11 @@
 /*
  * Lightbox window
  */
-import { Component } from "react";
-import Events from "../../events";
+import { Component } from 'react'
+import Events from '../../events'
 
-import { client } from "../apollo/init";
-import { gql } from "@apollo/client";
+import { client } from '../apollo/init'
+import { gql } from '@apollo/client'
 
 class Page extends Component {
   state = {
@@ -16,48 +16,48 @@ class Page extends Component {
     current: null,
     ID: null,
     URLSegment: null,
-    ClassName: "Page",
+    ClassName: 'Page',
     CSSClass: null,
     Title: null,
     Summary: null,
     Link: null,
     URL: null,
     Elements: [],
-    page: null,
-  };
+    page: null
+  }
 
-  componentDidUpdate() {
-    const ui = this;
+  componentDidUpdate () {
+    const ui = this
 
     if (ui.state.Title) {
-      document.title = ui.state.Title;
+      document.title = ui.state.Title
 
       if (ui.state.URL) {
         window.history.pushState(
           {
-            page: JSON.stringify(ui.state),
+            page: JSON.stringify(ui.state)
           },
           ui.state.Title,
           ui.state.URL
-        );
+        )
       }
     }
 
     if (ui.state.Elements.length) {
-      window.dispatchEvent(new Event(Events.AJAX));
+      window.dispatchEvent(new Event(Events.AJAX))
     }
   }
 
-  constructor(props) {
-    super(props);
+  constructor (props) {
+    super(props)
 
-    const ui = this;
-    ui.name = ui.constructor.name;
-    console.log(`${ui.name}: init`);
+    const ui = this
+    ui.name = ui.constructor.name
+    console.log(`${ui.name}: init`)
   }
 
   reset = () => {
-    const ui = this;
+    const ui = this
 
     ui.setState({
       type: [],
@@ -67,12 +67,12 @@ class Page extends Component {
       ID: null,
       Title: null,
       URL: null,
-      Elements: [],
-    });
-  };
+      Elements: []
+    })
+  }
 
   load = (link) => {
-    const ui = this;
+    const ui = this
     const query = gql(`
 			query Pages {
 			  readPages(URLSegment: "home", limit: 1, offset: 0) {
@@ -112,37 +112,37 @@ class Page extends Component {
 			    }
 			  }
 			}
-		`);
+		`)
 
-    ui.reset();
+    ui.reset()
     ui.setState({
-      Title: "Loading ...",
-      loading: true,
-    });
+      Title: 'Loading ...',
+      loading: true
+    })
     console.log(
       client.readQuery({
-        query,
+        query
       })
-    );
+    )
     client
       .query({
-        query: query,
+        query
       })
       .then((resp) => {
-        const page = resp.data.readPages.edges[0].node;
+        const page = resp.data.readPages.edges[0].node
 
         // write to cache
         client.writeQuery({
           query,
           data: {
-            resp,
-          },
-        });
+            resp
+          }
+        })
         console.log(
           client.readQuery({
-            query,
+            query
           })
-        );
+        )
 
         ui.setState({
           ID: page.ID,
@@ -154,74 +154,74 @@ class Page extends Component {
           Link: page.Link,
           Elements: page.Elements.edges,
           URL: page.Link || link,
-          loading: false,
-        });
+          loading: false
+        })
       })
       .catch((error) => {
-        console.error(error);
+        console.error(error)
 
-        let msg = "";
+        let msg = ''
 
         if (error.response) {
           switch (error.response.status) {
             case 404:
-              msg = "Not Found.";
-              break;
+              msg = 'Not Found.'
+              break
             case 500:
-              msg = "Server issue, please try again latter.";
-              break;
+              msg = 'Server issue, please try again latter.'
+              break
             default:
-              msg = "Something went wrong.";
-              break;
+              msg = 'Something went wrong.'
+              break
           }
         } else if (error.request) {
-          msg = "No response received";
+          msg = 'No response received'
         } else {
-          console.warn("Error", error.message);
+          console.warn('Error', error.message)
         }
 
         ui.setState({
-          error: msg,
-        });
-      });
-  };
+          error: msg
+        })
+      })
+  }
 
   getHtml = (html) => {
     const decodeHtmlEntity = (input) => {
-      var doc = new DOMParser().parseFromString(input, "text/html");
-      return doc.documentElement.textContent;
-    };
+      const doc = new DOMParser().parseFromString(input, 'text/html')
+      return doc.documentElement.textContent
+    }
 
     return {
-      __html: decodeHtmlEntity(html),
-    };
-  };
+      __html: decodeHtmlEntity(html)
+    }
+  }
 
-  render() {
-    const ui = this;
-    const name = ui.name;
-    const className = `elemental-area page-${ui.state.CSSClass} url-${ui.state.URLSegment}`;
+  render () {
+    const ui = this
+    const name = ui.name
+    const className = `elemental-area page-${ui.state.CSSClass} url-${ui.state.URLSegment}`
 
     const ElementItem = (props) => (
-      <div dangerouslySetInnerHTML={props.html}></div>
-    );
+      <div dangerouslySetInnerHTML={props.html} />
+    )
 
-    let html = "";
+    let html = ''
     if (ui.state.Elements.length) {
       ui.state.Elements.map((el) => {
-        html += el.node.Render;
-      });
+        html += el.node.Render
+      })
     } else {
-      html += '<div class="loading">Loading ...</div>';
+      html += '<div class="loading">Loading ...</div>'
     }
 
     return (
       <div
         className={className}
         dangerouslySetInnerHTML={ui.getHtml(html)}
-      ></div>
-    );
+      />
+    )
   }
 }
 
-export default Page;
+export default Page

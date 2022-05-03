@@ -42,4 +42,4 @@ export default {
   FORM_STEPPED_FIRST_STEP: 'form-first-step',
   FORM_STEPPED_LAST_STEP: 'form-last-step',
   FORM_FIELDS: 'input,textarea,select',
-};
+}

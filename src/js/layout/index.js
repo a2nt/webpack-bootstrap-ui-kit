@@ -1,26 +1,26 @@
-import Events from "../_events";
+import Events from '../_events'
 
 const LayoutUI = ((W) => {
-  const NAME = "_layout";
-  const D = document;
-  const BODY = D.body;
+  const NAME = '_layout'
+  const D = document
+  const BODY = D.body
 
   const init_fonts = () => {
-    console.log(`${NAME}: init_fonts`);
+    console.log(`${NAME}: init_fonts`)
 
-    const css = D.createElement("link");
-    css.rel = "stylesheet";
-    css.type = "text/css";
-    css.media = "all";
+    const css = D.createElement('link')
+    css.rel = 'stylesheet'
+    css.type = 'text/css'
+    css.media = 'all'
     css.href =
-      "https://fonts.googleapis.com/css?family=Roboto:ital,wght@0,400;0,700;1,400&display=swap";
-    D.getElementsByTagName("head")[0].appendChild(css);
-  };
+      'https://fonts.googleapis.com/css?family=Roboto:ital,wght@0,400;0,700;1,400&display=swap'
+    D.getElementsByTagName('head')[0].appendChild(css)
+  }
 
   const init_analytics = () => {
-    console.log(`${NAME}: init_analytics`);
-    /*google analytics */
-    /*(function(i, s, o, g, r, a, m) {
+    console.log(`${NAME}: init_analytics`)
+    /* google analytics */
+    /* (function(i, s, o, g, r, a, m) {
                   i['GoogleAnalyticsObject'] = r;
                   (i[r] =
                     i[r] ||
@@ -40,12 +40,12 @@ const LayoutUI = ((W) => {
                   'ga',
                 );
                 ga('create', 'UA-********-*', 'auto');
-                ga('send', 'pageview');*/
-  };
+                ga('send', 'pageview'); */
+  }
 
   W.addEventListener(`${Events.LOADED}`, () => {
-    init_fonts();
-    //init_analytics();
-  });
-})(window);
-export default LayoutUI;
+    init_fonts()
+    // init_analytics();
+  })
+})(window)
+export default LayoutUI

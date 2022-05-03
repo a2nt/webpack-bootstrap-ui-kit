@@ -1,6 +1,6 @@
-"use strict";
+'use strict'
 
-/*import $ from 'jquery';
+/* import $ from 'jquery';
 import Events from '../_events';
 
 // Mapbox API

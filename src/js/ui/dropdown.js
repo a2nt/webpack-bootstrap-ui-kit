@@ -1,4 +1,4 @@
-import Events from '../_events';
+import Events from '../_events'
 
 /*
  * Bootstrap compatible dropdowns without popover library
@@ -8,101 +8,100 @@ import Events from '../_events';
  *
  */
 const DropdownHoverUI = ((window) => {
-  const NAME = 'js-dropdown';
+  const NAME = 'js-dropdown'
 
   const HideAll = () => {
     // hide others
     document.querySelectorAll('.dropdown-menu').forEach((el, i) => {
-      el.classList.remove('show');
-    });
-  };
+      el.classList.remove('show')
+    })
+  }
 
   const Toggle = (el) => {
-    HideAll();
+    HideAll()
 
-    el.querySelector('.dropdown-menu').classList.toggle('show');
-  };
+    el.querySelector('.dropdown-menu').classList.toggle('show')
+  }
 
   const Show = (e) => {
-    const el = e.currentTarget;
-    el.querySelector('.dropdown-menu').classList.add('show');
-  };
+    const el = e.currentTarget
+    el.querySelector('.dropdown-menu').classList.add('show')
+  }
 
   const Hide = (e) => {
-    const el = e.currentTarget;
-    el.querySelector('.dropdown-menu').classList.remove('show');
-  };
+    const el = e.currentTarget
+    el.querySelector('.dropdown-menu').classList.remove('show')
+  }
 
   const init = () => {
-    console.log(`${NAME}: init`);
+    console.log(`${NAME}: init`)
 
-    const clickableEls = document.querySelectorAll(`.${NAME},[data-bs-toggle="dropdown"]`);
-    const hoverableEls = document.querySelectorAll(`[data-bs-toggle="hover"]`);
+    const clickableEls = document.querySelectorAll(`.${NAME},[data-bs-toggle="dropdown"]`)
+    const hoverableEls = document.querySelectorAll('[data-bs-toggle="hover"]')
 
     const attachHoverEvents = (el) => {
-      el.addEventListener('mouseover', Show, false);
-      el.addEventListener('mouseout', Hide, false);
+      el.addEventListener('mouseover', Show, false)
+      el.addEventListener('mouseout', Hide, false)
 
-      el.classList.add(`${NAME}-active`);
-    };
+      el.classList.add(`${NAME}-active`)
+    }
 
     const attachClickEvents = (el) => {
       el.addEventListener('click', (e) => {
-        e.preventDefault();
+        e.preventDefault()
 
-        const el = e.currentTarget;
-        const parent = el.closest('.dropdown');
-        Toggle(parent);
-      });
+        const el = e.currentTarget
+        const parent = el.closest('.dropdown')
+        Toggle(parent)
+      })
 
-      el.classList.add(`${NAME}-active`);
-    };
+      el.classList.add(`${NAME}-active`)
+    }
 
     // Hide all for outside clicks
-    /*document.addEventListener('click', function (event) {
+    /* document.addEventListener('click', function (event) {
       const isClickInside = clickableEls.contains(event.target);
 
       if (!isClickInside) {
         HideAll();
       }
-    });*/
+    }); */
 
     document.addEventListener('click', (event) => {
-      let breakPath = false;
-      const path = event.path || (event.composedPath && event.composedPath());
+      let breakPath = false
+      const path = event.path || (event.composedPath && event.composedPath())
 
       if (!path) {
-        console.warn('Browser does not provide event path to hide dropdowns on outside click');
+        console.warn('Browser does not provide event path to hide dropdowns on outside click')
       }
 
       path.forEach((el, i) => {
         if (breakPath) {
-          return;
+          return
         }
 
         if (el === document) {
-          HideAll();
+          HideAll()
         }
 
         if (el.classList && el.classList.contains('dropdown-toggle')) {
-          breakPath = true;
-          return;
+          breakPath = true
         }
-      });
-    });
+      })
+    })
 
     hoverableEls.forEach((el, i) => {
-      const parent = el.closest('.dropdown');
-      attachHoverEvents(parent);
-    });
+      const parent = el.closest('.dropdown')
+      attachHoverEvents(parent)
+    })
 
     clickableEls.forEach((el, i) => {
-      attachClickEvents(el);
-    });
-  };
+      attachClickEvents(el)
+    })
+  }
 
-  window.addEventListener(`${Events.LODEDANDREADY}`, init);
-  window.addEventListener(`${Events.AJAX}`, init);
-})(window);
+  window.addEventListener(`${Events.LODEDANDREADY}`, init)
+  window.addEventListener(`${Events.AJAX}`, init)
+})(window)
 
-export default DropdownHoverUI;
+export default DropdownHoverUI

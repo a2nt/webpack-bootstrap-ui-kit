@@ -1,48 +1,48 @@
-"use strict";
+'use strict'
 
-import $ from "jquery";
-import Events from "../_events";
+import $ from 'jquery'
+import Events from '../_events'
 
 const ShrinkUI = (($) => {
   // Constants
-  const W = window;
-  const D = document;
-  const NAME = "ShrinkUI";
+  const W = window
+  const D = document
+  const NAME = 'ShrinkUI'
 
-  console.log(`${NAME}: init`);
+  console.log(`${NAME}: init`)
 
   $(W).on(
     `${NAME}.init ${Events.LOADED} ${Events.SCROLL} ${Events.RESIZE}`,
     () => {
-      if ($("#Navigation > .navbar-collapse").hasClass("show")) {
-        return;
+      if ($('#Navigation > .navbar-collapse').hasClass('show')) {
+        return
       }
 
-      let h1 = $("#SiteWideMessage").height();
+      let h1 = $('#SiteWideMessage').height()
       if (!h1) {
-        h1 = 0;
+        h1 = 0
       }
-      let h2 = $("#SiteWideOffline").height();
+      let h2 = $('#SiteWideOffline').height()
       if (!h2) {
-        h2 = 0;
+        h2 = 0
       }
 
-      let h3 = $("#Header").height();
+      let h3 = $('#Header').height()
       if (!h3) {
-        h3 = 0;
+        h3 = 0
       }
 
-      const headerHeight = h1 + h2 + h3;
+      const headerHeight = h1 + h2 + h3
 
       if ($(D).scrollTop() > headerHeight) {
-        $("body").addClass("shrink");
+        $('body').addClass('shrink')
       } else {
-        $("body").removeClass("shrink");
+        $('body').removeClass('shrink')
       }
     }
-  );
+  )
 
-  return ShrinkUI;
-})($);
+  return ShrinkUI
+})($)
 
-export default ShrinkUI;
+export default ShrinkUI

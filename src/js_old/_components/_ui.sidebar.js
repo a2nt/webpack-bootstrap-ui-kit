@@ -1,84 +1,84 @@
-"use strict";
+'use strict'
 
-//import StickySidebar from 'sticky-sidebar/src/sticky-sidebar';
-import $ from "jquery";
-import Events from "../_events";
+// import StickySidebar from 'sticky-sidebar/src/sticky-sidebar';
+import $ from 'jquery'
+import Events from '../_events'
 
 const SidebarUI = (($) => {
-  const D = document;
-  const W = window;
-  const $Body = $("body");
-  const NAME = "SidebarUI";
-  const CLASSNAME = `js${NAME}`;
-  const CONTENTHOLDER = "content-holder";
-  const INNERWRAPPER = `${CLASSNAME}__inner`;
+  const D = document
+  const W = window
+  const $Body = $('body')
+  const NAME = 'SidebarUI'
+  const CLASSNAME = `js${NAME}`
+  const CONTENTHOLDER = 'content-holder'
+  const INNERWRAPPER = `${CLASSNAME}__inner`
 
   class SidebarUI {
-    static init() {
-      const ui = this;
-      ui.dispose();
+    static init () {
+      const ui = this
+      ui.dispose()
 
       if (!$(`.${CLASSNAME}`).length) {
-        return;
+        return
       }
 
-      console.log(`${NAME}: init ...`);
-      //const fontSize = parseInt($Body.css('font-size'));
-      const fontSize = 0;
-      const contentElement = $(`.${CONTENTHOLDER}`)[0];
+      console.log(`${NAME}: init ...`)
+      // const fontSize = parseInt($Body.css('font-size'));
+      const fontSize = 0
+      const contentElement = $(`.${CONTENTHOLDER}`)[0]
 
-      //$(`.${CLASSNAME}`).wrapInner(`<div class="${INNERWRAPPER}"></div>`);
-      const $el = $(`.${CLASSNAME}`);
-      const $innerWrapper = $(`.${INNERWRAPPER}`);
+      // $(`.${CLASSNAME}`).wrapInner(`<div class="${INNERWRAPPER}"></div>`);
+      const $el = $(`.${CLASSNAME}`)
+      const $innerWrapper = $(`.${INNERWRAPPER}`)
 
-      /*const sticky = new StickySidebar(`.${CLASSNAME}`, {
+      /* const sticky = new StickySidebar(`.${CLASSNAME}`, {
         topSpacing: fontSize,
         bottomSpacing: fontSize,
         containerSelector: CONTENTHOLDER,
         innerWrapperSelector: INNERWRAPPER,
-      });*/
+      }); */
 
-      $el.addClass(`${CLASSNAME}-active`);
+      $el.addClass(`${CLASSNAME}-active`)
 
       $Body.on(`${Events.SCROLL} ${Events.RESIZE}`, (e) => {
-        const contentOffset = parseInt(contentElement.offsetTop) + fontSize;
+        const contentOffset = parseInt(contentElement.offsetTop) + fontSize
         const contentOffsetHeight =
-          parseInt(contentElement.offsetHeight) - fontSize;
-        const sidebarWidth = $el[0].offsetWidth;
+          parseInt(contentElement.offsetHeight) - fontSize
+        const sidebarWidth = $el[0].offsetWidth
 
-        const scrollPos = parseInt($Body.scrollTop());
+        const scrollPos = parseInt($Body.scrollTop())
 
         // normal pos
         if (contentOffset >= scrollPos) {
-          $innerWrapper.attr("style", "");
+          $innerWrapper.attr('style', '')
         } else if (
           scrollPos >=
           contentOffset + contentOffsetHeight - $innerWrapper[0].offsetHeight
         ) {
           // bottom pos
-          $innerWrapper.attr("style", `position:absolute;bottom:${fontSize}px`);
+          $innerWrapper.attr('style', `position:absolute;bottom:${fontSize}px`)
         } else {
           // scrolled pos
           $innerWrapper.attr(
-            "style",
+            'style',
             `position:fixed;top:${fontSize}px;width:${sidebarWidth}px`
-          );
+          )
         }
-      });
+      })
     }
 
-    static dispose() {
-      console.log(`${NAME}: dispose`);
+    static dispose () {
+      console.log(`${NAME}: dispose`)
     }
   }
 
   $(W).on(`${NAME}.init ${Events.LODEDANDREADY}`, () => {
-    SidebarUI.init();
-  });
+    SidebarUI.init()
+  })
 
-  W.SidebarUI = new SidebarUI();
+  W.SidebarUI = new SidebarUI()
 
-  return SidebarUI;
-})($);
+  return SidebarUI
+})($)
 
-export default SidebarUI;
+export default SidebarUI
