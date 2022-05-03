@@ -100,9 +100,7 @@ a,
     opacity: 0.8;
 
     > .fa,
-    > .svg-inline--fa,
-    &.fa,
-    &.svg-inline--fa {
+    > .svg-inline--fa {
       transform: scale(1.5);
     }
   }
@@ -117,9 +115,7 @@ a,
   opacity: 0.8;
 
   > .fa,
-  > .svg-inline--fa,
-  &.fa,
-  &.svg-inline--fa {
+  > .svg-inline--fa {
     transform: scale(1.5);
   }
 }
