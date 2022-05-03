@@ -6,7 +6,7 @@ import {
   ApolloClient,
   HttpLink,
   ApolloLink,
-  concat,
+  // concat
 } from '@apollo/client'
 
 import { onError } from '@apollo/client/link/error'
@@ -89,7 +89,7 @@ const link = from([
 
     // Use explicit `window.fetch` so tha outgoing requests
     // are captured and deferred until the Service Worker is ready.
-    fetch: (...args) => fetch(...args),
+    fetch: (...args) => window.fetch(...args),
     credentials: 'same-origin', // 'include',
     connectToDevTools: process.env.NODE_ENV === 'development',
   }),

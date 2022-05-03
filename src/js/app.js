@@ -5,7 +5,7 @@
 // import $ from 'jquery';
 import '../scss/app.scss'
 
-import Events from './_events'
+// import Events from './_events'
 import './main'
 
 /*

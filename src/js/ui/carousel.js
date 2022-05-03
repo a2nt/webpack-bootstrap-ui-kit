@@ -52,7 +52,7 @@ const CarouselUI = ((window) => {
           const ind = document.createElement('button')
           ind.setAttribute('type', 'button')
           ind.setAttribute('aria-label', `Slide to #${i + 1}`)
-          if (i == 0) {
+          if (i === 0) {
             ind.classList.add('active')
           }
           ind.setAttribute('data-bs-target', el.getAttribute('id'))
@@ -87,14 +87,14 @@ const CarouselUI = ((window) => {
       }
 
       if (el.classList.contains('carousel-multislide')) {
-        const calculate = new ResizeObserver((entries) => {
+        const calculate = new window.ResizeObserver((entries) => {
           const entry = entries[0]
           const el = entry.target
           const rect = entry.contentRect
 
           const items = el.querySelectorAll('.carousel-item')
           const width = rect.width
-          const height = rect.height
+          // const height = rect.height
           const numToDisplay = Math.min(parseInt(el.dataset.length), numberOfItems)
           const itemWidth = width / numToDisplay
 

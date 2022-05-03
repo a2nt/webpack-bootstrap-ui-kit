@@ -55,7 +55,7 @@ const MainUI = ((window) => {
 
     // init AJAX components
     static loaded () {
-      const ui = this
+      // const ui = this
       console.log(`${NAME}: loaded`)
     }
   }

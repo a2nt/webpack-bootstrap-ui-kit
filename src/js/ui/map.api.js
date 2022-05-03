@@ -44,6 +44,8 @@ const MapAPI = ((window) => {
 
     // Public methods
     getMap () {
+      const ui = this
+
       return ui.map
     }
 
@@ -106,7 +108,7 @@ const MapAPI = ((window) => {
   const init = () => {
     console.log(`${NAME}: init`)
     document.querySelectorAll(`.${NAME}`).forEach((el, i) => {
-      const map = new MapAPI(el)
+      new MapAPI(el)
     })
   }
 

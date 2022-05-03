@@ -1,7 +1,6 @@
 // browser tab visibility state detection
 
 import Events from '../_events'
-import Consts from '../_consts'
 import Page from './models/page.jsx'
 
 import { getParents } from '../main/funcs'
@@ -35,8 +34,8 @@ const MainUILinks = ((W) => {
       const ui = this
 
       D.querySelectorAll('.graphql-page').forEach((el, i) => {
-        const el_id = el.getAttribute('href')
-        el.setAttribute(`data-${ui.name}-id`, el_id)
+        const elId = el.getAttribute('href')
+        el.setAttribute(`data-${ui.name}-id`, elId)
 
         el.addEventListener('click', ui.loadClick)
       })

@@ -3,10 +3,9 @@ import Events from '../_events'
 const LayoutUI = ((W) => {
   const NAME = '_layout'
   const D = document
-  const BODY = D.body
 
-  const init_fonts = () => {
-    console.log(`${NAME}: init_fonts`)
+  const initFonts = () => {
+    console.log(`${NAME}: initFonts`)
 
     const css = D.createElement('link')
     css.rel = 'stylesheet'
@@ -17,8 +16,8 @@ const LayoutUI = ((W) => {
     D.getElementsByTagName('head')[0].appendChild(css)
   }
 
-  const init_analytics = () => {
-    console.log(`${NAME}: init_analytics`)
+  const initAnalytics = () => {
+    console.log(`${NAME}: initAnalytics`)
     /* google analytics */
     /* (function(i, s, o, g, r, a, m) {
                   i['GoogleAnalyticsObject'] = r;
@@ -44,8 +43,8 @@ const LayoutUI = ((W) => {
   }
 
   W.addEventListener(`${Events.LOADED}`, () => {
-    init_fonts()
-    // init_analytics();
+    initFonts()
+    initAnalytics()
   })
 })(window)
 export default LayoutUI

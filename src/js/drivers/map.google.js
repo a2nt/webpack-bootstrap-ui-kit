@@ -5,6 +5,8 @@ import { MarkerClusterer } from '@googlemaps/markerclusterer'
 import Events from '../_events'
 import MarkerUI from './map.google.marker'
 
+const google = window.google
+
 const GoogleMapsDriver = ((window) => {
   class GoogleMapsDriver {
     getName () {
@@ -220,7 +222,7 @@ const GoogleMapsDriver = ((window) => {
     addGeoJson (config) {
       const ui = this
       const geojson = JSON.parse(config.geojson)
-      const firstMarker = geojson.features[0].geometry.coordinates
+      // const firstMarker = geojson.features[0].geometry.coordinates
       // Map.setCenter(firstMarker);
       const bounds = new google.maps.LatLngBounds()
 

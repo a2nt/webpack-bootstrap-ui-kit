@@ -2,7 +2,6 @@
 import axios from 'redaxios'
 
 import Events from '../_events'
-import Consts from '../_consts'
 
 export default ((W) => {
   const NAME = 'main.online'
@@ -12,13 +11,13 @@ export default ((W) => {
   let pingInterval
   const PING_META = D.querySelector('meta[name="ping"]')
 
-  let update_online_status_lock = false
+  let updateOnlineStatusLock = false
   const UPDATE_ONLINE_STATUS = (online) => {
-    if (update_online_status_lock) {
+    if (updateOnlineStatusLock) {
       return
     }
 
-    update_online_status_lock = true
+    updateOnlineStatusLock = true
     if (online) {
       if (BODY.classList.contains('is-offline')) {
         console.log(`${NAME}: back Online`)
@@ -47,32 +46,32 @@ export default ((W) => {
       W.dispatchEvent(new Event(Events.OFFLINE))
     }
 
-    update_online_status_lock = false
+    updateOnlineStatusLock = false
   }
 
   // session ping
-  let session_ping_lock = false
+  let sessionPingLock = false
   const SESSION_PING = () => {
-    if (session_ping_lock || BODY.classList.contains('is-offline')) {
+    if (sessionPingLock || BODY.classList.contains('is-offline')) {
       return
     }
 
     const PING_URL = PING_META.getAttribute('content')
 
     console.log(`${NAME}: session ping`)
-    session_ping_lock = true
+    sessionPingLock = true
 
     axios
       .post(PING_URL, {})
       .then((resp) => {
-        session_ping_lock = false
+        sessionPingLock = false
         UPDATE_ONLINE_STATUS(true)
       })
       .catch((error) => {
         console.error(error)
         console.warn(`${NAME}: SESSION_PING failed`)
 
-        session_ping_lock = false
+        sessionPingLock = false
         UPDATE_ONLINE_STATUS(false)
       })
   }

@@ -1,13 +1,11 @@
 // browser tab visibility state detection
 
 import Events from '../_events'
-import Consts from '../_consts'
 import ImageObject from './models/image'
 
 export default ((W) => {
   const NAME = 'main.lazy-images'
   const D = document
-  const BODY = D.body
 
   const loadLazyImages = () => {
     console.log(`${NAME}: Load lazy images`)

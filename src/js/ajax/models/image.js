@@ -10,9 +10,6 @@ const API_STATIC_URL = API_STATIC
 console.log(`${NAME} [static url]: ${API_STATIC_URL}`)
 
 class ImageObject {
-  constructor () {
-  }
-
   load (url, el) {
     const imageUrl = url.startsWith('http') ? url : API_STATIC_URL + url
 
@@ -28,7 +25,7 @@ class ImageObject {
           responseType: 'blob',
         })
         .then((response) => {
-          const reader = new FileReader() // https://developer.mozilla.org/en-US/docs/Web/API/FileReader/FileReader
+          const reader = new window.FileReader() // https://developer.mozilla.org/en-US/docs/Web/API/FileReader/FileReader
           reader.readAsDataURL(response.data)
           reader.onload = () => {
             const imageDataUrl = reader.result
@@ -44,6 +41,7 @@ class ImageObject {
         .catch((e) => {
           console.warn(e)
 
+          let msg = ''
           if (e.response) {
             switch (e.response.status) {
               case 404:

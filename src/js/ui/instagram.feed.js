@@ -4,14 +4,12 @@
 // so it isn't very stable implementation. You should have something for the fall-back.
 
 import Events from '../_events'
-import Consts from '../_consts'
 import InstagramFeed from '@jsanahuja/instagramfeed/src/InstagramFeed'
 
 export default ((window) => {
   const NAME = 'js-instagramfeed'
-  const BODY = document.body
 
-  const ig_media_preview = (base64data) => {
+  const igMediaPreview = (base64data) => {
     const jpegtpl =
         '/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEABsaGikdKUEmJkFCLy8vQkc/Pj4/R0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0cBHSkpNCY0PygoP0c/NT9HR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR//AABEIABQAKgMBIgACEQEDEQH/xAGiAAABBQEBAQEBAQAAAAAAAAAAAQIDBAUGBwgJCgsQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+gEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoLEQACAQIEBAMEBwUEBAABAncAAQIDEQQFITEGEkFRB2FxEyIygQgUQpGhscEJIzNS8BVictEKFiQ04SXxFxgZGiYnKCkqNTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqCg4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2dri4+Tl5ufo6ery8/T19vf4+fr/2gAMAwEAAhEDEQA/AA=='
     const t = atob(base64data)
@@ -60,7 +58,7 @@ export default ((window) => {
 
           data.edge_owner_to_timeline_media.edges.forEach((el, i) => {
             const item = el.node
-            const preview = ig_media_preview(item.media_preview)
+            const preview = igMediaPreview(item.media_preview)
 
             list.innerHTML +=
               `<div class="a col ${NAME}-item"` +

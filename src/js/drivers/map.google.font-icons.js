@@ -1,5 +1,7 @@
 'use strict'
 
+const google = window.google
+
 const Obj = {
   init: () => {
     class GoogleMapsHtmlOverlay extends google.maps.OverlayView {

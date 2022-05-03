@@ -1,17 +1,16 @@
 // touch/mouse detection
 
 import Events from '../_events'
-import Consts from '../_consts'
 
 export default ((W) => {
   const NAME = '_main.touch'
   const D = document
   const BODY = D.body
 
-  let prev_touch_event_name
-  let touch_timeout
-  const SET_TOUCH_SCREEN = (bool, event_name) => {
-    if (touch_timeout || event_name === prev_touch_event_name) {
+  let prevTouchEventName
+  let touchTimeout
+  const SET_TOUCH_SCREEN = (bool, eventName) => {
+    if (touchTimeout || eventName === prevTouchEventName) {
       return
     }
 
@@ -31,12 +30,12 @@ export default ((W) => {
       W.dispatchEvent(new Event(Events.TOUCHDISABLED))
     }
 
-    prev_touch_event_name = event_name
+    prevTouchEventName = eventName
     // prevent firing touch and mouse events together
-    if (!touch_timeout) {
-      touch_timeout = setTimeout(() => {
-        clearTimeout(touch_timeout)
-        touch_timeout = null
+    if (!touchTimeout) {
+      touchTimeout = setTimeout(() => {
+        clearTimeout(touchTimeout)
+        touchTimeout = null
       }, 500)
     }
   }

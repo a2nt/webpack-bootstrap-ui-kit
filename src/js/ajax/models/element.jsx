@@ -74,45 +74,45 @@ class Page extends Component {
   load = (link) => {
     const ui = this
     const query = gql(`
-			query Pages {
-			  readPages(URLSegment: "home", limit: 1, offset: 0) {
-			    edges {
-			      node {
-			        __typename
-			        _id
-			        ID
-			        Title
-			        ClassName
-			        CSSClass
-			        Summary
-			        Link
-			        URLSegment
-			        Elements {
-			          edges {
-			            node {
-			              __typename
-			        	 _id
-			              ID
-			              Title
-			              Render
-			            }
-			          }
-			          pageInfo {
-			            hasNextPage
-			            hasPreviousPage
-			            totalCount
-			          }
-			        }
-			      }
-			    }
-			    pageInfo {
-			      hasNextPage
-			      hasPreviousPage
-			      totalCount
-			    }
-			  }
-			}
-		`)
+query Pages {
+readPages(URLSegment: "home", limit: 1, offset: 0) {
+edges {
+node {
+__typename
+_id
+ID
+Title
+ClassName
+CSSClass
+Summary
+Link
+URLSegment
+Elements {
+edges {
+node {
+__typename
+_id
+ID
+Title
+Render
+}
+}
+pageInfo {
+hasNextPage
+hasPreviousPage
+totalCount
+}
+}
+}
+}
+pageInfo {
+hasNextPage
+hasPreviousPage
+totalCount
+}
+}
+}
+`)
 
     ui.reset()
     ui.setState({

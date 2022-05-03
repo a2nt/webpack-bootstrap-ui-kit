@@ -1,10 +1,9 @@
 // browser tab visibility state detection
 
-import Events from '../_events'
+// import Events from '../_events'
 
 const NAME = '_main.loading-spinner'
 const D = document
-const BODY = D.body
 const SPINNER = D.getElementById('PageLoading')
 
 class SpinnerUI {

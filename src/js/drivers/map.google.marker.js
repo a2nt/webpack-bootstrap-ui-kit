@@ -1,4 +1,5 @@
 'use strict'
+const google = window.google
 
 const Obj = {
   init: () => {
