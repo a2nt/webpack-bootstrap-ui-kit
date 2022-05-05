@@ -9,10 +9,12 @@ import Events from '../_events'
  */
 const DropdownHoverUI = ((window) => {
   const NAME = 'js-dropdown'
+  const ACTIVECLS = ['active', 'active-dropdown']
 
   const HideAll = () => {
     // hide others
     document.querySelectorAll('.dropdown-menu').forEach((el, i) => {
+      el.closest('.dropdown').classList.remove(...ACTIVECLS)
       el.classList.remove('show')
     })
   }
@@ -24,12 +26,18 @@ const DropdownHoverUI = ((window) => {
   }
 
   const Show = (e) => {
+    e.stopPropagation()
     const el = e.currentTarget
+
+    el.classList.add(...ACTIVECLS)
     el.querySelector('.dropdown-menu').classList.add('show')
   }
 
   const Hide = (e) => {
+    e.stopPropagation()
     const el = e.currentTarget
+
+    el.classList.remove(...ACTIVECLS)
     el.querySelector('.dropdown-menu').classList.remove('show')
   }
 
@@ -41,7 +49,7 @@ const DropdownHoverUI = ((window) => {
 
     const attachHoverEvents = (el) => {
       el.addEventListener('mouseover', Show, false)
-      el.addEventListener('mouseout', Hide, false)
+      el.addEventListener('mouseleave', Hide, false)
 
       el.classList.add(`${NAME}-active`)
     }
@@ -60,12 +68,12 @@ const DropdownHoverUI = ((window) => {
 
     // Hide all for outside clicks
     /* document.addEventListener('click', function (event) {
-      const isClickInside = clickableEls.contains(event.target);
+      const isClickInside = clickableEls.contains(event.target)
 
       if (!isClickInside) {
-        HideAll();
+        HideAll()
       }
-    }); */
+    }) */
 
     document.addEventListener('click', (event) => {
       let breakPath = false
