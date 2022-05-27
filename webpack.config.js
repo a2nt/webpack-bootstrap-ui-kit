@@ -20,8 +20,10 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 //const ImageSpritePlugin = require('@a2nt/image-sprite-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const WebpackBuildNotifications = require('webpack-build-notifications');
 
 const UIInfo = require('./package.json');
+const UINAME = JSON.stringify(UIInfo.name);
 const UIVERSION = JSON.stringify(UIInfo.version);
 const UIMetaInfo = require('./node_modules/@a2nt/meta-lightbox-js/package.json');
 
@@ -45,7 +47,7 @@ let plugins = [
       }),
     new webpack.DefinePlugin({
             NODE_ENV: JSON.stringify(NODE_ENV),
-            UINAME: JSON.stringify(UIInfo.name),
+            UINAME: UINAME,
             UIVERSION: UIVERSION,
             UIAUTHOR: JSON.stringify(UIInfo.author),
             UIMetaNAME: JSON.stringify(UIMetaInfo.name),
@@ -62,6 +64,11 @@ let plugins = [
       experimentalUseImportModule: false,
       filename: 'css/[name].css',
       //allChunks: true,
+    }),
+    new WebpackBuildNotifications({
+      title: UINAME + ' ' + UIVERSION,
+      logo: path.join(__dirname, conf.APPDIR, conf.SRC, 'favicon.png'),
+      suppressWarning: true,
     }),
 ];
 
