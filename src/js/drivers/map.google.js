@@ -5,7 +5,6 @@ import { MarkerClusterer } from '@googlemaps/markerclusterer'
 import Events from '../_events'
 import MarkerUI from './map.google.marker'
 
-const google = window.google
 
 const GoogleMapsDriver = ((window) => {
   class GoogleMapsDriver {
@@ -59,7 +58,7 @@ const GoogleMapsDriver = ((window) => {
       // init fontawesome icons
       ui.MarkerUI = MarkerUI.init()
 
-      ui.map = new google.maps.Map(mapDiv, {
+      ui.map = new window.google.maps.Map(mapDiv, {
         zoom,
         center,
         fullscreenControl: true,
@@ -82,7 +81,7 @@ const GoogleMapsDriver = ((window) => {
       })
       ui.popup.setMap(ui.map)
 
-      ui.geocoder = new google.maps.Geocoder()
+      ui.geocoder = new window.google.maps.Geocoder()
 
       ui.cluster = new MarkerClusterer(ui.map, null, {
         styles: [
@@ -121,6 +120,7 @@ const GoogleMapsDriver = ((window) => {
       ui.markers.push(marker)
 
       ui.cluster.addMarker(marker)
+      marker.setMap(ui.map);
 
       return marker
     }
@@ -224,7 +224,7 @@ const GoogleMapsDriver = ((window) => {
       const geojson = JSON.parse(config.geojson)
       // const firstMarker = geojson.features[0].geometry.coordinates
       // Map.setCenter(firstMarker);
-      const bounds = new google.maps.LatLngBounds()
+      const bounds = new window.google.maps.LatLngBounds()
 
       // add markers to map
       geojson.features.forEach((marker) => {

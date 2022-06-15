@@ -1,10 +1,8 @@
 'use strict'
 
-const google = window.google
-
 const Obj = {
   init: () => {
-    class GoogleMapsHtmlOverlay extends google.maps.OverlayView {
+    class GoogleMapsHtmlOverlay extends window.google.maps.OverlayView {
       constructor (options) {
         super()
         const ui = this
@@ -100,14 +98,14 @@ const Obj = {
         ui.getPanes().overlayMouseTarget.appendChild(ui.div)
 
         // Add listeners to the element.
-        google.maps.event.addDomListener(ui.div, 'click', (event) => {
-          google.maps.event.trigger(ui, 'click')
+        window.google.maps.event.addDomListener(ui.div, 'click', (event) => {
+          window.google.maps.event.trigger(ui, 'click')
           if (ui.isFunction(ui.onClick)) ui.onClick()
           event.stopPropagation()
         })
 
-        google.maps.event.addDomListener(ui.div, 'mouseover', (event) => {
-          google.maps.event.trigger(ui, 'mouseover')
+        window.google.maps.event.addDomListener(ui.div, 'mouseover', (event) => {
+          window.google.maps.event.trigger(ui, 'mouseover')
           if (ui.isFunction(ui.onMouseOver)) ui.onMouseOver()
           event.stopPropagation()
         })
@@ -119,7 +117,7 @@ const Obj = {
         // Calculate position of div
         const positionInPixels = ui
           .getProjection()
-          .fromLatLngToDivPixel(new google.maps.LatLng(ui.position))
+          .fromLatLngToDivPixel(new window.google.maps.LatLng(ui.position))
 
         // Align HTML overlay relative to original position
         const divOffset = {
