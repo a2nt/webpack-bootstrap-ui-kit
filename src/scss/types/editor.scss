@@ -123,6 +123,8 @@ table {
     @extend .table-bordered;
 
     &.table-none {
+        margin-right: -.5rem;
+        margin-left: -.5rem;
         border: 0;
 
         @extend .table-borderless;
@@ -159,13 +161,13 @@ ul {
 
         &:before {
             position: static;
+            display: inline-block;
             width: .5em;
             height: .5em;
+            margin-right: 1em;
             content: "";
             border-radius: .5em;
             background: currentColor;
-            display: inline-block;
-            margin-right: 1em;
         }
     }
 }
