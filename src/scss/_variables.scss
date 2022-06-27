@@ -130,3 +130,5 @@ $carousel-controls-zindex: 11 !default;
 $carousel-controls-shadow: 1px 1px $black !default;
 $carousel-controls-hover-bg: transparentize($black, 0.4) !default;
 $carousel-slide-img-loading-max-height: 70vh !default;
+
+$breadcrumb-active-color:  $sidebar-nav-link-hover-color;
