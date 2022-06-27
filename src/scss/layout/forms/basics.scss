@@ -9,6 +9,11 @@
     & + .field__content {
       padding-left: $form-spacer-x;
     }
+
+    &-right {
+      flex: 1 1 100%;
+      padding: .5em;
+    }
   }
 
   &__content {
