@@ -131,3 +131,8 @@ body.cms {
         }
     }
 }
+
+// fix grid bulk editor
+.cms table.grid-field__table tbody .col-bulkSelect {
+    position: relative;
+}

@@ -8,8 +8,9 @@ const CarouselUI = ((window) => {
     console.log(`${NAME}: init`)
 
     document.querySelectorAll(`.${NAME}`).forEach((el, i) => {
+      const interval = el.dataset.bsInterval ? parseInt(el.dataset.bsInterval) : false;
       const carousel = new Carousel(el, {
-        interval: el.dataset.bsInterval ? parseInt(el.dataset.bsInterval) : false,
+        interval,
       })
       el.ui = carousel
       const items = el.querySelectorAll('.carousel-item')
@@ -87,12 +88,16 @@ const CarouselUI = ((window) => {
       }
 
       if (el.classList.contains('carousel-multislide')) {
+        const inner = el.querySelector('.carousel-inner')
+        const items = el.querySelectorAll('.carousel-item')
+
+        // fix animation glitch
+        inner.style.left = '0px'
+
         const calculate = new window.ResizeObserver((entries) => {
           const entry = entries[0]
           const el = entry.target
           const rect = entry.contentRect
-
-          const items = el.querySelectorAll('.carousel-item')
           const width = rect.width
           // const height = rect.height
           const numToDisplay = Math.min(parseInt(el.dataset.length), numberOfItems)
@@ -115,7 +120,26 @@ const CarouselUI = ((window) => {
         calculate.observe(el)
 
         el.addEventListener('slide.bs.carousel', (e) => {
-          const inner = el.querySelector('.carousel-inner')
+          // infinite scroll
+          const numToDisplay = Math.min(parseInt(el.dataset.length), numberOfItems)
+          if(numberOfItems - numToDisplay < e.to) {
+            // disable transition
+            //inner.style.transition = 'none'
+
+            inner.querySelectorAll('.carousel-item').forEach((el) => {
+              el.classList.remove('active')
+            })
+
+            inner.querySelector('.carousel-item:first-child').classList.add('active')
+            inner.style.left = '0px'
+            e.preventDefault();
+
+
+            // enable transition
+            //inner.style.transition = ''
+            return;
+          }
+          //
 
           switch (e.direction) {
             case 'left':
@@ -134,6 +158,11 @@ const CarouselUI = ((window) => {
         }
       }
 
+      if(interval){
+        el.ui.cycle();
+      }
+
+      el.dataset.ui = el.ui
       el.classList.add(`${NAME}-active`)
     })
   }

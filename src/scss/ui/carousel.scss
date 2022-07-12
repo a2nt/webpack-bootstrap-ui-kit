@@ -100,14 +100,37 @@ $carousel-slide-img-loading-max-height: 25vh !default;
         display: block;
         width: 50%;
         margin: 0;
+
+        @media (max-width: (map-get($grid-breakpoints, "md") - 1)) {
+            width: 100%!important;
+        }
+    }
+
+    .carousel-item-next:not(.carousel-item-start),
+    .active.carousel-item-end {
+      transform: none;
+    }
+
+    .carousel-item-prev:not(.carousel-item-end),
+    .active.carousel-item-start {
+      transform: none;
     }
 
     .carousel-inner {
         display: flex;
+        flex-direction: column;
 
         align-items: center;
         justify-content: center;
+        transition: all 1s ease;
+        @media (min-width: map-get($grid-breakpoints, "md")) {
+            flex-direction: row;
+        }
     }
+}
+
+.carousel-inner {
+    transition: all .4s ease;
 }
 
 .js-carousel-no-slide {
