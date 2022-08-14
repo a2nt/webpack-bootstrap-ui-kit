@@ -130,22 +130,22 @@ const CarouselUI = ((window) => {
 
         calcResize.observe(el)
         const resetPosition = () => {
-             // disable transition
-            inner.style.transition = 'none'
-            inner.classList.add('no-transition')
-            inner.style.left = '0px'
+          // disable transition
+          inner.style.transition = 'none'
+          inner.classList.add('no-transition')
+          inner.style.left = '0px'
 
-            // enable transition
-            setTimeout(() => {
-              inner.style.transition = ''
-              inner.classList.remove('no-transition')
+          // enable transition
+          setTimeout(() => {
+            inner.style.transition = ''
+            inner.classList.remove('no-transition')
 
-              inner.querySelectorAll('.carousel-item').forEach((el) => {
-                el.classList.remove('active')
-              })
+            inner.querySelectorAll('.carousel-item').forEach((el) => {
+              el.classList.remove('active')
+            })
 
-              inner.querySelector('.carousel-item:first-child').classList.add('active')
-            }, 1000);
+            inner.querySelector('.carousel-item:first-child').classList.add('active')
+          }, 1000);
         };
 
         el.addEventListener('slide.bs.carousel', (e) => {
