@@ -13,8 +13,8 @@ const CarouselUI = ((window) => {
         interval,
       })
       el.ui = carousel
-      const items = el.querySelectorAll('.carousel-item')
-      const numberOfItems = parseInt(items.length)
+      let items = el.querySelectorAll('.carousel-item')
+      let numberOfItems = parseInt(items.length)
 
       // create next/prev arrows
       if (el.dataset.bsArrows) {
@@ -89,12 +89,21 @@ const CarouselUI = ((window) => {
 
       if (el.classList.contains('carousel-multislide')) {
         const inner = el.querySelector('.carousel-inner')
-        const items = el.querySelectorAll('.carousel-item')
+
+        // add next elements by cloning originals
+        items.forEach((el, i) => {
+          const newItem = el.cloneNode(true);
+          newItem.classList.remove('active');
+          inner.appendChild(newItem);
+        });
+
+        items = el.querySelectorAll('.carousel-item')
+        numberOfItems = parseInt(items.length)
 
         // fix animation glitch
         inner.style.left = '0px'
 
-        const calculate = new window.ResizeObserver((entries) => {
+        const calculate = (entries) => {
           const entry = entries[0]
           const el = entry.target
           const rect = entry.contentRect
@@ -106,7 +115,7 @@ const CarouselUI = ((window) => {
           el.dataset.itemWidth = itemWidth
           el.dataset.numToDisplay = numToDisplay
 
-          el.querySelector('.carousel-inner').style.width = `${numberOfItems * itemWidth}px`
+          inner.style.width = `${numberOfItems * itemWidth}px`
           items.forEach((el, i) => {
             el.style.width = `${itemWidth}px`
           })
@@ -115,28 +124,38 @@ const CarouselUI = ((window) => {
             el.classList.add('js-carousel-no-slide')
             carousel.pause()
           }
-        })
+        };
 
-        calculate.observe(el)
+        const calcResize = new window.ResizeObserver(calculate)
+
+        calcResize.observe(el)
+        const resetPosition = () => {
+             // disable transition
+            inner.style.transition = 'none'
+            inner.classList.add('no-transition')
+            inner.style.left = '0px'
+
+            // enable transition
+            setTimeout(() => {
+              inner.style.transition = ''
+              inner.classList.remove('no-transition')
+
+              inner.querySelectorAll('.carousel-item').forEach((el) => {
+                el.classList.remove('active')
+              })
+
+              inner.querySelector('.carousel-item:first-child').classList.add('active')
+            }, 1000);
+        };
 
         el.addEventListener('slide.bs.carousel', (e) => {
           // infinite scroll
           const numToDisplay = Math.min(parseInt(el.dataset.length), numberOfItems)
-          if(numberOfItems - numToDisplay < e.to) {
-            // disable transition
-            //inner.style.transition = 'none'
+          console.log(`.${NAME}: ${e.to} ${numberOfItems / 2}`);
 
-            inner.querySelectorAll('.carousel-item').forEach((el) => {
-              el.classList.remove('active')
-            })
-
-            inner.querySelector('.carousel-item:first-child').classList.add('active')
-            inner.style.left = '0px'
+          if(numberOfItems - numToDisplay < e.to){
             e.preventDefault();
-
-
-            // enable transition
-            //inner.style.transition = ''
+            resetPosition();
             return;
           }
           //
@@ -148,6 +167,10 @@ const CarouselUI = ((window) => {
             case 'right':
               inner.style.left = `${-(e.to * el.dataset.itemWidth)}px`
               break
+          }
+
+          if(numberOfItems / 2 === e.to){
+            resetPosition();
           }
         })
 

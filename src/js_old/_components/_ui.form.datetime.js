@@ -38,6 +38,7 @@ const DatetimeUI = (($) => {
         const defaultDate =
           $el.attr('name').toLowerCase().indexOf('end') !== -1 ? '+4d' : '+3d'
 
+        $el.attr('type', 'text')
         $el.attr('readonly', 'true')
         $el.datepicker(
           $.extend(

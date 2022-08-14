@@ -46,14 +46,15 @@ const FormValidate = (($) => {
         ui.validate(true, () => {
           e.preventDefault()
 
+           const $el = $element.find('.error').first()
           // switch to step
           if (ui._stepped_form) {
-            const $el = $element.find('.error').first()
-
             if ($el.length) {
               ui._stepped_form.step($el.parents('.step'))
             }
           }
+          // scroll to error
+          $el[0].scrollIntoView()
 
           $element.trigger(Events.FORM_VALIDATION_FAILED)
         })

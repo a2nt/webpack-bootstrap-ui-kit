@@ -2,7 +2,7 @@
 
 import $ from 'jquery'
 
-import select2 from 'select2/dist/js/select2.js'
+import 'select2/dist/js/select2.js'
 import Events from '../_events'
 
 const FormSelect2 = (($) => {
