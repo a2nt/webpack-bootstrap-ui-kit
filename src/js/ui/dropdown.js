@@ -22,22 +22,22 @@ const DropdownHoverUI = ((window) => {
   const Toggle = (el) => {
     HideAll()
 
-    el.querySelector('.dropdown-menu').classList.toggle('show')
+    if (el.querySelector('.dropdown-menu').classList.contains('show')) {
+      Hide(el)
+    } else {
+      Show(el)
+    }
   }
 
-  const Show = (e) => {
-    e.stopPropagation()
-    const el = e.currentTarget
-
+  const Show = (el) => {
     el.classList.add(...ACTIVECLS)
+    el.closest('.dropdown').classList.add(...ACTIVECLS)
     el.querySelector('.dropdown-menu').classList.add('show')
   }
 
-  const Hide = (e) => {
-    e.stopPropagation()
-    const el = e.currentTarget
-
+  const Hide = (el) => {
     el.classList.remove(...ACTIVECLS)
+    el.closest('.dropdown').classList.remove(...ACTIVECLS)
     el.querySelector('.dropdown-menu').classList.remove('show')
   }
 
@@ -48,8 +48,14 @@ const DropdownHoverUI = ((window) => {
     const hoverableEls = document.querySelectorAll('[data-bs-toggle="hover"]')
 
     const attachHoverEvents = (el) => {
-      el.addEventListener('mouseover', Show, false)
-      el.addEventListener('mouseleave', Hide, false)
+      el.addEventListener('mouseover', (e) => {
+        e.stopPropagation()
+        Show(e.currentTarget)
+      }, false)
+      el.addEventListener('mouseleave', (e) => {
+        e.stopPropagation()
+        Hide(e.currentTarget)
+      }, false)
 
       el.classList.add(`${NAME}-active`)
     }
