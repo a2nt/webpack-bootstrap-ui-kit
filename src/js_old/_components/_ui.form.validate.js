@@ -75,10 +75,10 @@ const FormValidate = (($) => {
 
     validate (scrollTo = true, badCallback = false) {
       console.log(`${NAME}: checking the form ...`)
-
       const ui = this
       let valid = true
 
+      ui.$element.data('locked', false)
       ui._fields.filter(':visible').each((i, el) => {
         const $el = $(el)
         const fieldUI = $el.data('jsFormValidateField')
@@ -91,6 +91,9 @@ const FormValidate = (($) => {
           if (badCallback) {
             badCallback()
           }
+
+          // scroll to error
+          ui.$element.find('.form__field.error')[0].scrollIntoView();
 
           valid = false
           return false

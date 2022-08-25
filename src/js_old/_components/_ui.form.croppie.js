@@ -8,6 +8,17 @@ import SpinnerUI from './_ui.spinner'
 import 'croppie/croppie.js'
 import 'exif-js/exif.js'
 
+window.MainUI.alert = (msg, status) => {
+    let el = document.querySelector('#MainUIAlert')
+    if(!el){
+        el = document.createElement('div');
+        el.setAttribute('id', 'MainUIAlert')
+        document.querySelector('.wrapper').appendChild(el)
+    }
+
+    el.innerHTML = `<div class="alert alert-${status}">${msg}</div>`
+};
+
 const CroppieUI = (($) => {
   const NAME = 'jsCroppieUI'
   const DATA_KEY = NAME
@@ -89,6 +100,7 @@ const CroppieUI = (($) => {
       const ui = this
       const $el = ui.$el
       const $form = $el.closest('form')
+      $form.data('locked', false)
 
       if (input.files && input.files[0]) {
         const reader = new FileReader()
@@ -169,8 +181,8 @@ const CroppieUI = (($) => {
                   if (IS_JSON) {
                     if (typeof json.status !== 'undefined') {
                       if (json.status === 'success') {
-                        if (MainUI) {
-                          MainUI.alert(json.message, json.status)
+                        if (window.MainUI) {
+                          window.MainUI.alert(json.message, json.status)
                         } else {
                           window.location.reload()
                         }
@@ -189,8 +201,8 @@ const CroppieUI = (($) => {
                           )
                         }
                       } else if (json.status === 'error') {
-                        if (MainUI) {
-                          MainUI.alert(json.message, json.status)
+                        if (window.MainUI) {
+                          window.MainUI.alert(json.message, json.status)
                         } else {
                           window.location.reload()
                         }
