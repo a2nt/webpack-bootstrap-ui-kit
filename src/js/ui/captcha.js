@@ -48,7 +48,7 @@ const CaptchaUI = ((window) => {
 
       const script = document.createElement('script');
       script.id = 'captchaAPI';
-      script.src = 'https://www.google.com/recaptcha/api.js?render=explicit&hl=' + document.querySelector('html').getAttribute('lang').substr(0,2)
+      script.src = `https://www.google.com/recaptcha/api.js?render=explicit&hl=${  document.querySelector('html').getAttribute('lang').substr(0,2)}`
       script.async = true
       script.onload = function() {
         console.log(`${NAME}: Captcha API is loaded.`)
