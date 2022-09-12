@@ -27,108 +27,78 @@ $container-max-widths: (
   xxxl: 1536px,
   xxxxl: 1836px,
 ) !default;
-
 $font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
 $font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
-
 $font-family-base: "Roboto", $font-family-sans-serif !default;
-
+$html-font-size: 14px!default;
 $spacer: 1rem !default;
 $headings-margin-bottom: $spacer !default;
-
 $enable-rounded: false !default;
 $enable-shadows: true !default;
-
 $enable-gradients: false !default;
-
 $enable-transitions: true !default;
 $enable-reduced-motion: true !default;
-
 $enable-caret: false !default;
-
 $enable-grid-classes: true !default;
 $enable-button-pointers: true !default;
 $enable-rfs: true !default;
-
 $enable-validation-icons: true !default;
 $enable-negative-margins: true !default;
-
 $enable-deprecation-messages: true !default;
-
 $enable-important-utilities: true !default;
 $breadcrumb-divider: quote("/") !default;
 
 // ui framework settings
 $body-gutter-x: $spacer !default;
 $body-gutter-y: $spacer !default;
-
 $body-double-gutter-x: $body-gutter-x * 2 !default;
 $body-double-gutter-y: $body-gutter-y * 2 !default;
-
-$body-gutter-reduced-x: $body-gutter-x * 0.5 !default;
-$body-gutter-reduced-y: $body-gutter-y * 0.5 !default;
-
-$body-gutter-reduced-d-x: $body-gutter-x * 0.25 !default;
-$body-gutter-reduced-d-y: $body-gutter-y * 0.25 !default;
-
+$body-gutter-reduced-x: $body-gutter-x * .5 !default;
+$body-gutter-reduced-y: $body-gutter-y * .5 !default;
+$body-gutter-reduced-d-x: $body-gutter-x * .25 !default;
+$body-gutter-reduced-d-y: $body-gutter-y * .25 !default;
 $form-spacer-x: $spacer !default;
 $form-spacer-y: $spacer !default;
-
 $element-spacer-x: map.get($spacers, 3) !default;
 $element-spacer-y: map.get($spacers, 3) !default;
-
 $element-reduced-spacer-x: map.get($spacers, 2) !default;
 $element-reduced-spacer-y: map.get($spacers, 2) !default;
-
 $element-reduced-d-spacer-x: map.get($spacers, 1) !default;
 $element-reduced-d-spacer-y: map.get($spacers, 1) !default;
-
 $body-bg: #fff !default;
 $body-color: #212529 !default;
 
 // site specific variables
 $extra-large-screen: 2000px !default;
-
 $full-body-min-width: map-get($grid-breakpoints, "lg") !default;
 $typography-breakpoint: map-get($grid-breakpoints, "sm") - 1 !default;
-
 $header-bg: var(--bs-dark) !default;
 $header-color: var(--bs-light) !default;
 $header-link: var(--bs-white) !default;
-
 $main-nav-link-color: var(--bs-white) !default;
 $main-nav-link-bg: none !default;
-
 $main-nav-toggler-size: 2rem !default;
-
 $main-nav-link-hover-bg: none !default;
 $main-nav-link-hover-color: var(--bs-cyan) !default;
-
 $main-nav-dropdown-bg: $header-bg !default;
 $main-nav-dropdown-color: $header-link !default;
 $main-nav-dropdown-hover-bg: var(--bs-black) !default;
 $main-nav-dropdown-hover-color: $main-nav-link-hover-color !default;
-
 $sidebar-nav-link-hover-color: var(--bs-indigo) !default;
-
 $footer-bg: $header-bg !default;
 $footer-color: $header-color !default;
 $footer-link: $header-link !default;
-
 $footer-footer-bg: $main-nav-dropdown-hover-bg !default;
-
 $sliderelement-carousel-slide-max-y: 70vh !default;
 $sliderelement-carousel-slide-bg: $header-bg !default;
 $sliderelement-carousel-slide-ratio-x: 16 !default;
 $sliderelement-carousel-slide-ratio-y: 9 !default;
-
 $carousel-title-color: $white !default;
 $carousel-slide-min-height: 4rem !default;
 $carousel-text-shadow: 1px 1px $black !default;
 $carousel-controls-font-size: 3rem;
 $carousel-controls-zindex: 11 !default;
 $carousel-controls-shadow: 1px 1px $black !default;
-$carousel-controls-hover-bg: transparentize($black, 0.4) !default;
+$carousel-controls-hover-bg: transparentize($black, .4) !default;
 $carousel-slide-img-loading-max-height: 70vh !default;
-
-$breadcrumb-active-color:  $sidebar-nav-link-hover-color;
+$breadcrumb-active-color: $sidebar-nav-link-hover-color;

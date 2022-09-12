@@ -187,6 +187,7 @@ const CarouselUI = ((window) => {
 
       el.dataset.ui = el.ui
       el.classList.add(`${NAME}-active`)
+      el.dispatchEvent(new Event(`${NAME}-ready`))
     })
   }
 

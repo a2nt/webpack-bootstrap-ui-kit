@@ -2,226 +2,246 @@
 
 @import "~bootstrap/scss/mixins";
 
-@mixin hover-disabled() {
-  &:not(.disabled) {
-    &.active,
-    &:active,
-    &:hover,
-    &:focus {
-      @content;
-    }
+/// Remove the unit of a length
+/// @param {Number} $number - Number to remove unit from
+/// @return {Number} - Unitless number
+@function strip-unit($number) {
+  @if type-of($number) == 'number' and not unitless($number) {
+    @return $number / ($number * 0 + 1);
   }
+
+  @return $number;
+}
+
+@function rem($pxValue) {
+    @return #{strip-unit($pxValue) / strip-unit($html-font-size)}rem;
+}
+
+/*.component {
+    font-size: rem(14px); // or rem(14)
+}*/
+
+@mixin hover-disabled() {
+    &:not(.disabled) {
+        &.active,
+        &:active,
+        &:hover,
+        &:focus {
+            @content;
+        }
+    }
 }
 
 @mixin pseudo($display: block, $pos: absolute, $content: "") {
-  content: $content;
-  display: $display;
-  position: $pos;
+    position: $pos;
+    display: $display;
+    content: $content;
 }
 
 @mixin responsive-ratio($x, $y, $pseudo: false) {
-  $padding: unquote(math.div($y, $x) * 100 + "%");
+    $padding: unquote(math.div($y, $x) * 100 + "%");
 
-  @if $pseudo {
-    &:before {
-      @include pseudo($pos: relative);
-      padding-top: $padding;
-      width: 100%;
+    @if $pseudo {
+        &:before {
+            width: 100%;
+            padding-top: $padding;
+
+            @include pseudo($pos: relative);
+        }
+    } @else {
+        padding-top: $padding;
     }
-  } @else {
-    padding-top: $padding;
-  }
 }
 
 @mixin input-placeholder {
-  &.placeholder {
-    @content;
-  }
+    &.placeholder {
+        @content;
+    }
 
-  &:-moz-placeholder {
-    @content;
-  }
+    &:-moz-placeholder {
+        @content;
+    }
 
-  &::-moz-placeholder {
-    @content;
-  }
+    &::-moz-placeholder {
+        @content;
+    }
 
-  &:-ms-input-placeholder {
-    @content;
-  }
+    &:-ms-input-placeholder {
+        @content;
+    }
 
-  &::-webkit-input-placeholder {
-    @content;
-  }
+    &::-webkit-input-placeholder {
+        @content;
+    }
 }
 
 @mixin truncate($truncation-boundary) {
-  max-width: $truncation-boundary;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+    overflow: hidden;
+    max-width: $truncation-boundary;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 @mixin fix-bold() {
-  display: inline-flex;
-  flex-direction: column;
+    display: inline-flex;
+    flex-direction: column;
 
-  &:before {
-    content: attr(data-text);
-    content: attr(data-text) / "";
-    font-weight: bold;
-    height: 0;
-    overflow: hidden;
-    pointer-events: none;
-    user-select: none;
-    visibility: hidden;
-  }
+    &:before {
+        font-weight: bold;
+        visibility: hidden;
+        overflow: hidden;
+        height: 0;
+        content: attr(data-text);
+        content: attr(data-text) / "";
+        user-select: none;
+        pointer-events: none;
+    }
 }
 
 @mixin dropdowns-dark() {
-  .navbar-dark {
-    .nav-link {
-      @include hover-focus {
-        background: $navbar-dark-hover-background;
-      }
+    .navbar-dark {
+        .nav-link {
+            @include hover-focus {
+                background: $navbar-dark-hover-background;
+            }
+        }
+
+        .active > .nav-link,
+        .nav-link.active {
+            background: $navbar-dark-active-background;
+        }
+
+        .nav-link.show,
+        .navbar-nav .show > .nav-link {
+            color: $navbar-dark-show-color;
+            background: $navbar-dark-show-background;
+        }
     }
 
-    .active > .nav-link,
-    .nav-link.active {
-      background: $navbar-dark-active-background;
+    .dropdown-menu.bg-dark {
+        border-color: $dark;
+
+        .nav-link {
+            color: $navbar-dark-color;
+
+            @include hover-focus {
+                color: $navbar-dark-hover-color;
+            }
+
+            &.disabled {
+                cursor: default;
+                color: $navbar-dark-disabled-color;
+            }
+        }
+
+        .show > .nav-link,
+        .active > .nav-link,
+        .nav-link.show,
+        .nav-link.active {
+            color: $navbar-dark-active-color;
+        }
+
+        .dropdown-item {
+            @include hover-focus {
+                color: $navbar-dark-hover-color;
+                background: $navbar-dark-hover-background;
+            }
+
+            &.active,
+            &:active {
+                background: $navbar-dark-active-background;
+            }
+
+            .nav-link {
+                background: none;
+            }
+        }
     }
-
-    .nav-link.show,
-    .navbar-nav .show > .nav-link {
-      background: $navbar-dark-show-background;
-      color: $navbar-dark-show-color;
-    }
-  }
-
-  .dropdown-menu.bg-dark {
-    border-color: $dark;
-
-    .nav-link {
-      color: $navbar-dark-color;
-
-      @include hover-focus {
-        color: $navbar-dark-hover-color;
-      }
-
-      &.disabled {
-        color: $navbar-dark-disabled-color;
-        cursor: default;
-      }
-    }
-
-    .show > .nav-link,
-    .active > .nav-link,
-    .nav-link.show,
-    .nav-link.active {
-      color: $navbar-dark-active-color;
-    }
-
-    .dropdown-item {
-      @include hover-focus {
-        background: $navbar-dark-hover-background;
-        color: $navbar-dark-hover-color;
-      }
-
-      &.active,
-      &:active {
-        background: $navbar-dark-active-background;
-      }
-
-      .nav-link {
-        background: none;
-      }
-    }
-  }
 }
 
 @mixin dropdown-hovers() {
-  .dropdown.show {
-    .dropdown {
-      &:hover,
-      &.active,
-      &:focus {
-        > .dropdown-menu {
-          display: block;
+    .dropdown.show {
+        .dropdown {
+            &:hover,
+            &.active,
+            &:focus {
+                 > .dropdown-menu {
+                    display: block;
+                }
+            }
         }
-      }
-    }
-  }
-
-  @media only screen and (min-width: map-get($grid-breakpoints, "md")) {
-    .dropdown-hover ul li {
-      position: relative;
     }
 
-    .dropdown-hover ul li {
-      &:hover,
-      &.active,
-      &:focus {
-        > .dropdown-toggle::after {
-          transform: rotate(-90deg);
+    @media only screen and (min-width: map-get($grid-breakpoints, "md")) {
+        .dropdown-hover ul li {
+            position: relative;
         }
 
-        > ul {
-          display: block;
+        .dropdown-hover ul li {
+            &:hover,
+            &.active,
+            &:focus {
+                 > .dropdown-toggle::after {
+                    transform: rotate(-90deg);
+                }
+
+                 > ul {
+                    display: block;
+                }
+            }
         }
-      }
-    }
 
-    .dropdown-hover ul ul {
-      display: none;
-      left: 0;
-      min-width: 250px;
-      position: absolute;
-      top: 100%;
-    }
-
-    .dropdown-hover ul ul li {
-      position: relative;
-    }
-
-    .dropdown-hover ul ul li {
-      &:hover,
-      &.active,
-      &:focus {
-        > ul {
-          display: block;
+        .dropdown-hover ul ul {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            display: none;
+            min-width: 250px;
         }
-      }
-    }
 
-    .dropdown-hover ul ul ul {
-      display: none;
-      left: 100%;
-      min-width: 250px;
-      position: absolute;
-      top: 0;
-    }
-
-    .dropdown-hover ul ul ul li {
-      position: relative;
-    }
-
-    .dropdown-hover ul ul ul li {
-      &:hover,
-      &.active,
-      &:focus {
-        ul {
-          display: block;
+        .dropdown-hover ul ul li {
+            position: relative;
         }
-      }
-    }
 
-    .dropdown-hover ul ul ul ul {
-      display: none;
-      left: -100%;
-      min-width: 250px;
-      position: absolute;
-      top: 0;
-      z-index: 1;
+        .dropdown-hover ul ul li {
+            &:hover,
+            &.active,
+            &:focus {
+                 > ul {
+                    display: block;
+                }
+            }
+        }
+
+        .dropdown-hover ul ul ul {
+            position: absolute;
+            top: 0;
+            left: 100%;
+            display: none;
+            min-width: 250px;
+        }
+
+        .dropdown-hover ul ul ul li {
+            position: relative;
+        }
+
+        .dropdown-hover ul ul ul li {
+            &:hover,
+            &.active,
+            &:focus {
+                ul {
+                    display: block;
+                }
+            }
+        }
+
+        .dropdown-hover ul ul ul ul {
+            position: absolute;
+            z-index: 1;
+            top: 0;
+            left: -100%;
+            display: none;
+            min-width: 250px;
+        }
     }
-  }
 }
