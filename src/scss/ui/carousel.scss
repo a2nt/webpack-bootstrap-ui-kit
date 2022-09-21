@@ -118,14 +118,14 @@ $carousel-slide-img-loading-max-height: 25vh !default;
 
     .carousel-inner {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
 
         align-items: center;
         justify-content: center;
         transition: all 1s ease;
-        @media (min-width: map-get($grid-breakpoints, "md")) {
+        /*@media (min-width: map-get($grid-breakpoints, "md")) {
             flex-direction: row;
-        }
+        }*/
     }
 }
 

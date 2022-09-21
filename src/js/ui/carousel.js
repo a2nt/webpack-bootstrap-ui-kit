@@ -1,4 +1,5 @@
 import Events from '../_events'
+import Consts from '../_consts'
 import Carousel from 'bootstrap/js/src/carousel'
 
 const CarouselUI = ((window) => {
@@ -103,13 +104,25 @@ const CarouselUI = ((window) => {
         // fix animation glitch
         inner.style.left = '0px'
 
+        const getNumToDisplay = (el) => {
+          const screenSize = window.detectCSSScreenSize()
+          let curNum = parseInt(el.dataset['length'+window.globalF.ucwords(screenSize)]);
+          if(!curNum){
+            curNum = parseInt(el.dataset.length);
+          }
+
+          return Math.min(curNum, numberOfItems)
+        }
+
         const calculate = (entries) => {
           const entry = entries[0]
           const el = entry.target
           const rect = entry.contentRect
-          const width = rect.width
+          //const width = rect.width
+          const width = el.querySelector('.carousel-inner-container').clientWidth
+
           // const height = rect.height
-          const numToDisplay = Math.min(parseInt(el.dataset.length), numberOfItems)
+          const numToDisplay = getNumToDisplay(el)
           const itemWidth = width / numToDisplay
 
           el.dataset.itemWidth = itemWidth
@@ -121,7 +134,7 @@ const CarouselUI = ((window) => {
           })
 
           if (numberOfItems === numToDisplay) {
-            el.classList.add('js-carousel-no-slide')
+            el.classList.add(`${NAME}-no-slide`)
             carousel.pause()
           }
         };
@@ -150,7 +163,7 @@ const CarouselUI = ((window) => {
 
         el.addEventListener('slide.bs.carousel', (e) => {
           // infinite scroll
-          const numToDisplay = Math.min(parseInt(el.dataset.length), numberOfItems)
+          const numToDisplay = getNumToDisplay(el)
           console.log(`.${NAME}: ${e.to} ${numberOfItems / 2}`);
 
           if(numberOfItems - numToDisplay < e.to){
@@ -177,7 +190,7 @@ const CarouselUI = ((window) => {
         el.classList.add(`${NAME}-multislide-active`)
       } else {
         if (items.length === 1) {
-          el.classList.add('js-carousel-no-slide')
+          el.classList.add(`${NAME}-no-slide`)
         }
       }
 

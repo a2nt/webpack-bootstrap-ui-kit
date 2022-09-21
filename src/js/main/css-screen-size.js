@@ -48,6 +48,7 @@ export default ((W) => {
     return curEnv
   }
 
+  W.detectCSSScreenSize = detectCSSScreenSize
   W.addEventListener(`${Events.LOADED}`, detectCSSScreenSize)
 
   W.addEventListener(`${Events.RESIZE}`, detectCSSScreenSize)

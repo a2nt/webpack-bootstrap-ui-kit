@@ -31,5 +31,21 @@ funcs.getParents = (elem, selector) => {
   return parents
 }
 
+funcs.ucwords = (strInitial) => {
+  let str = strInitial.toLowerCase();
+  const words = str.split(' ');
+  str = '';
+  for (var i = 0; i < words.length; i++) {
+    let word = words[i];
+    word = word.charAt(0).toUpperCase() + word.slice(1);
+    if (i > 0) { str = str + ' '; }
+    str = str + word;
+  }
+
+  return str
+}
+
+
+window.globalF = funcs
 module.exports = funcs
 module.exports.default = funcs

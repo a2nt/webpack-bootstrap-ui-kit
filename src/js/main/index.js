@@ -4,4 +4,5 @@
 import './visibility'
 import './touch'
 import './css-screen-size'
+import './funcs'
 import './main'
