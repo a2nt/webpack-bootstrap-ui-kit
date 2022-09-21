@@ -106,7 +106,7 @@ const CarouselUI = ((window) => {
 
         const getNumToDisplay = (el) => {
           const screenSize = window.detectCSSScreenSize()
-          let curNum = parseInt(el.dataset['length'+window.globalF.ucwords(screenSize)]);
+          let curNum = parseInt(el.dataset[`length${window.globalF.ucwords(screenSize)}`]);
           if(!curNum){
             curNum = parseInt(el.dataset.length);
           }

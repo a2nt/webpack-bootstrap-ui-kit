@@ -38,7 +38,7 @@ funcs.ucwords = (strInitial) => {
   for (var i = 0; i < words.length; i++) {
     let word = words[i];
     word = word.charAt(0).toUpperCase() + word.slice(1);
-    if (i > 0) { str = str + ' '; }
+    if (i > 0) { str = `${str  } `; }
     str = str + word;
   }
 
