@@ -15,10 +15,13 @@ const MapAPI = ((window) => {
       const Drv = new MAP_DRIVER()
       const BODY = document.querySelector('body')
       const config = el.dataset
-      config.center = [
-        config.lng ? config.lng : BODY.dataset['default-lng'],
-        config.lat ? config.lat : BODY.dataset['default-lat'],
-      ]
+
+      const centerLng = config.lng ? config.lng : BODY.dataset['default-lng'];
+      const centerLat = config.lat ? config.lat : BODY.dataset['default-lat'];
+
+      /*if (centerLat && centerLng) {
+        config.center = [parseFloat(centerLng),parseFloat(centerLat)];
+      }*/
 
       /* config['style'] = config['style'] ?
                                   jQuery.parseJSON(config['style']) :

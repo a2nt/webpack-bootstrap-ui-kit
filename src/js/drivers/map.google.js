@@ -52,6 +52,7 @@ const GoogleMapsDriver = ((window) => {
             lat: 0,
             lng: 0,
           }
+
       const style = config.style ? config.style : null
 
       console.log(`${ui.getName()}: API is loaded`)

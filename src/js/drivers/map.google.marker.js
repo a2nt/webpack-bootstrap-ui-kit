@@ -99,13 +99,13 @@ const Obj = {
         ui.getPanes().overlayMouseTarget.appendChild(ui.div)
 
         // Add listeners to the element.
-        window.google.maps.event.addDomListener(ui.div, 'click', (event) => {
+        window.google.maps.event.addEventListener(ui.div, 'click', (event) => {
           window.google.maps.event.trigger(ui, 'click')
           if (ui.isFunction(ui.onClick)) ui.onClick()
           event.stopPropagation()
         })
 
-        window.google.maps.event.addDomListener(ui.div, 'mouseover', (event) => {
+        window.google.maps.event.addEventListener(ui.div, 'mouseover', (event) => {
           window.google.maps.event.trigger(ui, 'mouseover')
           if (ui.isFunction(ui.onMouseOver)) ui.onMouseOver()
           event.stopPropagation()
