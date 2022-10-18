@@ -30,8 +30,28 @@ const FormSelect2 = (($) => {
         .find('select:not([readonly])')
         .not('.no-select2')
 
-      $selectFields.each((i, el) => {
-        $(el).select2()
+      $selectFields.each((i, eli) => {
+        const $eli = $(eli);
+
+        if ($eli.hasClass('js-data-ajax')) {
+          console.log($eli.data('source'));
+          $eli.select2({
+            ajax: {
+              url: $eli.data('source'),
+              dataType: 'json',
+              data: function (params) {
+                const query = {
+                  search: params.term,
+                  page: params.page || 1
+                }
+
+                return query;
+              }
+            }
+          });
+        } else {
+          $eli.select2()
+        }
       })
 
       $el.addClass(`${NAME}-active`)
