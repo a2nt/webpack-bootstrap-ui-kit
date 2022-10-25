@@ -77,11 +77,11 @@ const MapAPI = ((window) => {
         Drv.geocode(config.address, (results) => {
           console.log(results)
 
-          const lat = results[0].geometry.location.lat()
-          const lng = results[0].geometry.location.lng()
+          const lat = parseFloat(results[0].geometry.location.lat())
+          const lng = parseFloat(results[0].geometry.location.lng())
 
           console.log(
-            `${NAME}: setting up single lat/lng marker lat: ${lat} lng: ${lng}`
+            `${NAME}: setting up single lat/lng marker lat: ${lat} lng: ${lng} #1`
           )
 
           Drv.addMarker([lng, lat], config)
@@ -91,14 +91,18 @@ const MapAPI = ((window) => {
           })
         })
       } else if (config.lat && config.lng) {
-        const lat = config.lat
-        const lng = config.lng
+        const lat = parseFloat(config.lat)
+        const lng = parseFloat(config.lng)
 
         console.log(
-          `${NAME}: setting up single lat/lng marker lat: ${lat} lng: ${lng}`
+          `${NAME}: setting up single lat/lng marker lat: ${lat} lng: ${lng} #2`
         )
 
         Drv.addMarker([lng, lat], config)
+        ui.map.setCenter({
+          lat,
+          lng,
+        })
       }
 
       el.classList.add(`${NAME}-active`)

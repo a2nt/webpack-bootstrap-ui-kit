@@ -241,8 +241,8 @@ const GoogleMapsDriver = ((window) => {
         })
 
         bounds.extend({
-          lat: crds[1],
-          lng: crds[0],
+          lat: parseFloat(crds[1]),
+          lng: parseFloat(crds[0]),
         })
       })
 
