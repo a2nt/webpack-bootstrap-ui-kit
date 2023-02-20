@@ -162,3 +162,7 @@ body.cms {
     white-space: nowrap !important;
     border: 0 !important;
 }
+#MetaLightboxApp {
+    position: relative;
+    z-index: 99;
+}
