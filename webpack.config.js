@@ -229,7 +229,7 @@ const cfg = merge(common.webpack, {
                         reserved: ['$', 'jQuery', 'jquery'],
                       },
                     output: {
-                        ecma: 5,
+                        ecma: 6,
                         comments: false,
                         // Turned on because emoji and regex is not minified properly using default
                         // https://github.com/facebook/create-react-app/issues/2488

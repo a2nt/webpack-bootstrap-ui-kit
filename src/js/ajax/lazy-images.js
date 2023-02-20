@@ -9,13 +9,20 @@ export default ((W) => {
 
   const loadLazyImages = () => {
     console.log(`${NAME}: Load lazy images`)
+    const base = document.querySelector('base')
+    const baseURL = base ? base.getAttribute('href') : '/'
+
 
     D.querySelectorAll('[data-lazy-src]').forEach((el) => {
       el.classList.remove('empty')
 
       const img = new ImageObject()
+      let imgURL = baseURL + el.getAttribute('data-lazy-src')
 
-      img.load(el.getAttribute('data-lazy-src'), el)
+      // remove double slash
+      imgURL = imgURL.replace(/([^:]\/)\/+/g, "$1")
+
+      img.load(imgURL, el)
         .then((result) => {
           el.setAttribute('src', result)
         })
