@@ -15,9 +15,11 @@ const SelectUI = ((window) => {
         return
       }
 
+      const max = el.dataset.maxItemCount;
       new Choices(el, {
         allowHTML: true,
         shouldSort: (el.dataset.shouldSort === 'true'),
+        maxItemCount:  max ? max : -1,
       });
 
       el.classList.add(`${NAME}-active`)

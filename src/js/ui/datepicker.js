@@ -2,9 +2,21 @@ import Events from '../_events'
 import Datepicker from 'vanillajs-datepicker/Datepicker'
 
 const init = () => {
-  document.querySelectorAll('.js-datepicker').forEach((el, i) => {
-    const picker = new Datepicker(el)
+  document.querySelectorAll('input.js-datepicker').forEach((el, i) => {
+    if( el.dataset.ui ){
+      return
+    }
+
+    const datesNum = el.dataset.datesNum;
+
+    const picker = new Datepicker(el,{
+      buttonClass: 'btn',
+      autohide: true,
+      maxNumberOfDates: datesNum ? datesNum : 1,
+    })
+
     el.ui = picker
+    el.dataset.ui = true
   })
 }
 

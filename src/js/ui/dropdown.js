@@ -14,7 +14,10 @@ const DropdownHoverUI = ((window) => {
   const HideAll = () => {
     // hide others
     document.querySelectorAll('.dropdown-menu').forEach((el, i) => {
-      el.closest('.dropdown').classList.remove(...ACTIVECLS)
+      const next = el.closest('.dropdown')
+      if (next) {
+        next.classList.remove(...ACTIVECLS)
+      }
       el.classList.remove('show')
     })
   }
@@ -22,7 +25,10 @@ const DropdownHoverUI = ((window) => {
   const Toggle = (el) => {
     HideAll()
 
-    el.querySelector('.dropdown-menu').classList.toggle('show')
+    const menu = el.querySelector('.dropdown-menu')
+    if(menu) {
+      menu.classList.toggle('show')
+    }
   }
 
   const Show = (e) => {
@@ -30,7 +36,10 @@ const DropdownHoverUI = ((window) => {
     const el = e.currentTarget
 
     el.classList.add(...ACTIVECLS)
-    el.querySelector('.dropdown-menu').classList.add('show')
+    const menu = el.querySelector('.dropdown-menu')
+    if(menu){
+      menu.classList.add('show')
+    }
   }
 
   const Hide = (e) => {
@@ -38,7 +47,10 @@ const DropdownHoverUI = ((window) => {
     const el = e.currentTarget
 
     el.classList.remove(...ACTIVECLS)
-    el.querySelector('.dropdown-menu').classList.remove('show')
+    const menu = el.querySelector('.dropdown-menu')
+    if(menu){
+      menu.classList.remove('show')
+    }
   }
 
   const init = () => {
@@ -60,7 +72,9 @@ const DropdownHoverUI = ((window) => {
 
         const el = e.currentTarget
         const parent = el.closest('.dropdown')
-        Toggle(parent)
+        if(parent){
+          Toggle(parent)
+        }
       })
 
       el.classList.add(`${NAME}-active`)
@@ -100,7 +114,9 @@ const DropdownHoverUI = ((window) => {
 
     hoverableEls.forEach((el, i) => {
       const parent = el.closest('.dropdown')
-      attachHoverEvents(parent)
+      if(parent){
+        attachHoverEvents(parent)
+      }
     })
 
     clickableEls.forEach((el, i) => {
