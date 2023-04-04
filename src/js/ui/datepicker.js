@@ -15,6 +15,10 @@ const init = () => {
       maxNumberOfDates: datesNum ? datesNum : 1,
     })
 
+    el.addEventListener('changeDate', (e) => {
+      e.currentTarget.dispatchEvent(new Event('change'));
+    })
+
     el.ui = picker
     el.dataset.ui = true
   })
