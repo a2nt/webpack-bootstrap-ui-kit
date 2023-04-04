@@ -17,7 +17,10 @@ export default ((W) => {
       el.classList.remove('empty')
 
       const img = new ImageObject()
-      let imgURL = baseURL + el.getAttribute('data-lazy-src')
+      let imgURL = el.getAttribute('data-lazy-src')
+      if (!imgURL.startsWith('http://') && !imgURL.startsWith('https://')) {
+        imgURL = baseURL + el.getAttribute('data-lazy-src')
+      }
 
       // remove double slash
       imgURL = imgURL.replace(/([^:]\/)\/+/g, "$1")
