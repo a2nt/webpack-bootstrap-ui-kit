@@ -149,8 +149,11 @@ ol {
     li {
         position: relative;
         margin: .5em 0;
-        padding-left: .5em;
     }
+}
+
+ol {
+    padding-left: $typography-spacer-x * 2;
 }
 
 ul {
