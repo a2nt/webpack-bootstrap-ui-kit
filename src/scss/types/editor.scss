@@ -2,6 +2,8 @@
 
 @import "~bootstrap/scss/tables";
 $typography-breakpoint: map-get($grid-breakpoints, "sm") - 1 !default;
+$typography-spacer-x: 1em !default;
+$typography-spacer-y: 1em !default;
 
 html,
 body {
@@ -22,6 +24,7 @@ h6,
 .h5,
 .h6 {
     color: $headings-color;
+    line-height: 1.8em;
 }
 
 a {
@@ -34,12 +37,12 @@ img,
 .ss-htmleditorfield-file {
     display: block;
     max-width: 100%;
-    margin-top: $element-reduced-spacer-y;
-    margin-bottom: $element-reduced-spacer-y;
+    margin-top: $typography-spacer-y;
+    margin-bottom: $typography-spacer-y;
 
     @media (min-width: $typography-breakpoint + 1) {
-        margin-right: $element-reduced-spacer-x;
-        margin-left: $element-reduced-spacer-x;
+        margin-right: $typography-spacer-x;
+        margin-left: $typography-spacer-x;
     }
 
     &.center {
@@ -61,7 +64,7 @@ img,
         clear: left;
 
         @media (min-width: $typography-breakpoint + 1) {
-            margin: 0 $element-reduced-spacer-x $element-reduced-spacer-y 0;
+            margin: 0 $typography-spacer-x $typography-spacer-y 0;
         }
     }
 
@@ -72,7 +75,7 @@ img,
         clear: right;
 
         @media (min-width: $typography-breakpoint + 1) {
-            margin: $element-reduced-spacer-y 0 0 $element-reduced-spacer-x;
+            margin: $typography-spacer-y 0 0 $typography-spacer-x;
         }
     }
 
@@ -84,7 +87,7 @@ img,
 
 .captionImage {
     img {
-        margin-bottom: $element-reduced-spacer-y !important;
+        margin-bottom: $typography-spacer-y !important;
     }
 
     .caption {
@@ -141,7 +144,7 @@ table {
 
 ul,
 ol {
-    padding-left: $spacer;
+    padding-left: $typography-spacer-x;
 
     li {
         position: relative;
@@ -151,7 +154,6 @@ ol {
 }
 
 ul {
-    padding-left: 0;
     list-style: none;
 
     li {
@@ -236,7 +238,7 @@ img {
             display: block;
             width: 50%;
             min-width: 50%;
-            padding: 0 $spacer * .5;
+            padding: 0 $typography-spacer-x * .5;
             content: attr(data-label);
         }
     }
