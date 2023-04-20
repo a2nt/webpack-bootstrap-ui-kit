@@ -56,7 +56,7 @@ const DropdownHoverUI = ((window) => {
   const init = () => {
     console.log(`${NAME}: init`)
 
-    const clickableEls = document.querySelectorAll(`.${NAME},[data-bs-toggle="dropdown"]`)
+    const clickableEls = document.querySelectorAll(`.${NAME},[data-bs-toggle="dropdown"],.dropdown-toggle`)
     const hoverableEls = document.querySelectorAll('[data-bs-toggle="hover"]')
 
     const attachHoverEvents = (el) => {
