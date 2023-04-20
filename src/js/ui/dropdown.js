@@ -72,9 +72,20 @@ const DropdownHoverUI = ((window) => {
 
         const el = e.currentTarget
         const parent = el.closest('.dropdown')
+        const href = el.getAttribute('href')
+
         if(parent){
+          console.log(`${NAME}: nav toggle`);
           Toggle(parent)
         }
+
+        // nav second click
+        if(href && el.dataset.firstClick) {
+          console.log(`${NAME}: nav second click`);
+          window.location.href = href;
+        }
+
+        el.dataset.firstClick = true;
       })
 
       el.classList.add(`${NAME}-active`)
