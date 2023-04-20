@@ -74,18 +74,23 @@ const DropdownHoverUI = ((window) => {
         const parent = el.closest('.dropdown')
         const href = el.getAttribute('href')
 
-        if(parent){
-          console.log(`${NAME}: nav toggle`);
-          Toggle(parent)
-        }
-
         // nav second click
         if(href && el.dataset.firstClick) {
-          console.log(`${NAME}: nav second click`);
-          window.location.href = href;
+          console.log(`${NAME}: nav second click`)
+          window.location.href = href
         }
+        el.dataset.firstClick = true
 
-        el.dataset.firstClick = true;
+        if(parent){
+          // big screen click
+          if(window.innerWidth > 768 && parent.classList.contains('active-dropdown')){
+            console.log(`${NAME}: big screen | nav click the dropdown is shown already`)
+            window.location.href = href
+          }
+
+          console.log(`${NAME}: nav toggle`)
+          Toggle(parent)
+        }
       })
 
       el.classList.add(`${NAME}-active`)
