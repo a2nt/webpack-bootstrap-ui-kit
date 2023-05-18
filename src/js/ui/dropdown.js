@@ -83,7 +83,7 @@ const DropdownHoverUI = ((window) => {
 
         if(parent){
           // big screen click
-          if(window.innerWidth > 768 && parent.classList.contains('active-dropdown')){
+          if(href && window.innerWidth > 768 && parent.classList.contains('active-dropdown')){
             console.log(`${NAME}: big screen | nav click the dropdown is shown already`)
             window.location.href = href
           }
