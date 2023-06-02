@@ -58,8 +58,7 @@ img,
     }
 
     &.start,
-    &.left,
-    &.leftAlone {
+    &.left {
         float: left;
         clear: left;
 
@@ -68,15 +67,29 @@ img,
         }
     }
 
+
+    &.leftAlone {
+        float: none;
+        clear: both;
+        margin-left: 0;
+        margin-right: auto;
+    }
+
     &.end,
-    &.right,
-    &.rightAlone {
+    &.right {
         float: right;
         clear: right;
 
         @media (min-width: $typography-breakpoint + 1) {
             margin: $typography-spacer-y 0 0 $typography-spacer-x;
         }
+    }
+
+    &.rightAlone {
+        float: none;
+        clear: both;
+        margin-left: auto;
+        margin-right: 0;
     }
 
     iframe {

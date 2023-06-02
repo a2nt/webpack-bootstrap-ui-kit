@@ -145,11 +145,6 @@ body.cms {
     }
 }
 
-.btn-outline-primary,
-.btn-primary {
-    color: #fff;
-}
-
 .visually-hidden,
 .visually-hidden-focusable:not(:focus):not(:focus-within) {
     position: absolute !important;
@@ -165,4 +160,8 @@ body.cms {
 #MetaLightboxApp {
     position: relative;
     z-index: 99;
+}
+
+.sticky-buttons ~ table.table.grid-field__table {
+    margin-top: 1rem;
 }
