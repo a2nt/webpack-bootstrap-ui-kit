@@ -1,3 +1,7 @@
+.form-control.dropdown {
+  @extend .form-select;
+}
+
 .field {
   flex-direction: row;
 
