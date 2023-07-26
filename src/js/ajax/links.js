@@ -7,6 +7,8 @@ import { getParents } from '../main/funcs'
 
 import { Collapse } from 'bootstrap'
 
+import { createRoot } from 'react-dom/client';
+
 import SpinnerUI from '../main/loading-spinner'
 
 const MainUILinks = ((W) => {
@@ -78,9 +80,8 @@ const MainUILinks = ((W) => {
             `${NAME}: [popstate] GraphPage is missing. Have to render it first`
           )
 
-          ui.GraphPage = ReactDOM.render(
-            <Page />,
-            document.getElementById('MainContent')
+          ui.GraphPage = createRoot(document.getElementById('MainContent')).render(
+            <Page />
           )
         }
 
@@ -132,9 +133,8 @@ const MainUILinks = ((W) => {
                                       } */
 
       if (!ui.GraphPage) {
-        ui.GraphPage = ReactDOM.render(
-          <Page />,
-          document.getElementById('MainContent')
+        ui.GraphPage = createRoot(document.getElementById('MainContent')).render(
+          <Page />
         )
       }
 
