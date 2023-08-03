@@ -66,6 +66,12 @@ const MainUI = ((window) => {
     BODY.classList.add('loaded')
     SpinnerUI.hide()
 
+    window.addEventListener('beforeunload', () => {
+      console.log(`${NAME} before unload`)
+      SpinnerUI.show()
+      BODY.classList.remove('loaded')
+    })
+
     console.groupEnd('init')
     console.timeEnd('init')
 

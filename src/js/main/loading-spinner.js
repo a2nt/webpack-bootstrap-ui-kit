@@ -3,8 +3,7 @@
 // import Events from '../_events'
 
 const NAME = '_main.loading-spinner'
-const D = document
-const SPINNER = D.getElementById('PageLoading')
+const SPINNER = document.getElementById('PageLoading')
 
 class SpinnerUI {
   static show () {
@@ -17,10 +16,5 @@ class SpinnerUI {
     SPINNER.classList.add('d-none')
   }
 }
-
-window.addEventListener('beforeunload', () => {
-  console.log(`${NAME} show before unload`)
-  SPINNER.classList.remove('d-none')
-});
 
 export default SpinnerUI
