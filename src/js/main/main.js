@@ -58,6 +58,13 @@ const MainUI = ((window) => {
       // const ui = this
       console.log(`${NAME}: loaded`)
     }
+
+    static unloaded () {
+      console.log(`${NAME}: unloaded`)
+
+      SpinnerUI.show()
+      BODY.classList.remove('loaded')
+    }
   }
 
   const documentInit = () => {
@@ -65,12 +72,6 @@ const MainUI = ((window) => {
 
     BODY.classList.add('loaded')
     SpinnerUI.hide()
-
-    window.addEventListener('beforeunload', () => {
-      console.log(`${NAME} before unload`)
-      SpinnerUI.show()
-      BODY.classList.remove('loaded')
-    })
 
     console.groupEnd('init')
     console.timeEnd('init')
@@ -89,6 +90,10 @@ const MainUI = ((window) => {
   window.addEventListener(`${Events.AJAX}`, () => {
     MainUI.loaded()
   })
+
+   window.addEventListener('beforeunload', () => {
+      MainUI.unloaded()
+    })
 
   window.MainUI = MainUI
 
