@@ -91,27 +91,18 @@ const CarouselUI = ((window) => {
       if (el.classList.contains('carousel-multislide')) {
         const inner = el.querySelector('.carousel-inner')
 
-        if(!el.querySelector('.carousel-inner-container')){
-          const wrapper = document.createElement('div');
-          wrapper.classList.add('carousel-inner-container');
-          inner.parentNode.insertBefore(wrapper, inner);
-          wrapper.appendChild(inner);
-        }
+        // add next elements by cloning originals
+        items.forEach((el, i) => {
+          const newItem = el.cloneNode(true);
+          newItem.classList.remove('active');
+          inner.appendChild(newItem);
+        });
 
         items = el.querySelectorAll('.carousel-item')
         numberOfItems = parseInt(items.length)
 
         // fix animation glitch
         inner.style.left = '0px'
-
-        if(numberOfItems > getNumToDisplay(el)){
-          // add next elements by cloning originals
-          items.forEach((el, i) => {
-            const newItem = el.cloneNode(true);
-            newItem.classList.remove('active');
-            inner.appendChild(newItem);
-          });
-        }
 
         const getNumToDisplay = (el) => {
           const screenSize = window.detectCSSScreenSize()
@@ -137,14 +128,14 @@ const CarouselUI = ((window) => {
           el.dataset.itemWidth = itemWidth
           el.dataset.numToDisplay = numToDisplay
 
-          if (numberOfItems <= numToDisplay) {
+          inner.style.width = `${numberOfItems * itemWidth}px`
+          items.forEach((el, i) => {
+            el.style.width = `${itemWidth}px`
+          })
+
+          if (numberOfItems === numToDisplay) {
             el.classList.add(`${NAME}-no-slide`)
             carousel.pause()
-          } else {
-            inner.style.width = `${numberOfItems * itemWidth}px`
-            items.forEach((el, i) => {
-              el.style.width = `${itemWidth}px`
-            })
           }
         };
 

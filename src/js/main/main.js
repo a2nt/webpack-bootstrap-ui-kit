@@ -91,9 +91,9 @@ const MainUI = ((window) => {
     MainUI.loaded()
   })
 
-   window.addEventListener('beforeunload', () => {
-      MainUI.unloaded()
-    })
+  window.addEventListener('beforeunload', () => {
+    MainUI.unloaded()
+  })
 
   window.MainUI = MainUI
 
