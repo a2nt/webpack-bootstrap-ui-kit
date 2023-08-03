@@ -18,4 +18,9 @@ class SpinnerUI {
   }
 }
 
+window.addEventListener('beforeunload', () => {
+  console.log(`${NAME} show before unload`)
+  SPINNER.classList.remove('d-none')
+});
+
 export default SpinnerUI
