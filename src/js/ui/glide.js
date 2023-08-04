@@ -1,7 +1,9 @@
 import '@glidejs/glide/src/assets/sass/glide.core.scss'
-import Glide from '@glidejs/glide'
+import "../../scss/ui/glide.theme.scss";
 
+import Glide from '@glidejs/glide'
 import Events from '@a2nt/ss-bootstrap-ui-webpack-boilerplate-react/src/js/_events'
+
 window.addEventListener(`${Events.LODEDANDREADY}`, () => {
   console.log(`Glide init`);
 
