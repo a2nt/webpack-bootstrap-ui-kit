@@ -1,19 +1,18 @@
 import Events from '../_events'
 
-const LayoutUI = ((W) => {
+const LayoutUI = ((window) => {
   const NAME = '_layout'
-  const D = document
 
   const initFonts = () => {
     console.log(`${NAME}: initFonts`)
 
-    const css = D.createElement('link')
+    const css = document.createElement('link')
     css.rel = 'stylesheet'
     css.type = 'text/css'
     css.media = 'all'
     css.href =
       'https://fonts.googleapis.com/css?family=Roboto:ital,wght@0,400;0,700;1,400&display=swap'
-    D.getElementsByTagName('head')[0].appendChild(css)
+    document.getElementsByTagName('head')[0].appendChild(css)
   }
 
   const initAnalytics = () => {
@@ -42,9 +41,30 @@ const LayoutUI = ((W) => {
                 ga('send', 'pageview'); */
   }
 
-  W.addEventListener(`${Events.LOADED}`, () => {
+  // set attributes for mobile friendly tables
+  const initMobileTables = () => {
+    document.querySelectorAll('.typography table').forEach((el) => {
+      const header = el.querySelector('thead tr:first-child')
+      if (!header) {
+        return
+      }
+      header.classList.add('d-typography-breakpoint-none')
+
+      header.querySelectorAll('td').forEach((h) => {
+        el.querySelectorAll(`td:eq(${i})`)
+        .forEach((el) => {
+          if (!el.dataset.label) {
+            el.dataset.label = h.innerText
+          }
+        });
+      });
+    });
+  }
+
+  window.addEventListener(`${Events.LOADED}`, () => {
     initFonts()
     initAnalytics()
+    initMobileTables()
   })
 })(window)
 export default LayoutUI
