@@ -19,6 +19,11 @@ const CaptchaUI = ((window) => {
       const fields = document.querySelectorAll(`.${NAME}, .g-recaptcha`)
       const grecaptcha = window.grecaptcha
 
+      if (typeof window.grecaptcha.render !== 'function') {
+        console.log(`${NAME}: no render function`);
+        return
+      }
+
       fields.forEach((el, i) => {
         if (el.dataset.widgetid || el.innerHTML !== '') {
           // already initialized
