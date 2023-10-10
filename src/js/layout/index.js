@@ -52,11 +52,11 @@ const LayoutUI = ((window) => {
 
       header.querySelectorAll('td').forEach((h) => {
         el.querySelectorAll(`td:eq(${i})`)
-        .forEach((el) => {
-          if (!el.dataset.label) {
-            el.dataset.label = h.innerText
-          }
-        });
+          .forEach((el) => {
+            if (!el.dataset.label) {
+              el.dataset.label = h.innerText
+            }
+          });
       });
     });
   }
