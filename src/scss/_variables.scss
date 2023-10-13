@@ -32,6 +32,10 @@ $font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, 
 $font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
 $font-family-base: "Roboto", $font-family-sans-serif !default;
 $html-font-size: 14px!default;
+
+$link-decoration: none !default;
+$link-hover-decoration: underline !default;
+
 $spacer: 1rem !default;
 $headings-margin-bottom: $spacer !default;
 $enable-rounded: false !default;
@@ -103,3 +107,11 @@ $carousel-controls-shadow: 1px 1px $black !default;
 $carousel-controls-hover-bg: transparentize($black, .4) !default;
 $carousel-slide-img-loading-max-height: 70vh !default;
 $breadcrumb-active-color: $sidebar-nav-link-hover-color;
+
+$navbar-toggler-font-size: 2rem !default;
+$accordion-padding-y: .5rem !default;
+$accordion-padding-x: 1rem !default;
+$accordion-button-focus-box-shadow: none !default;
+$enable-transitions: false !default;
+$breadcrumb-active-color: $body-color !default;
+$navbar-toggler-focus-width: 0.05rem !default;

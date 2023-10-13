@@ -52,6 +52,10 @@ window.addEventListener(`${Events.LODEDANDREADY}`, () => {
       type: 'carousel',
       perView: cfg.perView,
       autoplay: cfg.bsInterval,
+      breakpoints: {
+        768: {perView: 1},
+        992: {perView: parseInt(cfg.perView/2)}
+      }
     }).mount();
   });
 });
