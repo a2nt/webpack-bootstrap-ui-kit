@@ -4,13 +4,13 @@ import "../../scss/ui/glide.theme.scss";
 import Glide from '@glidejs/glide'
 import Events from '@a2nt/ss-bootstrap-ui-webpack-boilerplate-react/src/js/_events'
 
-window.addEventListener(`${Events.LODEDANDREADY}`, () => {
+const init = () => {
   console.log(`Glide init`);
 
   document.querySelectorAll('.glide').forEach((el) => {
     const cfg = el.dataset;
 
-    if(cfg.perView === 1 && cfg.bsIndicators) {
+    if (cfg.perView === 1 && cfg.bsIndicators) {
       const bullets = document.createElement('div');
       bullets.classList.add('glide__bullets');
       bullets.dataset.glideEl = "controls[nav]";
@@ -27,7 +27,7 @@ window.addEventListener(`${Events.LODEDANDREADY}`, () => {
       el.append(bullets);
     }
 
-    if(cfg.bsArrows){
+    if (cfg.bsArrows) {
       const btns = document.createElement('div');
       btns.classList.add('glide__arrows');
       btns.dataset.glideEl = "controls";
@@ -47,15 +47,20 @@ window.addEventListener(`${Events.LODEDANDREADY}`, () => {
       el.append(btns);
     }
 
-    new Glide(el,{
+    new Glide(el, {
       startAt: 0,
       type: 'carousel',
       perView: cfg.perView,
       autoplay: cfg.bsInterval,
       breakpoints: {
-        768: {perView: 1},
-        992: {perView: parseInt(cfg.perView/2)}
-      }
+        768: { perView: 1 },
+        992: { perView: parseInt(cfg.perView / 2) },
+      },
     }).mount();
   });
+};
+
+window.addEventListener(`${Events.LODEDANDREADY}`, init);
+window.addEventListener(`${Events.AJAX}`, () => {
+  setTimeout(init, 300)
 });
