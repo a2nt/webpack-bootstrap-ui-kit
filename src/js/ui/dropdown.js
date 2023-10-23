@@ -26,7 +26,7 @@ const DropdownHoverUI = ((window) => {
     HideAll()
 
     const menu = el.querySelector('.dropdown-menu')
-    if(menu) {
+    if (menu) {
       menu.classList.toggle('show')
     }
   }
@@ -37,7 +37,7 @@ const DropdownHoverUI = ((window) => {
 
     el.classList.add(...ACTIVECLS)
     const menu = el.querySelector('.dropdown-menu')
-    if(menu){
+    if (menu) {
       menu.classList.add('show')
     }
   }
@@ -48,7 +48,7 @@ const DropdownHoverUI = ((window) => {
 
     el.classList.remove(...ACTIVECLS)
     const menu = el.querySelector('.dropdown-menu')
-    if(menu){
+    if (menu) {
       menu.classList.remove('show')
     }
   }
@@ -75,17 +75,31 @@ const DropdownHoverUI = ((window) => {
         const href = el.getAttribute('href')
 
         // nav second click
-        if(href && el.dataset.firstClick) {
+        if (href && el.dataset.firstClick) {
           console.log(`${NAME}: nav second click`)
-          window.location.href = href
+
+          e.stopImmediatePropagation()
+          if (typeof window.app === 'undefined' || typeof window.app.Router === 'undefined') {
+            window.location.href = href
+            return
+          }
+
+          window.app.Router.openURL(href)
         }
         el.dataset.firstClick = true
 
-        if(parent){
+        if (parent) {
           // big screen click
-          if(href && window.innerWidth > 768 && parent.classList.contains('active-dropdown')){
+          if (href && window.innerWidth > 768 && parent.classList.contains('active-dropdown')) {
             console.log(`${NAME}: big screen | nav click the dropdown is shown already`)
-            window.location.href = href
+
+            e.stopImmediatePropagation()
+            if (typeof window.app === 'undefined' || typeof window.app.Router === 'undefined') {
+              window.location.href = href
+              return
+            }
+
+            window.app.Router.openURL(href)
           }
 
           console.log(`${NAME}: nav toggle`)
@@ -130,7 +144,7 @@ const DropdownHoverUI = ((window) => {
 
     hoverableEls.forEach((el, i) => {
       const parent = el.closest('.dropdown')
-      if(parent){
+      if (parent) {
         attachHoverEvents(parent)
       }
     })
