@@ -49,5 +49,7 @@ export default ((W) => {
   }
 
   W.addEventListener(`${Events.LODEDANDREADY}`, loadLazyImages)
-  W.addEventListener(`${Events.AJAX}`, loadLazyImages)
+  W.addEventListener(`${Events.AJAX}`, () => {
+    setTimeout(loadLazyImages, 250)
+  })
 })(window)
