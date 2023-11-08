@@ -52,6 +52,7 @@ const init = () => {
       type: 'carousel',
       perView: cfg.perView,
       autoplay: cfg.bsInterval,
+      gap: 0,
       breakpoints: {
         768: { perView: 1 },
         992: { perView: parseInt(cfg.perView / 2) },

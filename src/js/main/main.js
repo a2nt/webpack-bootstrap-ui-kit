@@ -37,7 +37,7 @@ const MainUI = ((window) => {
 
   class MainUI {
     // first time the website initialization
-    static init () {
+    static init() {
       const ui = this
 
       // store landing page state
@@ -54,12 +54,12 @@ const MainUI = ((window) => {
     }
 
     // init AJAX components
-    static loaded () {
+    static loaded() {
       // const ui = this
       console.log(`${NAME}: loaded`)
     }
 
-    static unloaded () {
+    static unloaded() {
       console.log(`${NAME}: unloaded`)
 
       SpinnerUI.show()
@@ -69,9 +69,6 @@ const MainUI = ((window) => {
 
   const documentInit = () => {
     MainUI.init()
-
-    BODY.classList.add('loaded')
-    SpinnerUI.hide()
 
     console.groupEnd('init')
     console.timeEnd('init')
@@ -86,6 +83,16 @@ const MainUI = ((window) => {
   } else {
     documentInit()
   }
+
+
+  window.addEventListener(`${Events.LODEDANDREADY}`, () => {
+    BODY.classList.add('loaded')
+
+    if (typeof window.app === 'undefined' || typeof window.app.Router === 'undefined') {
+      console.warn('Spinner is hidden')
+      SpinnerUI.hide()
+    }
+  });
 
   window.addEventListener(`${Events.AJAX}`, () => {
     MainUI.loaded()
