@@ -44,6 +44,8 @@ const CaptchaUI = ((window) => {
       })
     }
 
+    window.rendergcaptcha = attachCaptcha;
+
     const loadScript = (callback) => {
       if (typeof window.grecaptcha !== 'undefined') {
         callback()
@@ -53,11 +55,11 @@ const CaptchaUI = ((window) => {
 
       const script = document.createElement('script');
       script.id = 'captchaAPI';
-      script.src = `https://www.google.com/recaptcha/api.js?render=explicit&hl=${document.querySelector('html').getAttribute('lang').substr(0, 2)}`
+      script.src = `https://www.google.com/recaptcha/api.js?onload=rendergcaptcha&render=explicit&hl=${document.querySelector('html').getAttribute('lang').substr(0, 2)}`
       script.async = true
       script.onload = function () {
         console.log(`${NAME}: Captcha API is loaded.`)
-        setTimeout(callback, 1000)
+        //setTimeout(callback, 1000)
       }
 
       document.body.append(script)
