@@ -34,7 +34,7 @@ const CaptchaUI = ((window) => {
         const widgetid = grecaptcha.render(el, el.dataset)
         el.dataset.widgetid = widgetid
 
-        if(el.dataset.size === 'invisible' && !el.dataset.callback){
+        if (el.dataset.size === 'invisible' && !el.dataset.callback) {
           grecaptcha.execute(widgetid)
           form.addEventListener('submit', submitListener)
         }
@@ -45,7 +45,7 @@ const CaptchaUI = ((window) => {
     }
 
     const loadScript = (callback) => {
-      if(typeof window.grecaptcha !== 'undefined'){
+      if (typeof window.grecaptcha !== 'undefined') {
         callback()
       }
 
@@ -53,19 +53,19 @@ const CaptchaUI = ((window) => {
 
       const script = document.createElement('script');
       script.id = 'captchaAPI';
-      script.src = `https://www.google.com/recaptcha/api.js?render=explicit&hl=${  document.querySelector('html').getAttribute('lang').substr(0,2)}`
+      script.src = `https://www.google.com/recaptcha/api.js?render=explicit&hl=${document.querySelector('html').getAttribute('lang').substr(0, 2)}`
       script.async = true
-      script.onload = function() {
+      script.onload = function () {
         console.log(`${NAME}: Captcha API is loaded.`)
-        callback()
+        setTimeout(callback, 1000)
       }
 
       document.body.append(script)
     }
 
-    if(document.querySelectorAll('.g-recaptcha').length){
+    if (document.querySelectorAll('.g-recaptcha').length) {
       loadScript(attachCaptcha);
-    }else{
+    } else {
       console.log(`${NAME}: No Captcha fields.`)
     }
 
