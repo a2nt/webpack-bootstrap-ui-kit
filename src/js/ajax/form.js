@@ -12,6 +12,11 @@ const submitForm = (e) => {
   console.log(`${NAME}: submit`)
   const data = new FormData(form);
   const parent = form.parentElement;
+  const btns = form.querySelectorAll('input[type="submit"],button')
+
+  btns.forEach(el => {
+    el.setAttribute('disabled', 'disabled')
+  })
 
   data.append('ajax', '1')
   form.classList.add('loading')
