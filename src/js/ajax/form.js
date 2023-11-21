@@ -14,7 +14,7 @@ const submitForm = (e) => {
   const parent = form.parentElement;
   const btns = form.querySelectorAll('input[type="submit"],button')
 
-  btns.forEach(el => {
+  btns.forEach((el) => {
     el.setAttribute('disabled', 'disabled')
   })
 
