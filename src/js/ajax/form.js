@@ -19,7 +19,7 @@ const submitForm = (e) => {
   })
 
   data.append('ajax', '1')
-  form.classList.add('loading')
+  form.parentElement.classList.add('loading')
 
   fetch(form.action, {
     method: form.method,
@@ -49,19 +49,12 @@ const submitForm = (e) => {
 const replaceForm = (form, html) => {
   const parent = form.parentElement;
 
-  if (parent.classList.contains(CONTAINER_CLASS)) {
-    parent.innerHTML = html
-
-    window.dispatchEvent(new Event(`${Events.AJAX}`))
-    return
-  }
-
-  const elHtml = document.createElement('div')
-  elHtml.classList.add(CONTAINER_CLASS)
-  elHtml.innerHTML = html
-  form.replaceWith(elHtml)
+  parent.innerHTML = html
+  parent.classList.remove('loading')
+  parent.classList.add('loaded')
 
   window.dispatchEvent(new Event(`${Events.AJAX}`))
+  return
 }
 
 const formInit = (form) => {
@@ -69,6 +62,16 @@ const formInit = (form) => {
     console.log(`${NAME}: #${form.id} already activated`)
     return false
   }
+
+  // wrap form
+  const parent = form.parentElement;
+
+  if (!parent.classList.contains(CONTAINER_CLASS)) {
+    const elHtml = document.createElement('div')
+    elHtml.classList.add(CONTAINER_CLASS)
+    elHtml.append(form)
+  }
+  //
 
   form.dataset[`${NAME}Active`] = true
 

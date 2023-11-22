@@ -11,12 +11,14 @@
   animation: fade 3s linear infinite;
 }
 
+.form-container.loading,
 main.loading {
   animation: shrink 0.5s linear 1;
   max-height: 0;
   overflow: hidden;
 }
 
+.form-container.loaded,
 main.loaded {
   animation: expand 0.5s linear 1;
   max-height: fit-content;
