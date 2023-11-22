@@ -65,11 +65,11 @@ const formInit = (form) => {
 
   // wrap form
   const parent = form.parentElement;
-
   if (!parent.classList.contains(CONTAINER_CLASS)) {
     const elHtml = document.createElement('div')
     elHtml.classList.add(CONTAINER_CLASS)
     elHtml.append(form)
+    parent.append(elHtml)
   }
   //
 
