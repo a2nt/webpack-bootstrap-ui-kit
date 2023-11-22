@@ -4,6 +4,10 @@ body {
   min-height: 100vh;
 }
 
+html {
+  overflow-y: scroll; // prevent content jumps produced by scroll bar
+}
+
 // sticky footer
 body {
   display: flex;
@@ -16,6 +20,7 @@ body {
   --body-gutter-reduced-y: #{inspect($body-gutter-reduced-y)};
   --body-gutter-reduced-d-x: #{inspect($body-gutter-reduced-d-x)};
   --body-gutter-reduced-d-y: #{inspect($body-gutter-reduced-d-y)};
+  overflow-y: hidden; // prevent content jumps produced by scroll bar
 
   .wrapper {
     flex: 1 0 auto;
@@ -29,6 +34,7 @@ body {
 }
 
 @media (min-width: $extra-large-screen) {
+
   html,
   body {
     font-size: 0.9vw !important;
@@ -95,12 +101,13 @@ option,
 a,
 .a,
 .btn {
+
   &:hover,
   &.active {
     opacity: 0.8;
 
-    > .fa,
-    > .svg-inline--fa {
+    >.fa,
+    >.svg-inline--fa {
       transform: scale(1.5);
     }
   }
@@ -114,8 +121,8 @@ a,
 [data-toggle][aria-expanded="true"] {
   opacity: 0.8;
 
-  > .fa,
-  > .svg-inline--fa {
+  >.fa,
+  >.svg-inline--fa {
     transform: scale(1.5);
   }
 }

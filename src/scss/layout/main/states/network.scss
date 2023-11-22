@@ -6,6 +6,22 @@
   animation: fade 0.5s linear infinite;
 }
 
+// slower animation speed for big objects
+.carousel__img.loading {
+  animation: fade 3s linear infinite;
+}
+
+main.loading {
+  animation: shrink 0.5s linear 1;
+  max-height: 0;
+  overflow: hidden;
+}
+
+main.loaded {
+  animation: expand 0.5s linear 1;
+  max-height: fit-content;
+}
+
 .graphql-page {
   &.response-404 {
     cursor: not-allowed;
