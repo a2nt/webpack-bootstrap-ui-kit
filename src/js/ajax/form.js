@@ -19,6 +19,8 @@ const submitForm = (e) => {
   })
 
   data.append('ajax', '1')
+
+  form.parentElement.classList.remove('loaded')
   form.parentElement.classList.add('loading')
 
   fetch(form.action, {
