@@ -12,7 +12,7 @@ body {
 }
 
 p {
-    margin-bottom: 2rem;
+    margin-bottom: $typography-spacer-y;
 }
 
 h1,
@@ -107,7 +107,7 @@ img,
     }
 
     .caption {
-        font-size: .8rem;
+        font-size: .8em;
     }
 }
 
@@ -142,8 +142,8 @@ table {
     @extend .table-bordered;
 
     &.table-none {
-        margin-right: -.5rem;
-        margin-left: -.5rem;
+        margin-right: $typography-spacer-x * -0.5;
+        margin-left: $typography-spacer-x * -0.5;
         border: 0;
 
         @extend .table-borderless;
@@ -164,7 +164,7 @@ ol {
 
     li {
         position: relative;
-        margin: .5em 0;
+        margin: ($typography-spacer-x * 0.5) 0;
     }
 }
 

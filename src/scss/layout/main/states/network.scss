@@ -7,8 +7,11 @@
 }
 
 // slower animation speed for big objects
-.carousel__img.loading {
-  animation: fade 3s linear infinite;
+.carousel__img,
+.glide__img {
+  &.loading {
+    animation: fade 3s linear infinite;
+  }
 }
 
 .form-container.loading,
