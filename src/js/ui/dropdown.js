@@ -18,16 +18,21 @@ const DropdownHoverUI = ((window) => {
       if (next) {
         next.classList.remove(...ACTIVECLS)
       }
+
       el.classList.remove('show')
     })
   }
 
   const Toggle = (el) => {
-    HideAll()
+    console.log(`${NAME}: nav toggle`)
 
     const menu = el.querySelector('.dropdown-menu')
-    if (menu) {
-      menu.classList.toggle('show')
+    const isOpenned = menu.classList.contains('show')
+
+    HideAll()
+
+    if (menu && !isOpenned) {
+      menu.classList.add('show')
     }
   }
 
@@ -60,13 +65,22 @@ const DropdownHoverUI = ((window) => {
     const hoverableEls = document.querySelectorAll('[data-bs-toggle="hover"]')
 
     const attachHoverEvents = (el) => {
+      if (el.classList.contains(`${NAME}-hover-active`)) {
+        return
+      }
+
       el.addEventListener('mouseover', Show, false)
       el.addEventListener('mouseleave', Hide, false)
 
       el.classList.add(`${NAME}-active`)
+      el.classList.add(`${NAME}-hover-active`)
     }
 
     const attachClickEvents = (el) => {
+      if (el.classList.contains(`${NAME}-click-active`)) {
+        return
+      }
+
       el.addEventListener('click', (e) => {
         e.preventDefault()
 
@@ -86,7 +100,7 @@ const DropdownHoverUI = ((window) => {
 
           window.app.Router.openURL(href)
         }
-        el.dataset.firstClick = true
+
 
         if (parent) {
           // big screen click
@@ -102,12 +116,14 @@ const DropdownHoverUI = ((window) => {
             window.app.Router.openURL(href)
           }
 
-          console.log(`${NAME}: nav toggle`)
           Toggle(parent)
         }
+
+        el.dataset.firstClick = true
       })
 
       el.classList.add(`${NAME}-active`)
+      el.classList.add(`${NAME}-click-active`)
     }
 
     // Hide all for outside clicks
