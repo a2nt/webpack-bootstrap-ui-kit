@@ -3,11 +3,18 @@ import "../../scss/ui/glide.theme.scss";
 
 import Glide from '@glidejs/glide'
 import Events from '@a2nt/ss-bootstrap-ui-webpack-boilerplate-react/src/js/_events'
+const NAME = 'uiGlide'
 
 const init = () => {
-  console.log(`Glide init`);
+  console.log(`${NAME} init`)
 
   document.querySelectorAll('.glide').forEach((el) => {
+    if (el.dataset.glide) {
+      return
+    }
+
+    el.dataset.glide = true
+
     const cfg = el.dataset;
 
     if (cfg.perView === 1 && cfg.bsIndicators) {
@@ -47,7 +54,7 @@ const init = () => {
       el.append(btns);
     }
 
-    new Glide(el, {
+    const glide = new Glide(el, {
       startAt: 0,
       type: 'carousel',
       perView: cfg.perView,
@@ -57,7 +64,14 @@ const init = () => {
         768: { perView: 1 },
         992: { perView: parseInt(cfg.perView / 2) },
       },
-    }).mount();
+    })
+
+    glide.on('mount.after', () => {
+      el.dispatchEvent(new Event(`${Events.CAROUSEL_READY}`))
+      window.dispatchEvent(new Event(`${Events.CAROUSEL_READY}`))
+    })
+
+    glide.mount();
   });
 };
 
