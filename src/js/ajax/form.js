@@ -64,25 +64,25 @@ const processResponse = (html) => {
 
         return {
           json: true,
-          data: json
+          data: json,
         }
 
       } catch (e) {
         return {
           json: false,
-          data: json.MainContent
+          data: json.MainContent,
         }
       }
     }
 
     return {
       json: true,
-      data: json
+      data: json,
     }
   } catch (e) {
     return {
       json: false,
-      data: html
+      data: html,
     }
   }
 }
@@ -92,7 +92,7 @@ const formProcessJson = (form, json) => {
 
   if (json.msgs) {
     json.msgs.forEach((i) => {
-      const field = form.querySelector('[name="' + i.fieldName + '"],[name^="' + i.fieldName + '["]')
+      const field = form.querySelector(`[name="${  i.fieldName  }"],[name^="${  i.fieldName  }["]`)
       if (field) {
         field.classList.add('error')
 
