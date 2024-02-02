@@ -38,6 +38,10 @@
   }
 }
 
+.form__field input.password {
+  @extend .form-control;
+}
+
 .form__fieldset {
     margin-bottom: -1rem;
 }

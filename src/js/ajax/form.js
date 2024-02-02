@@ -33,7 +33,12 @@ const submitForm = (e) => {
     .then(async (resp) => {
       const body = resp.text().then((html) => {
         try {
-          const json = JSON.parse(html)
+          let json = JSON.parse(html)
+
+          if (typeof json.MainContent !== undefined) {
+            json = JSON.parse(json.MainContent)
+          }
+
           console.log(`${NAME}: JSON response`)
           const status = json.status === 'good' ? 'success' : 'error'
 
@@ -83,7 +88,7 @@ const formInit = (form) => {
 const init = () => {
   console.log(`${NAME}: init`)
 
-  document.querySelectorAll('#MainContent form:not(.legacy)').forEach(formInit)
+  document.querySelectorAll('#MainContent form:not(.legacy),.ajax-form').forEach(formInit)
 }
 
 window.addEventListener(`${Events.LODEDANDREADY}`, init)

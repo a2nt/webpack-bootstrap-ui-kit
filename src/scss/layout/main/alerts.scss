@@ -6,6 +6,7 @@
   .alert {
     display: flex;
     margin-bottom: 0;
+
     .alert__container {
       display: flex;
     }
@@ -26,4 +27,8 @@
   .alert-offline {
     display: flex !important;
   }
+}
+
+.alert-bad {
+  @extend .alert-danger;
 }
