@@ -29,6 +29,7 @@
   }
 }
 
-.alert-bad {
+.alert-bad,
+.alert-error {
   @extend .alert-danger;
 }

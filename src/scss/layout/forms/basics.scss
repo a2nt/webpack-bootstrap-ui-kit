@@ -10,7 +10,7 @@
     display: inline-flex;
     padding-right: $form-spacer-x;
 
-    & + .field__content {
+    &+.field__content {
       padding-left: $form-spacer-x;
     }
 
@@ -52,5 +52,5 @@
 }
 
 .form__fieldset {
-    margin-bottom: -1rem;
+  margin-bottom: -1rem;
 }

@@ -21,6 +21,11 @@ const submitForm = (e) => {
   data.append('formid', id)
   data.append('ajax', '1')
 
+
+  form.querySelectorAll('.field__alert').forEach((el) => {
+    el.remove()
+  })
+
   parent.classList.remove('loaded')
   parent.classList.add('loading')
 
@@ -33,26 +38,95 @@ const submitForm = (e) => {
     body: data,
   })
     .then(async (resp) => {
+      if (!resp.ok) {
+        console.error(`${NAME}: BAD RESPONSE`)
+        console.log(resp)
+        return
+      }
       const body = resp.text().then((html) => {
-        try {
-          let json = JSON.parse(html)
-
-          if (typeof json.MainContent !== undefined) {
-            json = JSON.parse(json.MainContent)
-          }
-
-          console.log(`${NAME}: JSON response`)
-          const status = json.status === 'good' ? 'success' : 'error'
-
-          replaceForm(form, `<div class="alert alert-${status}">${json.message}</div>`)
-        } catch (e) {
-          console.log(`${NAME}: HTML response`)
-          replaceForm(form, html)
-
-          parent.querySelector('form').addEventListener('submit', submitForm)
+        const result = processResponse(html)
+        if (result.json) {
+          return formProcessJson(form, result.data)
         }
+
+        return replaceForm(form, result.data)
       })
     })
+}
+
+const processResponse = (html) => {
+  try {
+    let json = JSON.parse(html)
+
+    if (json.MainContent) {
+      try {
+        json = JSON.parse(json.MainContent)
+
+        return {
+          json: true,
+          data: json
+        }
+
+      } catch (e) {
+        return {
+          json: false,
+          data: json.MainContent
+        }
+      }
+    }
+
+    return {
+      json: true,
+      data: json
+    }
+  } catch (e) {
+    return {
+      json: false,
+      data: html
+    }
+  }
+}
+
+const formProcessJson = (form, json) => {
+  const status = json.status === 'good' ? 'success' : 'danger'
+
+  if (json.msgs) {
+    json.msgs.forEach((i) => {
+      const field = form.querySelector('[name="' + i.fieldName + '"],[name^="' + i.fieldName + '["]')
+      if (field) {
+        field.classList.add('error')
+
+        const fieldContainer = field.closest('.form__field')
+        if (fieldContainer) {
+          fieldContainer.classList.add('error')
+
+          const msg = document.createElement('div')
+          msg.classList.add(...['field__alert', 'alert', `alert-${status}`, `alert-${i.messageCast}`, `${i.messageType}`])
+          msg.innerHTML = i.message
+
+          fieldContainer.appendChild(msg)
+        }
+      }
+    })
+
+    return setLoaded(form)
+  }
+
+  return replaceForm(form, `<div class="alert alert-${status}">${json.message}</div>`)
+}
+
+const setLoaded = (form) => {
+  const parent = form.parentElement;
+
+  parent.classList.remove('loading')
+  parent.classList.add('loaded')
+
+  const btns = form.querySelectorAll('input[type="submit"],button')
+  btns.forEach((el) => {
+    el.removeAttribute('disabled', 'disabled')
+  })
+
+  window.dispatchEvent(new Event(`${Events.AJAX}`))
 }
 
 const replaceForm = (form, html) => {
@@ -62,8 +136,11 @@ const replaceForm = (form, html) => {
   parent.classList.remove('loading')
   parent.classList.add('loaded')
 
-  window.dispatchEvent(new Event(`${Events.AJAX}`))
-  return
+  const newForm = parent.querySelector('form')
+  if (newForm) {
+    newForm.addEventListener('submit', submitForm)
+    return setLoaded(newForm)
+  }
 }
 
 const formInit = (form) => {
