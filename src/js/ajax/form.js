@@ -13,11 +13,12 @@ const submitForm = (e) => {
   const data = new FormData(form);
   const parent = form.parentElement;
   const btns = form.querySelectorAll('input[type="submit"],button')
+  const id = form.getAttribute('ID')
 
   btns.forEach((el) => {
     el.setAttribute('disabled', 'disabled')
   })
-
+  data.append('formid', id)
   data.append('ajax', '1')
 
   parent.classList.remove('loaded')
@@ -27,6 +28,7 @@ const submitForm = (e) => {
     method: form.method,
     headers: {
       'x-requested-with': 'XMLHttpRequest',
+      'x-requested-form': id,
     },
     body: data,
   })
