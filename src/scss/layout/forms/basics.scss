@@ -27,6 +27,15 @@
   &.CompositeField {
     flex-direction: column;
   }
+
+  &__alert {
+    &.validation {
+      @extend .alert-danger;
+      width: 100%;
+      margin-top: 1em;
+      margin-bottom: 0;
+    }
+  }
 }
 
 .field.password {
