@@ -87,12 +87,17 @@ const processResponse = (html) => {
   }
 }
 
+
+const isAlertResponse = (msg) => {
+  return msg.indexOf('class="alert') || msg.indexOf('class=\'alert')
+}
+
 const formProcessJson = (form, json) => {
-  const status = json.status === 'good' ? 'success' : 'danger'
+  const status = json.status === 'good' || 'success' ? 'success' : 'danger'
 
   if (json.msgs) {
     json.msgs.forEach((i) => {
-      const field = form.querySelector(`[name="${  i.fieldName  }"],[name^="${  i.fieldName  }["]`)
+      const field = form.querySelector(`[name="${i.fieldName}"],[name^="${i.fieldName}["]`)
       if (field) {
         field.classList.add('error')
 
@@ -101,7 +106,11 @@ const formProcessJson = (form, json) => {
           fieldContainer.classList.add('error')
 
           const msg = document.createElement('div')
-          msg.classList.add(...['field__alert', 'alert', `alert-${status}`, `alert-${i.messageCast}`, `${i.messageType}`])
+          msg.classList.add(...['field__alert'])
+          if (!isAlertResponse(i.message)) {
+            msg.classList.add(...['alert', `alert-${status}`, `alert-${i.messageCast}`, `${i.messageType}`])
+          }
+
           msg.innerHTML = i.message
 
           fieldContainer.appendChild(msg)
@@ -112,7 +121,11 @@ const formProcessJson = (form, json) => {
     return setLoaded(form)
   }
 
-  return replaceForm(form, `<div class="alert alert-${status}">${json.message}</div>`)
+  const replacementHTML = !isAlertResponse(json.message)
+    ? `<div class="alert alert-${status}">${json.message}</div>`
+    : json.message
+
+  return replaceForm(form, replacementHTML)
 }
 
 const setLoaded = (form) => {

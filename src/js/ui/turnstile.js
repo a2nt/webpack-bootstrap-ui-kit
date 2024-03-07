@@ -17,7 +17,12 @@ const init = () => {
 
   console.log(`${NAME}: init`)
   captchas.forEach((el) => {
+    if (el.dataset[NAME] || el.innerHTML.length > 0) {
+      return
+    }
+
     window.turnstile.render(el)
+    el.dataset[NAME] = true
   })
 }
 
