@@ -26,6 +26,10 @@
 
   &.CompositeField {
     flex-direction: column;
+
+    &.row {
+      flex-direction: row;
+    }
   }
 
   &__alert {
@@ -47,8 +51,16 @@
   }
 }
 
-.form__field input.password {
-  @extend .form-control;
+.form {
+  &__field {
+    input.password {
+      @extend .form-control;
+    }
+
+    iframe {
+      width: 100% !important;
+    }
+  }
 }
 
 .form__fieldset {

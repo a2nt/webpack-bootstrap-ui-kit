@@ -4,7 +4,8 @@ const NAME = 'uiTurnstile'
 const SELECTOR = '.cf-turnstile'
 
 const init = () => {
-  if (!document.querySelectorAll(SELECTOR).length) {
+  const captchas = document.querySelectorAll(SELECTOR)
+  if (!captchas.length) {
     console.log(`${NAME}: No Captcha fields.`)
     return
   }
@@ -15,7 +16,9 @@ const init = () => {
   }
 
   console.log(`${NAME}: init`)
-  window.turnstile.render(SELECTOR)
+  captchas.forEach((el) => {
+    window.turnstile.render(el)
+  })
 }
 
 
