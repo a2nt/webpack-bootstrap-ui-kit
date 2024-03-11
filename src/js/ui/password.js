@@ -5,14 +5,15 @@ const PasswordUI = ((window) => {
 
   const init = () => {
     console.log(`${NAME}: init`)
+    let timer
 
-    let timer;
     const toggle = (input) => {
-      if (input.getAttribute('type') === 'password') {
-        show(input)
-      } else {
-        hide(input)
+      console.log(`${NAME}: toggle`)
+      if (timer) {
+        clearTimeout(timer);
       }
+
+      show(input)
     }
 
     const show = (input) => {
@@ -24,18 +25,18 @@ const PasswordUI = ((window) => {
 
     const hide = (input) => {
       input.setAttribute('type', 'password')
-      if(timer){
+      if (timer) {
         clearTimeout(timer);
       }
     }
 
     document.querySelectorAll(`${NAME}-show, .show-password`).forEach((el) => {
-      if(el.classList.contains(`${NAME}-active`)){
+      if (el.classList.contains(`${NAME}-active`)) {
         return
       }
 
       el.addEventListener('click', (e) => {
-        const input = e.currentTarget.closest('.field').querySelector('input');
+        const input = e.currentTarget.closest('.field').querySelector('input')
         if (!input) {
           return
         }

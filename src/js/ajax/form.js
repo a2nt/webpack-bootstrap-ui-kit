@@ -22,9 +22,7 @@ const submitForm = (e) => {
   data.append('ajax', '1')
 
 
-  form.querySelectorAll('.field__alert').forEach((el) => {
-    el.remove()
-  })
+  clearAlerts(form)
 
   parent.classList.remove('loaded')
   parent.classList.add('loading')
@@ -52,6 +50,12 @@ const submitForm = (e) => {
         return replaceForm(form, result.data)
       })
     })
+}
+
+const clearAlerts = (form) => {
+  form.querySelectorAll('.field__alert,.form__message').forEach((el) => {
+    el.remove()
+  })
 }
 
 const processResponse = (html) => {
@@ -95,27 +99,47 @@ const isAlertResponse = (msg) => {
 const formProcessJson = (form, json) => {
   const status = json.status === 'good' || 'success' ? 'success' : 'danger'
 
+  if (json.location) {
+    console.log(`${NAME}: Redirect`)
+
+    //if (!json.loadAjax && typeof window.app.Router !== 'undefined') {
+    const link = document.createElement('a')
+    link.setAttribute('href', json.location)
+    window.app.Router.linkClick(link, new Event('click'))
+    //} else {
+    //  window.location = json.location
+    //}
+
+    return setLoaded(form)
+  }
+
   if (json.msgs) {
+    const fieldset = form.querySelector('.form__fieldset')
+
     json.msgs.forEach((i) => {
+      const msg = document.createElement('div')
+      msg.classList.add(...['field__alert'])
+      if (!isAlertResponse(i.message)) {
+        msg.classList.add(...['alert', `alert-${status}`, `alert-${i.messageCast}`, `${i.messageType}`])
+      }
+
+      msg.innerHTML = i.message
+
+
       const field = form.querySelector(`[name="${i.fieldName}"],[name^="${i.fieldName}["]`)
+
       if (field) {
         field.classList.add('error')
 
         const fieldContainer = field.closest('.form__field')
         if (fieldContainer) {
           fieldContainer.classList.add('error')
-
-          const msg = document.createElement('div')
-          msg.classList.add(...['field__alert'])
-          if (!isAlertResponse(i.message)) {
-            msg.classList.add(...['alert', `alert-${status}`, `alert-${i.messageCast}`, `${i.messageType}`])
-          }
-
-          msg.innerHTML = i.message
-
           fieldContainer.appendChild(msg)
+          return
         }
       }
+
+      form.insertBefore(msg, fieldset)
     })
 
     return setLoaded(form)
