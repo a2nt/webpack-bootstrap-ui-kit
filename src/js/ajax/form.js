@@ -102,13 +102,13 @@ const formProcessJson = (form, json) => {
   if (json.location) {
     console.log(`${NAME}: Redirect`)
 
-    //if (!json.loadAjax && typeof window.app.Router !== 'undefined') {
-    const link = document.createElement('a')
-    link.setAttribute('href', json.location)
-    window.app.Router.linkClick(link, new Event('click'))
-    //} else {
-    //  window.location = json.location
-    //}
+    if (!json.loadAjax && typeof window.app.Router !== 'undefined') {
+      const link = document.createElement('a')
+      link.setAttribute('href', json.location)
+      window.app.Router.linkClick(link, new Event('click'))
+    } else {
+      window.location = json.location
+    }
 
     return setLoaded(form)
   }
