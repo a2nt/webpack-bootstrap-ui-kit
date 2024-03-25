@@ -107,4 +107,8 @@ $glide-right-icon: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/sv
   &__slide {
     position: relative;
   }
+
+  video {
+    min-width: 100%;
+  }
 }
