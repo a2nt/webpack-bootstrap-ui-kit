@@ -1,85 +1,71 @@
 import Events from '../_events'
 
-const CaptchaUI = ((window) => {
-  const NAME = 'js-captcha'
+const NAME = 'uiTurnstile'
+const SELECTOR = `.${NAME},.js-turnstile`
 
-  const init = () => {
-    console.log(`${NAME}: init`)
+const init = () => {
+  console.log(`${NAME}: init`)
 
-    if (typeof window.grecaptcha.render !== 'function') {
-      window.grecaptcha.reset()
-    }
-
-    const submitListener = (e) => {
-      console.log(`${NAME}: Validating Captcha ...`)
-      const field = e.currentTarget.querySelectorAll(`.${NAME}, .g-recaptcha`).forEach((el) => {
-        grecaptcha.execute(el.dataset.widgetid)
-      })
-    }
-
-    const attachCaptcha = () => {
-      console.log(`${NAME}: Rendering Captcha ...`)
-
-      const fields = document.querySelectorAll(`.${NAME}, .g-recaptcha`)
-      const grecaptcha = window.grecaptcha
-
-      if (typeof window.grecaptcha.render !== 'function') {
-        console.log(`${NAME}: no render function`);
-        return
-      }
-
-      fields.forEach((el, i) => {
-        if (el.dataset.widgetid || el.innerHTML !== '') {
-          // already initialized
-          return
-        }
-
-        const form = el.closest(form)
-        const widgetid = grecaptcha.render(el, el.dataset)
-        el.dataset.widgetid = widgetid
-
-        if (el.dataset.size === 'invisible' && !el.dataset.callback) {
-          grecaptcha.execute(widgetid)
-          form.addEventListener('submit', submitListener)
-        }
-
-        el.classList.add(`${NAME}-active`)
-        el.dispatchEvent(new Event(`${NAME}-ready`))
-      })
-    }
-
-    window.rendergcaptcha = attachCaptcha;
-
-    const loadScript = (callback) => {
-      if (typeof window.grecaptcha !== 'undefined') {
-        callback()
-      }
-
-      console.log(`${NAME}: Loading Captcha API ...`)
-
-      const script = document.createElement('script');
-      script.id = 'captchaAPI';
-      script.src = `https://www.google.com/recaptcha/api.js?onload=rendergcaptcha&render=explicit&hl=${document.querySelector('html').getAttribute('lang').substr(0, 2)}`
-      script.async = true
-      script.onload = function () {
-        console.log(`${NAME}: Captcha API is loaded.`)
-        //setTimeout(callback, 1000)
-      }
-
-      document.body.append(script)
-    }
-
-    if (document.querySelectorAll('.g-recaptcha').length) {
-      loadScript(attachCaptcha);
-    } else {
-      console.log(`${NAME}: No Captcha fields.`)
-    }
-
-    window.noCaptchaFieldRender = attachCaptcha
+  const captchas = document.querySelectorAll(SELECTOR)
+  if (!captchas.length) {
+    console.log(`${NAME}: No Captcha fields.`)
+    return
   }
 
-  window.addEventListener(`${Events.LODEDANDREADY}`, init)
-  window.addEventListener(`${Events.AJAX}`, init)
-})(window)
+  if (!document.querySelector('#captchaAPI') && typeof window.turnstile === 'undefined') {
+    loadScript(init)
+    return
+  }
 
-export default CaptchaUI
+  renderCaptcha()
+}
+
+const renderCaptcha = () => {
+  console.log(`${NAME}: renderCaptcha`)
+
+  const captchas = document.querySelectorAll(SELECTOR)
+
+  captchas.forEach((el) => {
+    if (el.dataset[NAME] || el.innerHTML.length > 0) {
+
+      if (el.dataset.widgetid) {
+        turnstile.reset(el.dataset.widgetid)
+      }
+
+      return
+    }
+
+    const widgetid = window.turnstile.render(el, {
+      sitekey: el.dataset.sitekey,
+      callback: function (token) {
+        console.log(`${NAME}: Challenge Success ${token}`);
+      },
+    })
+
+    /*const form = el.closest('form')
+    form.addEventListener('submit', () => {
+      console.log(`${NAME}: submit`)
+      window.turnstile.reset(el.dataset.widgetid)
+    })*/
+
+    el.dataset.widgetid = widgetid
+
+    el.dataset[NAME] = true
+  })
+}
+
+const loadScript = () => {
+
+  console.log(`${NAME}: Loading Captcha API ...`)
+  const script = document.createElement('script');
+  script.id = 'captchaAPI';
+  script.src = `https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=renderCaptcha`
+  script.async = true
+
+  document.body.append(script)
+}
+
+window.renderCaptcha = renderCaptcha
+
+window.addEventListener(`${Events.LODEDANDREADY}`, init)
+window.addEventListener(`${Events.AJAX}`, init)
