@@ -6,6 +6,10 @@ const CaptchaUI = ((window) => {
   const init = () => {
     console.log(`${NAME}: init`)
 
+    if (typeof window.grecaptcha.render !== 'function') {
+      window.grecaptcha.reset()
+    }
+
     const submitListener = (e) => {
       console.log(`${NAME}: Validating Captcha ...`)
       const field = e.currentTarget.querySelectorAll(`.${NAME}, .g-recaptcha`).forEach((el) => {
