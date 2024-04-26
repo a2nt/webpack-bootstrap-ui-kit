@@ -1,7 +1,7 @@
 import Events from '../_events'
 
 const NAME = 'uiTurnstile'
-const SELECTOR = `.${NAME},.js-turnstile`
+const SELECTOR = `.${NAME},.js-turnstile,.field.turnstile .cf-turnstile`
 
 const init = () => {
   console.log(`${NAME}: init`)
@@ -12,12 +12,18 @@ const init = () => {
     return
   }
 
-  if (!document.querySelector('#captchaAPI') && typeof window.turnstile === 'undefined') {
-    loadScript(init)
+  if (
+    !document.querySelector('#captchaAPI')
+    && !document.querySelector('[src^="https://challenges.cloudflare.com/turnstile/v0/api.js"]')
+  ) {
+    loadScript()
     return
   }
 
-  renderCaptcha()
+  // the script may be loading right now
+  if (typeof window.turnstile !== 'undefined') {
+    renderCaptcha()
+  }
 }
 
 const renderCaptcha = () => {
@@ -29,11 +35,14 @@ const renderCaptcha = () => {
     if (el.dataset[NAME] || el.innerHTML.length > 0) {
 
       if (el.dataset.widgetid) {
-        turnstile.reset(el.dataset.widgetid)
+        //turnstile.reset(el.dataset.widgetid)
       }
 
       return
     }
+
+
+    console.log(`${NAME}: renderCaptcha > new field`)
 
     const widgetid = window.turnstile.render(el, {
       sitekey: el.dataset.sitekey,
@@ -42,17 +51,20 @@ const renderCaptcha = () => {
       },
     })
 
-    const form = el.closest('form')
+    /*const form = el.closest('form')
     form.addEventListener('submit', () => {
       console.log(`${NAME}: submit`)
       window.turnstile.reset(el.dataset.widgetid)
-    })
+    })*/
 
     el.dataset.widgetid = widgetid
 
     el.dataset[NAME] = true
   })
 }
+
+
+window.renderCaptcha = renderCaptcha
 
 const loadScript = () => {
 
@@ -64,8 +76,6 @@ const loadScript = () => {
 
   document.body.append(script)
 }
-
-window.renderCaptcha = renderCaptcha
 
 window.addEventListener(`${Events.LODEDANDREADY}`, init)
 window.addEventListener(`${Events.AJAX}`, init)
