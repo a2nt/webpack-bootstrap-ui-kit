@@ -59,7 +59,7 @@ const loadScript = () => {
   console.log(`${NAME}: Loading Captcha API ...`)
   const script = document.createElement('script');
   script.id = 'captchaAPI';
-  script.src = `https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=renderCaptcha&hl=${document.querySelector('html').getAttribute('lang').substr(0, 2)}`
+  script.src = `https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=renderCaptcha`
   script.async = true
 
   document.body.append(script)
