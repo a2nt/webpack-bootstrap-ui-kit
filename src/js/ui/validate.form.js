@@ -115,7 +115,7 @@ class ValidateForm {
 
     this.#form.removeEventListener('submit', this.submitHandler)
 
-    this.#form.ValidateForm = null
+    delete this.#form.ValidateForm
     this.#form.classList.remove(`${NAME}--active`)
   }
 }

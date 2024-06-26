@@ -56,7 +56,7 @@ class ValidateField {
     this.#field.removeEventListener('change', this.validate)
     this.#field.removeEventListener('focusout', this.validate)
 
-    this.#field.ValidateField = null
+    delete this.#field.ValidateField
 
     this.#field.classList.remove(`${NAME}--active`)
   }
