@@ -60,8 +60,12 @@ class ValidateForm {
     }
   }
 
-  addExtraCheck = (func) => {
-    this.#extraChecks.push(func)
+  addExtraCheck = (validateFunc) => {
+    if (!this.#extraChecks.includes(validateFunc)) {
+      this.#extraChecks.push(validateFunc)
+    }
+
+    return this
   }
 
   validate = async () => {
@@ -83,8 +87,8 @@ class ValidateForm {
     }
 
     // run extra checks
-    for (const func in this.#extraChecks) {
-      valid = func(this.#form)
+    for (const validateFunc of this.#extraChecks) {
+      valid = validateFunc(this.#form)
 
       if (!valid) {
         break

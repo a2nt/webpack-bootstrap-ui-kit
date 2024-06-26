@@ -25,8 +25,12 @@ class ValidateField {
     this.#field.dispatchEvent(new Event(Events.FORM_INIT_VALIDATE_FIELD))
   }
 
-  addExtraCheck = (func) => {
-    this.#extraChecks.push(func)
+  addExtraCheck = (validateFunc) => {
+    if (!this.#extraChecks.includes(validateFunc)) {
+      this.#extraChecks.push(validateFunc)
+    }
+
+    return this
   }
 
   validate = () => {
@@ -39,8 +43,10 @@ class ValidateField {
 
     // run extra checks
     let valid = true
-    for (const func in this.#extraChecks) {
-      valid = func(this.#field)
+    console.log(this.#extraChecks)
+
+    for (const validateFunc of this.#extraChecks) {
+      valid = validateFunc(this.#field)
 
       if (!valid) {
         break
