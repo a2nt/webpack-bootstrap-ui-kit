@@ -6,7 +6,7 @@ const NAME = 'ui.validate.form'
 class ValidateForm {
   #steppedUI
   #form
-  #extraChecks = []
+  #extraChecks = {}
 
   constructor(form) {
     this.#form = form
@@ -61,10 +61,7 @@ class ValidateForm {
   }
 
   addExtraCheck = (validateFunc) => {
-    if (!this.#extraChecks.includes(validateFunc)) {
-      this.#extraChecks.push(validateFunc)
-    }
-
+    this.#extraChecks[validateFunc.name] = validateFunc
     return this
   }
 
@@ -87,8 +84,8 @@ class ValidateForm {
     }
 
     // run extra checks
-    for (const validateFunc of this.#extraChecks) {
-      valid = validateFunc(this.#form)
+    for (const validateFuncName in this.#extraChecks) {
+      valid = this.#extraChecks[validateFuncName](this.#form)
 
       if (!valid) {
         break

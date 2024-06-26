@@ -3,7 +3,7 @@ const NAME = 'ui.validate.field'
 
 class ValidateField {
   #field
-  #extraChecks = []
+  #extraChecks = {}
 
   constructor(field) {
     this.#field = field
@@ -26,10 +26,7 @@ class ValidateField {
   }
 
   addExtraCheck = (validateFunc) => {
-    if (!this.#extraChecks.includes(validateFunc)) {
-      this.#extraChecks.push(validateFunc)
-    }
-
+    this.#extraChecks[validateFunc.name] = validateFunc
     return this
   }
 
@@ -43,10 +40,8 @@ class ValidateField {
 
     // run extra checks
     let valid = true
-    console.log(this.#extraChecks)
-
-    for (const validateFunc of this.#extraChecks) {
-      valid = validateFunc(this.#field)
+    for (const validateFuncName in this.#extraChecks) {
+      valid = this.#extraChecks[validateFuncName](this.#field)
 
       if (!valid) {
         break
