@@ -11,9 +11,24 @@ const DropdownHoverUI = ((window) => {
   const NAME = 'js-dropdown'
   const ACTIVECLS = ['active', 'active-dropdown']
 
+
+  // limit clicking rate and hover-touch-click events iterfere
+  const LockMenu = (menu) => {
+    menu.locked = true
+
+    setTimeout(() => {
+      menu.locked = false
+    }, 200)
+  }
+
   const HideAll = () => {
+    console.log(`${NAME}: HideAll`)
     // hide others
     document.querySelectorAll('.dropdown-menu').forEach((el, i) => {
+      if (el.locked) {
+        return
+      }
+
       const next = el.closest('.dropdown')
       if (next) {
         next.classList.remove(...ACTIVECLS)
@@ -24,15 +39,29 @@ const DropdownHoverUI = ((window) => {
   }
 
   const Toggle = (el) => {
-    console.log(`${NAME}: nav toggle`)
-
     const menu = el.querySelector('.dropdown-menu')
     const isOpenned = menu.classList.contains('show')
 
-    HideAll()
 
-    if (menu && !isOpenned) {
-      menu.classList.add('show')
+    if (menu) {
+      if (menu.locked) {
+        return
+      }
+
+      LockMenu(menu)
+      HideAll()
+
+      if (isOpenned) {
+        console.log(`${NAME}: Toggle hide`)
+
+        el.classList.remove(...ACTIVECLS)
+        menu.classList.remove('show')
+      } else {
+        console.log(`${NAME}: Toggle show`)
+
+        el.classList.add(...ACTIVECLS)
+        menu.classList.add('show')
+      }
     }
   }
 
@@ -40,9 +69,17 @@ const DropdownHoverUI = ((window) => {
     e.stopPropagation()
     const el = e.currentTarget
 
-    el.classList.add(...ACTIVECLS)
     const menu = el.querySelector('.dropdown-menu')
     if (menu) {
+      if (menu.locked) {
+        return
+      }
+
+      LockMenu(menu)
+      console.log(`${NAME}: Show`)
+      HideAll()
+
+      el.classList.add(...ACTIVECLS)
       menu.classList.add('show')
     }
   }
@@ -50,10 +87,18 @@ const DropdownHoverUI = ((window) => {
   const Hide = (e) => {
     e.stopPropagation()
     const el = e.currentTarget
-
-    el.classList.remove(...ACTIVECLS)
     const menu = el.querySelector('.dropdown-menu')
+
     if (menu) {
+      if (menu.locked) {
+        return
+      }
+
+      LockMenu(menu)
+
+      console.log(`${NAME}: Hide`)
+
+      el.classList.remove(...ACTIVECLS)
       menu.classList.remove('show')
     }
   }
