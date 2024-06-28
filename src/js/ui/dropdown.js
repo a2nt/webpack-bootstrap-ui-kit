@@ -24,8 +24,13 @@ const DropdownHoverUI = ((window) => {
     }, timeout)
   }
 
+  // debuging
+  const LogMsg = (msg) => {
+    //console.log(msg)
+  }
+
   const HideAll = () => {
-    console.log(`${NAME}: HideAll`)
+    LogMsg(`${NAME}: HideAll`)
     // hide others
     document.querySelectorAll('.dropdown-menu').forEach((el, i) => {
       if (el.locked) {
@@ -55,24 +60,39 @@ const DropdownHoverUI = ((window) => {
     }
 
     LockMenu(menu, 800)
-    HideAll()
+    HideSiblings(el)
 
     if (isOpennedByToogle) {
-      console.log(`${NAME}: Toggle hide`)
+      LogMsg(`${NAME}: Toggle hide`)
 
       el.classList.remove(...ACTIVECLS)
       menu.classList.remove('show')
-
-      menu.dropdownToggle = false
     } else {
-      console.log(`${NAME}: Toggle show`)
+      LogMsg(`${NAME}: Toggle show`)
 
       el.classList.add(...ACTIVECLS)
       menu.classList.add('show')
-
-      menu.dropdownToggle = true
     }
 
+    menu.dropdownToggle = true
+  }
+
+  const HideSiblings = (el) => {
+    const parent = el.parentNode
+    if (!parent) {
+      return
+    }
+
+    [...parent.children].forEach((el2) => {
+      if (el === el2) {
+        return
+      }
+
+      const dropdown = el2.querySelector('.dropdown-menu')
+      if (dropdown) {
+        dropdown.classList.remove('show')
+      }
+    })
   }
 
   const Show = (e) => {
@@ -88,9 +108,10 @@ const DropdownHoverUI = ((window) => {
       return
     }
 
+    menu.dropdownToggle = false
     //LockMenu(menu)
-    console.log(`${NAME}: Show`)
-    HideAll()
+    LogMsg(`${NAME}: Show`)
+    HideSiblings(el)
 
     el.classList.add(...ACTIVECLS)
     menu.classList.add('show')
@@ -108,16 +129,17 @@ const DropdownHoverUI = ((window) => {
       return
     }
 
+    menu.dropdownToggle = false
     LockMenu(menu)
 
-    console.log(`${NAME}: Hide`)
+    LogMsg(`${NAME}: Hide`)
 
     el.classList.remove(...ACTIVECLS)
     menu.classList.remove('show')
   }
 
   const init = () => {
-    console.log(`${NAME}: init`)
+    LogMsg(`${NAME}: init`)
 
     const clickableEls = document.querySelectorAll(`[data-bs-toggle="dropdown"]`)
     const hoverableEls = document.querySelectorAll('[data-bs-toggle="hover"]')
@@ -144,7 +166,7 @@ const DropdownHoverUI = ((window) => {
         const el = e.currentTarget
         const parent = el.closest('.dropdown')
 
-        console.log(`${NAME}: click`)
+        LogMsg(`${NAME}: click`)
 
         if (parent) {
           Toggle(parent)
@@ -156,14 +178,6 @@ const DropdownHoverUI = ((window) => {
     }
 
     // Hide all for outside clicks
-    /* document.addEventListener('click', function (event) {
-      const isClickInside = clickableEls.contains(event.target)
-
-      if (!isClickInside) {
-        HideAll()
-      }
-    }) */
-
     document.addEventListener('click', (event) => {
       let breakPath = false
       const path = event.path || (event.composedPath && event.composedPath())
