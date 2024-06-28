@@ -11,12 +11,15 @@ const DropdownHoverUI = ((window) => {
   const NAME = 'js-dropdown'
   const ACTIVECLS = ['active', 'active-dropdown']
 
-
   // limit clicking rate and hover-touch-click events iterfere
   const LockMenu = (menu) => {
     menu.locked = true
 
-    setTimeout(() => {
+    if (window.app.dropdownTimer) {
+      clearTimeout(window.app.dropdownTimer)
+    }
+
+    window.app.dropdownTimer = setTimeout(() => {
       menu.locked = false
     }, 200)
   }
@@ -40,29 +43,36 @@ const DropdownHoverUI = ((window) => {
 
   const Toggle = (el) => {
     const menu = el.querySelector('.dropdown-menu')
-    const isOpenned = menu.classList.contains('show')
+    const isOpennedByToogle = menu.classList.contains('show') && menu.dropdownToggle
 
 
-    if (menu) {
-      if (menu.locked) {
-        return
-      }
-
-      LockMenu(menu)
-      HideAll()
-
-      if (isOpenned) {
-        console.log(`${NAME}: Toggle hide`)
-
-        el.classList.remove(...ACTIVECLS)
-        menu.classList.remove('show')
-      } else {
-        console.log(`${NAME}: Toggle show`)
-
-        el.classList.add(...ACTIVECLS)
-        menu.classList.add('show')
-      }
+    if (!menu) {
+      return
     }
+
+    if (menu.locked) {
+      return
+    }
+
+    LockMenu(menu)
+    HideAll()
+
+    if (isOpennedByToogle) {
+      console.log(`${NAME}: Toggle hide`)
+
+      el.classList.remove(...ACTIVECLS)
+      menu.classList.remove('show')
+
+      menu.dropdownToggle = false
+    } else {
+      console.log(`${NAME}: Toggle show`)
+
+      el.classList.add(...ACTIVECLS)
+      menu.classList.add('show')
+
+      menu.dropdownToggle = true
+    }
+
   }
 
   const Show = (e) => {
@@ -70,18 +80,20 @@ const DropdownHoverUI = ((window) => {
     const el = e.currentTarget
 
     const menu = el.querySelector('.dropdown-menu')
-    if (menu) {
-      if (menu.locked) {
-        return
-      }
-
-      LockMenu(menu)
-      console.log(`${NAME}: Show`)
-      HideAll()
-
-      el.classList.add(...ACTIVECLS)
-      menu.classList.add('show')
+    if (!menu) {
+      return
     }
+
+    if (menu.locked) {
+      return
+    }
+
+    //LockMenu(menu)
+    console.log(`${NAME}: Show`)
+    HideAll()
+
+    el.classList.add(...ACTIVECLS)
+    menu.classList.add('show')
   }
 
   const Hide = (e) => {
@@ -89,24 +101,25 @@ const DropdownHoverUI = ((window) => {
     const el = e.currentTarget
     const menu = el.querySelector('.dropdown-menu')
 
-    if (menu) {
-      if (menu.locked) {
-        return
-      }
-
-      LockMenu(menu)
-
-      console.log(`${NAME}: Hide`)
-
-      el.classList.remove(...ACTIVECLS)
-      menu.classList.remove('show')
+    if (!menu) {
+      return
     }
+    if (menu.locked) {
+      return
+    }
+
+    LockMenu(menu)
+
+    console.log(`${NAME}: Hide`)
+
+    el.classList.remove(...ACTIVECLS)
+    menu.classList.remove('show')
   }
 
   const init = () => {
     console.log(`${NAME}: init`)
 
-    const clickableEls = document.querySelectorAll(`.${NAME},[data-bs-toggle="dropdown"],.dropdown-toggle`)
+    const clickableEls = document.querySelectorAll(`[data-bs-toggle="dropdown"]`)
     const hoverableEls = document.querySelectorAll('[data-bs-toggle="hover"]')
 
     const attachHoverEvents = (el) => {
@@ -128,10 +141,13 @@ const DropdownHoverUI = ((window) => {
 
       el.addEventListener('click', (e) => {
         e.preventDefault()
-
         const el = e.currentTarget
         const parent = el.closest('.dropdown')
-        const href = el.getAttribute('href')
+
+        const link = el.querySelector('a')
+        const href = link && link.offsetParent !== null ? link.getAttribute('href') : null
+
+        console.log(`${NAME}: click`)
 
         // nav second click
         if (href && el.dataset.firstClick) {
@@ -203,15 +219,20 @@ const DropdownHoverUI = ((window) => {
       })
     })
 
-    hoverableEls.forEach((el, i) => {
+    hoverableEls.forEach((el) => {
       const parent = el.closest('.dropdown')
       if (parent) {
         attachHoverEvents(parent)
+        // for touch screen
+        attachClickEvents(parent)
       }
     })
 
-    clickableEls.forEach((el, i) => {
-      attachClickEvents(el)
+    clickableEls.forEach((el) => {
+      const parent = el.closest('.dropdown')
+      if (parent) {
+        attachClickEvents(parent)
+      }
     })
   }
 
