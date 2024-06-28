@@ -149,34 +149,7 @@ const DropdownHoverUI = ((window) => {
 
         console.log(`${NAME}: click`)
 
-        // nav second click
-        if (href && el.dataset.firstClick) {
-          console.log(`${NAME}: nav second click`)
-
-          e.stopImmediatePropagation()
-          if (typeof window.app === 'undefined' || typeof window.app.Router === 'undefined') {
-            window.location.href = href
-            return
-          }
-
-          window.app.Router.openURL(href)
-        }
-
-
         if (parent) {
-          // big screen click
-          if (href && window.innerWidth > 768 && parent.classList.contains('active-dropdown')) {
-            console.log(`${NAME}: big screen | nav click the dropdown is shown already`)
-
-            e.stopImmediatePropagation()
-            if (typeof window.app === 'undefined' || typeof window.app.Router === 'undefined') {
-              window.location.href = href
-              return
-            }
-
-            window.app.Router.openURL(href)
-          }
-
           Toggle(parent)
         }
 
