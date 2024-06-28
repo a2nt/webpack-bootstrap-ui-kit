@@ -12,16 +12,16 @@ const DropdownHoverUI = ((window) => {
   const ACTIVECLS = ['active', 'active-dropdown']
 
   // limit clicking rate and hover-touch-click events iterfere
-  const LockMenu = (menu) => {
+  const LockMenu = (menu, timeout = 200) => {
     menu.locked = true
 
-    if (window.app.dropdownTimer) {
-      clearTimeout(window.app.dropdownTimer)
+    if (menu.dropdownTimeout) {
+      clearTimeout(menu.dropdownTimeout)
     }
 
-    window.app.dropdownTimer = setTimeout(() => {
+    menu.dropdownTimeout = setTimeout(() => {
       menu.locked = false
-    }, 200)
+    }, timeout)
   }
 
   const HideAll = () => {
@@ -54,7 +54,7 @@ const DropdownHoverUI = ((window) => {
       return
     }
 
-    LockMenu(menu)
+    LockMenu(menu, 800)
     HideAll()
 
     if (isOpennedByToogle) {
