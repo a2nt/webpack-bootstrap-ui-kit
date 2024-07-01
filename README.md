@@ -8,10 +8,6 @@ It's easy to extend and easy to convert HTML templates to CMS templates.
 Note: I prefer using vanilla JS with minimal external dependencies to reach higher loading speed.
 There's no jQuery and no React, but it can be connected optionally.
 
-# Demo
-
-https://rawcdn.githack.com/a2nt/webpack-bootstrap-ui-kit/master/dist/index.html
-
 # Quick Start
 
 ## Requirements:
